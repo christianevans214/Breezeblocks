@@ -1,3 +1,3 @@
 # DrandAndDrop
 
-Drag and Drop feature for quick front-end prototyping
+Drand and Drop feature for quick front-end prototyping
