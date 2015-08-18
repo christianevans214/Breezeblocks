@@ -1,4 +1,4 @@
-app.directive("uiThumbnail", function() {
+app.directive("uiThumbnail", function($rootScope, $compile) {
 	return {
 		restrict: "E",
 		scope: {
@@ -12,7 +12,10 @@ app.directive("uiThumbnail", function() {
 			elem.css('background-image', "url(" + scope.component.thumbnail + ")");
 			//can hook into elements parent and place html of template into it.
 			elem.click(function() {
-				$("#app").append(scope.component.html);
+				var toAppend = $compile(scope.component.html)(scope);
+				$("#app").append(toAppend);
+				// $rootScope.$apply();
+				// $rootScope.$digest();
 				console.log("ELEMENT", elem, "ELEMENT PARENT", elem.parent());
 				console.log("WHAT THIS WORKED")
 			})

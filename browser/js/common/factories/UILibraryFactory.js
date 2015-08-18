@@ -1,7 +1,7 @@
 app.factory("UILibraryFactory", function() {
 	return {
 		uiNavbar: {
-			html: "<h1> NAV BAR NAV BAR NAV BAR NAV BAR NAV BAR NAV BAR NAV BAR NAV BAR NAV </h1>",
+			html: "<ui-navbar></ui-navbar>",
 			jsx: "hey",
 			thumbnail: "/images/navbar.png"
 		}
