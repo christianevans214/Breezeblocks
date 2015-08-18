@@ -6,7 +6,9 @@
 
 var React = require('react-native');
 var BasicSwitch = require('./components/SwitchIOS');
+var BasicScrollView = require('./components/ScrollView');
 var {
+  ScrollView,
   TabBarIOS,
   SwitchIOS,
   AppRegistry,
@@ -18,13 +20,12 @@ var {
 var reactNative = React.createClass({
   render: function() {
     return (
+      <BasicScrollView />
+
 /*      <View style={styles.container}>
         <BasicSwitch />
         <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.ios.js
+          Cooper's Smart Phone!
         </Text>
         <Text style={styles.instructions}>
           Press Cmd+R to reload,{'\n'}
