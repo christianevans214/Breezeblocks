@@ -51,6 +51,7 @@ app.directive("uiThumbnail", function($rootScope) {
 			function dragMoveListener (event) {
 				var target = event.target,
 			        // keep the dragged position in the data-x/data-y attributes
+
 			    	x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx,
 			    	y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
 
@@ -58,6 +59,8 @@ app.directive("uiThumbnail", function($rootScope) {
 				target.style.webkitTransform =
 				target.style.transform =
 					'translate(' + x + 'px, ' + y + 'px)';
+				// target.style.zIndex="100"
+				// console.log(target.style.zIndex)
 
 			    // update the posiion attributes
 				target.setAttribute('data-x', x);
