@@ -5,7 +5,9 @@
 'use strict';
 
 var React = require('react-native');
+var BasicSwitch = require('./components/SwitchIOS');
 var {
+  TabBarIOS,
   SwitchIOS,
   AppRegistry,
   StyleSheet,
@@ -16,8 +18,8 @@ var {
 var reactNative = React.createClass({
   render: function() {
     return (
-      <View style={styles.container}>
-        <SwitchIOS />
+/*      <View style={styles.container}>
+        <BasicSwitch />
         <Text style={styles.welcome}>
           Welcome to React Native!
         </Text>
@@ -28,7 +30,7 @@ var reactNative = React.createClass({
           Press Cmd+R to reload,{'\n'}
           Cmd+D or shake for dev menu
         </Text>
-      </View>
+      </View>*/
     );
   }
 });
