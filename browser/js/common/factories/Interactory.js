@@ -48,7 +48,7 @@ app.factory("Interactory", function($compile) {
 					// update the element's style
 					target.style.width = event.rect.width + 'px';
 					target.style.height = event.rect.height + 'px';
-
+					if($(event.target).children) console.log("HEY HERE'S THE RESIZING INFO", $(event.target).children[0]);
 					// translate when resizing from top or left edges
 					x += event.deltaRect.left;
 					y += event.deltaRect.top;
