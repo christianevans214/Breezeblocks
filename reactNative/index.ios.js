@@ -7,7 +7,7 @@
 var React = require('react-native');
 var BasicSwitch = require('./components/SwitchIOS');
 var BasicScrollView = require('./components/ScrollView');
-var actions = require('./utils/convertJson');
+//var actions = require('./utils/convertJson');
 
 //console.log(actions);
 
@@ -22,6 +22,21 @@ var {
 } = React;
 
 var reactNative = React.createClass({
+  componentDidMount: function(){
+    this.fetchData();
+  },
+  fetchData: function(){
+    fetch('http://localhost:1337/api/view')
+      .then((res) => res.json())
+      .then((res) => {
+        console.log(res);
+        // console.log(res._bodyText);
+/*        this.setState({
+          dataSource: resData
+        });*/
+      })
+      .done();
+  },  
   render: function() {
     return (
       <BasicScrollView />
