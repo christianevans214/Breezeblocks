@@ -1,8 +1,19 @@
 <div class="container edit-container" style = "padding: 0">
 <!-- <ui-navbar></ui-navbar> -->
 	<div id="elements" class="edit-blade col-md-2">
-		<ui-thumbnail style= "height: 75px; width: 75px; display: block" component="uiLibrary.uiNavbar"></ui-thumbnail>
+		<ui-thumbnail style= "height: 75px; width: 75px; display: block" component="uiLibrary.uiNavbar" id="elemThumb"></ui-thumbnail>
+		<ui-thumbnail style= "height: 75px; width: 75px; display: block; background-size: cover" component="uiLibrary.uiDropArea" id="dropThumb"></ui-thumbnail>
 	</div>
-	<div id="app" class="edit-blade col-md-8"></div>
-	<div id="style" class="edit-blade col-md-2">this is the right</div>
+	<div id="outer-canvas" class="edit-blade col-md-8">
+		<div id="app">
+			<ui-drop-area></ui-drop-area>
+		</div>
+	</div>
+	<div id="style" class="edit-blade col-md-2" ng-submit="changeColor()">edit colors:
+		<pre spacing="default">{{editProps | json}}</pre>
+		<pre spacing="default">{{properties | json}}</pre>
+		<form name="properties">
+		<input type="color" ng-model="editProps.color">
+		<input type="submit">
+		</form>
 </div>
