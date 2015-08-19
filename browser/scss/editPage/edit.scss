@@ -33,6 +33,7 @@
 
 .drop-area{
 	display: flex;
+	min-height: 20px;
 	flex-direction: row;
 	box-sizing: border-box;
 	z-index: 1;
