@@ -1,11 +1,16 @@
+<div class="switch-button">
+	<label class="switch"><input type="checkbox" checked><i></i></label>
+	<label class="switch red"><input type="checkbox"><i></i></label>
+</div>
+
 <section id="about">
     <p>
-        This website--the very one at which you currently gaze--was created by a basic scaffolding
-        concocted at Fullstack Academy. Here are some of the people who make it all very real:
+        Cooper's IPhone App
     </p>
     <carousel interval="2000">
         <slide ng-repeat="image in images">
-            <img height="300" ng-src="{{ image }}" />
+            <img height="300" ng-src="image" />
         </slide>
     </carousel>
 </section>
+

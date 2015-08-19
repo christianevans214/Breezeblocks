@@ -7,6 +7,10 @@
 var React = require('react-native');
 var BasicSwitch = require('./components/SwitchIOS');
 var BasicScrollView = require('./components/ScrollView');
+var actions = require('./utils/convertJson');
+
+//console.log(actions);
+
 var {
   ScrollView,
   TabBarIOS,
