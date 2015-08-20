@@ -16,7 +16,6 @@ var {
   Image,
   SliderIOS,
   ScrollView,
-  TabBarIOS,
   SwitchIOS,
   AppRegistry,
   StyleSheet,
@@ -38,7 +37,7 @@ var reactNative = React.createClass({
   },  
   render: function() {
     return (
-        <Navbar />
+        <Navbar title={"downloads"}/>
 /*      <View>
         <BasicScrollView />
         <BasicSlider />
