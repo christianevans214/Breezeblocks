@@ -1,41 +1,48 @@
-<script src="/handlebars/dist/handlebars.js"></script>
-<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+<html>
+<body>
+<text>hello</text>
+<script src="./generator"></script>
+
 <script id="template" type="text/x-handlebars-template">
-    'use strict';
+  'use strict';
 
-    var React = require('react-native');
-    var BasicSwitch = require('./components/SwitchIOS');
-    var BasicScrollView = require('./components/ScrollView');
-    var BasicSlider = require('./components/SliderIOS');
-    var Navbar = require('./components/TabBarIOS');
+  var React = require('react-native');
+  var BasicSwitch = require('./components/SwitchIOS');
+  var BasicScrollView = require('./components/ScrollView');
+  var BasicSlider = require('./components/SliderIOS');
+  var Navbar = require('./components/TabBarIOS');
 
-    var {
-      TabBarIOS,
-      Image,
-      SliderIOS,
-      ScrollView,
-      SwitchIOS,
-      AppRegistry,
-      StyleSheet,
-      Text,
-      View,
-    } = React;
+  var {
+    TabBarIOS,
+    Image,
+    SliderIOS,
+    ScrollView,
+    SwitchIOS,
+    AppRegistry,
+    StyleSheet,
+    Text,
+    View,
+  } = React;
 
-    var reactNative = React.createClass({
-        render: function() {
-            return (
-                {{renderElements}}
-            );
-        }
-    })
+  var reactNative = React.createClass({
+      render: function() {
+          return (
+              {{renderElements}}
+          );
+      }
+  })
 
 
-    var styles = StyleSheet.create({
-        {{styleObject}}
-    })
+  var styles = StyleSheet.create({
+      {{styleObject}}
+  })
 
-    AppRegistry.registerComponent('reactNative', () => reactNative);
-    </script>
-
-    <div class="content-placeholder"></div> 
+  AppRegistry.registerComponent('reactNative', () => reactNative);
 </script>
+
+<div class="content-placeholder"></div>
+</body>
+</html>
+
+
+
