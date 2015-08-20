@@ -6,8 +6,10 @@
 		<ui-thumbnail style= "height: 75px; width: 75px; display: block; background-size: cover" component="uiLibrary.uiImage" id="elemThumb"></ui-thumbnail>
 	</div>
 	<div id="outer-canvas" class="edit-blade col-md-8 col-sm-8">
+			<!-- <ui-drop-area class="drop-area ng-class:'getClass()'"></ui-drop-area> -->
+			<!-- <pre>{{parseTree|json}}</pre> -->
 		<div id="app">
-			<ui-drop-area class="drop-area ng-class:'getClass()'"></ui-drop-area>
+			<div ng-repeat = "View in parseTree" class='{{View.className.join(" ")}}' ng-include='"js/common/directives/ui-components/ui-drop-area/ui-drop-area.html"'></div>
 		</div>
 	</div>
 

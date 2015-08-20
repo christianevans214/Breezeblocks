@@ -16,13 +16,21 @@ function colorChange($scope) {
 	})
 }
 
-app.controller('EditPageController', function($scope, $compile, UILibraryFactory, EmitterizerFactory, Interactory, StyleFactory) {
+app.controller('EditPageController', function($scope, $compile, UILibraryFactory, EmitterizerFactory, Interactory, StyleFactory,ParseTreeFactory) {
+	$scope.parseTree = ParseTreeFactory.parseTree.tree;
+	$scope.pathName = function(elemPath){
+		return "js/common/components/" + elemPath + ".html"
+	}
+
+
+
+
+
+
 	$scope.uiLibrary = UILibraryFactory;
 	//properties to edit styling:
 	$scope.editProps = {flexGrowSize: 1};
 	//properties to edit HTML
-
-	$scope.parseTree = [{View:{className:["view-1"]}}];
 	$scope.currentlySelected = null;
 	$scope.addToParseTree = function() {};
 	$scope.createReactClass = function() {};
