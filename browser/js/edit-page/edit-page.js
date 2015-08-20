@@ -23,7 +23,11 @@ app.controller('EditPageController', function($scope, $compile, UILibraryFactory
 	}
 
 
-
+	$scope.changeSelected = function(className){
+		if($scope.currentlySelected) $scope.currentlySelected.removeClass('shadow')
+		$scope.currentlySelected = $('.'+ className);
+		$scope.currentlySelected.addClass('shadow')
+	}
 
 
 
@@ -40,7 +44,9 @@ app.controller('EditPageController', function($scope, $compile, UILibraryFactory
 	$scope.lessFlex = StyleFactory.lessFlex($scope);
 	$scope.moreFlex = StyleFactory.moreFlex($scope);
 	$scope.deleteElem = function(){
-		$scope.currentlySelected.remove()
+		var thisParent = $scope.currentlySelected.parent()[0]
+		console.log("parent",thisParent)
+		ParseTreeFactory.removeElement($scope,$scope.currentlySelected,thisParent)
 	}
 
 	$scope.getClass = function(){

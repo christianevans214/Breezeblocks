@@ -1,4 +1,4 @@
-app.factory("Interactory", function($compile) {
+app.factory("Interactory", function($compile, ParseTreeFactory) {
 	return {
 		Interact: function($scope) {
 			interact('#app')
@@ -6,13 +6,16 @@ app.factory("Interactory", function($compile) {
 					accept: '#dropThumb',
 					overlap: 0.75,
 					ondrop: function(event) {
-						var thisComponentName = $(event.relatedTarget).attr('component').split(".")[1];
-						console.log(thisComponentName);
-						$scope.parseTree.push({View:{className:["view-" + ($scope.parseTree.length+1)]}});
-						var toAppend = $compile($scope.uiLibrary[thisComponentName].html)($scope);
-						toAppend.addClass("view-" + $scope.parseTree.length);
-						$(event.target).append(toAppend);
-						console.log("WHAT THIS WORKED")
+						console.log("It still works!")
+						ParseTreeFactory.addRow($scope)
+
+						// var thisComponentName = $(event.relatedTarget).attr('component').split(".")[1];
+						// console.log(thisComponentName);
+						// $scope.parseTree.push({View:{className:["view-" + ($scope.parseTree.length+1)]}});
+						// var toAppend = $compile($scope.uiLibrary[thisComponentName].html)($scope);
+						// toAppend.addClass("view-" + $scope.parseTree.length);
+						// $(event.target).append(toAppend);
+						// console.log("WHAT THIS WORKED")
 
 					}
 
@@ -24,11 +27,14 @@ app.factory("Interactory", function($compile) {
 				.dropzone({
 					accept: '#elemThumb',
 					ondrop: function(event) {
-						var thisComponentName = $(event.relatedTarget).attr('component').split(".")[1];
-						console.log(thisComponentName);
-						var toAppend = $compile($scope.uiLibrary[thisComponentName].html)($scope);
-						$(event.target).append(toAppend);
-						console.log("WHAT THIS WORKED")
+						var thisComponentName= event.relatedTarget.getAttribute('component')
+						console.log('this component:',thisComponentName.split('.')[1])
+						ParseTreeFactory.addElement($scope,event.target.className.split(' ')[1],thisComponentName.split('.')[1]);
+						// var thisComponentName = $(event.relatedTarget).attr('component').split(".")[1];
+						// console.log(thisComponentName);
+						// var toAppend = $compile($scope.uiLibrary[thisComponentName].html)($scope);
+						// $(event.target).append(toAppend);
+						// console.log("WHAT THIS WORKED")
 					}
 				})
 				.resizable({

@@ -60,9 +60,9 @@ ui-thumbnail{
 	color: white;
 }
 
-.image{
-	flex-grow: 1; 
-	display: flex; 
-	flex-direction: column
+.ui-image{
+	display: flex;
+	background-size: cover; 
+	flex-grow: 1;
 }
 
