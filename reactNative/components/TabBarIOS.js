@@ -8,6 +8,7 @@ var {
   View,
 } = React;
 
+var systemIconTypes = ['bookmarks', 'contacts', 'downloads', 'favorites', 'featured', 'history', 'more', 'most-recent', 'most-viewed', 'recents', 'search', 'top-rated'];
 
 module.exports = React.createClass({
   getInitialState: function() {
@@ -15,10 +16,34 @@ module.exports = React.createClass({
       selectedTab: 'redTab',
     };
   },
-  addTabBarItem: function(tabTitle) {
-
-  },
-
+/*  addTabBarItem: function(tabTitle: string, isSystemIcon: bool) {
+    if(isSystemIcon && systemIconTypes.indexOf(tabTitle) > -1){
+      return {
+        <TabBarIOS.Item
+          systemIcon={tabTitle}
+          selected={this.state.selectedTab === tabTitle}
+          onPress={() => {
+            this.setState({
+              selectedTab: 'blueTab',
+            });
+          }}>
+          {this._renderContent({tabTitle})}
+        </TabBarIOS.Item>
+      }
+    }
+    return {
+        <TabBarIOS.Item
+          title={tabTitle}
+          selected={this.state.selectedTab === tabTitle}
+          onPress={() => {
+            this.setState({
+              selectedTab: 'blueTab',
+            });
+          }}>
+          {this._renderContent({tabTitle})}
+        </TabBarIOS.Item>
+    }
+  },*/
   _renderContent: function(pageText: string) {
     return (
       <View style={[styles.tabContent]}>
@@ -32,6 +57,7 @@ module.exports = React.createClass({
       <TabBarIOS
         tintColor="white"
         barTintColor="darkslateblue">
+        {addTabBarItem("favorites", true)}
         <TabBarIOS.Item
           title="title"
           selected={this.state.selectedTab === 'blueTab'}
@@ -43,7 +69,7 @@ module.exports = React.createClass({
         	{this._renderContent('Blue Tab')}
         </TabBarIOS.Item>
         <TabBarIOS.Item
-          systemIcon="history"
+          systemIcon="favorites"
           selected={this.state.selectedTab === 'redTab'}
           onPress={() => {
             this.setState({
