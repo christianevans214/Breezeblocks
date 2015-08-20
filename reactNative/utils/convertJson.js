@@ -1,31 +1,27 @@
 var React = require('react-native');
-// var $ = require('jquery');
-// var json;
 
 module.exports = React.createClass({
-/*	getInitialState: function(){
+	getInitialState: function(){
 		return {
-			dataSource: '',
 			loaded: false,
+			json: '',
 		}
-	},*/
-	componentDidMount: function(){
-		this.fetchData();
 	},
-	fetchData: function(){
-		fetch('/views')
-			.then((res) => res.json())
-			.then((resData) => {
-				console.log(resData);
-/*				this.setState({
-					dataSource: resData
-				});*/
-			})
-			.done();
-	},	
-	render: function() {
-		return (
-			<div />
-		);
-	}
+  componentDidMount: function(){
+    this.fetchData();
+  },
+  fetchData: function(){
+    fetch('http://localhost:1337/api/view')
+      .then((res) => res.json())
+      .then((res) => {
+      	this.
+        console.log(res);
+      })
+      .done();
+  },  
+  render: function() {
+  	return (
+
+  	);
+  }
 })
