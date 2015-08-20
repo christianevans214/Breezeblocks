@@ -8,7 +8,9 @@ app.factory("Interactory", function($compile) {
 					ondrop: function(event) {
 						var thisComponentName = $(event.relatedTarget).attr('component').split(".")[1];
 						console.log(thisComponentName);
+						$scope.parseTree.push({View:{className:["view-" + ($scope.parseTree.length+1)]}});
 						var toAppend = $compile($scope.uiLibrary[thisComponentName].html)($scope);
+						toAppend.addClass("view-" + $scope.parseTree.length);
 						$(event.target).append(toAppend);
 						console.log("WHAT THIS WORKED")
 
@@ -22,17 +24,11 @@ app.factory("Interactory", function($compile) {
 				.dropzone({
 					accept: '#elemThumb',
 					ondrop: function(event) {
-						// console.log($scope.UILibrary[event.component])
 						var thisComponentName = $(event.relatedTarget).attr('component').split(".")[1];
 						console.log(thisComponentName);
-						// var componentObject = eval("$scope." + thisComponentName);
-						// console.log(thisComponentName);
-						// console.log("mouseup","in",event)
 						var toAppend = $compile($scope.uiLibrary[thisComponentName].html)($scope);
 						$(event.target).append(toAppend);
-						// console.log("ELEMENT", elem, "ELEMENT PARENT", elem.parent());
 						console.log("WHAT THIS WORKED")
-
 					}
 				})
 				.resizable({

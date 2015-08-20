@@ -44,3 +44,9 @@ ui-thumbnail{
 	position: relative;
 	z-index: 4;
 }
+
+.shadow{
+	box-shadow: 0 0 10px 2px #000000;
+	transition: .2s;
+}
+

@@ -16,6 +16,20 @@ app.factory("StyleFactory", function() {
 				$scope.currentlySelected.css('margin', $scope.editProps.margin + "px");
 				$scope.editProps.margin = undefined;
 			}
+		},
+		lessFlex: function($scope){
+			return function(){
+				if ($scope.editProps.flexGrowSize > 1){
+					$scope.currentlySelected.css('flex-grow', --$scope.editProps.flexGrowSize)
+				}
+			}
+		},
+		moreFlex: function($scope){
+			return function(){
+				if ($scope.editProps.flexGrowSize < 10){
+					$scope.currentlySelected.css('flex-grow', ++$scope.editProps.flexGrowSize)
+				}
+			}
 		}
 	}
 })
