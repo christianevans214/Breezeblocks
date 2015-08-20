@@ -9,7 +9,11 @@ var BasicSwitch = require('./components/SwitchIOS');
 var BasicScrollView = require('./components/ScrollView');
 var Actions = require('./utils/reactCodeRender.js');
 
+
 var {
+  TabBarIOS,
+  Image,
+  SliderIOS,
   ScrollView,
   TabBarIOS,
   SwitchIOS,
@@ -28,10 +32,6 @@ var reactNative = React.createClass({
       .then((res) => res.json())
       .then((res) => {
         console.log(res);
-        // console.log(res._bodyText);
-/*        this.setState({
-          dataSource: resData
-        });*/
       })
       .done();
   },  
@@ -39,7 +39,6 @@ var reactNative = React.createClass({
     return (
       <Actions />
       // <BasicScrollView />
-
 /*      <View style={styles.container}>
         <BasicSwitch />
         <Text style={styles.welcome}>
@@ -70,6 +69,10 @@ var styles = StyleSheet.create({
     textAlign: 'center',
     color: '#333333',
     marginBottom: 5,
+  },
+  img: {
+    width: 200,
+    height: 200,
   },
 });
 

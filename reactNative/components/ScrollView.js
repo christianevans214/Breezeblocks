@@ -13,8 +13,8 @@ module.exports = React.createClass({
     return (
       <ScrollView
         horizontal={true}
-        /*contentInset={{top: -50}}*/
-        style={[styles.scrollView, styles.horizontalScrollView]}>
+        contentInset={{top: 50}}
+        style={[styles.scrollView]}>
         {THUMBS.map(createThumbRow)}
       </ScrollView>
     );
@@ -42,9 +42,6 @@ var styles = StyleSheet.create({
   scrollView: {
     // backgroundColor: '#6A85B1',
     height: 300,
-  },
-  horizontalScrollView: {
-    height: 120,
   },
   containerPage: {
     height: 50,

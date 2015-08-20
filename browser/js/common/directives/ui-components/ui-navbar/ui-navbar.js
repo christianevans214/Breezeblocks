@@ -5,7 +5,7 @@ app.directive("uiNavbar", function() {
 		link: function(scope,elem,attr) {
 			$(elem).on('click',function(){
 				scope.$emit('changeSelect',elem)
-				console.log("you clicked",elem)
+				
 			})
 		}
 	}
