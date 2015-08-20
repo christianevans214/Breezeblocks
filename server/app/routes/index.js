@@ -2,7 +2,6 @@
 var router = require('express').Router();
 var json = require('./view.json');
 var path = require('path');
-console.log(json);
 module.exports = router;
 
 var pathToTemplate = path.join(__dirname, './../reactUtils/template.html');
