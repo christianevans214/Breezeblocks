@@ -7,9 +7,8 @@
 var React = require('react-native');
 var BasicSwitch = require('./components/SwitchIOS');
 var BasicScrollView = require('./components/ScrollView');
-var BasicSlider = require('./components/SliderIOS');
-var Navbar = require('./components/TabBarIOS');
-//var actions = require('./utils/convertJson');
+var Actions = require('./utils/reactCodeRender.js');
+
 
 var {
   TabBarIOS,
@@ -38,14 +37,8 @@ var reactNative = React.createClass({
   },  
   render: function() {
     return (
-        <Navbar />
-/*      <View>
-        <BasicScrollView />
-        <BasicSlider />
-        <Image style={[styles.img, ]} source={{uri: "http://www.oldyelladogranch.com/puppies.jpg"}} />
-      </View>*/
-      
-
+      <Actions />
+      // <BasicScrollView />
 /*      <View style={styles.container}>
         <BasicSwitch />
         <Text style={styles.welcome}>
