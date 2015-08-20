@@ -7,11 +7,14 @@
 var React = require('react-native');
 var BasicSwitch = require('./components/SwitchIOS');
 var BasicScrollView = require('./components/ScrollView');
+var BasicSlider = require('./components/SliderIOS');
+var Navbar = require('./components/TabBarIOS');
 //var actions = require('./utils/convertJson');
 
-//console.log(actions);
-
 var {
+  TabBarIOS,
+  Image,
+  SliderIOS,
   ScrollView,
   TabBarIOS,
   SwitchIOS,
@@ -30,16 +33,18 @@ var reactNative = React.createClass({
       .then((res) => res.json())
       .then((res) => {
         console.log(res);
-        // console.log(res._bodyText);
-/*        this.setState({
-          dataSource: resData
-        });*/
       })
       .done();
   },  
   render: function() {
     return (
-      <BasicScrollView />
+        <Navbar />
+/*      <View>
+        <BasicScrollView />
+        <BasicSlider />
+        <Image style={[styles.img, ]} source={{uri: "http://www.oldyelladogranch.com/puppies.jpg"}} />
+      </View>*/
+      
 
 /*      <View style={styles.container}>
         <BasicSwitch />
@@ -71,6 +76,10 @@ var styles = StyleSheet.create({
     textAlign: 'center',
     color: '#333333',
     marginBottom: 5,
+  },
+  img: {
+    width: 200,
+    height: 200,
   },
 });
 
