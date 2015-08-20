@@ -1,13 +1,17 @@
 var fs = require('fs');
-var templateFile = require('./template.html');
-	
+//var $ = require('jquery');
+//var Handlebars = require('handlebars');
+//var templateFile = require('./template.html');
+
+console.log("GOT HERE")
+
 $(function(){
-	//var templateScript = $('#template').html();
-	var templateScript = templateFile;
+	var templateScript = $('#template').html();
+	// var templateScript = templateFile.$('#template').html();
 
 	//Compile template
-	//var template = Handlebars.compile(template.js)
-	var template = Handlebars.compile(templateScript)
+	var template = Handlebars.compile(template.html)
+	// var template = Handlebars.compile(templateScript)
 
 	//Define data object
 	var context = {
@@ -19,7 +23,7 @@ $(function(){
 	var compiledJSX = template(context);
 
 	//write file....
-	//$('.content-placeholder').html(compiledJSX);
+	// $('.content-placeholder').html(compiledJSX);
 	fs.writeFile('template.js', compiledJSX, function(err){
 		if(err) throw err;
 		console.log('Saved File');
