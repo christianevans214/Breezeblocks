@@ -43,7 +43,8 @@ module.exports = React.createClass({
           {this._renderContent({tabTitle})}
         </TabBarIOS.Item>
     }
-  },*/
+  },
+  {addTabBarItem("favorites", true)}*/
   _renderContent: function(pageText: string) {
     return (
       <View style={[styles.tabContent]}>
@@ -57,7 +58,6 @@ module.exports = React.createClass({
       <TabBarIOS
         tintColor="white"
         barTintColor="darkslateblue">
-        {addTabBarItem("favorites", true)}
         <TabBarIOS.Item
           title="title"
           selected={this.state.selectedTab === 'blueTab'}
