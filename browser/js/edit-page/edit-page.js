@@ -9,88 +9,45 @@ app.config(function($stateProvider) {
 
 });
 
-app.controller('EditPageController', function($scope, $compile, UILibraryFactory) {
-	// console.log(UILibraryFactory.uiNavbar);
-	$scope.uiLibrary = UILibraryFactory;
-	$scope.editProps = {};
-	$scope.currentlySelected = "Hi";
-	// $scope.uiNavbar = {
-	// 	"hey": "What"
-	// }
-	$scope.parseTree = {};
-	$scope.addToParseTree = function() {};
-	$scope.createReactClass = function() {};
-	$scope.changeColor = function(){
-		$scope.currentlySelected.css('background-color', $scope.editProps.color);
-	}
-	$scope.$on('changeSelect',function(event, data){
-		var thing = $(data);
-		console.log(thing);
+function colorChange($scope) {
+	$scope.$on('changeSelect', function(event, data) {
 		$scope.currentlySelected = $(data)
 		$scope.$apply()
 	})
+}
 
-	interact('#app')
-		.dropzone({
-			accept: '#dropThumb',
-			overlap: 0.75,
-			ondrop: function(event){
-				// console.log($scope.UILibrary[event.component])
-				var thisComponentName = $(event.relatedTarget).attr('component').split(".")[1];
-				console.log (thisComponentName);
-				// var componentObject = eval("$scope." + thisComponentName);
-				// console.log(thisComponentName);
-				// console.log("mouseup","in",event)
-				var toAppend = $compile($scope.uiLibrary[thisComponentName].html)($scope);
-				$(event.target).append(toAppend);
-				// console.log("ELEMENT", elem, "ELEMENT PARENT", elem.parent());
-				console.log("WHAT THIS WORKED")
-					
-			}
+app.controller('EditPageController', function($scope, $compile, UILibraryFactory, EmitterizerFactory, Interactory, StyleFactory) {
+	$scope.uiLibrary = UILibraryFactory;
+	//properties to edit styling:
+	$scope.editProps = {flexGrowSize: 1};
+	//properties to edit HTML
 
-		})
+	$scope.parseTree = [{View:{className:["view-1"]}}];
+	$scope.currentlySelected = null;
+	$scope.addToParseTree = function() {};
+	$scope.createReactClass = function() {};
+	$scope.changeColor = StyleFactory.changeColor($scope);
+	$scope.changeMargin = StyleFactory.changeMargin($scope);
+	$scope.changePadding = StyleFactory.changePadding($scope);
+	$scope.lessFlex = StyleFactory.lessFlex($scope);
+	$scope.moreFlex = StyleFactory.moreFlex($scope);
+	$scope.deleteElem = function(){
+		$scope.currentlySelected.remove()
+	}
 
+	$scope.getClass = function(){
+		return 1
+	}
 
+	//event emitter to catch whenever someone selects a template in the iPhone
+	// $scope.$on('changeSelect', function(event, data) {
+	// 	if($scope.currentlySelected) $scope.currentlySelected.removeClass('shadow')
+	// 	$scope.currentlySelected = $(data)
+	// 	$scope.currentlySelected.addClass('shadow')
+	// 	$scope.editProps = {flexGrowSize: 1};
+	// 	$scope.$apply()
+	// });
+	EmitterizerFactory.makeEmitterListeners($scope);
 
-	interact('.drop-area')
-		.dropzone({
-			accept: '#elemThumb',
-			ondrop: function(event){
-				// console.log($scope.UILibrary[event.component])
-				var thisComponentName = $(event.relatedTarget).attr('component').split(".")[1];
-				console.log (thisComponentName);
-				// var componentObject = eval("$scope." + thisComponentName);
-				// console.log(thisComponentName);
-				// console.log("mouseup","in",event)
-				var toAppend = $compile($scope.uiLibrary[thisComponentName].html)($scope);
-				$(event.target).append(toAppend);
-				// console.log("ELEMENT", elem, "ELEMENT PARENT", elem.parent());
-				console.log("WHAT THIS WORKED")
-					
-			}
-		})
-		.resizable({
-			edges: {bottom: true},
-		})
-		.on('resizemove', function (event) {
-    var target = event.target,
-        x = (parseFloat(target.getAttribute('data-x')) || 0),
-        y = (parseFloat(target.getAttribute('data-y')) || 0);
-
-    // update the element's style
-    target.style.width  = event.rect.width + 'px';
-    target.style.height = event.rect.height + 'px';
-
-    // translate when resizing from top or left edges
-    x += event.deltaRect.left;
-    y += event.deltaRect.top;
-
-    target.style.webkitTransform = target.style.transform =
-        'translate(' + x + 'px,' + y + 'px)';
-
-    target.setAttribute('data-x', x);
-    target.setAttribute('data-y', y);
-    // target.textContent = event.rect.width + '×' + event.rect.height;
-  });
-
+	Interactory.Interact($scope);
 });

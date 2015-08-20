@@ -11,13 +11,6 @@ app.directive("uiThumbnail", function($rootScope) {
 			console.log("THUMBNAIL", scope.component.thumbnail);
 			elem.css('background-image', "url(" + scope.component.thumbnail + ")");
 			elem.addClass('thumb')
-			//can hook into elements parent and place html of template into it.
-			// elem.click(function() {
-			// 	var toAppend = $compile(scope.component.html)(scope);
-			// 	$("#app").append(toAppend);
-			// 	console.log("ELEMENT", elem, "ELEMENT PARENT", elem.parent());
-			// 	console.log("WHAT THIS WORKED")
-			// })
 			interact('.thumb')
 				.draggable({
 			    // enable inertial throwing
