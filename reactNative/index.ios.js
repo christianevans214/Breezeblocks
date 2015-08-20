@@ -7,9 +7,7 @@
 var React = require('react-native');
 var BasicSwitch = require('./components/SwitchIOS');
 var BasicScrollView = require('./components/ScrollView');
-//var actions = require('./utils/convertJson');
-
-//console.log(actions);
+var Actions = require('./utils/reactCodeRender.js');
 
 var {
   ScrollView,
@@ -39,7 +37,8 @@ var reactNative = React.createClass({
   },  
   render: function() {
     return (
-      <BasicScrollView />
+      <Actions />
+      // <BasicScrollView />
 
 /*      <View style={styles.container}>
         <BasicSwitch />

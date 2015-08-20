@@ -1,7 +1,6 @@
 'use strict';
 var router = require('express').Router();
 var json = require('./view.json');
-console.log(json);
 module.exports = router;
 
 router.use('/members', require('./members'));
