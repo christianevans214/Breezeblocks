@@ -15,5 +15,10 @@ module.exports = {
     "clientID": "INSERT_GOOGLE_CLIENTID_HERE",
     "clientSecret": "INSERT_GOOGLE_CLIENT_SECRET_HERE",
     "callbackURL": "INSERT_GOOGLE_CALLBACK_HERE"
+  },
+  "GITHUB": {
+    "clientID": "817b2894f3f85e3688a6",
+    "clientSecret": "c066b38b6dc075be02bfb8ed75a2e68aebc226bd",
+    "callbackURL": 'https://localhost:1337/verify'
   }
 };
