@@ -49,6 +49,52 @@ module.exports = function(json){
 		}
 	]
 
+{
+    "view1": {
+        "flex": '1',
+        "justify-content": 'center',
+        "align-items": 'center',
+        "background-color": '#F5FCFF',
+    },
+    "img1": {
+        "width": '200px',
+        "height": '200px',
+    },
+    "view2": {
+        "flex": '1',
+        "justify-content": 'center',
+        "align-items": 'center',
+        "background-color": '#F5FCFF',
+    },
+    "img2": {
+        "width": '200px',
+        "height": '200px',
+    }
+}
+
+var styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#F5FCFF',
+  },
+  welcome: {
+    fontSize: 20,
+    textAlign: 'center',
+    margin: 10,
+  },
+  instructions: {
+    textAlign: 'center',
+    color: '#333333',
+    marginBottom: 5,
+  },
+  img: {
+    width: 200,
+    height: 200,
+  },
+});
+
 	var reactDOM = "";
 	for(var i = 0; i < json.length; i++){
 	    reactDOM += domMaker(json[i]);

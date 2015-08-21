@@ -35,7 +35,13 @@ var reactNative = React.createClass({
 
 
 var styles = StyleSheet.create({
-    {{{styleObject}}}
+    {{#each styleTree}}
+      {{camelCase @key}}:{
+        {{#each this}}
+          {{camelCase @key}}: {{{removePx this}}},
+        {{/each }}
+      }, 
+    {{/each }}
 })
 
 AppRegistry.registerComponent('reactNative', () => reactNative);

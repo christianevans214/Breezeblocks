@@ -43,7 +43,26 @@ var reactNative = React.createClass({
 
 
 var styles = StyleSheet.create({
-    
+      view1:{
+          flex: 1,
+          justifyContent: 'center',
+          alignItems: 'center',
+          backgroundColor: '#F5FCFF',
+      }, 
+      img1:{
+          width: 200,
+          height: 200,
+      }, 
+      view2:{
+          flex: 1,
+          justifyContent: 'center',
+          alignItems: 'center',
+          backgroundColor: '#F5FCFF',
+      }, 
+      img2:{
+          width: 200,
+          height: 200,
+      }, 
 })
 
 AppRegistry.registerComponent('reactNative', () => reactNative);

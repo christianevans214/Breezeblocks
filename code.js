@@ -52,12 +52,30 @@ var data = [
 	}
 ]
 
-var templateFile = require('fs').readFileSync('./template.hbs').toString();
-
-var typeToContentTranslator = {
-	Navbar: 'title',
-	Image: 'source'
+var styleData = {
+    "view1": {
+        "flex": '1',
+        "justify-content": 'center',
+        "align-items": 'center',
+        "background-color": '#F5FCFF',
+    },
+    "img1": {
+        "width": '200px',
+        "height": '200px',
+    },
+    "view2": {
+        "flex": '1',
+        "justify-content": 'center',
+        "align-items": 'center',
+        "background-color": '#F5FCFF',
+    },
+    "img2": {
+        "width": '200px',
+        "height": '200px',
+    }
 };
+
+var templateFile = require('fs').readFileSync('./template.hbs').toString();
 
 // Handlebars.registerPartial('View', require('fs').readFileSync('./testPartial.hbs'));
 
@@ -71,10 +89,16 @@ Handlebars.registerHelper('camelCase', function (string) {
 	return ChangeCase.camelCase(string);
 });
 
+Handlebars.registerHelper('removePx', function(string){
+	string = string.replace(/px$/,"");	
+	if(string.match(/[^0-9]/) !== null) return "'" + string + "'";
+	else return string;
+})
+
 
 var createTemplate = Handlebars.compile(templateFile);
 
-var renderedTemplate = createTemplate({ tree: data });
+var renderedTemplate = createTemplate({ tree: data, styleTree: styleData });
 
 require('fs').writeFile('./whatever.js', renderedTemplate, console.error.bind(console));
 
