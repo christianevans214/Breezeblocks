@@ -1,7 +1,56 @@
 var Handlebars = require('Handlebars');
 var ChangeCase = require('change-case');
+var path = require('path');
 var fs = require('fs');
 
+var templatePath = path.join(__dirname, './template.hbs');
+
+module.exports = function(data, styleData){
+	return new Promise(function(resolve, reject){
+		fs.readFile(templatePath, function(err, data){
+			if(err) reject(err);
+			else{
+				resolve(data.toString());	
+			}
+		})
+	})
+	.then(function(templateFile){
+		var createTemplate = Handlebars.compile(templateFile);
+		var renderedTemplate = createTemplate({ tree: data, styleTree: styleData });
+		return renderedTemplate;
+	})
+	.then(function(renderedTemplate){
+		console.log("writing file", renderedTemplate);
+		return new Promise(function(resolve, reject){
+			fs.writeFile('./reactNative/index.ios.js', renderedTemplate, function(err){
+				if(err) reject(err);
+				else resolve(renderedTemplate);
+			})
+		})
+	})
+	.then(function(finaltemp){
+		console.log("file saved!");
+		return finaltemp;
+	})
+
+	// Handlebars.registerPartial('View', require('fs').readFileSync('./testPartial.hbs'));
+
+	Handlebars.registerHelper('getProp', function (propObj) {
+		if(propObj.name === "source") return "{{uri: '" + propObj.value + "'}}";
+		else if(propObj.type === "string") return "'" + propObj.value + "'";
+		else return propObj.value; 
+	});
+
+	Handlebars.registerHelper('camelCase', function (string) {
+		return ChangeCase.camelCase(string);
+	});
+
+	Handlebars.registerHelper('removePx', function(string){
+		string = string.replace(/px$/,"");	
+		if(string.match(/[^0-9]/) !== null) return "'" + string + "'";
+		else return string;
+	})
+}
 /*var data = [
 	{
 		className: ['drop-area','view-1'],
@@ -76,52 +125,6 @@ var styleData = {
     }
 };*/
 
-module.exports = function(data, styleData){
-	new Promise(function(resolve, reject){
-		fs.readFile('/Users/PT/Fullstack/DrandAndDrop/server/app/reactUtils/template.hbs', function(err, data){
-			if(err)reject(err);
-			else{
-				resolve(data.toString());	
-			}
-		})
-	})
-	.then(function(templateFile){
-		var createTemplate = Handlebars.compile(templateFile);
-		var renderedTemplate = createTemplate({ tree: data, styleTree: styleData });
-		return renderedTemplate;
-	})
-	.then(function(renderedTemplate){
-		return new Promise(function(resolve, reject){
-			fs.writeFile('./reactNative/index.ios.js', renderedTemplate, function(err){
-				if(err) reject(err);
-				else resolve(renderedTemplate);
-			})
-		})
-	})
-	.then(function(finaltemp){
-		console.log("file saved!");
-		return finaltemp;
-	})
-	.then(null, function(err){console.error(err)});
-
-	// Handlebars.registerPartial('View', require('fs').readFileSync('./testPartial.hbs'));
-
-	Handlebars.registerHelper('getProp', function (propObj) {
-		if(propObj.name === "source") return "{{uri: '" + propObj.value + "'}}";
-		else if(propObj.type === "string") return "'" + propObj.value + "'";
-		else return propObj.value; 
-	});
-
-	Handlebars.registerHelper('camelCase', function (string) {
-		return ChangeCase.camelCase(string);
-	});
-
-	Handlebars.registerHelper('removePx', function(string){
-		string = string.replace(/px$/,"");	
-		if(string.match(/[^0-9]/) !== null) return "'" + string + "'";
-		else return string;
-	})
-}
 
 
 //recursive version
