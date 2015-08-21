@@ -23,6 +23,12 @@ var schema = new mongoose.Schema({
     },
     google: {
         id: String
+    },
+    github: {
+        id: String
+    },
+    projects: {
+        type: [{type: mongoose.Schema.ObjectId, ref:"Build"}]
     }
 });
 
