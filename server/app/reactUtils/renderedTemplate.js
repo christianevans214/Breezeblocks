@@ -18,20 +18,17 @@ var {
   View,
 } = React;
 
-// data = rep
-
 var reactNative = React.createClass({
     render: function() {
         return (
-            {{#each }}
-            {{/each }}
+            <View style={[styles.container, styles.test]}><BasicScrollView style={[styles.somerandomclass, styles.somerandomclass2]} horizontally='true'/><BasicScrollView style={[styles.someotherclass, styles.someotherclass2]} horizontally='false'/></View>
         );
     }
 })
 
 
 var styles = StyleSheet.create({
-    {{{styleObject}}}
+    container: {flex: 1,justifyContent: 'center',alignItems: 'center',backgroundColor: '#F5FCFF',},
 })
 
 AppRegistry.registerComponent('reactNative', () => reactNative);

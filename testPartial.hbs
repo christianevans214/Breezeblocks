@@ -1,0 +1,6 @@
+<View>
+  {{#each data.children}}
+  <{{this.type}} {{getProp this}}={ '{{this.content}}' } style={[{{#each this.className}}styles.{{camelCase this}}{{#unless @last}}, {{/unless }}{{/each }}]}>
+  </{{this.type}}>
+  {{/each}}
+</View>
