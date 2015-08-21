@@ -1,8 +1,8 @@
 'use strict';
 var router = require('express').Router();
-var json = require('./view.json');
 var path = require('path');
 module.exports = router;
+
 
 var pathToTemplate = path.join(__dirname, './../reactUtils/template.html');
 var pathToGenerator = path.join(__dirname, './../reactUtils/generator.js');
@@ -10,7 +10,7 @@ var pathToGenerator = path.join(__dirname, './../reactUtils/generator.js');
 router.use('/members', require('./members'));
 
 router.get('/view', function(req, res){
-	res.send(json);
+	res.send(exampleData);
 });
 
 router.get('/template', function(req, res){
