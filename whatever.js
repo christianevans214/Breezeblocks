@@ -22,17 +22,19 @@ var reactNative = React.createClass({
     render: function() {
         return (
             <View>
-              <Navbar title={ '' } style={[styles.uiNavbar, styles.view1Navbar1]}>
+              <Navbar title='my cool app' style={[styles.view1Navbar1]}>
               </Navbar>
-              <Navbar title={ '' } style={[styles.uiNavbar, styles.view1Navbar2]}>
+              <Navbar title='my okay app' style={[styles.view1Navbar2]}>
               </Navbar>
-              <Navbar title={ '' } style={[styles.uiNavbar, styles.view1Navbar3]}>
+              <Navbar title='my bad app' style={[styles.view1Navbar3]}>
+              </Navbar>
+              <Navbar title='the title' style={[styles.view1Navbar3]}>
               </Navbar>
             </View>
             <View>
-              <Image source={ '' } style={[styles.uiImage, styles.view2Image1]}>
+              <Image source={{uri: 'http://www.joomlaworks.net/images/demos/galleries/abstract/7.jpg'}} style={[styles.view2Image1]}>
               </Image>
-              <Image source={ '' } style={[styles.uiImage, styles.view2Image2]}>
+              <Image source={{uri: 'https://imgs.xkcd.com/comics/perl_problems.png'}} style={[styles.view2Image2]}>
               </Image>
             </View>
         );

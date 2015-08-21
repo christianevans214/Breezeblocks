@@ -7,15 +7,27 @@ var data = [
 		children: [
 			{type: 'Navbar',
 			 className: ['ui-navbar', 'view-1-navbar-1'],
-			 content: ['My Cool App']
+			 props: [
+			 	{ "name": "title", "value": "my cool app", type: "string" }
+			 ]
 			},
 			{type: 'Navbar',
 			 className: ['ui-navbar', 'view-1-navbar-2'],
-			 content: ['My Okay App']
+			 props: [
+			 	{ "name": "title", "value": "my okay app", type: "string" }
+			 ]
 			},
 			{type: 'Navbar',
 			 className: ['ui-navbar', 'view-1-navbar-3'],
-			 content: ['My Bad App :(']
+			 props: [
+			 	{ "name": "title", "value": "my bad app", type: "string" }
+			 ]
+			},
+			{type: 'Navbar',
+			 className: ['ui-navbar', 'view-1-navbar-3'],
+			 props: [
+			 	{ "name": "title", "value": "the title", type: "string" }
+			 ]
 			}
 
 		]
@@ -25,14 +37,20 @@ var data = [
 		children: [
 			{type: 'Image',
 			 className: ["ui-image",'view-2-image-1'],
-			 content: ['http://www.joomlaworks.net/images/demos/galleries/abstract/7.jpg']},
+				 props: [
+			 	{ "name": "source", "value": "http://www.joomlaworks.net/images/demos/galleries/abstract/7.jpg", type: "string" }
+			 ]
+			},
 			{type: 'Image',
 			 className: ['ui-image', 'view-2-image-2'],
-			 content: ['https://imgs.xkcd.com/comics/perl_problems.png']}
+			 props: [
+			 	{ "name": "source", "value": "https://imgs.xkcd.com/comics/perl_problems.png", type: "string" }
+			 ]	
+			}			 
 		]
 
 	}
-];
+]
 
 var templateFile = require('fs').readFileSync('./template.hbs').toString();
 
@@ -43,16 +61,20 @@ var typeToContentTranslator = {
 
 // Handlebars.registerPartial('View', require('fs').readFileSync('./testPartial.hbs'));
 
-Handlebars.registerHelper('getProp', function (element) {
-	return typeToContentTranslator[element.type];
+Handlebars.registerHelper('getProp', function (propObj) {
+	if(propObj.name === "source") return "{{uri: '" + propObj.value + "'}}";
+	else if(propObj.type === "string") return "'" + propObj.value + "'";
+	else return propObj.value; 
 });
 
 Handlebars.registerHelper('camelCase', function (string) {
 	return ChangeCase.camelCase(string);
 });
 
+
 var createTemplate = Handlebars.compile(templateFile);
 
 var renderedTemplate = createTemplate({ tree: data });
 
 require('fs').writeFile('./whatever.js', renderedTemplate, console.error.bind(console));
+

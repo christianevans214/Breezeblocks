@@ -6,15 +6,21 @@ module.exports = function(json){
 			children: [
 				{type: 'Navbar',
 				 className: ['ui-navbar', 'view-1-navbar-1'],
-				 props: {"title": "my cool app"}
+				 props: [
+				 	{ "name": "title", "value": "my cool app", type: "string" }
+				 ]
 				},
 				{type: 'Navbar',
 				 className: ['ui-navbar', 'view-1-navbar-2'],
-				 props: {"title": "my okay app"}
+				 props: [
+				 	{ "name": "title", "value": "my okay app", type: "string" }
+				 ]
 				},
 				{type: 'Navbar',
 				 className: ['ui-navbar', 'view-1-navbar-3'],
-				 props: {"title": "my bad app"}
+				 props: [
+				 	{ "name": "title", "value": "my bad app", type: "string" }
+				 ]
 				},
 				{type: 'Navbar',
 				 className: ['ui-navbar', 'view-1-navbar-3'],
@@ -30,10 +36,14 @@ module.exports = function(json){
 			children: [
 				{type: 'Image',
 				 className: ["ui-image",'view-2-image-1'],
-				 props: {"source": 'http://www.joomlaworks.net/images/demos/galleries/abstract/7.jpg'}},
+ 				 props: [
+				 	{ "name": "source", "value": "http://www.joomlaworks.net/images/demos/galleries/abstract/7.jpg", type: "string" }
+				 ]
 				{type: 'Image',
 				 className: ['ui-image', 'view-2-image-2'],
-				 props: {"source": 'https://imgs.xkcd.com/comics/perl_problems.png'}}
+				 props: [
+				 	{ "name": "source", "value": "https://imgs.xkcd.com/comics/perl_problems.png", type: "string" }
+				 ]				 
 			]
 
 		}
