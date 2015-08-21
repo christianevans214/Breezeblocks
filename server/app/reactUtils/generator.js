@@ -36,7 +36,6 @@ module.exports = function(data, styleData){
 		return renderedTemplate;
 	})
 	.then(function(renderedTemplate){
-		console.log("writing file", renderedTemplate);
 		return new Promise(function(resolve, reject){
 			fs.writeFile('./reactNative/index.ios.js', renderedTemplate, function(err){
 				if(err) reject(err);
