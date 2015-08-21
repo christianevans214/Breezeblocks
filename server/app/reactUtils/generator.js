@@ -2,7 +2,7 @@ var Handlebars = require('Handlebars');
 var ChangeCase = require('change-case');
 var fs = require('fs');
 
-var data = [
+/*var data = [
 	{
 		className: ['drop-area','view-1'],
 		children: [
@@ -74,53 +74,54 @@ var styleData = {
         "width": '200px',
         "height": '200px',
     }
-};
+};*/
 
-
-new Promise(function(resolve, reject){
-	fs.readFile('/Users/PT/Fullstack/DrandAndDrop/server/app/reactUtils/template.hbs', function(err, data){
-		if(err)reject(err);
-		else{
-			resolve(data.toString());	
-		}
-	})
-})
-.then(function(templateFile){
-	var createTemplate = Handlebars.compile(templateFile);
-	var renderedTemplate = createTemplate({ tree: data, styleTree: styleData });
-	return renderedTemplate;
-})
-.then(function(renderedTemplate){
-	return new Promise(function(resolve, reject){
-		fs.writeFile('./reactNative/index.ios.js', renderedTemplate, function(err){
-			if(err) reject(err);
-			else resolve(renderedTemplate);
+module.exports = function(data, styleData){
+	new Promise(function(resolve, reject){
+		fs.readFile('/Users/PT/Fullstack/DrandAndDrop/server/app/reactUtils/template.hbs', function(err, data){
+			if(err)reject(err);
+			else{
+				resolve(data.toString());	
+			}
 		})
 	})
-})
-.then(function(finaltemp){
-	console.log("file saved!");
-	return finaltemp;
-})
-.then(null, function(err){console.error(err)});
+	.then(function(templateFile){
+		var createTemplate = Handlebars.compile(templateFile);
+		var renderedTemplate = createTemplate({ tree: data, styleTree: styleData });
+		return renderedTemplate;
+	})
+	.then(function(renderedTemplate){
+		return new Promise(function(resolve, reject){
+			fs.writeFile('./reactNative/index.ios.js', renderedTemplate, function(err){
+				if(err) reject(err);
+				else resolve(renderedTemplate);
+			})
+		})
+	})
+	.then(function(finaltemp){
+		console.log("file saved!");
+		return finaltemp;
+	})
+	.then(null, function(err){console.error(err)});
 
-// Handlebars.registerPartial('View', require('fs').readFileSync('./testPartial.hbs'));
+	// Handlebars.registerPartial('View', require('fs').readFileSync('./testPartial.hbs'));
 
-Handlebars.registerHelper('getProp', function (propObj) {
-	if(propObj.name === "source") return "{{uri: '" + propObj.value + "'}}";
-	else if(propObj.type === "string") return "'" + propObj.value + "'";
-	else return propObj.value; 
-});
+	Handlebars.registerHelper('getProp', function (propObj) {
+		if(propObj.name === "source") return "{{uri: '" + propObj.value + "'}}";
+		else if(propObj.type === "string") return "'" + propObj.value + "'";
+		else return propObj.value; 
+	});
 
-Handlebars.registerHelper('camelCase', function (string) {
-	return ChangeCase.camelCase(string);
-});
+	Handlebars.registerHelper('camelCase', function (string) {
+		return ChangeCase.camelCase(string);
+	});
 
-Handlebars.registerHelper('removePx', function(string){
-	string = string.replace(/px$/,"");	
-	if(string.match(/[^0-9]/) !== null) return "'" + string + "'";
-	else return string;
-})
+	Handlebars.registerHelper('removePx', function(string){
+		string = string.replace(/px$/,"");	
+		if(string.match(/[^0-9]/) !== null) return "'" + string + "'";
+		else return string;
+	})
+}
 
 
 //recursive version

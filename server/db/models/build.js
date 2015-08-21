@@ -10,4 +10,4 @@ var schema = new mongoose.Schema({
 	gitUrl: String
 })
 
-mongoose.model('Build',schema)
+mongoose.model('Build',schema);
