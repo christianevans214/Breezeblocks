@@ -1,5 +1,6 @@
 var Handlebars = require('Handlebars');
 var ChangeCase = require('change-case');
+var fs = require('fs');
 
 var data = [
 	{
@@ -75,7 +76,33 @@ var styleData = {
     }
 };
 
-var templateFile = require('fs').readFileSync('./template.hbs').toString();
+
+new Promise(function(resolve, reject){
+	fs.readFile('/Users/PT/Fullstack/DrandAndDrop/server/app/reactUtils/template.hbs', function(err, data){
+		if(err)reject(err);
+		else{
+			resolve(data.toString());	
+		}
+	})
+})
+.then(function(templateFile){
+	var createTemplate = Handlebars.compile(templateFile);
+	var renderedTemplate = createTemplate({ tree: data, styleTree: styleData });
+	return renderedTemplate;
+})
+.then(function(renderedTemplate){
+	return new Promise(function(resolve, reject){
+		fs.writeFile('./reactNative/index.ios.js', renderedTemplate, function(err){
+			if(err) reject(err);
+			else resolve(renderedTemplate);
+		})
+	})
+})
+.then(function(finaltemp){
+	console.log("file saved!");
+	return finaltemp;
+})
+.then(null, function(err){console.error(err)});
 
 // Handlebars.registerPartial('View', require('fs').readFileSync('./testPartial.hbs'));
 
@@ -94,13 +121,6 @@ Handlebars.registerHelper('removePx', function(string){
 	if(string.match(/[^0-9]/) !== null) return "'" + string + "'";
 	else return string;
 })
-
-
-var createTemplate = Handlebars.compile(templateFile);
-
-var renderedTemplate = createTemplate({ tree: data, styleTree: styleData });
-
-require('fs').writeFile('./reactNative/index.ios.js', renderedTemplate, console.error.bind(console));
 
 
 //recursive version
