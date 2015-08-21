@@ -28,28 +28,28 @@ app.controller('EditPageController', function($scope, $compile, UILibraryFactory
 
 	$scope.changeSelected = function(className){
 		if($scope.currentlySelected) $scope.currentlySelected.removeClass('shadow')
+		$scope.activeCSSEdit = CssTreeFactory.cssTree[className];
 		$scope.currentlySelected = $('.'+ className);
+		var thisParent = $scope.currentlySelected.parent()[0]
 		$scope.currentlySelected.addClass('shadow')
+		$scope.activeHTMLEdit = ParseTreeFactory.findActiveElement($scope, className, thisParent);
 	}
 
 
 
 	$scope.uiLibrary = UILibraryFactory;
 	//properties to edit styling:
-	$scope.editProps = {flexGrowSize: 1};
+	$scope.activeCSSEdit = {};
 	//properties to edit HTML
+	$scope.activeHTMLEdit = {};
 	$scope.currentlySelected = null;
-	$scope.addToParseTree = function() {};
-	$scope.createReactClass = function() {};
-	$scope.changeColor = StyleFactory.changeColor($scope);
-	$scope.changeMargin = StyleFactory.changeMargin($scope);
-	$scope.changePadding = StyleFactory.changePadding($scope);
 	$scope.lessFlex = StyleFactory.lessFlex($scope);
 	$scope.moreFlex = StyleFactory.moreFlex($scope);
 	$scope.deleteElem = function(){
 		var thisParent = $scope.currentlySelected.parent()[0]
-		console.log("parent",thisParent)
 		ParseTreeFactory.removeElement($scope,$scope.currentlySelected,thisParent)
+		$scope.activeCSSEdit = {};
+		$scope.activeHTMLEdit = {};
 	}
 
 	//delete button code, not quite working yet:

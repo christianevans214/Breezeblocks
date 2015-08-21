@@ -25,7 +25,8 @@
 
 	<div id="style" class="edit-blade col-md-2 col-sm-2">
 		edit props:
-		<pre> {{editProps | json}}</pre>
+		<pre>CSS OBJECT {{activeCSSEdit | json}}</pre>
+		<pre>HTML OBJECT {{activeHTMLEdit | json}}</pre>
 		<input type="button" value="delete this" ng-click="deleteElem()"></input></br>
 
 		<pre spacing="default">{{currentlySelected | json}}</pre>
@@ -33,12 +34,15 @@
 
 
 		<form name="properties">
-		<input ng-change = "changeColor()" type="color" ng-model="editProps.color"></br></br>
+		<label>change property</label>
+		<textarea ng-model="activeHTMLEdit.props[0].value"></textarea>
+		<label>Background Color</label>
+		<input type="color" ng-model='activeCSSEdit["background-color"]'></br></br>
 		<label>Padding!</label>
-		<input ng-change = "changePadding()" type="range" ng-model = "editProps.padding">
+		<input type="range" ng-model="activeCSSEdit['padding']">
 		<label>Margin</label>
-		<input ng-change = "changeMargin()" type="range" ng-model = "editProps.margin">
+		<input type="range" ng-model="activeCSSEdit['margin']">
 		<label>FlexGrowSize</label>
-		<input type="button" value="-" ng-model= "editProps.flexGrowSize" ng-click="lessFlex()"><input type="button" value="+" ng-click="moreFlex()" ng-model= "editProps.flexGrowSize">
+		<input type="button" value="-" ng-click="lessFlex()" ng-model= "activeCSSEdit['flex-grow']"><input type="button" value="+" ng-click="moreFlex()"  ng-model= "activeCSSEdit['flex-grow']">
 		</form>
 </div>

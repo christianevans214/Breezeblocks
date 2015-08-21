@@ -2,8 +2,6 @@ app.factory('ParseTreeFactory', function(){
 	
 	var count = 5;
 	return {
-
-
 		parseTree: {
 			tree: 
 			[
@@ -12,15 +10,21 @@ app.factory('ParseTreeFactory', function(){
 					children: [
 						{type: 'Navbar',
 						className: ['ui-navbar', 'view-1-navbar-1'],
-						content: ['My Cool App']
+						props: [
+							{ "name": "title", "value": "my cool app", type: "string" }
+							]
 						},
 						{type: 'Navbar',
 						className: ['ui-navbar', 'view-1-navbar-2'],
-						content: ['My Okay App']
+						props: [
+							{ "name": "title", "value": "my okay app", type: "string" }
+							]
 						},
 						{type: 'Navbar',
 						className: ['ui-navbar', 'view-1-navbar-3'],
-						content: ['My Bad App :(']
+						props: [
+							{ "name": "title", "value": "my bad app", type: "string" }
+							]
 						}
 
 					]
@@ -30,10 +34,16 @@ app.factory('ParseTreeFactory', function(){
 					children: [
 						{type: 'Image',
 						className: ["ui-image",'view-2-image-1'],
-						content: ['http://www.joomlaworks.net/images/demos/galleries/abstract/7.jpg']},
+						props: [
+							{ "name": "source", "value": "http://www.joomlaworks.net/images/demos/galleries/abstract/7.jpg", type: "string" }
+							]
+					},
 						{type: 'Image',
 						className: ['ui-image', 'view-2-image-2'],
-						content: ['https://imgs.xkcd.com/comics/perl_problems.png']}
+						props: [
+							{ "name": "source", "value": "https://imgs.xkcd.com/comics/perl_problems.png", type: "string" }
+							]
+						}
 					]
 
 				}
@@ -58,13 +68,14 @@ app.factory('ParseTreeFactory', function(){
 			filteredViewElem.children.push({
 				type: type,
 				className: ['ui-'+ type.toLowerCase(), classToReturn],
-				content: ["http://www.aspen-tech.com/wp-content/uploads/2014/09/Act-CRM-Sunset-Mode.jpg"]
+				props: [{}]
 			})
 			$scope.$digest();
 			return classToReturn;
 		},
 
 		removeRow: function($scope,className){
+			//still can't do this.
 			console.log("DA CLASS", className);
 			this.parseTree.tree = this.parseTree.tree.filter(function(View){
 				return (View.className[1] !== className)
@@ -80,8 +91,29 @@ app.factory('ParseTreeFactory', function(){
 			 container.children = container.children.filter(function(child){ 
 				return (child.className[1] !== childClassName[1]);
 			});
+		},
+		addProperties: function($scope, elem, parent){
+			var parentClassName = parent.className.split(" ");
+			var childClassName = elem[0].className.split(" ");
+			var container = this.parseTree.tree.filter(function(View){ 
+				return (parentClassName[1] === View.className[1])
+			})[0]
+			var childToChange = container.children.filter(function(child){ 
+				return (child.className[1] === childClassName[1]);
+			})[0];
+			console.log(childToChange);
+		},
+		findActiveElement: function($scope, className, parent){
+			// console.log('CLASSNAME', className, "PARENT", parent);
+			var uniqueParentClassName = parent.className.split(" ")[1];
+			var container = this.parseTree.tree.filter(function(View){ 
+				return (uniqueParentClassName === View.className[1])
+			})[0]
+			console.log("VIEW CONTAINER", container);
+			return container.children.filter(function(child){ 
+				return (child.className[1] === className);
+			})[0];
+			// return activeElement;
 		}
-		//addToTree: function(){};
-		//removeFromTree: function(){};
 	}
 })
