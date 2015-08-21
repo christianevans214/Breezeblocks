@@ -1,3 +1,7 @@
-<div ng-repeat="child in View.children" ng-click="changeSelected(child.className[1])" class="{{child.className.join(' ')}}" ng-include="pathName(child.type)">
+<div ng-repeat="child in View.children"
+ng-click="changeSelected(child.className[1])"
+class="{{child.className.join(' ')}}"
+style="{{convertObjToInlineStyle(child.className[1])}}"
+ng-include="pathName(child.type)">
 	
 </div>

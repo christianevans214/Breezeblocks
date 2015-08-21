@@ -1,4 +1,4 @@
-app.factory("Interactory", function($compile, ParseTreeFactory) {
+app.factory("Interactory", function($compile, ParseTreeFactory, CssTreeFactory) {
 	return {
 		Interact: function($scope) {
 			interact('#app')
@@ -6,17 +6,9 @@ app.factory("Interactory", function($compile, ParseTreeFactory) {
 					accept: '#dropThumb',
 					overlap: 0.75,
 					ondrop: function(event) {
-						console.log("It still works!")
-						ParseTreeFactory.addRow($scope)
-
-						// var thisComponentName = $(event.relatedTarget).attr('component').split(".")[1];
-						// console.log(thisComponentName);
-						// $scope.parseTree.push({View:{className:["view-" + ($scope.parseTree.length+1)]}});
-						// var toAppend = $compile($scope.uiLibrary[thisComponentName].html)($scope);
-						// toAppend.addClass("view-" + $scope.parseTree.length);
-						// $(event.target).append(toAppend);
-						// console.log("WHAT THIS WORKED")
-
+						//this should be refactored eventually
+						var eventClass = ParseTreeFactory.addRow($scope)
+						CssTreeFactory.addViewClass(eventClass);
 					}
 
 				})
@@ -28,13 +20,8 @@ app.factory("Interactory", function($compile, ParseTreeFactory) {
 					accept: '#elemThumb',
 					ondrop: function(event) {
 						var thisComponentName= event.relatedTarget.getAttribute('component')
-						console.log('this component:',thisComponentName.split('.')[1])
-						ParseTreeFactory.addElement($scope,event.target.className.split(' ')[1],thisComponentName.split('.')[1]);
-						// var thisComponentName = $(event.relatedTarget).attr('component').split(".")[1];
-						// console.log(thisComponentName);
-						// var toAppend = $compile($scope.uiLibrary[thisComponentName].html)($scope);
-						// $(event.target).append(toAppend);
-						// console.log("WHAT THIS WORKED")
+						var eventClass = ParseTreeFactory.addElement($scope,event.target.className.split(' ')[1],thisComponentName.split('.')[1]);
+						CssTreeFactory.addChildClass(eventClass);
 					}
 				})
 				.resizable({
@@ -50,14 +37,15 @@ app.factory("Interactory", function($compile, ParseTreeFactory) {
 					// update the element's style
 					target.style.width = event.rect.width + 'px';
 					target.style.height = event.rect.height + 'px';
-					if($(event.target).children) console.log("HEY HERE'S THE RESIZING INFO", $(event.target).children[0]);
+					// if($(event.target).children) console.log("HEY HERE'S THE RESIZING INFO", $(event.target).children[0]);
 					// translate when resizing from top or left edges
 					x += event.deltaRect.left;
 					y += event.deltaRect.top;
 
 					target.style.webkitTransform = target.style.transform =
 						'translate(' + x + 'px,' + y + 'px)';
-
+					console.log("RESIZE INFO HEY HERE", target.className);
+					if(CssTreeFactory.cssTree[target.className.split(" ")[1]]) CssTreeFactory.cssTree[target.className.split(" ")[1]]["height"] = target.style.height;
 					target.setAttribute('data-x', x);
 					target.setAttribute('data-y', y);
 					// target.textContent = event.rect.width + '×' + event.rect.height;

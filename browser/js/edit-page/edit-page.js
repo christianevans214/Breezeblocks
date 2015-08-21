@@ -16,8 +16,11 @@ function colorChange($scope) {
 	})
 }
 
-app.controller('EditPageController', function($scope, $compile, UILibraryFactory, EmitterizerFactory, Interactory, StyleFactory,ParseTreeFactory) {
+app.controller('EditPageController', function($scope, $compile, UILibraryFactory, EmitterizerFactory, Interactory, StyleFactory,ParseTreeFactory, CssTreeFactory) {
+	$scope.convertObjToInlineStyle = CssTreeFactory.objToInlineStyle;
+	$scope.cssTree = CssTreeFactory.cssTree;
 	$scope.parseTree = ParseTreeFactory.parseTree.tree;
+
 	$scope.pathName = function(elemPath){
 		return "js/common/components/" + elemPath + ".html"
 	}
@@ -49,9 +52,20 @@ app.controller('EditPageController', function($scope, $compile, UILibraryFactory
 		ParseTreeFactory.removeElement($scope,$scope.currentlySelected,thisParent)
 	}
 
-	$scope.getClass = function(){
-		return 1
-	}
+	//delete button code, not quite working yet:
+	
+	// $scope.showDeleteButton = function(className){
+	// 	var $elem = $('.'+className)
+	// 	$elem.prepend('<span style="display: inline-block; position: absolute; float: left; align-self: flex-start;" class="x-button">x</span>')
+	// 	$('.x-button').on('click',function(){
+	// 		ParseTreeFactory.removeRow($scope, className)
+	// 		$(this).remove();
+	// 	})
+	// }
+
+	// $scope.hideDeleteButton = function(className){
+	// 	$('.x-button').remove();
+	// }
 
 	//event emitter to catch whenever someone selects a template in the iPhone
 	// $scope.$on('changeSelect', function(event, data) {
