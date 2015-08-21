@@ -7,7 +7,6 @@ var generator = require('../../reactUtils/generator');
 module.exports = router;
 
 router.post('/', function (req, res, next) {
-	console.log("req.body", req.body);
 	generator(req.body.html, req.body.css)
 	.then(function(){
 		res.sendStatus(200);
