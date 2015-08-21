@@ -50,3 +50,19 @@ ui-thumbnail{
 	transition: .2s;
 }
 
+.ui-navbar{
+	flex-grow: 1; 
+	display: flex; 
+	flex-direction: column; 
+	width: 100%; 
+	align-items: center; 
+	background: #444;
+	color: white;
+}
+
+.ui-image{
+	display: flex;
+	background-size: cover; 
+	flex-grow: 1;
+}
+

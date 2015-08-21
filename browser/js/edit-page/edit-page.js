@@ -16,28 +16,56 @@ function colorChange($scope) {
 	})
 }
 
-app.controller('EditPageController', function($scope, $compile, UILibraryFactory, EmitterizerFactory, Interactory, StyleFactory) {
+app.controller('EditPageController', function($scope, $compile, UILibraryFactory, EmitterizerFactory, Interactory, StyleFactory,ParseTreeFactory, CssTreeFactory) {
+	$scope.convertObjToInlineStyle = CssTreeFactory.objToInlineStyle;
+	$scope.cssTree = CssTreeFactory.cssTree;
+	$scope.parseTree = ParseTreeFactory.parseTree.tree;
+
+	$scope.pathName = function(elemPath){
+		return "js/common/components/" + elemPath + ".html"
+	}
+
+
+	$scope.changeSelected = function(className){
+		if($scope.currentlySelected) $scope.currentlySelected.removeClass('shadow')
+		$scope.activeCSSEdit = CssTreeFactory.cssTree[className];
+		$scope.currentlySelected = $('.'+ className);
+		var thisParent = $scope.currentlySelected.parent()[0]
+		$scope.currentlySelected.addClass('shadow')
+		$scope.activeHTMLEdit = ParseTreeFactory.findActiveElement($scope, className, thisParent);
+	}
+
+
+
 	$scope.uiLibrary = UILibraryFactory;
 	//properties to edit styling:
-	$scope.editProps = {flexGrowSize: 1};
+	$scope.activeCSSEdit = {};
 	//properties to edit HTML
-
-	$scope.parseTree = [{View:{className:["view-1"]}}];
+	$scope.activeHTMLEdit = {};
 	$scope.currentlySelected = null;
-	$scope.addToParseTree = function() {};
-	$scope.createReactClass = function() {};
-	$scope.changeColor = StyleFactory.changeColor($scope);
-	$scope.changeMargin = StyleFactory.changeMargin($scope);
-	$scope.changePadding = StyleFactory.changePadding($scope);
 	$scope.lessFlex = StyleFactory.lessFlex($scope);
 	$scope.moreFlex = StyleFactory.moreFlex($scope);
 	$scope.deleteElem = function(){
-		$scope.currentlySelected.remove()
+		var thisParent = $scope.currentlySelected.parent()[0]
+		ParseTreeFactory.removeElement($scope,$scope.currentlySelected,thisParent)
+		$scope.activeCSSEdit = {};
+		$scope.activeHTMLEdit = {};
 	}
 
-	$scope.getClass = function(){
-		return 1
-	}
+	//delete button code, not quite working yet:
+	
+	// $scope.showDeleteButton = function(className){
+	// 	var $elem = $('.'+className)
+	// 	$elem.prepend('<span style="display: inline-block; position: absolute; float: left; align-self: flex-start;" class="x-button">x</span>')
+	// 	$('.x-button').on('click',function(){
+	// 		ParseTreeFactory.removeRow($scope, className)
+	// 		$(this).remove();
+	// 	})
+	// }
+
+	// $scope.hideDeleteButton = function(className){
+	// 	$('.x-button').remove();
+	// }
 
 	//event emitter to catch whenever someone selects a template in the iPhone
 	// $scope.$on('changeSelect', function(event, data) {
