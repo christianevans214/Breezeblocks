@@ -1,0 +1,48 @@
+'use strict';
+
+var React = require('react-native');
+var BasicSwitch = require('./components/SwitchIOS');
+var BasicScrollView = require('./components/ScrollView');
+var BasicSlider = require('./components/SliderIOS');
+var Navbar = require('./components/TabBarIOS');
+
+var {
+  TabBarIOS,
+  Image,
+  SliderIOS,
+  ScrollView,
+  SwitchIOS,
+  AppRegistry,
+  StyleSheet,
+  Text,
+  View,
+} = React;
+
+var reactNative = React.createClass({
+    render: function() {
+        return (
+            {{#each tree}}
+            <View>
+              {{#each this.children}}
+              <{{this.type}} {{#each this.props}}{{this.name}}={{{getProp this}}}{{/each }} style={[{{#each this.className}}{{#unless @first}}styles.{{camelCase this}}{{#unless @last}}, {{/unless }}{{/unless }}{{/each }}]}>
+              </{{this.type}}>
+              {{/each}}
+            </View>
+            {{/each }}
+        );
+    }
+})
+
+
+var styles = StyleSheet.create({
+    {{#each styleTree}}
+      {{camelCase @key}}:{
+        {{#each this}}
+          {{camelCase @key}}: {{{removePx this}}},
+        {{/each }}
+      }, 
+    {{/each }}
+})
+
+AppRegistry.registerComponent('reactNative', () => reactNative);
+

@@ -16,35 +16,6 @@ module.exports = React.createClass({
       selectedTab: 'redTab',
     };
   },
-/*  addTabBarItem: function(tabTitle: string, isSystemIcon: bool) {
-    if(isSystemIcon && systemIconTypes.indexOf(tabTitle) > -1){
-      return {
-        <TabBarIOS.Item
-          systemIcon={tabTitle}
-          selected={this.state.selectedTab === tabTitle}
-          onPress={() => {
-            this.setState({
-              selectedTab: 'blueTab',
-            });
-          }}>
-          {this._renderContent({tabTitle})}
-        </TabBarIOS.Item>
-      }
-    }
-    return {
-        <TabBarIOS.Item
-          title={tabTitle}
-          selected={this.state.selectedTab === tabTitle}
-          onPress={() => {
-            this.setState({
-              selectedTab: 'blueTab',
-            });
-          }}>
-          {this._renderContent({tabTitle})}
-        </TabBarIOS.Item>
-    }
-  },
-  {addTabBarItem("favorites", true)}*/
   _renderContent: function(pageText: string) {
     return (
       <View style={[styles.tabContent]}>
@@ -54,10 +25,21 @@ module.exports = React.createClass({
   },
 
   render: function() {
+    
     return (
       <TabBarIOS
         tintColor="white"
         barTintColor="darkslateblue">
+        <TabBarIOS.Item
+          systemIcon={this.props.title}
+          selected={this.state.selectedTab === this.props.title}
+/*          onPress={() => {
+            this.setState({
+              selectedTab: {this.props.title},
+            });
+          }}*/>
+          {this._renderContent(this.props.title)}
+        </TabBarIOS.Item>
         <TabBarIOS.Item
           title="title"
           selected={this.state.selectedTab === 'blueTab'}
