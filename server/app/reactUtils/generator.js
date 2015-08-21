@@ -15,6 +15,22 @@ module.exports = function(data, styleData){
 		})
 	})
 	.then(function(templateFile){
+		Handlebars.registerHelper('getProp', function (propObj) {
+			if(propObj.name === "source") return "{{uri: '" + propObj.value + "'}}";
+			else if(propObj.type === "string") return "'" + propObj.value + "'";
+			else return propObj.value; 
+		});
+
+		Handlebars.registerHelper('camelCase', function (string) {
+			return ChangeCase.camelCase(string);
+		});
+
+		Handlebars.registerHelper('removePx', function(string){
+			string = string.replace(/px$/,"");	
+			if(string.match(/[^0-9]/) !== null) return "'" + string + "'";
+			else return string;
+		})
+
 		var createTemplate = Handlebars.compile(templateFile);
 		var renderedTemplate = createTemplate({ tree: data, styleTree: styleData });
 		return renderedTemplate;
@@ -34,22 +50,6 @@ module.exports = function(data, styleData){
 	})
 
 	// Handlebars.registerPartial('View', require('fs').readFileSync('./testPartial.hbs'));
-
-	Handlebars.registerHelper('getProp', function (propObj) {
-		if(propObj.name === "source") return "{{uri: '" + propObj.value + "'}}";
-		else if(propObj.type === "string") return "'" + propObj.value + "'";
-		else return propObj.value; 
-	});
-
-	Handlebars.registerHelper('camelCase', function (string) {
-		return ChangeCase.camelCase(string);
-	});
-
-	Handlebars.registerHelper('removePx', function(string){
-		string = string.replace(/px$/,"");	
-		if(string.match(/[^0-9]/) !== null) return "'" + string + "'";
-		else return string;
-	})
 }
 /*var data = [
 	{
