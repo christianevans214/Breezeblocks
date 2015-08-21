@@ -6,13 +6,13 @@ var Build = mongoose.model('Build');
 var generator = require('../../reactUtils/generator');
 module.exports = router;
 
-router.get('/:id', function (req, res, next) {
-	Build.findById(id).exec()
-	.then(function(app){
-		return generator(app.html, app.css);
-	})
-	.then(function(folder){
-		//return whole react native folder....
+router.post('/', function (req, res, next) {
+	console.log("req.body", req.body);
+	generator(req.body.html, req.body.css)
+	.then(function(){
+		res.sendStatus(200);
 	})
 	.then(null, next);
+	
+	//return whole react native folder....
 })
