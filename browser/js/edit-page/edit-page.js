@@ -55,12 +55,11 @@ app.controller('EditPageController', function($scope, $compile, UILibraryFactory
 		ParseTreeFactory.removeElement($scope, $scope.currentlySelected, thisParent)
 		$scope.activeCSSEdit = {};
 		$scope.activeHTMLEdit = {};
+		$scope.currentlySelected = null;
 	}
 	$scope.removeRow = function() {
 		var thisParent = $scope.currentlySelected.parent()[0]
 		$scope.parseTree = ParseTreeFactory.removeRow($scope, thisParent.className.split(' ')[1], $scope.parseTree);
-		$scope.activeCSSEdit = {};
-		$scope.activeHTMLEdit = {};
 		$scope.$digest();
 	}
 

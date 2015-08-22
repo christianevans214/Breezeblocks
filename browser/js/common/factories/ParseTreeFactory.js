@@ -1,4 +1,4 @@
-app.factory('ParseTreeFactory', function() {
+app.factory('ParseTreeFactory', function($http) {
 
 	var count = 5;
 	return {
@@ -117,11 +117,16 @@ app.factory('ParseTreeFactory', function() {
 			var container = this.parseTree.tree.filter(function(View) {
 				return (uniqueParentClassName === View.className[1])
 			})[0]
-			console.log("VIEW CONTAINER", container);
 			return container.children.filter(function(child) {
 				return (child.className[1] === className);
 			})[0];
 			// return activeElement;
+		},
+		saveApp: function(htmlTree, cssTree) {
+			var app = {
+				html: htmlTree,
+				css: cssTree
+			}
 		}
 	}
 })
