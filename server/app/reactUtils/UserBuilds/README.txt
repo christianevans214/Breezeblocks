@@ -1,0 +1,1 @@
+This file is where all the user build data will be temporarily stored and then removed.
