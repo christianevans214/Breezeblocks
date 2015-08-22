@@ -1,11 +1,26 @@
 var Handlebars = require('Handlebars');
 var ChangeCase = require('change-case');
 var path = require('path');
-var fs = require('fs');
+var fs = require('fs-extra');
+var zip = new require('node-zip')();
 
-var templatePath = path.join(__dirname, './template.hbs');
 
-module.exports = function(data, styleData){
+var templatePath = path.join(__dirname, 'template.hbs');
+var reactNativePath = path.join(__dirname, '../../../reactNative');
+
+module.exports = function(data, styleData, userId, buildId){
+	
+	var newProjectDir = path.join(__dirname, 'UserBuilds', userId, buildId)
+	var newProjectZipDir = path.join(__dirname, 'UserBuilds', userId, buildId+'ZIPPED')
+
+
+	return new Promise(function(resolve, reject){
+		fs.copy(reactNativePath, newProjectDir, function(err){
+			if(err)reject(err);
+			else resolve(newProjectDir)
+		})
+	})
+	.then(function(){		
 	return new Promise(function(resolve, reject){
 		fs.readFile(templatePath, function(err, data){
 			if(err) reject(err);
@@ -13,6 +28,7 @@ module.exports = function(data, styleData){
 				resolve(data.toString());	
 			}
 		})
+	})
 	})
 	.then(function(templateFile){
 		Handlebars.registerHelper('getProp', function (propObj) {
@@ -36,17 +52,46 @@ module.exports = function(data, styleData){
 		return renderedTemplate;
 	})
 	.then(function(renderedTemplate){
-		return new Promise(function(resolve, reject){
-			fs.writeFile('./reactNative/index.ios.js', renderedTemplate, function(err){
-				if(err) reject(err);
-				else resolve(renderedTemplate);
-			})
+	return new Promise(function(resolve, reject){
+		fs.writeFile(newProjectDir + "/index.ios.js", renderedTemplate, function(err){
+			if(err) reject(err);
+			else resolve(renderedTemplate);
 		})
+	})
 	})
 	.then(function(finaltemp){
 		console.log("file saved!");
-		return finaltemp;
+		return newProjectDir;
 	})
+	.then(function(newProjDir){
+		//zip the created project
+		console.log("zipping file", newProjDir)
+		zip.file(newProjDir);
+		var zippedFile = zip.generate({base64:false, compression:'DEFLATE'});
+	return new Promise(function(resolve, reject){
+		// fs.writeFileSync(newProjectZipDir, zippedProject, 'binary');
+		fs.writeFile(newProjectZipDir, zippedFile, 'binary', function(err){
+			if(err){
+				console.log("error zipping", err)
+				reject(err);
+			}
+			else resolve(newProjectZipDir);
+		})
+	})	
+	})
+	// .then(function(zippedProject){
+	// 	console.log('zippedProject', zippedProject);
+	// return new Promise(function(resolve, reject){
+	// 	// fs.writeFileSync(newProjectZipDir, zippedProject, 'binary');
+	// 	fs.writeFile(newProjectDir, zippedProject, 'binary', function(err){
+	// 		if(err){
+	// 			console.log("error zipping", err)
+	// 			reject(err);
+	// 		}
+	// 		else resolve(zippedProject);
+	// 	})
+	// })		
+	// })
 
 	// Handlebars.registerPartial('View', require('fs').readFileSync('./testPartial.hbs'));
 }
