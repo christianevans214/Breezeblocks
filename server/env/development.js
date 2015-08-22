@@ -15,5 +15,10 @@ module.exports = {
     "clientID": "INSERT_GOOGLE_CLIENTID_HERE",
     "clientSecret": "INSERT_GOOGLE_CLIENT_SECRET_HERE",
     "callbackURL": "INSERT_GOOGLE_CALLBACK_HERE"
-  }
+  },
+  "GITHUB": {
+    "clientID": "3780845516c2742c685e",
+    "clientSecret": "b7810928e34cef7a7886cd933e589264cc1e2ba6",
+    "callbackURL": "http://localhost:1337/auth/github/callback"
+  },
 };

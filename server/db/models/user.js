@@ -25,7 +25,11 @@ var schema = new mongoose.Schema({
         id: String
     },
     github: {
-        id: String
+        id: String,
+        username: String,
+        displayName: String,
+        profileUrl: String,
+        avatar: String
     },
     projects: {
         type: [{type: mongoose.Schema.ObjectId, ref:"Build"}]

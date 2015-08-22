@@ -1,4 +1,11 @@
 #login-form {
   width: 60%;
   margin: 0 auto;
+  .oauth {
+		max-width: 18em;
+	}
+	.btn-social{
+		text-align: center;
+		width: 100%;
+	}
 }
