@@ -208,6 +208,7 @@ var seedBuilds = function(){
     return Build.createAsync(builds)    
 }
 
+
 connectToDb.then(function(){
     wipeDB();
     console.log(chalk.cyan.bold('Database wiped clean'));
@@ -218,18 +219,11 @@ connectToDb.then(function(){
 .then(function(){
     return Build.findAsync({})
     .then(function(builds){
-        return User.createAsync({
-            email: users[0].email,
-            password: users[0].password,
-            projects: builds[0]
+        var promiseArr = [];
+        builds.forEach(function(build, index){
+            promiseArr.push(User.createAsync({email: users[index].email, password:users[index].password, projects:build}))
         })
-        .then(function(){
-            return User.createAsync({
-                email: users[1].email,
-                password: users[1].password,
-                projects: builds[1]
-            })
-        })
+        return Promise.all(promiseArr);
     })
 })
 .then(function () {
