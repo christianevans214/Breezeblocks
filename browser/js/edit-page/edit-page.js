@@ -16,26 +16,26 @@ function colorChange($scope) {
 	})
 }
 
-app.controller('EditPageController', function($scope, $compile, UILibraryFactory, EmitterizerFactory, Interactory, StyleFactory,ParseTreeFactory, CssTreeFactory) {
+app.controller('EditPageController', function($scope, $compile, UILibraryFactory, EmitterizerFactory, Interactory, StyleFactory, ParseTreeFactory, CssTreeFactory) {
 	$scope.convertObjToInlineStyle = CssTreeFactory.objToInlineStyle;
 	$scope.cssTree = CssTreeFactory.cssTree;
 	$scope.parseTree = ParseTreeFactory.parseTree.tree;
 
-	$scope.pathName = function(elemPath){
+	$scope.pathName = function(elemPath) {
 		return "js/common/components/" + elemPath + ".html"
 	}
 
 
-	$scope.changeSelected = function(className){
-		if($scope.currentlySelected) $scope.currentlySelected.removeClass('shadow')
+	$scope.changeSelected = function(className) {
+		if ($scope.currentlySelected) $scope.currentlySelected.removeClass('shadow')
 		$scope.activeCSSEdit = CssTreeFactory.cssTree[className];
-		$scope.currentlySelected = $('.'+ className);
+		$scope.currentlySelected = $('.' + className);
 		var thisParent = $scope.currentlySelected.parent()[0]
 		$scope.currentlySelected.addClass('shadow')
 		$scope.activeHTMLEdit = ParseTreeFactory.findActiveElement($scope, className, thisParent);
 	}
 
-	$scope.activeDropzone = function(className){
+	$scope.activeDropzone = function(className) {
 		console.log($('.' + className[1]).prev().addClass('appear'));
 
 	}
@@ -49,25 +49,28 @@ app.controller('EditPageController', function($scope, $compile, UILibraryFactory
 	$scope.currentlySelected = null;
 	$scope.lessFlex = StyleFactory.lessFlex($scope);
 	$scope.moreFlex = StyleFactory.moreFlex($scope);
-	$scope.deleteElem = function(){
+	$scope.deleteElem = function() {
 		var thisParent = $scope.currentlySelected.parent()[0]
-		ParseTreeFactory.removeElement($scope,$scope.currentlySelected,thisParent)
+		ParseTreeFactory.removeElement($scope, $scope.currentlySelected, thisParent)
 		$scope.activeCSSEdit = {};
 		$scope.activeHTMLEdit = {};
 	}
-	$scope.removeRow = function(){
+	$scope.removeRow = function() {
 		var thisParent = $scope.currentlySelected.parent()[0]
-		ParseTreeFactory.removeRow($scope,thisParent.className.split(' ')[1], $scope.parseTree)
+		$scope.parseTree = ParseTreeFactory.removeRow($scope, thisParent.className.split(' ')[1], $scope.parseTree);
+		$scope.activeCSSEdit = {};
+		$scope.activeHTMLEdit = {};
+		$scope.$digest();
 	}
 
 	//delete button code, not quite working yet:
 	// $scope.showDeleteButton = function(className){
-		// var $elem = $('.'+className)
-		// $elem.prepend('<span style="display: inline-block; position: absolute; float: left; align-self: flex-start;" class="x-button">x</span>')
-		// $('.x-button').on('click',function(){
-		// 	ParseTreeFactory.removeRow($scope, className)
-		// 	$(this).remove();
-		// })
+	// var $elem = $('.'+className)
+	// $elem.prepend('<span style="display: inline-block; position: absolute; float: left; align-self: flex-start;" class="x-button">x</span>')
+	// $('.x-button').on('click',function(){
+	// 	ParseTreeFactory.removeRow($scope, className)
+	// 	$(this).remove();
+	// })
 	// }
 
 	// $scope.hideDeleteButton = function(className){
