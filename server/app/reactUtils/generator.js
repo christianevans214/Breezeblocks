@@ -20,15 +20,15 @@ module.exports = function(data, styleData, userId, buildId){
 			else resolve(newProjectDir)
 		})
 	})
-	.then(function(){		
-	return new Promise(function(resolve, reject){
-		fs.readFile(templatePath, function(err, data){
-			if(err) reject(err);
-			else{
-				resolve(data.toString());	
-			}
+	.then(function(){	
+		return new Promise(function(resolve, reject){
+			fs.readFile(templatePath, function(err, data){
+				if(err) reject(err);
+				else{
+					resolve(data.toString());	
+				}
+			})
 		})
-	})
 	})
 	.then(function(templateFile){
 		Handlebars.registerHelper('getProp', function (propObj) {
@@ -52,12 +52,12 @@ module.exports = function(data, styleData, userId, buildId){
 		return renderedTemplate;
 	})
 	.then(function(renderedTemplate){
-	return new Promise(function(resolve, reject){
-		fs.writeFile(newProjectDir + "/index.ios.js", renderedTemplate, function(err){
-			if(err) reject(err);
-			else resolve(renderedTemplate);
+		return new Promise(function(resolve, reject){
+			fs.writeFile(newProjectDir + "/index.ios.js", renderedTemplate, function(err){
+				if(err) reject(err);
+				else resolve(renderedTemplate);
+			})
 		})
-	})
 	})
 	.then(function(finaltemp){
 		console.log("file saved!");
@@ -67,12 +67,13 @@ module.exports = function(data, styleData, userId, buildId){
 		//zip the created project
 		zip.file(newProjDir);
 		var zippedFile = zip.generate({base64:false, compression:'DEFLATE'});
-	return new Promise(function(resolve, reject){
-		fs.writeFile(newProjectZipDir, zippedFile, 'binary', function(err){
-			if(err) reject(err);
-			else resolve(newProjectZipDir);
-		})
-	})	
+		return new Promise(function(resolve, reject){
+			console.log("FILE ZIPPED");
+			fs.writeFile(newProjectZipDir, zippedFile, 'binary', function(err){
+				if(err) reject(err);
+				else resolve(newProjectZipDir);
+			})
+		})	
 	})
 
 

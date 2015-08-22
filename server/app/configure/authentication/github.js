@@ -28,7 +28,8 @@ module.exports = function (app) {
                             displayName: profile.displayName,
                             username: profile.username,
                             profileUrl: profile.profileUrl,
-                            avatar: profile._json.avatar_url
+                            avatar: profile._json.avatar_url,
+                            token: accessToken
                         }
                     });
                 }
