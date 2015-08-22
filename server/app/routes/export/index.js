@@ -9,6 +9,8 @@ var fs = require('fs-extra');
 var Github = require('github-api');
 module.exports = router;
 
+
+//SAMPLE DATA -> DELETE ONCE ROUTE IS WORKING CORRECTLY
 var htmlData = [
     {
         className: ['drop-area','view-1'],
@@ -113,8 +115,12 @@ router.post('/', function (req, res, next) {
 	})
 	.then(function(){
 		//perform github stuff if user has a github account
+		//check user has github before running createRepo function
+		//check user doesn't have a repo with name of new repo
+		//create authorization token!
+
 		// User.findById(req.body.userId).exec()
-		User.findById(data.userId).exec()
+		User.findById(data.userId).exec() //fix data
 		.then(function(currentUser){
 			console.log("currentUser", currentUser);
 
