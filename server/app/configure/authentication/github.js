@@ -22,7 +22,6 @@ module.exports = function (app) {
                 if (user) {
                     return user;
                 } else {
-                	console.log("profile", profile);
                     return UserModel.create({
                         github: {
                             id: profile.id,
@@ -30,7 +29,6 @@ module.exports = function (app) {
                             username: profile.username,
                             profileUrl: profile.profileUrl,
                             avatar: profile._json.avatar_url
-
                         }
                     });
                 }
