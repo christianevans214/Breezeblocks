@@ -35,6 +35,10 @@ app.controller('EditPageController', function($scope, $compile, UILibraryFactory
 		$scope.activeHTMLEdit = ParseTreeFactory.findActiveElement($scope, className, thisParent);
 	}
 
+	$scope.activeDropzone = function(className){
+		console.log($('.' + className[1]).prev().addClass('appear'));
+
+	}
 
 
 	$scope.uiLibrary = UILibraryFactory;
@@ -51,16 +55,19 @@ app.controller('EditPageController', function($scope, $compile, UILibraryFactory
 		$scope.activeCSSEdit = {};
 		$scope.activeHTMLEdit = {};
 	}
+	$scope.removeRow = function(){
+		var thisParent = $scope.currentlySelected.parent()[0]
+		ParseTreeFactory.removeRow($scope,thisParent.className.split(' ')[1], $scope.parseTree)
+	}
 
 	//delete button code, not quite working yet:
-	
 	// $scope.showDeleteButton = function(className){
-	// 	var $elem = $('.'+className)
-	// 	$elem.prepend('<span style="display: inline-block; position: absolute; float: left; align-self: flex-start;" class="x-button">x</span>')
-	// 	$('.x-button').on('click',function(){
-	// 		ParseTreeFactory.removeRow($scope, className)
-	// 		$(this).remove();
-	// 	})
+		// var $elem = $('.'+className)
+		// $elem.prepend('<span style="display: inline-block; position: absolute; float: left; align-self: flex-start;" class="x-button">x</span>')
+		// $('.x-button').on('click',function(){
+		// 	ParseTreeFactory.removeRow($scope, className)
+		// 	$(this).remove();
+		// })
 	// }
 
 	// $scope.hideDeleteButton = function(className){

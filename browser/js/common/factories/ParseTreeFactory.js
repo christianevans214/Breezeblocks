@@ -74,12 +74,16 @@ app.factory('ParseTreeFactory', function(){
 			return classToReturn;
 		},
 
-		removeRow: function($scope,className){
+		removeRow: function($scope,className, parseTree){
 			//still can't do this.
 			console.log("DA CLASS", className);
+			console.log("BEFORE:", this.parseTree.tree)
 			this.parseTree.tree = this.parseTree.tree.filter(function(View){
+				console.log(View.className[1]);
 				return (View.className[1] !== className)
 			})
+			parseTree = this.parseTree.tree;
+			console.log("AFTER", this.parseTree.tree);
 		},
 
 		removeElement: function($scope, elem, parent){
