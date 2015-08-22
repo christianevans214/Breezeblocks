@@ -65,33 +65,16 @@ module.exports = function(data, styleData, userId, buildId){
 	})
 	.then(function(newProjDir){
 		//zip the created project
-		console.log("zipping file", newProjDir)
 		zip.file(newProjDir);
 		var zippedFile = zip.generate({base64:false, compression:'DEFLATE'});
 	return new Promise(function(resolve, reject){
-		// fs.writeFileSync(newProjectZipDir, zippedProject, 'binary');
 		fs.writeFile(newProjectZipDir, zippedFile, 'binary', function(err){
-			if(err){
-				console.log("error zipping", err)
-				reject(err);
-			}
+			if(err) reject(err);
 			else resolve(newProjectZipDir);
 		})
 	})	
 	})
-	// .then(function(zippedProject){
-	// 	console.log('zippedProject', zippedProject);
-	// return new Promise(function(resolve, reject){
-	// 	// fs.writeFileSync(newProjectZipDir, zippedProject, 'binary');
-	// 	fs.writeFile(newProjectDir, zippedProject, 'binary', function(err){
-	// 		if(err){
-	// 			console.log("error zipping", err)
-	// 			reject(err);
-	// 		}
-	// 		else resolve(zippedProject);
-	// 	})
-	// })		
-	// })
+
 
 	// Handlebars.registerPartial('View', require('fs').readFileSync('./testPartial.hbs'));
 }
