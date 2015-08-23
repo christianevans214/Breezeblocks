@@ -121,12 +121,6 @@ app.factory('ParseTreeFactory', function($http) {
 				return (child.className[1] === className);
 			})[0];
 			// return activeElement;
-		},
-		saveApp: function(htmlTree, cssTree) {
-			var app = {
-				html: htmlTree,
-				css: cssTree
-			}
 		}
 	}
 })

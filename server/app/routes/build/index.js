@@ -11,6 +11,7 @@ router.param('id', function(req, res, next, id) {
 		.then(function(app) {
 			if (!app) throw new Error('No app found');
 			else req.app = app;
+			next();
 		})
 		.then(null, next);
 })

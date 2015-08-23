@@ -5,14 +5,14 @@ app.config(function($stateProvider) {
 			templateUrl: "js/user-dash/user-dash.html",
 			controller: 'UserDashController',
 			resolve: {
-				user: function($stateParams, UserFactory) {
+				user: function(UserFactory, $stateParams) {
 					return UserFactory.getUser($stateParams.id);
 				}
 			}
 		});
 });
 
-app.controller("UserDashController", function($scope, user) {
-	$scope.user = user;
-	console.log("CONTROLLER USER", user);
+app.controller("UserDashController", function($scope, $stateParams) {
+	// $scope.user = user;
+	console.log("USER STATEPARAMS", $stateParams);
 })

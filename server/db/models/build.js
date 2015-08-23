@@ -1,8 +1,9 @@
 var mongoose = require('mongoose');
 
 var schema = new mongoose.Schema({
+	title: String,
 	html: {
-		type: Object
+		type: [Object]
 	},
 	css: {
 		type: Object
