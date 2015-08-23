@@ -19,6 +19,10 @@ app.directive('navbar', function($rootScope, AuthService, AUTH_EVENTS, $state) {
                 label: 'Members Only',
                 state: 'membersOnly',
                 auth: true
+            }, {
+                label: "My Dashboard",
+                state: 'userDash({id: user._id})',
+                auth: true
             }];
 
             scope.user = null;
@@ -36,6 +40,7 @@ app.directive('navbar', function($rootScope, AuthService, AUTH_EVENTS, $state) {
             var setUser = function() {
                 AuthService.getLoggedInUser().then(function(user) {
                     scope.user = user;
+                    console.log("NAVBAR USER", user);
                 });
             };
 
