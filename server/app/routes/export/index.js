@@ -7,6 +7,8 @@ var Build = mongoose.model('Build');
 var generator = require('../../reactUtils/generator');
 var fs = require('fs-extra');
 var Github = require('github-api');
+var createNewRepo = require('./githubCreator');
+var Commit = require('./commit');
 module.exports = router;
 
 //SAMPLE DATA -> DELETE ONCE ROUTE IS WORKING CORRECTLY
@@ -97,7 +99,6 @@ router.post('/', function (req, res, next) {
 	//generator(req.body.html, req.body.css, req.body.userId, req.body.buildId)
 	generator(data.html, data.css, data.userId, data.buildId)
 	.then(function(zippedProject){
-		console.log("zippedProject", zippedProject);
 		//prompt user to download zipped project
 		res.status(201).sendFile(zippedProject, function(err){
 			//if(err) console.error('Your project failed to zip correctly', err);
@@ -111,39 +112,53 @@ router.post('/', function (req, res, next) {
 				// })
 			}
 		})
+		return zippedProject;
 
 	})
-	.then(function(){
-		//perform github stuff if user has a github account
-		//check user has github before running createRepo function
+	.then(function(zippedProjectPath){
+		//make github repo if user has a github account
 		//check user doesn't have a repo with name of new repo
-		//create authorization token!
 
 		// User.findById(req.body.userId).exec()
 		User.findById(data.userId).exec() //fix data
 		.then(function(currentUser){
 			// user is not logged in with github
-/*			if(!currentUser.github.username){
+			if(!currentUser.github.username){
 				// either asked them to login with github, or just download zipped file
-			}*/
-			console.log("currentUser", currentUser);
-
-			var repoObj = {
-			  "name": "Test",
-			  "description": "Test repo for Breeze Blocks Project",
-			  "homepage": currentUser.github.profileUrl,
+				console.log("No github account...")
+				return;
 			}
+
 			var github = new Github({
 				id: currentUser.github.id,
 				token: currentUser.github.token,
 				auth: "oauth"
-			})
-			var user = github.getUser();
-
-			user.createRepo(repoObj, function(err, res) {
-				if(err) console.error(err);
-				else console.log(res);
 			});
+			createNewRepo(currentUser, github)
+			.then(function(repoInfo){
+				//instantiate the Commit object
+				var commit = new Commit(github, repoInfo.owner.login, repoInfo.name, 'heads/master')
+
+				//I want to commit something!
+				commit.commit(
+				    [{
+				      path: 'test.txt',
+				      content: 'Some content for this file'
+				    }],
+				    'Exported BreezeBlocks Project',
+				    function(err, data){
+				      //data is the response from the reference update.
+				      if(err) console.log(err);
+				      else console.log("data", data);
+				    }
+				  )
+/*				console.log("repoInfo", repoInfo.owner.login, repoInfo.name);
+				var repo = github.getRepo(repoInfo.owner.login, repoInfo.name);
+				repo.write('master', 'https://github.com/cez213/Test.git', zippedProjectPath, 'Exported BreezeBlocks Project', function(err) {
+					console.log("writing to file");
+					if(err) console.log(err);
+				});*/
+			})
 		})
 	})
 	.then(null, next);
