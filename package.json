@@ -4,7 +4,7 @@
     "description": "A generated project at Fullstack Academy",
     "main": "server/start.js",
     "scripts": {
-        "start": "mkdir server/app/reactUtils/UserBuilds && nodemon --watch server -e js,html server/start.js --ignore server/app/reactUtils/UserBuilds",
+        "start": "nodemon --watch server -e js,html server/start.js --ignore server/app/reactUtils/UserBuilds",
         "postinstall": "gulp build"
     },
     "dependencies": {
