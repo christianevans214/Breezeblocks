@@ -31,7 +31,8 @@ app.factory("ProjectFactory", function($http) {
 				})
 		},
 		exportProject: function(projectObj) {
-			//projectObj needs to be {html, css, userId, buildId}
+			console.log("EXPORTPROJECT PROJECT OBJ", projectObj)
+				//projectObj needs to be {html, css, userId, buildId}
 			return $http.post(`api/export`, projectObj)
 				.then(function(res) {
 					return res.data;

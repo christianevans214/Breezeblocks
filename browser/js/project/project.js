@@ -18,6 +18,7 @@ app.controller("ProjectController", function(ProjectFactory, $scope, $compile, U
 	//All factories will also take in only the project HTML or project CSS on THIS scope, to avoid the problem we're having with factory trees
 	$scope.convertObjToInlineStyle = CssTreeFactory.objToInlineStyle;
 	$scope.project = project;
+	$scope.user = user;
 	$scope.project["css"] = $scope.project.css || {};
 	$scope.cssTree = project.css;
 	$scope.uiLibrary = UILibraryFactory;
@@ -25,6 +26,22 @@ app.controller("ProjectController", function(ProjectFactory, $scope, $compile, U
 	$scope.activeCSSEdit = {};
 	//properties to edit HTML
 	$scope.activeHTMLEdit = {};
+
+	//thsi will probably need to be edited later but yeah!
+	$scope.exportProject = function(project, user) {
+		console.log("PROJECT FOR EXPORT", project);
+		console.log("USER FOR EXPORT", user);
+		var objToExport = {
+			html: project.html,
+			css: project.css,
+			buildId: project._id,
+			userId: user._id
+		}
+		ProjectFactory.exportProject(objToExport)
+			.then(function(file) {
+				console.log("THIS WORKED", file);
+			})
+	}
 	$scope.currentlySelected = null;
 
 	$scope.saveProject = function(updatedProject) {
@@ -60,14 +77,18 @@ app.controller("ProjectController", function(ProjectFactory, $scope, $compile, U
 	$scope.deleteElem = function() {
 		var thisParent = $scope.currentlySelected.parent()[0]
 		console.log("COMMENCE DELETING", $scope.currentlySelected, thisParent)
-		ParseTreeFactory.removeElement($scope, $scope.currentlySelected, thisParent)
+		var classNameToRemove = ParseTreeFactory.removeElement($scope, $scope.currentlySelected, thisParent);
+		CssTreeFactory.removeClass(classNameToRemove[1], $scope)
 		$scope.activeCSSEdit = {};
 		$scope.activeHTMLEdit = {};
 		$scope.currentlySelected = null;
 	}
 	$scope.removeRow = function() {
 		var thisParent = $scope.currentlySelected.parent()[0]
-		$scope.project.html = ParseTreeFactory.removeRow($scope, thisParent.className.split(' ')[1], $scope.project.html);
+		var viewToRemove = thisParent.className.split(' ')[1]
+		$scope.project.html = ParseTreeFactory.removeRow($scope, viewToRemove, $scope.project.html);
+		//this remove Class all needs to remove all children classess
+		CssTreeFactory.removeViewClass(viewToRemove, $scope)
 		$scope.$digest();
 	}
 

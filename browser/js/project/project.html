@@ -44,6 +44,6 @@
 		<input type="button" value="-" ng-click="lessFlex()" ng-model= "activeCSSEdit['flex-grow']"><input type="button" value="+" ng-click="moreFlex()"  ng-model= "activeCSSEdit['flex-grow']">
 		</form>
 		<button class = "btn btn-info" ng-click = "saveProject(project)">Save Project</button>
-		<button class= "btn btn-danger">Export Project</button>
+		<button class= "btn btn-danger" ng-click="exportProject(project, user)">Export Project</button>
 	</div>
 </div>

@@ -93,8 +93,10 @@ var fakeUser = "obama";
 var fakeBuild = "123";
 
 router.post('/', function(req, res, next) {
-	// generator(req.body.html, req.body.css, req.body.userId, req.body.buildId)
-	generator(data, styleData, fakeUser, fakeBuild)
+	// generator(data, styleData, fakeUser, fakeBuild)
+	console.dir(req.body);
+	console.log(generator);
+	generator(req.body.html, req.body.css, req.body.userId, req.body.buildId)
 		.then(function(zippedProject) {
 			//prompt user to download zipped project
 			res.status(201).sendFile(zippedProject, function(err) {
