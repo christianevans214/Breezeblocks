@@ -102,7 +102,7 @@ var data = {
 }
 
 router.post('/', function(req, res, next) {
-
+	console.dir(req.body.html);
 	generator(req.body.html, req.body.css, req.body.userId, req.body.buildId)
 		.then(function(zippedProject) {
 			console.log("zippedProject", zippedProject);
