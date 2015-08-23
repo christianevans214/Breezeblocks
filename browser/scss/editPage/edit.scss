@@ -1,6 +1,4 @@
-* {
-	border: 1px solid black;
-}
+
 // #tools{
 // 	border: 1px solid black;
 // }
@@ -66,3 +64,14 @@ ui-thumbnail{
 	flex-grow: 1;
 }
 
+.appear{
+	opacity: 1
+}
+
+.delete-view{
+	position: absolute; 
+	z-index: 100; 
+	margin-left: -50px; 
+	border: none; 
+	opacity:0
+}

@@ -1,0 +1,12 @@
+<!-- <pre>{{user | json}}</pre> -->
+
+<ui-view>
+	<h1>User</h1>
+	<div class = "project-blade">
+		<div ng-repeat= "project in user.projects">
+			<a ui-sref='userDash.project({id: user._id, projectId: project._id})'>{{project.title}}</a>
+
+		</div>
+	<button type="btn btn-signal" ng-click="createNewProject()">New Project</button>
+	</div>
+</ui-view>

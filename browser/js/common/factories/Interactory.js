@@ -6,9 +6,10 @@ app.factory("Interactory", function($compile, ParseTreeFactory, CssTreeFactory) 
 					accept: '#dropThumb',
 					overlap: 0.75,
 					ondrop: function(event) {
-						//this should be refactored eventually
 						var eventClass = ParseTreeFactory.addRow($scope)
-						CssTreeFactory.addViewClass(eventClass);
+						console.log("EVEnTCLASS FROM INTERACTORY", eventClass)
+						CssTreeFactory.addViewClass(eventClass, $scope);
+						$scope.$digest()
 					}
 
 				})
@@ -19,9 +20,10 @@ app.factory("Interactory", function($compile, ParseTreeFactory, CssTreeFactory) 
 				.dropzone({
 					accept: '#elemThumb',
 					ondrop: function(event) {
-						var thisComponentName= event.relatedTarget.getAttribute('component')
-						var eventClass = ParseTreeFactory.addElement($scope,event.target.className.split(' ')[1],thisComponentName.split('.')[1]);
-						CssTreeFactory.addChildClass(eventClass);
+						var thisComponentName = event.relatedTarget.getAttribute('component')
+						var eventClass = ParseTreeFactory.addElement($scope, event.target.className.split(' ')[1], thisComponentName.split('.')[1]);
+						CssTreeFactory.addChildClass(eventClass, $scope);
+						$scope.$digest();
 					}
 				})
 				.resizable({
@@ -45,9 +47,10 @@ app.factory("Interactory", function($compile, ParseTreeFactory, CssTreeFactory) 
 					target.style.webkitTransform = target.style.transform =
 						'translate(' + x + 'px,' + y + 'px)';
 					console.log("RESIZE INFO HEY HERE", target.className);
-					if(CssTreeFactory.cssTree[target.className.split(" ")[1]]) CssTreeFactory.cssTree[target.className.split(" ")[1]]["height"] = target.style.height;
+					if ($scope.project.css[target.className.split(" ")[1]]) $scope.project.css[target.className.split(" ")[1]]["height"] = target.style.height;
 					target.setAttribute('data-x', x);
 					target.setAttribute('data-y', y);
+					$scope.$digest();
 					// target.textContent = event.rect.width + '×' + event.rect.height;
 				});
 
