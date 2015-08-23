@@ -1,4 +1,4 @@
-var Handlebars = require('Handlebars');
+var Handlebars = require('handlebars');
 var ChangeCase = require('change-case');
 var path = require('path');
 var fs = require('fs-extra');
@@ -10,15 +10,15 @@ var reactNativePath = path.join(__dirname, '../../../reactNative');
 
 module.exports = function(data, styleData, userId, buildId) {
 
-		var newProjectDir = path.join(__dirname, 'UserBuilds', userId, buildId)
-		var newProjectZipDir = path.join(__dirname, 'UserBuilds', userId, buildId + 'ZIPPED')
+		var newProjectDir = path.join(__dirname, 'UserBuilds', userId, buildId);
+		var newProjectZipDir = path.join(__dirname, 'UserBuilds', userId, buildId + 'ZIPPED');
 
 
 		return new Promise(function(resolve, reject) {
 				fs.copy(reactNativePath, newProjectDir, function(err) {
 					if (err) reject(err);
-					else resolve(newProjectDir)
-				})
+					else resolve(newProjectDir);
+				});
 			})
 			.then(function() {
 				return new Promise(function(resolve, reject) {
@@ -27,8 +27,8 @@ module.exports = function(data, styleData, userId, buildId) {
 						else {
 							resolve(data.toString());
 						}
-					})
-				})
+					});
+				});
 			})
 			.then(function(templateFile) {
 				Handlebars.registerHelper('getProp', function(propObj) {
@@ -42,10 +42,12 @@ module.exports = function(data, styleData, userId, buildId) {
 				});
 
 				Handlebars.registerHelper('removePx', function(string) {
-					string = string.replace(/px$/, "");
-					if (string.match(/[^0-9]/) !== null) return "'" + string + "'";
-					else return string;
-				})
+					if(typeof string === "string"){	
+						string = string.replace(/px$/, "");
+					}
+					string = "'" + string + "'";
+					return string;
+				});
 
 				var createTemplate = Handlebars.compile(templateFile);
 				var renderedTemplate = createTemplate({
@@ -59,8 +61,8 @@ module.exports = function(data, styleData, userId, buildId) {
 					fs.writeFile(newProjectDir + "/index.ios.js", renderedTemplate, function(err) {
 						if (err) reject(err);
 						else resolve(renderedTemplate);
-					})
-				})
+					});
+				});
 			})
 			.then(function(finaltemp) {
 				console.log("file saved!");
@@ -78,13 +80,13 @@ module.exports = function(data, styleData, userId, buildId) {
 					fs.writeFile(newProjectZipDir, zippedFile, 'binary', function(err) {
 						if (err) reject(err);
 						else resolve(newProjectZipDir);
-					})
-				})
-			})
+					});
+				});
+			});
 
 
 		// Handlebars.registerPartial('View', require('fs').readFileSync('./testPartial.hbs'));
-	}
+};
 	/*var data = [
 		{
 			className: ['drop-area','view-1'],

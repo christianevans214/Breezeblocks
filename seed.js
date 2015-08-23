@@ -198,9 +198,9 @@ var seedBuilds = function() {
             }
         }
 
-    }]
-    return Build.createAsync(builds)
-}
+    }];
+    return Build.createAsync(builds);
+};
 
 
 connectToDb.then(function() {
@@ -218,11 +218,11 @@ connectToDb.then(function() {
                     promiseArr.push(User.createAsync({
                         email: users[index].email,
                         password: users[index].password,
-                        projects: build
-                    }))
-                })
+                        projects: [build]
+                    }));
+                });
                 return Promise.all(promiseArr);
-            })
+            });
     })
     .then(function() {
         console.log(chalk.green('Seed successful!'));

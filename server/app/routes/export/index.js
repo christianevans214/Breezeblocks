@@ -93,16 +93,14 @@ var styleData = {
 	}
 };
 
-
 var data = {
 	html: htmlData,
 	css: styleData,
 	userId: "55d9f2c2085bdd22ea5af6d0",
 	buildId: "1234567"
-}
+};
 
 router.post('/', function(req, res, next) {
-	console.dir(req.body.html);
 	generator(req.body.html, req.body.css, req.body.userId, req.body.buildId)
 		.then(function(zippedProject) {
 			console.log("zippedProject", zippedProject);
@@ -118,7 +116,7 @@ router.post('/', function(req, res, next) {
 					// 	else console.log("files deleted");
 					// })
 				}
-			})
+			});
 
 		})
 		.then(function() {
