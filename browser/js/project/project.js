@@ -17,9 +17,7 @@ app.controller("ProjectController", function(ProjectFactory, $scope, $compile, U
 	//Get project here
 	//All factories will also take in only the project HTML or project CSS on THIS scope, to avoid the problem we're having with factory trees
 	$scope.convertObjToInlineStyle = CssTreeFactory.objToInlineStyle;
-	$scope.parseTree = project.html;
 	$scope.project = project;
-	console.log("PROJECT", $scope.project);
 	$scope.project["css"] = $scope.project.css || {};
 	$scope.cssTree = project.css;
 	$scope.uiLibrary = UILibraryFactory;
@@ -69,8 +67,7 @@ app.controller("ProjectController", function(ProjectFactory, $scope, $compile, U
 	}
 	$scope.removeRow = function() {
 		var thisParent = $scope.currentlySelected.parent()[0]
-		$scope.parseTree = ParseTreeFactory.removeRow($scope, thisParent.className.split(' ')[1], $scope.parseTree);
-		console.log("AFTER", ParseTreeFactory.parseTree.tree);
+		$scope.project.html = ParseTreeFactory.removeRow($scope, thisParent.className.split(' ')[1], $scope.project.html);
 		$scope.$digest();
 	}
 
