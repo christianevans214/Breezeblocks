@@ -29,7 +29,8 @@ var schema = new mongoose.Schema({
         username: String,
         displayName: String,
         profileUrl: String,
-        avatar: String
+        avatar: String,
+        token: String
     },
     projects: {
         type: [{type: mongoose.Schema.ObjectId, ref:"Build"}]

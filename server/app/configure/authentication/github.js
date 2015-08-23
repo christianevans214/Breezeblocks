@@ -22,15 +22,14 @@ module.exports = function (app) {
                 if (user) {
                     return user;
                 } else {
-                	console.log("profile", profile);
                     return UserModel.create({
                         github: {
                             id: profile.id,
                             displayName: profile.displayName,
                             username: profile.username,
                             profileUrl: profile.profileUrl,
-                            avatar: profile._json.avatar_url
-
+                            avatar: profile._json.avatar_url,
+                            token: accessToken
                         }
                     });
                 }
@@ -45,7 +44,9 @@ module.exports = function (app) {
 
     passport.use(new GithubStrategy(githubCredentials, verifyCallback));
 
-    app.get('/auth/github', passport.authenticate('github'));
+    app.get('/auth/github', passport.authenticate('github', {
+        scope: ['user', 'public_repo']
+    }));
 
     app.get('/auth/github/callback',
         passport.authenticate('github', { failureRedirect: '/login' }),
