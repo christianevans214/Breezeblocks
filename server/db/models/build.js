@@ -1,6 +1,10 @@
 var mongoose = require('mongoose');
 
 var schema = new mongoose.Schema({
+	viewCount: {
+		type: Number,
+		default: 1
+	},
 	title: {
 		type: String,
 		default: "Untitled"

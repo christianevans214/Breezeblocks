@@ -1,6 +1,7 @@
 <!-- <pre>{{project|json}}</pre> -->
 <div class="container edit-container" style = "padding: 0">
 <!-- <ui-navbar></ui-navbar> -->
+	<h3 ng-bind= "project.title"></h3>
 	<div id="elements" class="edit-blade col-md-2 col-sm-2">
 		<ui-thumbnail style= "height: 75px; width: 75px; display: block" component="uiLibrary.Navbar" id="elemThumb"></ui-thumbnail>
 		<ui-thumbnail style= "height: 75px; width: 75px; display: block; background-size: cover" component="uiLibrary.DropArea" id="dropThumb"></ui-thumbnail>
@@ -15,7 +16,8 @@
 				ng-include='"js/common/directives/ui-components/ui-drop-area/ui-drop-area.html"'
 			></div>
 		</div>
-		<pre class = "col-md-6" spacing="default"> Regular Tree {{parseTree | json}}</pre>
+		<pre class = "col-md-6" spacing="default"> Css Tree {{cssTree | json}}</pre>
+		<pre class = "col-md-6" spacing="default"> THE WHOLE DAMN PROJECT {{project | json}}</pre>
 	</div>
 
 
@@ -23,10 +25,9 @@
 		edit props:
 		<pre>CSS OBJECT {{activeCSSEdit | json}}</pre>
 		<pre>HTML OBJECT {{activeHTMLEdit | json}}</pre>
+		<input type="text" ng-model="project.title" placeholder = "Change Title of Project"></input>
 		<input type="button" value="delete this parent" ng-click="removeRow()"></input></br>
 		<input type="button" value="delete this" ng-click="deleteElem()"></input></br>
-
-		<pre spacing="default">{{currentlySelected | json}}</pre>
 		<!-- <pre spacing="default">{{properties | json}}</pre> -->
 
 
@@ -42,4 +43,7 @@
 		<label>FlexGrowSize</label>
 		<input type="button" value="-" ng-click="lessFlex()" ng-model= "activeCSSEdit['flex-grow']"><input type="button" value="+" ng-click="moreFlex()"  ng-model= "activeCSSEdit['flex-grow']">
 		</form>
+		<button class = "btn btn-info" ng-click = "saveProject(project)">Save Project</button>
+		<button class= "btn btn-danger">Export Project</button>
+	</div>
 </div>

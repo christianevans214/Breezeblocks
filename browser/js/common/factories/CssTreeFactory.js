@@ -1,8 +1,6 @@
 app.factory('CssTreeFactory', function($http) {
 	return {
-
-		cssTree: {},
-		objToInlineStyle: function(className) {
+		objToInlineStyle: function(className, $scope) {
 			var str = ""
 				// console.log(this.cssTree)
 			for (var selector in this.cssTree[className]) {
@@ -12,21 +10,20 @@ app.factory('CssTreeFactory', function($http) {
 			}
 			return str
 		},
-		addViewClass: function(className) {
-			//do this after lunch
-			this.cssTree[className] = {
-				// "flex-grow": "1"
-			};
+		addViewClass: function(className, $scope) {
+			$scope.project.css[className] = {};
 		},
-		addChildClass: function(className) {
-			this.cssTree[className] = {
+		addChildClass: function(className, $scope) {
+			$scope.project.css[className] = {
 				"flex-grow": 1
 			};
 		},
-		removeStyle: function(className) {
+		removeStyle: function(className, $scope) {
+
+		},
+		removeRowStyle: function(rowClassName, $scope) {
 
 		}
-
 
 	}
 })
