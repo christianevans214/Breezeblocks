@@ -30,12 +30,10 @@ app.controller("ProjectController", function(ProjectFactory, $scope, $compile, U
 	$scope.currentlySelected = null;
 
 	$scope.saveProject = function(updatedProject) {
-
 		ProjectFactory.updateProject(updatedProject._id, updatedProject)
 			.then(function(returnedProject) {
 				console.log("This worked");
 			});
-
 	}
 
 	$scope.pathName = function(elemPath) {
