@@ -1,32 +1,7 @@
 app.factory('CssTreeFactory', function($http) {
 	return {
 
-		cssTree: {
-			'view-1': {
-				'height': '40px'
-			},
-			'view-1-navbar-1': {
-				'background-color': '#F00',
-				"flex-grow": 2
-			},
-			'view-1-navbar-2': {
-				'background-color': '#0F0',
-				"flex-grow": 1
-			},
-			'view-1-navbar-3': {
-				'background-color': '#00F',
-				"flex-grow": 1
-			},
-			'view-2': {
-				'height': '30px'
-			},
-			'view-2-image-1': {
-				'flex-grow': 1
-			},
-			'view-2-image-2': {
-				'flex-grow': 4
-			}
-		},
+		cssTree: {},
 		objToInlineStyle: function(className) {
 			var str = ""
 				// console.log(this.cssTree)
@@ -47,6 +22,9 @@ app.factory('CssTreeFactory', function($http) {
 			this.cssTree[className] = {
 				"flex-grow": 1
 			};
+		},
+		removeStyle: function(className) {
+
 		}
 
 

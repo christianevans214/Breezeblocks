@@ -1,6 +1,7 @@
 'use strict';
 var router = require('express').Router();
 var mongoose = require('mongoose');
+var _ = require("lodash");
 var path = require('path');
 var Build = mongoose.model('Build');
 var _ = require('lodash');

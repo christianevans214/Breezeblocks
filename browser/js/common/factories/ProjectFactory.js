@@ -12,6 +12,12 @@ app.factory("ProjectFactory", function($http) {
 					return res.data;
 				})
 		},
+		createProject: function() {
+			return $http.post(`api/build`)
+				.then(function(res) {
+					return res.data;
+				})
+		},
 		updateProject: function(id, data) {
 			return $http.put(`api/build/${id}`, data)
 				.then(function(res) {

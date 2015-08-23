@@ -14,11 +14,14 @@ app.config(function($stateProvider) {
 
 
 app.controller("ProjectController", function($scope, $compile, UILibraryFactory, EmitterizerFactory, Interactory, StyleFactory, ParseTreeFactory, CssTreeFactory, $stateParams, project, user) {
-	console.log($stateParams);
+	console.log("EEEEEE", user);
+	console.log("whoop whopp", project);
 
 	$scope.convertObjToInlineStyle = CssTreeFactory.objToInlineStyle;
-	$scope.cssTree = CssTreeFactory.cssTree;
-	$scope.parseTree = ParseTreeFactory.parseTree.tree;
+	// $scope.cssTree = CssTreeFactory.cssTree;
+	// $scope.parseTree = ParseTreeFactory.parseTree.tree;
+	ParseTreeFactory.parseTree.tree = $scope.parseTree = project.html;
+	CssTreeFactory.cssTree = $scope.cssTree = project.css || {};
 	$scope.uiLibrary = UILibraryFactory;
 	//properties to edit styling:
 	$scope.activeCSSEdit = {};
@@ -59,6 +62,7 @@ app.controller("ProjectController", function($scope, $compile, UILibraryFactory,
 	$scope.removeRow = function() {
 		var thisParent = $scope.currentlySelected.parent()[0]
 		$scope.parseTree = ParseTreeFactory.removeRow($scope, thisParent.className.split(' ')[1], $scope.parseTree);
+		console.log("AFTER", ParseTreeFactory.parseTree.tree);
 		$scope.$digest();
 	}
 

@@ -2,59 +2,7 @@ app.factory('ParseTreeFactory', function($http) {
 
 	var count = 5;
 	return {
-		parseTree: {
-			tree: [{
-				className: ['drop-area', 'view-1'],
-				children: [{
-						type: 'Navbar',
-						className: ['ui-navbar', 'view-1-navbar-1'],
-						props: [{
-							"name": "title",
-							"value": "my cool app",
-							type: "string"
-						}]
-					}, {
-						type: 'Navbar',
-						className: ['ui-navbar', 'view-1-navbar-2'],
-						props: [{
-							"name": "title",
-							"value": "my okay app",
-							type: "string"
-						}]
-					}, {
-						type: 'Navbar',
-						className: ['ui-navbar', 'view-1-navbar-3'],
-						props: [{
-							"name": "title",
-							"value": "my bad app",
-							type: "string"
-						}]
-					}
-
-				]
-			}, {
-				className: ['drop-area', 'view-2'],
-				children: [{
-					type: 'Image',
-					className: ["ui-image", 'view-2-image-1'],
-					props: [{
-						"name": "source",
-						"value": "http://www.joomlaworks.net/images/demos/galleries/abstract/7.jpg",
-						type: "string"
-					}]
-				}, {
-					type: 'Image',
-					className: ['ui-image', 'view-2-image-2'],
-					props: [{
-						"name": "source",
-						"value": "https://imgs.xkcd.com/comics/perl_problems.png",
-						type: "string"
-					}]
-				}]
-
-			}]
-		},
-
+		parseTree: {},
 		addRow: function($scope) {
 			var classToReturn = 'view-' + (count++)
 			this.parseTree.tree.push({
@@ -87,7 +35,6 @@ app.factory('ParseTreeFactory', function($http) {
 				console.log(View.className[1]);
 				return (View.className[1] !== className)
 			})
-			console.log("AFTER", this.parseTree.tree);
 		},
 
 		removeElement: function($scope, elem, parent) {

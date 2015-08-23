@@ -1,12 +1,17 @@
 var mongoose = require('mongoose');
 
 var schema = new mongoose.Schema({
-	title: String,
+	title: {
+		type: String,
+		default: "Untitled"
+	},
 	html: {
-		type: [Object]
+		type: Object,
+		default: []
 	},
 	css: {
-		type: Object
+		type: Object,
+		default: {}
 	},
 	gitUrl: String
 })
