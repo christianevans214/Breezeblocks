@@ -1,25 +1,27 @@
 app.config(function($stateProvider) {
+	$stateProvider
+		.state("userDash.project", {
+			url: '/:projectId',
+			templateUrl: "js/project/project.html",
+			controller: "ProjectController",
+			resolve: {
+				project: function(ProjectFactory, $stateParams) {
+					return ProjectFactory.getProject($stateParams.projectId)
+				}
+			}
+		});
+})
 
-	// Register our *about* state.
-	$stateProvider.state('editPage', {
-		url: '/edit',
-		controller: 'EditPageController',
-		templateUrl: 'js/edit-page/edit-page.html'
-	});
 
-});
+app.controller("ProjectController", function($scope, $compile, UILibraryFactory, EmitterizerFactory, Interactory, StyleFactory, ParseTreeFactory, CssTreeFactory, $stateParams, project, user) {
+	console.log("EEEEEE", user);
+	console.log("whoop whopp", project);
 
-function colorChange($scope) {
-	$scope.$on('changeSelect', function(event, data) {
-		$scope.currentlySelected = $(data)
-		$scope.$apply()
-	})
-}
-
-app.controller('EditPageController', function($scope, $compile, UILibraryFactory, EmitterizerFactory, Interactory, StyleFactory, ParseTreeFactory, CssTreeFactory) {
 	$scope.convertObjToInlineStyle = CssTreeFactory.objToInlineStyle;
-	$scope.cssTree = CssTreeFactory.cssTree;
-	$scope.parseTree = ParseTreeFactory.parseTree.tree;
+	// $scope.cssTree = CssTreeFactory.cssTree;
+	// $scope.parseTree = ParseTreeFactory.parseTree.tree;
+	ParseTreeFactory.parseTree.tree = $scope.parseTree = project.html;
+	CssTreeFactory.cssTree = $scope.cssTree = project.css || {};
 	$scope.uiLibrary = UILibraryFactory;
 	//properties to edit styling:
 	$scope.activeCSSEdit = {};
@@ -60,6 +62,7 @@ app.controller('EditPageController', function($scope, $compile, UILibraryFactory
 	$scope.removeRow = function() {
 		var thisParent = $scope.currentlySelected.parent()[0]
 		$scope.parseTree = ParseTreeFactory.removeRow($scope, thisParent.className.split(' ')[1], $scope.parseTree);
+		console.log("AFTER", ParseTreeFactory.parseTree.tree);
 		$scope.$digest();
 	}
 
