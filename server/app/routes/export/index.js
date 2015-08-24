@@ -36,7 +36,7 @@ router.post('/', function (req, res, next) {
 		//make github repo if user has a github account
 		//check user doesn't have a repo with name of new repo
 		var repoName = req.body.title.replace(/\s/ig,'_').replace(/\W/ig,'');
-
+		
 		User.findById(req.body.userId).exec()
 		.then(function(currentUser){
 			// user is not logged in with github
@@ -56,6 +56,8 @@ router.post('/', function (req, res, next) {
 			.then(function(repoInfo){
 				var repo = github.getRepo(repoInfo.owner.login, repoInfo.name);
 				writeFiles(req.body.userId, req.body.buildId, repo, 'reactNative');
+				
+
 			})
 		})
 	})
