@@ -4,7 +4,7 @@
   "description": "A generated project at Fullstack Academy",
   "main": "server/start.js",
   "scripts": {
-    "start": "mkdir server/app/reactUtils/UserBuilds && nodemon --watch server -e js,html server/start.js --ignore server/app/reactUtils/UserBuilds",
+    "start": "nodemon --watch server -e js,html server/start.js --ignore server/app/reactUtils/UserBuilds",
     "postinstall": "gulp build"
   },
   "dependencies": {
@@ -26,8 +26,8 @@
     "express-handlebars": "^2.0.1",
     "express-session": "^1.10.3",
     "font-awesome": "^4.4.0",
-    "github-api": "^0.10.6",
     "fs-extra": "^0.23.1",
+    "github-api": "^0.10.6",
     "gulp": "^3.8.11",
     "gulp-babel": "^5.1.0",
     "gulp-concat": "^2.5.2",
@@ -55,6 +55,7 @@
     "mongodb": "^1.4.33",
     "mongoose": "^4.0.7",
     "node-zip": "^1.1.1",
+    "nodegit": "^0.4.1",
     "nodemon": "^1.3.7",
     "passport": "^0.2.1",
     "passport-facebook": "^1.0.3",
@@ -71,4 +72,3 @@
     "supertest": "^0.15.0"
   }
 }
-

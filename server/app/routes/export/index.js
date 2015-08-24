@@ -8,7 +8,7 @@ var generator = require('../../reactUtils/generator');
 var fs = require('fs-extra');
 var Github = require('github-api');
 var createNewRepo = require('./githubCreator');
-var Commit = require('./commit');
+var content = require('./readBuildDir');
 module.exports = router;
 
 //SAMPLE DATA -> DELETE ONCE ROUTE IS WORKING CORRECTLY
@@ -91,7 +91,7 @@ var styleData = {
 var data = {
 	html: htmlData,
 	css: styleData,
-	userId: "55d9f2c2085bdd22ea5af6d0",
+	userId: "55da1122f1d3d26d07ab67a8",
     buildId: "1234567"
 }
 
@@ -134,30 +134,27 @@ router.post('/', function (req, res, next) {
 				token: currentUser.github.token,
 				auth: "oauth"
 			});
+
 			createNewRepo(currentUser, github)
 			.then(function(repoInfo){
-				//instantiate the Commit object
-				var commit = new Commit(github, repoInfo.owner.login, repoInfo.name, 'heads/master')
-
-				//I want to commit something!
-				commit.commit(
-				    [{
-				      path: 'test.txt',
-				      content: 'Some content for this file'
-				    }],
-				    'Exported BreezeBlocks Project',
-				    function(err, data){
-				      //data is the response from the reference update.
-				      if(err) console.log(err);
-				      else console.log("data", data);
-				    }
-				  )
-/*				console.log("repoInfo", repoInfo.owner.login, repoInfo.name);
-				var repo = github.getRepo(repoInfo.owner.login, repoInfo.name);
-				repo.write('master', 'https://github.com/cez213/Test.git', zippedProjectPath, 'Exported BreezeBlocks Project', function(err) {
+/*				var repo = github.getRepo(repoInfo.owner.login, repoInfo.name);
+				var fileContent = content;
+				var fileNames = Object.keys(fileContent);
+				fileNames.forEach(function(file){
+				console.log("fileNames", fileNames);
+					return repo.write('master', file, fileContent[file], 'Exported BreezeBlocks Project', function(err) {
+						console.log("writing to file");
+						if(err) console.error(err);
+					});
+				})*/
+				
+				repo.write('master', 'reactNative', 'fileContent', 'Exported BreezeBlocks Project', function(err) {
 					console.log("writing to file");
-					if(err) console.log(err);
-				});*/
+					if(err) console.error(err);
+				});
+			
+
+
 			})
 		})
 	})

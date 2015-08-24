@@ -10,7 +10,7 @@ module.exports = function(currentUser, github){
 		user.createRepo(repoObj, function(err, res) {
 			if(err) reject(err);
 			else {
-				//console.log("new repo:", res);
+				console.log("repo created");
 				resolve(res);
 			}
 		});
