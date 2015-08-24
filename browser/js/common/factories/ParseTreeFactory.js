@@ -53,6 +53,7 @@ app.factory('ParseTreeFactory', function($http) {
 			container.children = container.children.filter(function(child) {
 				return (child.className[1] !== childClassName[1]);
 			});
+			return childClassName;
 		},
 		addProperties: function($scope, elem, parent) {
 			var parentClassName = parent.className.split(" ");

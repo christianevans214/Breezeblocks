@@ -18,11 +18,23 @@ app.factory('CssTreeFactory', function($http) {
 				"flex-grow": 1
 			};
 		},
-		removeStyle: function(className, $scope) {
-
+		removeClass: function(className, $scope) {
+			console.log("className to delete", className);
+			console.log("BEFORE DELETE", $scope.project.css);
+			console.log("CLASS NAME PROPERTIES", $scope.project.css[className])
+			if ($scope.project.css[className]) delete $scope.project.css[className];
+			console.log("AFTER DELETE", $scope.project.css);
 		},
-		removeRowStyle: function(rowClassName, $scope) {
-
+		removeViewClass: function(rowClassName, $scope) {
+			var classDeleteArr = [rowClassName];
+			var classNameRegex = new RegExp(rowClassName)
+				//need to find Children based on parent className
+			console.log("BEFORE DELETION", $scope.project.css);
+			for (var className in $scope.project.css) {
+				console.log(className.match(classNameRegex))
+				if (className.match(classNameRegex)) delete $scope.project.css[className];
+			}
+			console.log("AFTER DELETION", $scope.project.css);
 		}
 
 	}

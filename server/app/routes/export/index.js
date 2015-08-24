@@ -2,12 +2,15 @@
 var router = require('express').Router();
 var path = require('path');
 var mongoose = require('mongoose');
+var User = mongoose.model('User');
 var Build = mongoose.model('Build');
 var generator = require('../../reactUtils/generator');
 var fs = require('fs-extra');
+var Github = require('github-api');
 module.exports = router;
 
-var data = [{
+//SAMPLE DATA -> DELETE ONCE ROUTE IS WORKING CORRECTLY
+var htmlData = [{
 	className: ['drop-area', 'view-1'],
 	children: [{
 			type: 'Navbar',
@@ -66,6 +69,7 @@ var data = [{
 
 }]
 
+
 var styleData = {
 	"view1": {
 		"flex": '1',
@@ -89,16 +93,21 @@ var styleData = {
 	}
 };
 
-var fakeUser = "obama";
-var fakeBuild = "123";
+var data = {
+	html: htmlData,
+	css: styleData,
+	userId: "55d9f2c2085bdd22ea5af6d0",
+	buildId: "1234567"
+};
 
 router.post('/', function(req, res, next) {
-	// generator(req.body.html, req.body.css, req.body.userId, req.body.buildId)
-	generator(data, styleData, fakeUser, fakeBuild)
+	generator(req.body.html, req.body.css, req.body.userId, req.body.buildId)
 		.then(function(zippedProject) {
+			console.log("zippedProject", zippedProject);
 			//prompt user to download zipped project
 			res.status(201).sendFile(zippedProject, function(err) {
-				if (err) console.error('Your project failed to zip correctly', err);
+				//if(err) console.error('Your project failed to zip correctly', err);
+				if (err) throw err;
 				else {
 					console.log('download complete');
 					//remove files?
@@ -107,11 +116,41 @@ router.post('/', function(req, res, next) {
 					// 	else console.log("files deleted");
 					// })
 				}
-			})
+			});
+
 		})
 		.then(function() {
-			console.log("this is where github stuff would happen");
 			//perform github stuff if user has a github account
+			//check user has github before running createRepo function
+			//check user doesn't have a repo with name of new repo
+			//create authorization token!
+
+			// User.findById(req.body.userId).exec()
+			User.findById(data.userId).exec() //fix data
+				.then(function(currentUser) {
+					// user is not logged in with github
+					/*			if(!currentUser.github.username){
+									// either asked them to login with github, or just download zipped file
+								}*/
+					console.log("currentUser", currentUser);
+
+					var repoObj = {
+						"name": "Test",
+						"description": "Test repo for Breeze Blocks Project",
+						"homepage": currentUser.github.profileUrl,
+					}
+					var github = new Github({
+						id: currentUser.github.id,
+						token: currentUser.github.token,
+						auth: "oauth"
+					})
+					var user = github.getUser();
+
+					user.createRepo(repoObj, function(err, res) {
+						if (err) console.error(err);
+						else console.log(res);
+					});
+				})
 		})
 		.then(null, next);
 

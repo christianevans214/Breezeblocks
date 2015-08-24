@@ -56,7 +56,7 @@ gulp.task('testServerJS', function () {
 });
 
 gulp.task('testServerJSWithCoverage', function (done) {
-    gulp.src('./server/**/*.js')
+    gulp.src('./server/**/*.js','!./server/app/reactUtils/UserBuilds')
         .pipe(istanbul({
             includeUntested: true
         }))
