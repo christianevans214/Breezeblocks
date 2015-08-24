@@ -1,7 +1,7 @@
 <!-- <pre>{{project|json}}</pre> -->
 <div class="edit-container">
 <!-- <ui-navbar></ui-navbar> -->
-	<h3 id="Title" ng-bind= "project.title"></h3>
+	<h3 id="Title" ng-bind="project.title"></h3>
 
 	<div id="elements" class="edit-blade col-md-2 col-sm-2">
 		<div id="elementsContainer">
@@ -66,6 +66,7 @@
 			<div class="bottomButton left" ng-click = "saveProject(project)">Save Project</div>
 			<div class="bottomButton right">Export Project</div>
 		</div>
+		<span ng-show="showConfirm"> Saving...</span>
 
 	</div>
 

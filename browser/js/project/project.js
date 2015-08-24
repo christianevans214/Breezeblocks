@@ -28,11 +28,13 @@ app.controller("ProjectController", function(ProjectFactory, $scope, $compile, U
 	//properties to edit HTML
 	$scope.activeHTMLEdit = {};
 	$scope.currentlySelected = null;
-
+	$scope.showConfirm = false;
 	$scope.saveProject = function(updatedProject) {
+		$scope.showConfirm = true;
 		ProjectFactory.updateProject(updatedProject._id, updatedProject)
 			.then(function(returnedProject) {
 				console.log("This worked");
+				$scope.showConfirm = false;
 			});
 	}
 
