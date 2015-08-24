@@ -35,7 +35,8 @@ app.controller("ProjectController", function(ProjectFactory, AuthService, $scope
 			html: project.html,
 			css: project.css,
 			buildId: project._id,
-			userId: user._id
+			userId: user._id,
+			title: project.title
 		}
 		ProjectFactory.exportProject(objToExport)
 			.then(function(file) {

@@ -100,13 +100,14 @@ var styleData = {
 var data = {
 	html: htmlData,
 	css: styleData,
-	userId: "55da1122f1d3d26d07ab67a8",
-    buildId: "1234567"
+	userId: "55db540be736f98377967be0",
+    buildId: "1234567",
+    title: "Breeze Blocks Mobile App"
 }
 
 router.post('/', function (req, res, next) {
-	//generator(req.body.html, req.body.css, req.body.userId, req.body.buildId)
-	generator(data.html, data.css, data.userId, data.buildId)
+	//generator(data.html, data.css, data.userId, data.buildId)
+	generator(req.body.html, req.body.css, req.body.userId, req.body.buildId)
 	.then(function(zippedProject){
 		//prompt user to download zipped project
 		res.status(201).sendFile(zippedProject, function(err){
@@ -127,9 +128,10 @@ router.post('/', function (req, res, next) {
 	.then(function(zippedProjectPath){
 		//make github repo if user has a github account
 		//check user doesn't have a repo with name of new repo
-
-		// User.findById(req.body.userId).exec()
-		User.findById(data.userId).exec() //fix data
+		//var repoName = data.title.replace(/\s/ig,'_').replace(/\W/ig,'');
+		var repoName = req.body.title.replace(/\s/ig,'_').replace(/\W/ig,'');
+		//User.findById(data.userId).exec() //fix data
+		User.findById(req.body.userId).exec()
 		.then(function(currentUser){
 			// user is not logged in with github
 			if(!currentUser.github.username){
@@ -144,10 +146,11 @@ router.post('/', function (req, res, next) {
 				auth: "oauth"
 			});
 
-			createNewRepo(currentUser, github)
+			createNewRepo(currentUser, github, repoName)
 			.then(function(repoInfo){
 				var repo = github.getRepo(repoInfo.owner.login, repoInfo.name);
-				writeFiles(data.userId, data.buildId, repo, 'reactNative');
+				writeFiles(req.body.userId, req.body.buildId, repo, 'reactNative');
+				//writeFiles(data.userId, data.buildId, repo, 'reactNative');
 			})
 		})
 	})
