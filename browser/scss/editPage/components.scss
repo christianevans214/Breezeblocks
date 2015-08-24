@@ -21,7 +21,6 @@
 	display:flex;
 	align-items: center;
 	padding-top: 8px;
-	height: 100%;
 }
 .ui-text{
 	color: Black;
@@ -37,7 +36,7 @@
 .rangeHolder{
 	display: flex;
 	align-items: center;
-	height: 100%;
+
 	padding: 10px;
 	flex-grow: 1;
 }
@@ -51,7 +50,6 @@
 
 	input[type=range] {
 	  -webkit-appearance: none; /* Hides the slider so that custom slider can be made */
-	  	width: 100%; /* Specific width is required for Firefox. */
 	}
 
 	input[type=range]::-webkit-slider-thumb {

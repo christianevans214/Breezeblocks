@@ -32,6 +32,9 @@ app.factory("UILibraryFactory", function() {
 			},{
 				component: 'Text',
 				backgroundImage: '/images/text.png'
+			},{
+				component: 'ScrollView',
+				backgroundImage:'/images/ScrollView.png'
 			}
 			//
 		]
