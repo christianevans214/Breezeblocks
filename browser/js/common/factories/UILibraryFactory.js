@@ -35,6 +35,9 @@ app.factory("UILibraryFactory", function() {
 			},{
 				component: 'ScrollView',
 				backgroundImage:'/images/ScrollView.png'
+			},{
+				component: 'ListView',
+				backgroundImage: '/images/ListView.png'
 			}
 			//
 		]
