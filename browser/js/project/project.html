@@ -30,7 +30,7 @@
 			<!-- <ui-drop-area class="drop-area ng-class:'getClass()'"></ui-drop-area> -->
 			<!-- <pre>{{parseTree|json}}</pre> -->
 		<div id="app">
-			<div ng-repeat="View in parseTree" class='{{View.className.join(" ")}}'
+			<div ng-repeat="View in project.html" class='{{View.className.join(" ")}}'
 				style='{{convertObjToInlineStyle(View.className[1])}}'
 				ng-include='"js/common/directives/ui-components/ui-drop-area/ui-drop-area.html"'
 			></div>
