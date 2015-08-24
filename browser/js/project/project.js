@@ -80,6 +80,10 @@ app.controller("ProjectController", function(ProjectFactory, AuthService, $scope
 			var $lastSibling = $($scope.currentlySelected).prev()[0] || null;
 			$scope.changeSelected($lastSibling.className.split(' ')[1])
 		}
+		else{
+			//for use in DeleteElem function
+			$scope.currentlySelected == null;
+		}
 	}
 
 	$scope.selectNext = function() {
