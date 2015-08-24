@@ -1,9 +1,9 @@
 * {
-  box-sizing: border-box;
+
 }
 
 body {
-  background: #fdfdfd;
+  background: #444;
 }
 
 @mixin clearfix {
@@ -14,11 +14,9 @@ body {
   }
 }
 
-// #main {
-//   padding-top: 60px;
-//   width: 1200px;
-//   margin: 0 auto;
-// }
+#main {
+height: 100%;
+}
 
 @import 'directives/main';
 @import 'home/main';
@@ -26,3 +24,4 @@ body {
 @import 'tutorial/main';
 @import 'login/main';
 @import 'editPage/edit';
+@import 'userDash/userdash';
