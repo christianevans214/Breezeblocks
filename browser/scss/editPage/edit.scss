@@ -76,17 +76,22 @@ input{
 
 
 .bottomButton{
-	border: 1px solid #002;
+	border: 1px solid #222;
 	flex-grow: 1;
 	cursor: pointer;
 	padding: 10px;
 	text-align: center;
 	margin: 0px;
-	background-color: #008;
+	background-color: #333;
+}
+
+.block{
+	display: block;
 }
 .bottomButton:hover{
-	background-color: #228;
+	background-color: #444;
 }
+
 
 .drop-area{
 	display: flex;

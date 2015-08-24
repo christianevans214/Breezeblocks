@@ -13,7 +13,7 @@ app.config(function($stateProvider) {
 })
 
 
-app.controller("ProjectController", function(ProjectFactory, $scope, $compile, UILibraryFactory, EmitterizerFactory, Interactory, StyleFactory, ParseTreeFactory, CssTreeFactory, $stateParams, project, user) {
+app.controller("ProjectController", function(ProjectFactory, AuthService, $scope, $compile, UILibraryFactory, EmitterizerFactory, Interactory, StyleFactory, ParseTreeFactory, CssTreeFactory, $stateParams, project, user) {
 	//Get project here
 	//All factories will also take in only the project HTML or project CSS on THIS scope, to avoid the problem we're having with factory trees
 	$scope.convertObjToInlineStyle = CssTreeFactory.objToInlineStyle;
@@ -77,4 +77,12 @@ app.controller("ProjectController", function(ProjectFactory, $scope, $compile, U
 	EmitterizerFactory.makeEmitterListeners($scope);
 
 	Interactory.Interact($scope);
+
+	$scope.logout = function() {
+		console.log("logging out")
+        AuthService.logout().then(function() {
+            $state.go('home');
+        });
+    };
+
 });

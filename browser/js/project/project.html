@@ -17,8 +17,12 @@
 			<div class="thumbHolder">
 			<ui-thumbnail style= "height: 75px; width: 75px; display: block; background-size: cover" component="uiLibrary.Image" id="elemThumb"></ui-thumbnail>
 			</div>
+		</div>
 
-
+		<div id="bottomButtonContainer block">
+			<div class="bottomButton" ui-sref="userDash({id: user._id})">Project List</div>
+			<div class="bottomButton" ui-sref="home">Breezeblocks Home</div>
+			<div class="bottomButton" ui-sref="home" ng-click="logout()">Log Out</div>
 		</div>
 	</div>
 
