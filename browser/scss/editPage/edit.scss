@@ -63,10 +63,6 @@ input{
 }
 
 
-.thumbHolder{
-	height: 75px;
-	margin: 3px;
-}
 
 #bottomButtonContainer{
 	display: flex;
@@ -103,7 +99,15 @@ input{
 	border: 4px dashed lightgrey;
 }
 
+.thumbHolder{
+	height: 75px;
+	margin: 3px;
+}
 ui-thumbnail{
+	width: 75px;
+	height: 75px;
+	display: block;
+	background-size: cover;
 	border: 2px solid #0dd;
 	border-radius: 8px;
 	position: relative;
