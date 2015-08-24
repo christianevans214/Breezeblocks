@@ -35,15 +35,15 @@
 				ng-include='"js/common/directives/ui-components/ui-drop-area/ui-drop-area.html"'
 			></div>
 		</div>
-		<!-- <pre class = "col-md-6" spacing="default"> Css Tree {{cssTree | json}}</pre>
-		<pre class = "col-md-6" spacing="default"> THE WHOLE DAMN PROJECT {{project | json}}</pre> -->
+		<pre class = "col-md-6" spacing="default"> Css Tree {{cssTree | json}}</pre>
+		<pre class = "col-md-6" spacing="default"> THE WHOLE DAMN PROJECT {{project | json}}</pre>
 	</div>
 
 
 	<div id="style" class="edit-blade col-md-2 col-sm-2">
 		<!-- edit props: -->
-		<!-- <pre>CSS OBJECT {{activeCSSEdit | json}}</pre> -->
-		<!-- <pre>HTML OBJECT {{activeHTMLEdit | json}}</pre> -->
+		<pre>CSS OBJECT {{activeCSSEdit | json}}</pre>
+		<pre>HTML OBJECT {{activeHTMLEdit | json}}</pre>
 		<div id="controlsContainer">
 			<input type="text" ng-model="project.title" placeholder = "Change Title of Project"></input>
 			<input type="button" value="delete this parent" ng-click="removeRow()"></input></br>
