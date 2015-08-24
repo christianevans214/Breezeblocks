@@ -9,6 +9,7 @@ var fs = require('fs-extra');
 var Github = require('github-api');
 var createNewRepo = require('./githubCreator');
 var writeFiles = require('../../reactUtils/writeFiles');
+var fileContent = require('../../reactUtils/recursiveRead');
 
 module.exports = router;
 
@@ -146,9 +147,20 @@ router.post('/', function (req, res, next) {
 			createNewRepo(currentUser, github)
 			.then(function(repoInfo){
 				var repo = github.getRepo(repoInfo.owner.login, repoInfo.name);
-				var projectName = 'reactNative';
 				
-				writeFiles(data.userId, data.buildId, repo, projectName);
+				fileContent(data.userId, data.buildId, 'reactNative')
+				.then(function(fileObject){
+					var keys = Object.keys(fileObject);
+					console.log(keys.length);
+/*
+					keys.forEach(function(fileName){
+						console.log("fileName", fileName)
+						repo.write('master', fileName, fileObject[fileName], 'Exported BreezeBlocks Project', function(err) {
+							console.log("writing to file");
+							if(err) console.error(err);
+						});
+					})*/
+				})
 				
 /*				fileNames.forEach(function(file){
 				console.log("fileNames", fileNames);

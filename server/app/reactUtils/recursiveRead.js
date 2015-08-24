@@ -4,10 +4,10 @@ var Promise = require('bluebird');
 
 var arr = [];
 
-module.exports = function(baseFilePath, projectName){
-
+module.exports = function(userId, buildId, projectName){
+	var baseFilePath = path.join(__dirname, "UserBuilds", userId, buidId);
+	
 	projectName = projectName || 'reactNative';
-
 
 	var recursiveRead = function (filePath){
 		var files = fs.readdirSync(filePath);

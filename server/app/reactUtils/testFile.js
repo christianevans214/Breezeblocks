@@ -13,7 +13,7 @@ fileContent(filePath, 'reactNative')
 	// console.log(fileObject);
 	// console.log(fileObject[keys[0]].length);
 })
-.catch(function(err){console.log("promise error", err);});
+.catch(function(err){ console.log("promise error", err); });
 
 // var fileObject = fileContent(filePath, 'reactNativeProject');
 // console.log(Object.keys(fileObject));

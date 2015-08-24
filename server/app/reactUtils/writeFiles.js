@@ -14,12 +14,14 @@ module.exports = function(userId, buildId, repo, projectName){
 				console.log("writing to file");
 				if(err) console.error(err);
 			});
-		})
+		});
 		
 		//fileObject contains virtual file paths as keys and file content as values
 
 		// console.log(fileObject);
 		// console.log(fileObject[keys[0]].length);
 	})
-	.catch(function(err){console.log("promise error", err);});
+	.catch(function(err){ 
+		console.log("promise error", err); 
+	});
 }
