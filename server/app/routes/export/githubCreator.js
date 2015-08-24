@@ -25,7 +25,6 @@ module.exports = function(currentUser, github, repoName){
 	.then(function(){*/
 		return new Promise(function(resolve, reject){
 			user.createRepo(repoObj, function(err, res) {
-				console.log("repoObj", repoObj);
 				if(err) reject(err);
 				else {
 					console.log("repo created");

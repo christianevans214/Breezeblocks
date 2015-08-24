@@ -8,7 +8,7 @@ module.exports = function(userId, buildId, projectName){
 
 	projectName = projectName || 'reactNative';
 
-	(function recursiveRead(filePath){
+	function recursiveRead(filePath){
 		var files = fs.readdirSync(filePath);
 		files.forEach(function(file){
 			var newFilePath = path.join(filePath, file);
@@ -19,7 +19,9 @@ module.exports = function(userId, buildId, projectName){
 			else arr.push(newFilePath);
 		});
 		return arr;
-	})(baseFilePath);
+	};
+	
+	var filesToRead = recursiveRead(baseFilePath);
 
 	var promiseArr = [];
 
