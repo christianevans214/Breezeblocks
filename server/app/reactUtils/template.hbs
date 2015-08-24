@@ -21,6 +21,7 @@ var {
 var reactNative = React.createClass({
     render: function() {
         return (
+          <View>
             {{#each tree}}
             <View>
               {{#each this.children}}
@@ -29,6 +30,7 @@ var reactNative = React.createClass({
               {{/each}}
             </View>
             {{/each }}
+          </View>
         );
     }
 })

@@ -44,8 +44,11 @@ module.exports = function(data, styleData, userId, buildId) {
 				Handlebars.registerHelper('removePx', function(string) {
 					if(typeof string === "string"){	
 						string = string.replace(/px$/, "");
+						
+						if(string.match(/\D/) === null) string = Number(string);
+						else string = "'" + string + "'";
 					}
-					string = "'" + string + "'";
+
 					return string;
 				});
 
