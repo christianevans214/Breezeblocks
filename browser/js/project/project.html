@@ -5,19 +5,21 @@
 
 	<div id="elements" class="edit-blade col-md-2 col-sm-2">
 		<div id="elementsContainer">
-
+			<div class="thumbHolder">
+			<ui-thumbnail backgroundimage= "images/box.png" component="DropArea" id="dropThumb"></ui-thumbnail>
+			</div>
 			<!-- this should really be an ng-repeat! -->
 
-			<div class="thumbHolder">
-			<ui-thumbnail component="uiLibrary.DropArea" id="dropThumb"> </ui-thumbnail>
-			</div>
-			<div class="thumbHolder">
-			<ui-thumbnail component="uiLibrary.Navbar" id="elemThumb"> </ui-thumbnail>
+	<!-- 		<div class="thumbHolder">
+			<ui-thumbnail style= "height: 75px; width: 75px; display: block" component="uiLibrary.Navbar" id="elemThumb"></ui-thumbnail>
 			</div >
-			<div class="thumbHolder">
-			<ui-thumbnail component="uiLibrary.Image" id="elemThumb"> </ui-thumbnail>
-			</div>
 
+			<div class="thumbHolder">
+			<ui-thumbnail style= "height: 75px; width: 75px; display: block; background-size: cover" component="uiLibrary.Image" id="elemThumb"></ui-thumbnail>
+			</div> -->
+			<div class = "thumbHolder" ng-repeat="thumbnail in thumbnails">
+			<ui-thumbnail style= "height: 75px; width: 75px; display: block" background="thumbnail.backgroundImage" component="thumbnail.component" id="elemThumb"></ui-thumbnail>
+			</div>
 		</div>
 
 		<div id="bottomButtonContainer block">

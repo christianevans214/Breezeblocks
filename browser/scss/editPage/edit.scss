@@ -112,6 +112,10 @@ ui-thumbnail{
 	border-radius: 8px;
 	position: relative;
 	z-index: 4;
+	height: 75px; 
+	width: 75px; 
+	display: block; 
+	background-size: cover
 }
 
 .shadow{
