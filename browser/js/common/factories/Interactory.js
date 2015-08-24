@@ -21,7 +21,9 @@ app.factory("Interactory", function($compile, ParseTreeFactory, CssTreeFactory) 
 					accept: '#elemThumb',
 					ondrop: function(event) {
 						var thisComponentName = event.relatedTarget.getAttribute('component')
-						var eventClass = ParseTreeFactory.addElement($scope, event.target.className.split(' ')[1], thisComponentName.split('.')[1]);
+						console.log(thisComponentName)
+							//thisCOmponentName = "Navbar", "Image", etc...
+						var eventClass = ParseTreeFactory.addElement($scope, event.target.className.split(' ')[1], thisComponentName);
 						CssTreeFactory.addChildClass(eventClass, $scope);
 						$scope.$digest();
 					}
