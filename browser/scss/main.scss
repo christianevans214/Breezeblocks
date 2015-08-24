@@ -18,6 +18,10 @@ body {
 height: 100%;
 }
 
+ul[dnd-list], ul[dnd-list] > li { 
+    position: relative;
+}
+
 @import 'directives/main';
 @import 'home/main';
 @import 'about/main';
