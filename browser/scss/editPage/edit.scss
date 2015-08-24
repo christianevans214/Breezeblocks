@@ -29,13 +29,13 @@
 }
 
 .blueLabel{
-	color: #0ff;
+	color: #0dd;
 }
 
 #Title{
 	background-color: #333;
 	padding: 10px;
-	color: #0ff;
+	color: #0dd;
 	margin: 0px;
 }
 
@@ -65,6 +65,7 @@ input{
 
 .thumbHolder{
 	height: 75px;
+	margin: 3px;
 }
 
 #bottomButtonContainer{
@@ -103,12 +104,15 @@ input{
 }
 
 ui-thumbnail{
+	border: 2px solid #0dd;
+	border-radius: 8px;
 	position: relative;
 	z-index: 4;
 }
 
 .shadow{
 	box-shadow: 0 0 10px 2px #000000;
+	z-index: 50;
 	transition: .2s;
 }
 

@@ -59,15 +59,27 @@ app.controller("ProjectController", function(ProjectFactory, AuthService, $scope
 
 	$scope.lessFlex = StyleFactory.lessFlex($scope);
 	$scope.moreFlex = StyleFactory.moreFlex($scope);
+
+	$scope.selectLast = function() {
+		if ($scope.currentlySelected){
+			var $lastSibling = $($scope.currentlySelected).prev()[0] || null;
+			$scope.changeSelected($lastSibling.className.split(' ')[1])
+		}
+	}
+
+	$scope.selectNext = function() {
+		if ($scope.currentlySelected){
+			var $nextSibling = $($scope.currentlySelected).next()[0] || null;
+			$scope.changeSelected($nextSibling.className.split(' ')[1])
+		}
+	}
 	$scope.deleteElem = function() {
 		var thisParent = $scope.currentlySelected.parent()[0]
-		var $lastSibling = $($scope.currentlySelected).prev()[0] || null;
-		console.log($lastSibling)
 		console.log("COMMENCE DELETING", $scope.currentlySelected, thisParent)
 		ParseTreeFactory.removeElement($scope, $scope.currentlySelected, thisParent)
 		$scope.activeCSSEdit = {};
 		$scope.activeHTMLEdit = {};
-		$scope.changeSelected($lastSibling.className.split(' ')[1])
+		$scope.selectLast();
 
 	}
 	$scope.removeRow = function() {
@@ -87,5 +99,19 @@ app.controller("ProjectController", function(ProjectFactory, AuthService, $scope
             $state.go('home');
         });
     };
+
+    //listen for key presses
+    $(window).bind('keydown', function(e) {
+    	var code = e.keyCode;
+    	console.log(code)
+	  	if (code === 37){
+	  		$scope.selectLast()
+	  	}
+  		else if (code === 39){
+  			$scope.selectNext()
+  		}
+ 	 });
+
+
 
 });
