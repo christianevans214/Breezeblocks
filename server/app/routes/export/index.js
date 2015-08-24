@@ -9,6 +9,7 @@ var fs = require('fs-extra');
 var Github = require('github-api');
 var createNewRepo = require('./githubCreator');
 var writeFiles = require('../../reactUtils/writeFiles');
+var fileContent = require('../../reactUtils/recursiveRead');
 
 module.exports = router;
 
@@ -80,7 +81,7 @@ var styleData = {
 		"align-items": 'center',
 		"background-color": '#F5FCFF',
 	},
-	"img1": {
+	"view1Image1": {
 		"width": '200px',
 		"height": '200px',
 	},
@@ -90,7 +91,7 @@ var styleData = {
 		"align-items": 'center',
 		"background-color": '#F5FCFF',
 	},
-	"img2": {
+	"view2Image2": {
 		"width": '200px',
 		"height": '200px',
 	}
@@ -133,7 +134,7 @@ router.post('/', function (req, res, next) {
 			// user is not logged in with github
 			if(!currentUser.github.username){
 				// either asked them to login with github, or just download zipped file
-				console.log("No github account...")
+				console.log("No github account...");
 				return;
 			}
 
@@ -146,27 +147,10 @@ router.post('/', function (req, res, next) {
 			createNewRepo(currentUser, github)
 			.then(function(repoInfo){
 				var repo = github.getRepo(repoInfo.owner.login, repoInfo.name);
-				var projectName = 'reactNative';
-				
-				writeFiles(data.userId, data.buildId, repo, projectName);
-				
-/*				fileNames.forEach(function(file){
-				console.log("fileNames", fileNames);
-					return repo.write('master', file, fileContent[file], 'Exported BreezeBlocks Project', function(err) {
-						console.log("writing to file");
-						if(err) console.error(err);
-					});
-				})
-				
-				repo.write('master', 'reactNative', 'fileContent', 'Exported BreezeBlocks Project', function(err) {
-					console.log("writing to file");
-					if(err) console.error(err);
-				});*/
+				writeFiles(data.userId, data.buildId, repo, 'reactNative');
 			})
 		})
-		.then(null, next);
-	
 	})
+	.then(null, next);
 })
-
 
