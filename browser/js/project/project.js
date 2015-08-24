@@ -42,6 +42,7 @@ app.controller("ProjectController", function(ProjectFactory, AuthService, $scope
 				console.log("THIS WORKED", file);
 			})
 	}
+
 	$scope.currentlySelected = null;
 	$scope.showConfirm = false;
 	$scope.saveProject = function(updatedProject) {
@@ -125,10 +126,11 @@ app.controller("ProjectController", function(ProjectFactory, AuthService, $scope
     //listen for key presses
     $(window).bind('keydown', function(e) {
     	var code = e.keyCode;
-    	// console.log(code)
+    	//left arrow
 	  	if (code === 37){
 	  		$scope.selectLast()
 	  	}
+	  	//right arrow
   		else if (code === 39){
   			$scope.selectNext()
   		}
