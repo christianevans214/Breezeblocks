@@ -1,12 +1,11 @@
-var fs = require('fs');
+var fs = require('fs-extra');
 var path = require('path');
 var Promise = require('bluebird');
 
 var arr = [];
-
 module.exports = function(userId, buildId, projectName){
-	var baseFilePath = path.join(__dirname, "UserBuilds", userId, buidId);
-	
+	var baseFilePath = path.join(__dirname, "UserBuilds", userId, buildId);
+
 	projectName = projectName || 'reactNative';
 
 	var recursiveRead = function (filePath){
