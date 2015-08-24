@@ -32,7 +32,7 @@ gulp.task('reloadCSS', function () {
 
 gulp.task('lintJS', function () {
 
-    return gulp.src(['./browser/js/**/*.js', './server/**/*.js'])
+    return gulp.src(['./browser/js/**/*.js', './server/**/*.js', '!./server/app/{reactUtils/,reactUtils/**}'])
         .pipe(eslint())
         .pipe(eslint.format())
         .pipe(eslint.failOnError());
@@ -56,7 +56,7 @@ gulp.task('testServerJS', function () {
 });
 
 gulp.task('testServerJSWithCoverage', function (done) {
-    gulp.src('./server/**/*.js','!./server/app/reactUtils/UserBuilds')
+    gulp.src(['./server/**/*.js','!./server/app/{reactUtils/,reactUtils/**}'])
         .pipe(istanbul({
             includeUntested: true
         }))
@@ -159,7 +159,7 @@ gulp.task('default', function () {
         runSeq('buildCSS', 'reloadCSS');
     });
 
-    gulp.watch('server/**/*.js', ['lintJS']);
+    gulp.watch(['server/**/*.js','!./server/app/{reactUtils/,reactUtils/**}'], ['lintJS']);
 
     // Reload when a template (.html) file changes.
     gulp.watch(['browser/**/*.html', 'server/app/views/*.html'], ['reload']);
