@@ -21,7 +21,7 @@ app.controller("ProjectController", function(ProjectFactory, AuthService, $scope
 	$scope.user = user;
 	$scope.project["css"] = $scope.project.css || {};
 	$scope.cssTree = project.css;
-	$scope.uiLibrary = UILibraryFactory;
+	$scope.thumbnails = UILibraryFactory.Thumbnails;
 	//properties to edit styling:
 	$scope.activeCSSEdit = {};
 	//properties to edit HTML
@@ -77,18 +77,17 @@ app.controller("ProjectController", function(ProjectFactory, AuthService, $scope
 	$scope.moreFlex = StyleFactory.moreFlex($scope);
 
 	$scope.selectLast = function() {
-		if ($scope.currentlySelected){
+		if ($scope.currentlySelected) {
 			var $lastSibling = $($scope.currentlySelected).prev()[0] || null;
 			$scope.changeSelected($lastSibling.className.split(' ')[1])
-		}
-		else{
+		} else {
 			//for use in DeleteElem function
 			$scope.currentlySelected == null;
 		}
 	}
 
 	$scope.selectNext = function() {
-		if ($scope.currentlySelected){
+		if ($scope.currentlySelected) {
 			var $nextSibling = $($scope.currentlySelected).next()[0] || null;
 			$scope.changeSelected($nextSibling.className.split(' ')[1])
 		}
@@ -118,23 +117,23 @@ app.controller("ProjectController", function(ProjectFactory, AuthService, $scope
 
 	$scope.logout = function() {
 		console.log("logging out")
-        AuthService.logout().then(function() {
-            $state.go('home');
-        });
-    };
+		AuthService.logout().then(function() {
+			$state.go('home');
+		});
+	};
 
-    //listen for key presses
-    $(window).bind('keydown', function(e) {
-    	var code = e.keyCode;
-    	//left arrow
-	  	if (code === 37){
-	  		$scope.selectLast()
-	  	}
-	  	//right arrow
-  		else if (code === 39){
-  			$scope.selectNext()
-  		}
- 	 });
+	//listen for key presses
+	$(window).bind('keydown', function(e) {
+		var code = e.keyCode;
+		//left arrow
+		if (code === 37) {
+			$scope.selectLast()
+		}
+		//right arrow
+		else if (code === 39) {
+			$scope.selectNext()
+		}
+	});
 
 
 
