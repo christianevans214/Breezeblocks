@@ -76,10 +76,13 @@ app.controller("ProjectController", function(ProjectFactory, AuthService, $scope
 	$scope.lessFlex = StyleFactory.lessFlex($scope);
 	$scope.moreFlex = StyleFactory.moreFlex($scope);
 
+
 	$scope.selectLast = function() {
 		if ($scope.currentlySelected){
 			var $lastSibling = $($scope.currentlySelected).prev()[0] || null;
-			$scope.changeSelected($lastSibling.className.split(' ')[1])
+			if ($lastSibling){
+				$scope.changeSelected($lastSibling.className.split(' ')[1])
+			}
 		}
 		else{
 			//for use in DeleteElem function
@@ -90,9 +93,12 @@ app.controller("ProjectController", function(ProjectFactory, AuthService, $scope
 	$scope.selectNext = function() {
 		if ($scope.currentlySelected){
 			var $nextSibling = $($scope.currentlySelected).next()[0] || null;
+			if ($nextSibling){
 			$scope.changeSelected($nextSibling.className.split(' ')[1])
+			}
 		}
 	}
+	
 	$scope.deleteElem = function() {
 		var thisParent = $scope.currentlySelected.parent()[0]
 		console.log("COMMENCE DELETING", $scope.currentlySelected, thisParent)
