@@ -25,7 +25,15 @@ app.controller("ProjectController", function(ProjectFactory, AuthService, $scope
 	//properties to edit styling:
 	$scope.activeCSSEdit = {};
 	//properties to edit HTML
-	$scope.activeHTMLEdit = {};
+	$scope.activeHTMLEdit = {
+		props: [{
+			dataSource: [{
+				value: '1'
+			}, {
+				value: '2'
+			}]
+		}]
+	};
 
 	//thsi will probably need to be edited later but yeah!
 	$scope.exportProject = function(project, user) {
@@ -60,9 +68,11 @@ app.controller("ProjectController", function(ProjectFactory, AuthService, $scope
 
 
 	$scope.changeSelected = function(className) {
+		console.log("CLASSNAME OF CURRENTLY SELECTED", className)
 		if ($scope.currentlySelected) $scope.currentlySelected.removeClass('shadow')
 		$scope.activeCSSEdit = $scope.project.css[className];
 		$scope.currentlySelected = $('.' + className);
+		console.log($scope.currentlySelected.attr('component'));
 		var thisParent = $scope.currentlySelected.parent()[0]
 		$scope.currentlySelected.addClass('shadow')
 		$scope.activeHTMLEdit = ParseTreeFactory.findActiveElement($scope, className, thisParent);

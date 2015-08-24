@@ -1,9 +1,9 @@
 <div
 
 style=
-'background: url("{{child.props[0].value}}");
+'background: url("{{child.props[0].source}}");
 display: flex;
-background-size: cover; 
+background-size: {{child.props[0].resizeMode}}; 
 flex-grow: 1;
 '
 

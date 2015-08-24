@@ -17,16 +17,34 @@ app.factory('ParseTreeFactory', function($http) {
 			var classToReturn = parentClass + '-' + type.toLowerCase() + '-' + ($scope.project.viewCount++)
 
 			//Type check to make sure we see something when an image is placed onto the screen
-			if (type == "Image"){
+			if (type == "Image") {
 
 				filteredViewElem.children.push({
 					type: type,
 					className: ['ui-' + type.toLowerCase(), classToReturn],
-					props: [{ "value": "https://scontent-lga1-1.xx.fbcdn.net/hphotos-xfp1/v/t1.0-9/390469_103735846412710_468610899_n.jpg?oh=c08c11408e17d55d11c05431a3f9efdb&oe=5683D084"}]
+					props: [{
+						"source": "https://scontent-lga1-1.xx.fbcdn.net/hphotos-xfp1/v/t1.0-9/390469_103735846412710_468610899_n.jpg?oh=c08c11408e17d55d11c05431a3f9efdb&oe=5683D084",
+						"resizeMode": 'cover'
+					}]
 				})
-			}
-			else{
-				
+			} else if (type === "ListView") {
+				filteredViewElem.children.push({
+					type: type,
+					className: ['ui-' + type.toLowerCase(), classToReturn],
+					props: [{
+						dataSource: []
+					}]
+				})
+			} else if (type === "MapView") {
+				filteredViewElem.children.push({
+					type: type,
+					className: ['ui-' + type.toLowerCase(), classToReturn],
+					props: [{
+						region: {}
+					}]
+				})
+			} else {
+
 				filteredViewElem.children.push({
 					type: type,
 					className: ['ui-' + type.toLowerCase(), classToReturn],
