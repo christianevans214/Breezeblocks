@@ -31,10 +31,10 @@ module.exports = function(data, styleData, userId, buildId) {
 				});
 			})
 			.then(function(templateFile) {
-				Handlebars.registerHelper('getProp', function(propObj) {
-					if (propObj.name === "source") return "{{uri: '" + propObj.value + "'}}";
-					else if (propObj.type === "string") return "'" + propObj.value + "'";
-					else return propObj.value;
+				Handlebars.registerHelper('getProp', function(propKey, propValue) {
+					if (propKey === "source") return "{{uri: '" + propValue + "'}}";
+					else if (propKey === "resizeMode") return "'" + propValue + "'";
+					else return propValue;
 				});
 
 				Handlebars.registerHelper('camelCase', function(string) {
@@ -44,8 +44,11 @@ module.exports = function(data, styleData, userId, buildId) {
 				Handlebars.registerHelper('removePx', function(string) {
 					if(typeof string === "string"){	
 						string = string.replace(/px$/, "");
+						
+						if(string.match(/\D/) === null) string = Number(string);
+						else string = "'" + string + "'";
 					}
-					string = "'" + string + "'";
+
 					return string;
 				});
 

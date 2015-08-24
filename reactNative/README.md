@@ -6,7 +6,7 @@
 
 # Breeze-Blocks
 
-> Drag and Drop a ReactNative Application
+> Subtitle or Short Description Goes Here
 
 > ideally one sentence
 

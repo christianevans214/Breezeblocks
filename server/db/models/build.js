@@ -9,6 +9,7 @@ var schema = new mongoose.Schema({
 		type: String,
 		default: "Untitled"
 	},
+	gitName: String,
 	html: {
 		type: Object,
 		default: []
@@ -18,6 +19,11 @@ var schema = new mongoose.Schema({
 		default: {}
 	},
 	gitUrl: String
+})
+
+schema.pre('save', function (next) {
+	this.gitName = this.title.replace(/\s/ig,'_').replace(/\W/ig,'');
+	next();
 })
 
 mongoose.model('Build', schema);
