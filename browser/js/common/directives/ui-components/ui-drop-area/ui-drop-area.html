@@ -1,4 +1,7 @@
-<div ng-repeat="child in View.children"
+<li ng-repeat="child in View.children"
+dnd-draggable="child"
+dnd-moved="View.children.splice($index,1)"
+dnd-effect-allowed="move"
 ng-click="changeSelected(child.className[1])"
 class="{{child.className.join(' ')}}"
 style="{{convertObjToInlineStyle(child.className[1])}}"
