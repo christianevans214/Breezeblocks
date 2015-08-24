@@ -25,7 +25,7 @@ var reactNative = React.createClass({
             {{#each tree}}
             <View>
               {{#each this.children}}
-              <{{this.type}} {{#each this.props}}{{this.name}}={{{getProp this}}}{{/each }} style={[{{#each this.className}}{{#unless @first}}styles.{{camelCase this}}{{#unless @last}}, {{/unless }}{{/unless }}{{/each }}]}>
+              <{{this.type}} {{#each this.props}}{{#each this}}{{@key}}={{{getProp @key this}}} {{/each }}{{/each }}style={[{{#each this.className}}{{#unless @first}}styles.{{camelCase this}}{{#unless @last}}, {{/unless }}{{/unless }}{{/each }}]}>
               </{{this.type}}>
               {{/each}}
             </View>
