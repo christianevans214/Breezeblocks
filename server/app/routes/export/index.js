@@ -8,7 +8,8 @@ var generator = require('../../reactUtils/generator');
 var fs = require('fs-extra');
 var Github = require('github-api');
 var createNewRepo = require('./githubCreator');
-var content = require('./readBuildDir');
+var writeFiles = require('../../reactUtils/writeFiles');
+
 module.exports = router;
 
 //SAMPLE DATA -> DELETE ONCE ROUTE IS WORKING CORRECTLY
@@ -144,23 +145,28 @@ router.post('/', function (req, res, next) {
 
 			createNewRepo(currentUser, github)
 			.then(function(repoInfo){
-/*				var repo = github.getRepo(repoInfo.owner.login, repoInfo.name);
-				var fileContent = content;
-				var fileNames = Object.keys(fileContent);
-				fileNames.forEach(function(file){
+				var repo = github.getRepo(repoInfo.owner.login, repoInfo.name);
+				var projectName = 'reactNative';
+				
+				writeFiles(data.userId, data.buildId, repo, projectName);
+				
+/*				fileNames.forEach(function(file){
 				console.log("fileNames", fileNames);
 					return repo.write('master', file, fileContent[file], 'Exported BreezeBlocks Project', function(err) {
 						console.log("writing to file");
 						if(err) console.error(err);
 					});
-				})*/
+				})
 				
 				repo.write('master', 'reactNative', 'fileContent', 'Exported BreezeBlocks Project', function(err) {
 					console.log("writing to file");
 					if(err) console.error(err);
-				});
+				});*/
 			})
 		})
 		.then(null, next);
-
+	
+	})
 })
+
+
