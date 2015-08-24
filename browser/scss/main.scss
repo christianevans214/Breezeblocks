@@ -4,6 +4,7 @@
 
 body {
   background: #444;
+  font-family: Helvetica;
 }
 
 @mixin clearfix {
@@ -24,4 +25,5 @@ height: 100%;
 @import 'tutorial/main';
 @import 'login/main';
 @import 'editPage/edit';
+@import 'editPage/components';
 @import 'userDash/userdash';
