@@ -14,7 +14,9 @@ module.exports = function(baseFilePath, projectName){
 		files.forEach(function(file){
 			var newFilePath = path.join(filePath, file);
 			var stat = fs.statSync(newFilePath);
-			if(stat.isDirectory()) recursiveRead(newFilePath);
+			if(stat.isDirectory()){
+				if(file !== 'node_modules') recursiveRead(newFilePath);	
+			} 
 			else arr.push(newFilePath);
 		});
 		return arr;
