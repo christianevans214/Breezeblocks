@@ -103,7 +103,7 @@ app.controller("ProjectController", function(ProjectFactory, AuthService, $scope
     //listen for key presses
     $(window).bind('keydown', function(e) {
     	var code = e.keyCode;
-    	console.log(code)
+    	// console.log(code)
 	  	if (code === 37){
 	  		$scope.selectLast()
 	  	}
