@@ -61,11 +61,14 @@ app.controller("ProjectController", function(ProjectFactory, AuthService, $scope
 	$scope.moreFlex = StyleFactory.moreFlex($scope);
 	$scope.deleteElem = function() {
 		var thisParent = $scope.currentlySelected.parent()[0]
+		var $lastSibling = $($scope.currentlySelected).prev()[0] || null;
+		console.log($lastSibling)
 		console.log("COMMENCE DELETING", $scope.currentlySelected, thisParent)
 		ParseTreeFactory.removeElement($scope, $scope.currentlySelected, thisParent)
 		$scope.activeCSSEdit = {};
 		$scope.activeHTMLEdit = {};
-		$scope.currentlySelected = null;
+		$scope.changeSelected($lastSibling.className.split(' ')[1])
+
 	}
 	$scope.removeRow = function() {
 		var thisParent = $scope.currentlySelected.parent()[0]

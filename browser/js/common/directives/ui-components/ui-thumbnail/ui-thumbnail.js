@@ -34,7 +34,7 @@ app.directive("uiThumbnail", function($rootScope) {
 					onmove: dragMoveListener,
 				    // call this function on every dragend event
 					onend: function (event) {
-						clone.fadeIn();
+						clone.fadeIn("fast");
 				    	$(event.target).remove();
 					}
 				      // var textEl = event.target.querySelector('p');
