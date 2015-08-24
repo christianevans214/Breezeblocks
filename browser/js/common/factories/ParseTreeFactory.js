@@ -15,11 +15,25 @@ app.factory('ParseTreeFactory', function($http) {
 				return (View.className[1] === parentClass);
 			})[0]
 			var classToReturn = parentClass + '-' + type.toLowerCase() + '-' + ($scope.project.viewCount++)
-			filteredViewElem.children.push({
-				type: type,
-				className: ['ui-' + type.toLowerCase(), classToReturn],
-				props: [{}]
-			})
+
+			//Type check to make sure we see something when an image is placed onto the screen
+			if (type == "Image"){
+
+				filteredViewElem.children.push({
+					type: type,
+					className: ['ui-' + type.toLowerCase(), classToReturn],
+					props: [{ "value": "https://scontent-lga1-1.xx.fbcdn.net/hphotos-xfp1/v/t1.0-9/390469_103735846412710_468610899_n.jpg?oh=c08c11408e17d55d11c05431a3f9efdb&oe=5683D084"}]
+				})
+			}
+			else{
+				
+				filteredViewElem.children.push({
+					type: type,
+					className: ['ui-' + type.toLowerCase(), classToReturn],
+					props: [{}]
+				})
+			}
+
 			return classToReturn;
 		},
 

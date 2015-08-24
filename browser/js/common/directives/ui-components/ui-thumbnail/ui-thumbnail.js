@@ -6,6 +6,7 @@ app.directive("uiThumbnail", function($rootScope) {
 		},
 		templateUrl: 'js/common/directives/ui-components/ui-thumbnail/ui-thumbnail.html',
 		link: function(scope, elem, attr) {
+			var clone;
 			console.log("SCOPE.COMPONENT", scope.component);
 			console.log(attr);
 			console.log("THUMBNAIL", scope.component.thumbnail);
@@ -26,11 +27,14 @@ app.directive("uiThumbnail", function($rootScope) {
 					onstart: function(event){
 				    	console.log("clicked")
 				    	console.log(event.target)
-				    	$(event.target).clone().appendTo('#elements');
+						var holder = $(event.target).parent()
+						clone = $(event.target).clone()
+				    	clone.hide().appendTo(holder);
 					},
 					onmove: dragMoveListener,
 				    // call this function on every dragend event
 					onend: function (event) {
+						clone.fadeIn("fast");
 				    	$(event.target).remove();
 					}
 				      // var textEl = event.target.querySelector('p');

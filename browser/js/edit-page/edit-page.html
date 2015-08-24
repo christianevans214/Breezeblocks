@@ -1,32 +1,25 @@
 <div class="container edit-container" style = "padding: 0">
-<!-- <ui-navbar></ui-navbar> -->
 	<div id="elements" class="edit-blade col-md-2 col-sm-2">
 		<ui-thumbnail style= "height: 75px; width: 75px; display: block" component="uiLibrary.Navbar" id="elemThumb"></ui-thumbnail>
 		<ui-thumbnail style= "height: 75px; width: 75px; display: block; background-size: cover" component="uiLibrary.DropArea" id="dropThumb"></ui-thumbnail>
 		<ui-thumbnail style= "height: 75px; width: 75px; display: block; background-size: cover" component="uiLibrary.Image" id="elemThumb"></ui-thumbnail>
 	</div>
 	<div id="outer-canvas" class="edit-blade col-md-8 col-sm-8">
-			<!-- <ui-drop-area class="drop-area ng-class:'getClass()'"></ui-drop-area> -->
-			<!-- <pre>{{parseTree|json}}</pre> -->
 		<div id="app">
 			<div ng-repeat="View in parseTree" class='{{View.className.join(" ")}}'
 				style='{{convertObjToInlineStyle(View.className[1])}}'
 				ng-include='"js/common/directives/ui-components/ui-drop-area/ui-drop-area.html"'
 			></div>
 		</div>
-		<pre class = "col-md-6" spacing="default">{{parseTree | json}}</pre>
-		<pre class="col-md-6" spacing="default"> {{cssTree | json }} </pre>
 	</div>
 
 
 	<div id="style" class="edit-blade col-md-2 col-sm-2">
-		edit props:
-		<pre>CSS OBJECT {{activeCSSEdit | json}}</pre>
-		<pre>HTML OBJECT {{activeHTMLEdit | json}}</pre>
-		<input type="button" value="delete this parent" ng-click="removeRow()"></input></br>
+
+		<input type="button" value="delete this!!!" ng-click="removeRow()"></input></br>
+
 		<input type="button" value="delete this" ng-click="deleteElem()"></input></br>
 
-		<pre spacing="default">{{currentlySelected | json}}</pre>
 		<!-- <pre spacing="default">{{properties | json}}</pre> -->
 
 
@@ -42,4 +35,7 @@
 		<label>FlexGrowSize</label>
 		<input type="button" value="-" ng-click="lessFlex()" ng-model= "activeCSSEdit['flex-grow']"><input type="button" value="+" ng-click="moreFlex()"  ng-model= "activeCSSEdit['flex-grow']">
 		</form>
+
+<!-- 		<pre>CSS OBJECT {{activeCSSEdit | json}}</pre>
+		<pre>HTML OBJECT {{activeHTMLEdit | json}}</pre> -->
 </div>

@@ -1,12 +1,31 @@
 <!-- <pre>{{project|json}}</pre> -->
-<div class="container edit-container" style = "padding: 0">
+<div class="edit-container">
 <!-- <ui-navbar></ui-navbar> -->
-	<h3 ng-bind= "project.title"></h3>
+	<h3 id="Title" ng-bind="project.title"></h3>
+
 	<div id="elements" class="edit-blade col-md-2 col-sm-2">
-		<ui-thumbnail style= "height: 75px; width: 75px; display: block" component="uiLibrary.Navbar" id="elemThumb"></ui-thumbnail>
-		<ui-thumbnail style= "height: 75px; width: 75px; display: block; background-size: cover" component="uiLibrary.DropArea" id="dropThumb"></ui-thumbnail>
-		<ui-thumbnail style= "height: 75px; width: 75px; display: block; background-size: cover" component="uiLibrary.Image" id="elemThumb"></ui-thumbnail>
+		<div id="elementsContainer">
+
+			<!-- this should really be an ng-repeat! -->
+
+			<div class="thumbHolder">
+			<ui-thumbnail style= "height: 75px; width: 75px; display: block" component="uiLibrary.Navbar" id="elemThumb"></ui-thumbnail>
+			</div >
+			<div class="thumbHolder">
+			<ui-thumbnail style= "height: 75px; width: 75px; display: block; background-size: cover" component="uiLibrary.DropArea" id="dropThumb"></ui-thumbnail>
+			</div>
+			<div class="thumbHolder">
+			<ui-thumbnail style= "height: 75px; width: 75px; display: block; background-size: cover" component="uiLibrary.Image" id="elemThumb"></ui-thumbnail>
+			</div>
+		</div>
+
+		<div id="bottomButtonContainer block">
+			<div class="bottomButton" ui-sref="userDash({id: user._id})">Project List</div>
+			<div class="bottomButton" ui-sref="home">Breezeblocks Home</div>
+			<div class="bottomButton" ui-sref="home" ng-click="logout()">Log Out</div>
+		</div>
 	</div>
+
 	<div id="outer-canvas" class="edit-blade col-md-8 col-sm-8">
 			<!-- <ui-drop-area class="drop-area ng-class:'getClass()'"></ui-drop-area> -->
 			<!-- <pre>{{parseTree|json}}</pre> -->
@@ -22,28 +41,37 @@
 
 
 	<div id="style" class="edit-blade col-md-2 col-sm-2">
-		edit props:
+		<!-- edit props: -->
 		<pre>CSS OBJECT {{activeCSSEdit | json}}</pre>
 		<pre>HTML OBJECT {{activeHTMLEdit | json}}</pre>
-		<input type="text" ng-model="project.title" placeholder = "Change Title of Project"></input>
-		<input type="button" value="delete this parent" ng-click="removeRow()"></input></br>
-		<input type="button" value="delete this" ng-click="deleteElem()"></input></br>
-		<!-- <pre spacing="default">{{properties | json}}</pre> -->
+		<div id="controlsContainer">
+			<input type="text" ng-model="project.title" placeholder = "Change Title of Project"></input>
+			<input type="button" value="delete this parent" ng-click="removeRow()"></input></br>
+			<input type="button" value="delete this" ng-click="deleteElem()"></input></br>
+			<!-- <pre spacing="default">{{properties | json}}</pre> -->
 
 
-		<form name="properties">
-		<label>change property</label>
-		<textarea ng-model="activeHTMLEdit.props[0].value"></textarea>
-		<label>Background Color</label>
-		<input type="color" ng-model='activeCSSEdit["background-color"]'></br></br>
-		<label>Padding!</label>
-		<input type="range" ng-model="activeCSSEdit['padding']">
-		<label>Margin</label>
-		<input type="range" ng-model="activeCSSEdit['margin']">
-		<label>FlexGrowSize</label>
-		<input type="button" value="-" ng-click="lessFlex()" ng-model= "activeCSSEdit['flex-grow']"><input type="button" value="+" ng-click="moreFlex()"  ng-model= "activeCSSEdit['flex-grow']">
-		</form>
-		<button class = "btn btn-info" ng-click = "saveProject(project)">Save Project</button>
-		<button class= "btn btn-danger" ng-click="exportProject(project, user)">Export Project</button>
+			<form name="properties">
+			<label>change property</label>
+			<textarea ng-model="activeHTMLEdit.props[0].value"></textarea>
+			<label>Background Color</label>
+			<input type="color" ng-model='activeCSSEdit["background-color"]'></br></br>
+			<label>Padding!</label>
+			<input type="range" ng-model="activeCSSEdit['padding']">
+			<label>Margin</label>
+			<input type="range" ng-model="activeCSSEdit['margin']">
+			<label>FlexGrowSize</label>
+			<input type="button" value="-" ng-click="lessFlex()" ng-model= "activeCSSEdit['flex-grow']"></input>
+			<input type="button" value="+" ng-click="moreFlex()"  ng-model= "activeCSSEdit['flex-grow']"></input>
+			</form>
+		</div>
+
+		<div id="bottomButtonContainer">
+			<div class="bottomButton left" ng-click = "saveProject(project)">Save Project</div>
+			<div class="bottomButton right" ng-click="exportProject(project, user)">Export Project</div>
+		</div>
+		<span ng-show="showConfirm"> Saving...</span>
+
 	</div>
+
 </div>
