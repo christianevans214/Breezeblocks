@@ -7,6 +7,8 @@ var Build = mongoose.model('Build');
 var generator = require('../../reactUtils/generator');
 var fs = require('fs-extra');
 var Github = require('github-api');
+var createNewRepo = require('./githubCreator');
+var content = require('./readBuildDir');
 module.exports = router;
 
 //SAMPLE DATA -> DELETE ONCE ROUTE IS WORKING CORRECTLY
@@ -96,61 +98,68 @@ var styleData = {
 var data = {
 	html: htmlData,
 	css: styleData,
-	userId: "55d9f2c2085bdd22ea5af6d0",
-	buildId: "1234567"
-};
+	userId: "55da1122f1d3d26d07ab67a8",
+    buildId: "1234567"
+}
 
-router.post('/', function(req, res, next) {
-	generator(req.body.html, req.body.css, req.body.userId, req.body.buildId)
-		.then(function(zippedProject) {
-			console.log("zippedProject", zippedProject);
-			//prompt user to download zipped project
-			res.status(201).sendFile(zippedProject, function(err) {
-				//if(err) console.error('Your project failed to zip correctly', err);
-				if (err) throw err;
-				else {
-					console.log('download complete');
-					//remove files?
-					// fs.remove(directoryPath, function(err){
-					// 	if(err) console.error('Error deleting', err)
-					// 	else console.log("files deleted");
-					// })
-				}
+router.post('/', function (req, res, next) {
+	//generator(req.body.html, req.body.css, req.body.userId, req.body.buildId)
+	generator(data.html, data.css, data.userId, data.buildId)
+	.then(function(zippedProject){
+		//prompt user to download zipped project
+		res.status(201).sendFile(zippedProject, function(err){
+			//if(err) console.error('Your project failed to zip correctly', err);
+			if(err) throw err;
+			else{
+				console.log('download complete');
+				//remove files?
+				// fs.remove(directoryPath, function(err){
+				// 	if(err) console.error('Error deleting', err)
+				// 	else console.log("files deleted");
+				// })
+			}
+		})
+		return zippedProject;
+
+	})
+	.then(function(zippedProjectPath){
+		//make github repo if user has a github account
+		//check user doesn't have a repo with name of new repo
+
+		// User.findById(req.body.userId).exec()
+		User.findById(data.userId).exec() //fix data
+		.then(function(currentUser){
+			// user is not logged in with github
+			if(!currentUser.github.username){
+				// either asked them to login with github, or just download zipped file
+				console.log("No github account...")
+				return;
+			}
+
+			var github = new Github({
+				id: currentUser.github.id,
+				token: currentUser.github.token,
+				auth: "oauth"
 			});
 
-		})
-		.then(function() {
-			//perform github stuff if user has a github account
-			//check user has github before running createRepo function
-			//check user doesn't have a repo with name of new repo
-			//create authorization token!
-
-			// User.findById(req.body.userId).exec()
-			User.findById(data.userId).exec() //fix data
-				.then(function(currentUser) {
-					// user is not logged in with github
-					/*			if(!currentUser.github.username){
-									// either asked them to login with github, or just download zipped file
-								}*/
-					console.log("currentUser", currentUser);
-
-					var repoObj = {
-						"name": "Test",
-						"description": "Test repo for Breeze Blocks Project",
-						"homepage": currentUser.github.profileUrl,
-					}
-					var github = new Github({
-						id: currentUser.github.id,
-						token: currentUser.github.token,
-						auth: "oauth"
-					})
-					var user = github.getUser();
-
-					user.createRepo(repoObj, function(err, res) {
-						if (err) console.error(err);
-						else console.log(res);
+			createNewRepo(currentUser, github)
+			.then(function(repoInfo){
+/*				var repo = github.getRepo(repoInfo.owner.login, repoInfo.name);
+				var fileContent = content;
+				var fileNames = Object.keys(fileContent);
+				fileNames.forEach(function(file){
+				console.log("fileNames", fileNames);
+					return repo.write('master', file, fileContent[file], 'Exported BreezeBlocks Project', function(err) {
+						console.log("writing to file");
+						if(err) console.error(err);
 					});
-				})
+				})*/
+				
+				repo.write('master', 'reactNative', 'fileContent', 'Exported BreezeBlocks Project', function(err) {
+					console.log("writing to file");
+					if(err) console.error(err);
+				});
+			})
 		})
 		.then(null, next);
 
