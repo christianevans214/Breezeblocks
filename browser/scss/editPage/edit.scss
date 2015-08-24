@@ -96,7 +96,6 @@ input{
 	flex-direction: row;
 	box-sizing: border-box;
 	z-index: 1;
-	align-items: center;
 	border: 2px dashed #0DD;
 }
 
@@ -121,84 +120,6 @@ ui-thumbnail{
 	transition: .2s;
 }
 
-.ui-navbar{
-	flex-grow: 1; 
-	display: flex; 
-	flex-direction: column; 
-	width: 100%; 
-	font-size: 20pt;
-	align-items: center; 
-	justify-content: center;
-	background: #EFEFEF;
-	max-height: 48px;
-	border-bottom: 1px solid #DDD;
-	color: #222;
-	h5{
-		font-size: 17px;
-	}
-}
-
-.ui-switchios{
-	max-width: 60px;
-	justify-content: center;
-	padding-top: 8px;
-}
-.ui-text{
-	color: Black;
-	font-size: 20pt;
-	padding: 10px;
-	h5{
-		font-size: 17px;
-	}
-}
-.rangeHolder{
-	display: flex;
-	align-items: center;
-	height: 30px;
-	padding: 10px;
-	flex-grow: 1;
-}
-.ui-sliderios{
-	display: flex;
-	flex-grow: 1;
-	height: 100%;
-	align-items: center;
-
-	input[type=range] {
-	  -webkit-appearance: none; /* Hides the slider so that custom slider can be made */
-	  	width: 100%; /* Specific width is required for Firefox. */
-	}
-
-	input[type=range]::-webkit-slider-thumb {
-	  -webkit-appearance: none;
-	  border: 1px solid #AAA;
-	  height: 20px;
-	  width: 20px;
-	  border-radius: 40px;
-	  background: #ffffff;
-	  cursor: pointer;
-	  margin-top: -9px; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
-	  box-shadow: 1px 1px 1px rgba(255,255,255,0.3)
-	}
-
-	input[type=range]::-webkit-slider-runnable-track {
-		  height: 4px;
-		  cursor: pointer;
-		  background: #aaa;
-		  margin-top: -5px;
-		  border-radius: 10px;
-		  border: 0.2px solid #010101;
-	}
-
-
-}
-
-
-.ui-image{
-	display: flex;
-	background-size: cover; 
-	flex-grow: 1;
-}
 
 .appear{
 	opacity: 1
