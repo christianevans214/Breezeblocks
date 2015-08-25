@@ -65,8 +65,8 @@
 			<list-view-edit ng-if="(activeHTMLEdit.type === 'ListView')||(activeHTMLEdit.type === 'ScrollView')"></list-view-edit>
 			<map-view-edit ng-if="activeHTMLEdit.type === 'MapView'"></map-view-edit>
 			<slider-ios-edit ng-if="activeHTMLEdit.type === 'SliderIOS'"></slider-ios-edit>
-			<switch-ios-edit ng-if="activeHTMLEdit.type" === 'SwitchIOS'></switch-ios-edit>
-			<tab-bar-ios-edit></tab-bar-ios-edit>
+			<switch-ios-edit ng-if="activeHTMLEdit.type === 'SwitchIOS'"></switch-ios-edit>
+			<tab-bar-ios-edit ng-if="activeHTMLEdit.type === 'TabBarIOS'"></tab-bar-ios-edit>
 			</div>
 		</div>
 
