@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var shortid = require("shortid");
 
 var schema = new mongoose.Schema({
 	viewCount: {
@@ -7,7 +8,8 @@ var schema = new mongoose.Schema({
 	},
 	title: {
 		type: String,
-		default: "Untitled"
+		unique: true,
+		default: shortid.generate
 	},
 	gitName: String,
 	html: {
