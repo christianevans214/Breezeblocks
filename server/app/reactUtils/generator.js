@@ -11,7 +11,6 @@ var templatePath = path.join(__dirname, 'template.hbs');
 var reactNativePath = path.join(__dirname, '../../../reactNative');
 
 module.exports = function(pages, userId, buildId) {
-
 		var tabBarData;
 		var tabBarStyleData;
 		var title = [];
@@ -71,8 +70,8 @@ module.exports = function(pages, userId, buildId) {
 				pages.forEach(function(page, index){					
 					var data = page.html;
 					var styleData = page.css;
-					if(pages.length > 0) title.push(page.title + ".js");
-					else title = "index.ios.js";
+					if(pages.length > 1) title.push(page.title + ".js");
+					else title = ["index.ios.js"];
 
 					data = data.filter(function(htmlElement){
 						if(htmlElement.children[0].type === "TabBarIOS" && index === 0){
