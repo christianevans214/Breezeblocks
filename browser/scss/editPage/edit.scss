@@ -12,6 +12,20 @@
 	border: 1px solid #222;
 }
 
+div[dnd-list]{
+	position: relative;
+}
+
+ul{
+	display: flex;
+	flex-direction: row;
+	list-style: none;
+}
+li{
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
 .edit-blade{
 	background-color: #444;
 	color: #ddd;
