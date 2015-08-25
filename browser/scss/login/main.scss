@@ -1,5 +1,5 @@
 #login-form {
-  width: 60%;
+  width: 100%;
   margin: 0 auto;
   .oauth {
   		margin-top: 10px;
@@ -9,4 +9,11 @@
 		text-align: center;
 		width: 100%;
 	}
+}
+
+.thin{
+	width: 60%;
+	padding: 20px;
+	margin: 20px auto;
+
 }

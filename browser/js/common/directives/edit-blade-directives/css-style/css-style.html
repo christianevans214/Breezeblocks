@@ -1,0 +1,16 @@
+
+<!-- <pre spacing="default">{{properties | json}}</pre> -->
+
+<form name="css-properties">
+<p>Background Color
+<input type="color" ng-model='activeCSSEdit["background-color"]'></p>
+<p>Text Color
+<input type="color" ng-model='activeCSSEdit["color"]'></p>
+<p>Padding
+<input type="range" ng-model="activeCSSEdit['padding']"></p>
+<p>Margin</p>
+<input type="range" ng-model="activeCSSEdit['margin']">
+<p>FlexGrowSize</p>
+<input type="button" value="-" ng-click="lessFlex()" ng-model= "activeCSSEdit['flex-grow']"></input>
+<input type="button" value="+" ng-click="moreFlex()"  ng-model= "activeCSSEdit['flex-grow']"></input>
+</form>

@@ -8,15 +8,10 @@ app.directive("uiThumbnail", function($rootScope) {
 		templateUrl: 'js/common/directives/ui-components/ui-thumbnail/ui-thumbnail.html',
 		link: function(scope, elem, attr) {
 			var clone;
-			console.log("THUMBNAIL DIRECTIVE")
-			console.log("DIRECTIVE SCOPE", scope);
-			console.log("DIRECTIVE BACKGROUNDIMAGE", scope.background);
-			console.log("DIRECTIVE component", scope.component);
 
 			elem.css('background-image', "url(" + scope.background + ")");
 			elem.addClass('thumb')
 			$(elem).attr('component', scope.component);
-			console.log("AFTER SETTING ATTRIBUT", elem)
 			interact('.thumb')
 				.draggable({
 					// enable inertial throwing

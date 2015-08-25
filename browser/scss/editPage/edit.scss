@@ -49,6 +49,7 @@
 	background: white;
 	display: flex;
 	overflow: auto;
+	color: black;
 }
 
 input{
@@ -64,7 +65,7 @@ input{
 
 
 
-#bottomButtonContainer{
+.bottomButtonContainer{
 	display: flex;
 	align-self: flex-end;
 	padding: 0px;
@@ -96,7 +97,21 @@ input{
 	flex-direction: row;
 	box-sizing: border-box;
 	z-index: 1;
+
+}
+
+.dropBorder{
 	border: 2px dashed #0DD;
+}
+
+
+#checkboxcontainer{
+	padding: 5px;
+	input{
+		margin-right: 5px;
+	}
+	width: 100%;
+	font-size: 9pt;
 }
 
 .thumbHolder{
@@ -122,13 +137,21 @@ ui-thumbnail{
 .shadow{
 	box-shadow: 0 0 10px 2px #000000;
 	z-index: 50;
-	transition: .2s;
 }
 
+.propsContainer{
+	background: #555;
+	border: 1px solid grey;
+	border-radius: 5px;
+	padding: 5px;
+	margin-bottom: 0px;
+}
 
 .appear{
 	opacity: 1
 }
+
+
 
 .delete-view{
 	position: absolute; 

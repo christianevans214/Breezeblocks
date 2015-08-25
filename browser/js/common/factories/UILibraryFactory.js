@@ -38,6 +38,9 @@ app.factory("UILibraryFactory", function() {
 			},{
 				component: 'ListView',
 				backgroundImage: '/images/ListView.png'
+			},{
+				component: 'TabBar',
+				backgroundImage: '/images/tabbar.png'
 			}
 			//
 		]

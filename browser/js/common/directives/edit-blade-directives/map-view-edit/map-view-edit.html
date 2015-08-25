@@ -1,0 +1,15 @@
+<div class="map-view-edit">
+	Map View Type 
+	<select ng-model="activeHTMLEdit.props[0].mapType">
+		<option value="standard">standard</option>
+		<option value="satellite">satellite</option>
+		<option value="hybrid">hybrid</option>
+	</select>
+	<div class="region-changes">
+		Latitude <input type="text" ng-model="activeHTMLEdit.props[0].region.latitude" />
+		Longitude <input type="text" ng-model="activeHTMLEdit.props[0].region.longitude" />
+		Latitude Delta  <input type="text" ng-model="activeHTMLEdit.props[0].region.latitudeDelta" />
+		Longitude Delta  <input type="text" ng-model="activeHTMLEdit.props[0].region.longitudeDelta" />
+	</div>
+	Map Pitch <input type="checkbox" ng-model="activeHTMLEdit.props[0].pitchEnabled" />
+</div>
