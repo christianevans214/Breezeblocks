@@ -14,7 +14,7 @@ module.exports = function(app) {
         clientSecret: githubConfig.clientSecret,
         callbackURL: githubConfig.callbackURL
     };
-    var newUser;
+    var currentUser;
     var verifyCallback = function(accessToken, refreshToken, profile, done) {
 
         UserModel.findOne({
@@ -22,7 +22,6 @@ module.exports = function(app) {
             }).exec()
             .then(function(user) {
                 if (user) {
-                    newUser = user;
                     return user;
                 } else {
                     return UserModel.create({
@@ -37,6 +36,7 @@ module.exports = function(app) {
                     });
                 }
             }).then(function(userToLogin) {
+                currentUser = userToLogin;
                 done(null, userToLogin);
             }, function(err) {
                 console.error('Error creating user from Github authentication', err);
@@ -56,7 +56,7 @@ module.exports = function(app) {
             failureRedirect: '/login'
         }),
         function(req, res) {
-            res.redirect('/' + newUser._id);
+            res.redirect('/' + currentUser._id);
         });
 
 };

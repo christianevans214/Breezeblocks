@@ -24,11 +24,15 @@ var {
 var reactNative = React.createClass({
     render: function() {
         return (
+          <View>
+          <BasicSlider />
           <TabBar 
           button={"more"} 
           tintColor={"white"} 
           barTintColor={"darkslateblue"} 
+          style={styles.tabBar}
           view={<View style={[styles.sectionText, styles.leftMargin]}><Text>Cooper Rules the World</Text></View>} />
+          </View>
         );
     }
 })
@@ -39,6 +43,9 @@ var fullImage = {uri: 'http://facebook.github.io/react/img/logo_og.png'};
 var smallImage = {uri: 'http://facebook.github.io/react/img/logo_small.png'};
 
 var styles = StyleSheet.create({
+  tabBar: {
+    bottom: 0,
+  },
   base: {
     width: 38,
     height: 38,
