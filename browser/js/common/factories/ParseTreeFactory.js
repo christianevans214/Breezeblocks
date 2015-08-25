@@ -92,7 +92,7 @@ app.factory('ParseTreeFactory', function($http) {
 			})[0];
 		},
 		findActiveElement: function($scope, className, parent) {
-			// console.log('CLASSNAME', className, "PARENT", parent);
+			console.log('CLASSNAME', className, "PARENT", parent.className);
 			var uniqueParentClassName = parent.className.split(" ")[1];
 			var container = $scope.project.html.filter(function(View) {
 				return (uniqueParentClassName === View.className[1])
