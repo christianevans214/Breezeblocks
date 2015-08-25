@@ -65,7 +65,7 @@ input{
 
 
 
-#bottomButtonContainer{
+.bottomButtonContainer{
 	display: flex;
 	align-self: flex-end;
 	padding: 0px;
@@ -139,11 +139,12 @@ ui-thumbnail{
 	z-index: 50;
 }
 
-#propsContainer{
+.propsContainer{
+	background: #555;
 	border: 1px solid grey;
 	border-radius: 5px;
 	padding: 5px;
-	margin-bottom: 10px;
+	margin-bottom: 0px;
 }
 
 .appear{
