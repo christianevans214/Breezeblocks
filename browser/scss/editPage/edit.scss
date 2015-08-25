@@ -202,3 +202,22 @@ ui-thumbnail{
 	border: none; 
 	opacity:0
 }
+
+.tab-selected {
+	.tab-span {
+		color: blue;
+	}
+	.tab-p {
+		color: blue
+	}
+}
+
+.tab-span {
+	font-size: 18px; 
+	color: black
+}
+
+.tab-p {
+	font-size: 8px; 
+	color: black;
+}
