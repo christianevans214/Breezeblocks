@@ -1,11 +1,16 @@
 'use strict';
 
 var React = require('react-native');
+var BasicScrollView = require('./ScrollView');
+var BasicListView = require('./ListView');
+
 var {
   StyleSheet,
   TabBarIOS,
   Text,
   View,
+  ScrollView,
+  ListView,
 } = React;
 
 var systemIconTypes = ['bookmarks', 'contacts', 'downloads', 'favorites', 'featured', 'history', 'more', 'most-recent', 'most-viewed', 'recents', 'search', 'top-rated'];
@@ -32,13 +37,31 @@ module.exports = React.createClass({
         }}>
         {this.props.view}
         </TabBarIOS.Item>
+        <TabBarIOS.Item 
+        systemIcon="favorites"
+        selected={this.state.selectedTab === "favorites"}
+        onPress={() => {
+          this.setState({
+            selectedTab: "favorites",
+          });
+        }}>
+        <BasicScrollView />
+        </TabBarIOS.Item>
+        <TabBarIOS.Item 
+        systemIcon="history"
+        selected={this.state.selectedTab === "history"}
+        onPress={() => {
+          this.setState({
+            selectedTab: "history",
+          });
+        }}>
+        <BasicListView />
+        </TabBarIOS.Item>
       </TabBarIOS>
     );
   },
 
 });
-
-    
 
 var styles = StyleSheet.create({
   tabContent: {
