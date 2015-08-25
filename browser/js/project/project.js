@@ -164,6 +164,10 @@ app.controller("ProjectController", function(ProjectFactory, AuthService, $scope
 			$scope.selectNext()
 		}
 	});
+
+	//zoom level for app
+	$scope.scaleDegree = 1;
+	
 	$scope.selectTabItem = function(index) {
 		console.log("hey select tab function running here")
 		if ($scope.activeHTMLEdit && $scope.activeHTMLEdit.type === "TabBarIOS") {
