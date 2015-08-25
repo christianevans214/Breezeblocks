@@ -92,7 +92,7 @@ app.factory('ParseTreeFactory', function($http) {
 			})[0];
 		},
 		findActiveElement: function($scope, className, parent) {
-			// console.log('CLASSNAME', className, "PARENT", parent);
+			console.log('CLASSNAME', className, "PARENT", parent.className);
 			var uniqueParentClassName = parent.className.split(" ")[1];
 			var container = $scope.project.html.filter(function(View) {
 				return (uniqueParentClassName === View.className[1])
@@ -101,6 +101,9 @@ app.factory('ParseTreeFactory', function($http) {
 				return (child.className[1] === className);
 			})[0];
 			// return activeElement;
+		},
+		addTabBarItemReference: function() {
+
 		}
 	}
 })

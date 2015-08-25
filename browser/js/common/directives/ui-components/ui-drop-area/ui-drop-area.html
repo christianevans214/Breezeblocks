@@ -1,7 +1,19 @@
-<div ng-repeat="child in View.children"
+<!-- <div ng-repeat="child in View.children"
 ng-click="changeSelected(child.className[1])"
 class="{{child.className.join(' ')}}"
-style="{{convertObjToInlineStyle(child.className[1])}}"
+style="{{convertObjToInlineStyle(child.className[1])}} overflow: auto"
 ng-include="pathName(child.type)">
 	
 </div>
+
+ -->
+
+	<div ng-repeat="child in View.children"
+	ng-click="changeSelected(child.className[1])"
+	class="{{child.className.join(' ')}}"
+	style="{{convertObjToInlineStyle(child.className[1])}} overflow: auto"
+	ng-include="pathName(child.type)"
+	dnd-draggable="child"
+	dnd-moved="View.children.splice($index,1)"
+	dnd-effect-allowed="move">
+	</div>

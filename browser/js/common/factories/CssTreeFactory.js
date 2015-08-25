@@ -5,7 +5,7 @@ app.factory('CssTreeFactory', function($http) {
 				// console.log(this.cssTree)
 			for (var selector in this.cssTree[className]) {
 				str += selector + ': ' + this.cssTree[className][selector];
-				if (selector === "margin" || selector === "padding") str += "px";
+				if (selector === "margin" || selector.match(/(padding)/) || selector === "font-size") str += "px";
 				str += ";"
 			}
 			return str

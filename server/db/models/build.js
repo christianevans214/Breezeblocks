@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var shortid = require("shortid");
 
 var schema = new mongoose.Schema({
 	viewCount: {
@@ -7,7 +8,8 @@ var schema = new mongoose.Schema({
 	},
 	title: {
 		type: String,
-		default: "Untitled"
+		unique: true,
+		default: shortid.generate
 	},
 	gitName: String,
 	html: {
@@ -18,11 +20,11 @@ var schema = new mongoose.Schema({
 		type: Object,
 		default: {}
 	},
-	gitUrl: String
+	gitUrl: String,
 })
 
-schema.pre('save', function (next) {
-	this.gitName = this.title.replace(/\s/ig,'_').replace(/\W/ig,'');
+schema.pre('save', function(next) {
+	this.gitName = this.title.replace(/\s/ig, '_').replace(/\W/ig, '');
 	next();
 })
 

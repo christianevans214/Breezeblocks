@@ -25,17 +25,23 @@
 		</div>
 
 		<div id="bottomButtonContainer block">
-			<div class="bottomButton" ui-sref="userDash({id: user._id})">Project List</div>
-			<div class="bottomButton" ui-sref="home">Breezeblocks Home</div>
-			<div class="bottomButton" ui-sref="home" ng-click="logout()">Log Out</div>
+			<div class="bottomButton" ui-sref="userDash({id: user._id})"><span class="glyphicon glyphicon-th-list"></span> Project List</div>
+							<div class="bottomButtonContainer">
+
+			<div class="bottomButton" ui-sref="home"><span class="glyphicon glyphicon-home"></span> Breezeblocks Home</div>
+			<div class="bottomButton" ui-sref="home" ng-click="logout()"><span class="glyphicon glyphicon-log-out"></span> Log Out</div>
+		</div>
 		</div>
 	</div>
 
 	<div id="outer-canvas" class="edit-blade col-md-8 col-sm-8">
 			<!-- <ui-drop-area class="drop-area ng-class:'getClass()'"></ui-drop-area> -->
-			<!-- <pre>{{parseTree|json}}</pre> -->
+	<!-- 		<pre>{{parseTree|json}}</pre> -->
+
+
+			<!-- THIS IS THE APP! -->
 		<div id="app">
-			<div ng-repeat="View in project.html" class='{{View.className.join(" ")}}' ng-class="{dropBorder: showDropZones}"
+			<div ng-repeat="View in project.html" dnd-list="View.children" hover-x class='{{View.className.join(" ")}}' ng-class="{dropBorder: showDropZones}"
 				style='{{convertObjToInlineStyle(View.className[1])}}'
 				ng-include='"js/common/directives/ui-components/ui-drop-area/ui-drop-area.html"'
 			></div>
@@ -45,14 +51,14 @@
 
 	<div id="style" class="edit-blade col-md-2 col-sm-2">
 		<!-- edit props: -->
-		<pre>activeHTMLEdit{{activeHTMLEdit | json}}</pre>
+		<!-- <pre>activeHTMLEdit{{activeHTMLEdit | json}}</pre> -->
 <!-- 		<pre>activeCSSEdit {{activeCSSEdit | json}}</pre>
 		<pre>activeHTMLEdit {{activeHTMLEdit | json}}</pre> -->
 			Project Title  <input type="text" ng-model="project.title" placeholder = "Change Title of Project"></input>
 
 <div class="bottomButtonContainer">
-<button class="bottomButton" ng-click="deleteElem()">Delete Selected Element!</button>
-<button class="bottomButton" ng-click="removeRow()">Delete Parent Element</button>
+<div class="bottomButton" ng-click="deleteElem()"><span class="glyphicon glyphicon-remove-sign"></span> Delete Selected</div>
+<div class="bottomButton" ng-click="removeRow()"><span class="glyphicon glyphicon-trash"></span> Delete Container</div>
 </div>
 		<div id="controlsContainer" >
 			<div class="propsContainer">
@@ -65,18 +71,18 @@
 			<list-view-edit ng-if="(activeHTMLEdit.type === 'ListView')||(activeHTMLEdit.type === 'ScrollView')"></list-view-edit>
 			<map-view-edit ng-if="activeHTMLEdit.type === 'MapView'"></map-view-edit>
 			<slider-ios-edit ng-if="activeHTMLEdit.type === 'SliderIOS'"></slider-ios-edit>
-			<switch-ios-edit ng-if="activeHTMLEdit.type" === 'SwitchIOS'></switch-ios-edit>
-			<tab-bar-ios-edit></tab-bar-ios-edit>
+			<switch-ios-edit ng-if="activeHTMLEdit.type === 'SwitchIOS'"></switch-ios-edit>
+			<tab-bar-ios-edit ng-if="activeHTMLEdit.type === 'TabBarIOS'"></tab-bar-ios-edit>
 			</div>
 		</div>
 
 		<div class="bottomButtonContainer">
-			<div class="bottomButton left" ng-click = "saveProject(project)">Save Project</div>
-			<div class="bottomButton right" ng-click="exportProject(project, user)">Export Project</div>
+			<div class="bottomButton left" ng-click = "saveProject(project)"><span class="glyphicon glyphicon-floppy-disk"> </span> Save Project</div>
+			<div class="bottomButton right" ng-click="exportProject(project, user)"><span class="glyphicon glyphicon-cloud-upload"></span> Export Project</div>
 		</div>
 		<span ng-show="showConfirm"> Saving...</span>
 
 	</div>
-	<pre> {{cssTree | json }} </pre>
+	<!-- <pre> {{cssTree | json }} </pre> -->
 	<pre class = "col-md-6"> {{project | json}} </pre>
 </div>

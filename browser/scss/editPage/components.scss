@@ -3,17 +3,19 @@
 	display: flex; 
 	flex-direction: column; 
 	width: 100%; 
-	font-size: 20pt;
-	align-items: center; 
+	font-size: 17px;
 	justify-content: center;
 	background: #EFEFEF;
 	max-height: 48px;
 	border-bottom: 1px solid #DDD;
 	color: #222;
 	h5{
-		font-size: 17px;
+		text-align: inherit;
+		font-size: inherit;
 	}
 }
+
+
 
 .ui-switchios{
 	max-width: 60px;
@@ -24,23 +26,29 @@
 }
 .ui-text{
 	color: Black;
-	font-size: 20pt;
+	font-size: 17px;
 	display: flex;
-	align-items: center;
+	flex-direction: column;
 
 	padding: 10px;
 	h5{
-		font-size: 17px;
+		text-align: inherit;
+		font-size: inherit;
 	}
 }
 
 .ui-listview{
 	display: flex;
+	overflow: auto;
 	flex-direction: column;
+	padding: 10px;
+	font-size: 17px;
+
 	div{
+		text-align: inherit;
 		color: inherit;
 		padding: 10px;
-		font-size: 17px;
+		font-size: inherit;
 	}
 }
 

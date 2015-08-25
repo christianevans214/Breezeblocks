@@ -7,57 +7,67 @@ var Build = mongoose.model('Build');
 var generator = require('../../reactUtils/generator');
 var fs = require('fs-extra');
 var Github = require('github-api');
-var createNewRepo = require('./githubCreator');
+var createNewRepo = require('../../reactUtils/githubCreator');
 var writeFiles = require('../../reactUtils/writeFiles');
 var fileContent = require('../../reactUtils/recursiveRead');
+var _ = require('lodash');
 
 module.exports = router;
 
 router.post('/', function (req, res, next) {
 	generator(req.body.pages, req.body.userId, req.body.buildId)
 	.then(function(zippedProject){
-		//prompt user to download zipped project
-		res.status(201).sendFile(zippedProject, function(err){
-			//if(err) console.error('Your project failed to zip correctly', err);
-			if(err) throw err;
-			else{
-				console.log('download complete');
-				//remove files?
-				// fs.remove(directoryPath, function(err){
-				// 	if(err) console.error('Error deleting', err)
-				// 	else console.log("files deleted");
-				// })
-			}
-		})
+		if(!zippedProject) throw err;
+		else{
+			console.log('download complete');
+		}
 		return zippedProject;
 
 	})
 	.then(function(zippedProjectPath){
-		//make github repo if user has a github account
-		//check user doesn't have a repo with name of new repo
+		//Change project title to be acceptable syntax for Github repo name
 		var repoName = req.body.title.replace(/\s/ig,'_').replace(/\W/ig,'');
 		
 		User.findById(req.body.userId).exec()
 		.then(function(currentUser){
 			// user is not logged in with github
 			if(!currentUser.github.username){
-				// either asked them to login with github, or just download zipped file
 				console.log("No github account...");
+				res.status(201).sendFile(zippedProject, function(err){
+					if(err) throw err;
+					else{
+						console.log('zipped file was sent');
+					}
+				})
 				return;
 			}
 
+			//Authenticate github user
 			var github = new Github({
 				id: currentUser.github.id,
 				token: currentUser.github.token,
 				auth: "oauth"
 			});
-
+			
+			var repoData;
+			//create new repo then write all files to new repo
 			createNewRepo(currentUser, github, repoName)
 			.then(function(repoInfo){
+				repoData = repoInfo;
 				var repo = github.getRepo(repoInfo.owner.login, repoInfo.name);
-				writeFiles(req.body.userId, req.body.buildId, repo, 'reactNative');
-				
-
+				return writeFiles(req.body.userId, req.body.buildId, repo, 'reactNative');
+			})
+			.then(function(){
+				console.log("repoData.html_url", repoData.html_url)
+				res.status(201).json(repoData.html_url);
+/*				Build.findById(req.body.buildId).exec()
+				.then(function(project){
+					project.gitUrl = repoData.html_url;
+					project.save()
+					.then(function(updatedProject){
+						res.status(201).json(project);
+					})
+				})*/
 			})
 		})
 	})
