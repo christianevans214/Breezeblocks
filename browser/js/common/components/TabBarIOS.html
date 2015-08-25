@@ -1,6 +1,6 @@
-<div style="background-color: {{child.props[0].barTintColor}}; width: 100%; height: {{cssTree[View.className[1]].height}}"> 
-	<div style="display: inline-block" class="tab-item" ng-repeat="tabItem in child.props[0].TabBarIOSItems">
-		<span class = "glyphicon {{tabItem.glyph}}"></span>
-		<p>{{tabItem.title}}</p>
+<div style="background-color: {{child.props[0].barTintColor}}; width: 100%; height: {{cssTree[View.className[1]].height}}; display: flex; flex-direction: row"> 
+	<div style="flex-grow: 1; text-align: center" class="tab-item" ng-repeat="tabItem in child.props[0].TabBarIOSItems">
+		<span style= "font-size: 18px; color: black" class = "glyphicon {{tabItem.glyph}}"></span>
+		<p style="font-size: 8px; color: black">{{tabItem.systemIcon}}</p>
 	</div>
 </div>

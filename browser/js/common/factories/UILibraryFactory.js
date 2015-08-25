@@ -40,7 +40,7 @@ app.factory("UILibraryFactory", function() {
 				backgroundImage: '/images/ListView.png'
 			}, {
 				component: "TabBarIOS",
-				backgroundImage: '/images/ListView.png'
+				backgroundImage: '/images/tabbar.png'
 			}
 			//
 		]

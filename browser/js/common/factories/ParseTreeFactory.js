@@ -27,7 +27,7 @@ app.factory('ParseTreeFactory', function($http) {
 						"resizeMode": 'cover'
 					}]
 				})
-			} else if (type === "ListView") {
+			} else if (type === "ListView" || type === "ScrollView") {
 				filteredViewElem.children.push({
 					type: type,
 					className: ['ui-' + type.toLowerCase(), classToReturn],
