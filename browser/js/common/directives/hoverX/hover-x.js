@@ -6,14 +6,17 @@ app.directive('hoverX',function(ParseTreeFactory){
 			var $elem = $(elem)
 			// var className = elem.className.split(' ')[1]
 			$elem.on('mouseover', function(){
-				console.log(scope.$parent)
-				$elem.prepend('<span style="display: inline-block; position: absolute; float: left; align-self: flex-start;" class="x-button">x</span>')
-				$('.x-button').on('click',function(){
-					ParseTreeFactory.removeRow(scope.$parent, $elem.attr('class').split(" ")[1])
-					$elem.remove();
-					$(this).remove();
+					if ($elem.children().length == 0){
+						$elem.append('<div class="x-button"><span class="glyphicon glyphicon-remove"></span></div>')
+						$('.x-button').on('click',function(){
+							ParseTreeFactory.removeRow(scope.$parent, $elem.attr('class').split(" ")[1])
+							$(this).fadeOut("fast");
+							$elem.slideUp("fast",function(){
+								$elem.remove()
+							});
+						})
+					}
 				})
-			})
 			$elem.on('mouseleave',function(){
 				$('.x-button').remove();
 			})
