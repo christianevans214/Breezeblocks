@@ -6,8 +6,22 @@
 <input type="color" ng-model='activeCSSEdit["background-color"]'></p>
 <p>Text Color
 <input type="color" ng-model='activeCSSEdit["color"]'></p>
-<p>Padding
-<input type="range" ng-model="activeCSSEdit['padding']"></p>
+<span class="glyphicon glyphicon-text-size"></span>
+<input type="range" ng-model="activeCSSEdit['font-size']">
+<div class="bottomButton littleButton" ng-click="leftAlign()"><span class="glyphicon glyphicon-align-left"></span></div>
+<div class="bottomButton littleButton" ng-click="centerAlign()"><span class="glyphicon glyphicon-align-center"></div>
+<div class="bottomButton littleButton" ng-click="rightAlign()"><span class="glyphicon glyphicon-align-right"></div>
+
+
+
+<p>Padding-left:
+<input type="range" ng-model="activeCSSEdit['padding-left']"></p>
+<p>Padding-right:
+<input type="range" ng-model="activeCSSEdit['padding-right']"></p>
+<p>Padding-top:
+<input type="range" ng-model="activeCSSEdit['padding-top']"></p>
+<p>Padding-bottom:
+<input type="range" ng-model="activeCSSEdit['padding-bottom']"></p>
 <p>Margin</p>
 <input type="range" ng-model="activeCSSEdit['margin']">
 <p>FlexGrowSize</p>

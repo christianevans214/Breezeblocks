@@ -14,6 +14,24 @@ app.factory("StyleFactory", function() {
 					$scope.activeCSSEdit['flex-grow']++;
 				}
 			}
+		},
+		leftAlign: function($scope){
+			return function() {
+				console.log("hey")
+				$scope.activeCSSEdit['text-align'] = "left";
+			}
+		},
+		rightAlign: function($scope){
+			return function() {
+				console.log("whats")
+				$scope.activeCSSEdit['text-align'] = "right";
+			}
+		},
+		centerAlign: function($scope){
+			return function() {
+				console.log("up")
+				$scope.activeCSSEdit['text-align'] = "center";
+			}
 		}
 	}
 })
