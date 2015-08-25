@@ -48,7 +48,7 @@ module.exports = function(pages, userId, buildId) {
 					return ChangeCase.camelCase(string);
 				});
 
-				Handlebars.registerHelper('removePx', function(string) {
+				Handlebars.registerHelper('removePx', function(string, styleType) {
 					if(typeof string === "string"){	
 						string = string.replace(/px$/, "");
 						
@@ -56,6 +56,11 @@ module.exports = function(pages, userId, buildId) {
 						else string = "'" + string + "'";
 					}
 
+					if(styleType === "height" || styleType==="width"){
+						string = string * 1.25;
+						if(styleType === "height" && string>667) string = 667;
+						if(styleType === "width" && string>375) string = 375;
+					}
 					return string;
 				});
 
