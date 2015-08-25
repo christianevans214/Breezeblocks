@@ -39,7 +39,7 @@ module.exports = React.createClass({
             selectedTab: '{{this.systemIcon}}',
           });
         }}>
-        <{{this.projectReference}} />
+        {{#if this.projectReference}}<{{this.projectReference}} />{{/if}}
         </TabBarIOS.Item>
         {{/each }}
       </TabBarIOS>

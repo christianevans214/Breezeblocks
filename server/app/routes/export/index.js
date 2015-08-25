@@ -12,6 +12,10 @@ var writeFiles = require('../../reactUtils/writeFiles');
 var fileContent = require('../../reactUtils/recursiveRead');
 var _ = require('lodash');
 
+//for deep inspection in console
+// var util = require('util');
+// console.log(util.inspect(variable, false, null));
+
 module.exports = router;
 
 router.post('/', function (req, res, next) {

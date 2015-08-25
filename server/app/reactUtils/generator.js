@@ -68,14 +68,14 @@ module.exports = function(pages, userId, buildId) {
 
 				var templateArr = [];
 				
-				pages.forEach(function(page){					
+				pages.forEach(function(page, index){					
 					var data = page.html;
 					var styleData = page.css;
 					if(pages.length > 0) title.push(page.title + ".js");
 					else title = "index.ios.js";
 
 					data = data.filter(function(htmlElement){
-						if(htmlElement.children[0].type === "TabBarIOS"){
+						if(htmlElement.children[0].type === "TabBarIOS" && index === 0){
 							tabBarData = htmlElement;
 							tabBarStyleData = styleData;
 						}
