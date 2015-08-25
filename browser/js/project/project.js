@@ -21,6 +21,8 @@ app.controller("ProjectController", function(ProjectFactory, AuthService, $scope
 	$scope.project["css"] = $scope.project.css || {};
 	$scope.cssTree = project.css;
 	$scope.thumbnails = UILibraryFactory.Thumbnails;
+
+	$scope.activeTabItem = {};
 	//properties to edit styling:
 	$scope.activeCSSEdit = {};
 	//properties to edit HTML
@@ -44,6 +46,8 @@ app.controller("ProjectController", function(ProjectFactory, AuthService, $scope
 	}
 
 	$scope.currentlySelected = null;
+	//selected Tab Item for connecting pages
+	$scope.selectedTabItem = null;
 	$scope.showConfirm = false;
 	$scope.saveProject = function(updatedProject) {
 		$scope.showConfirm = true;
@@ -160,7 +164,27 @@ app.controller("ProjectController", function(ProjectFactory, AuthService, $scope
 			$scope.selectNext()
 		}
 	});
+	$scope.selectTabItem = function(index) {
+		console.log("hey select tab function running here")
+		if ($scope.activeHTMLEdit && $scope.activeHTMLEdit.type === "TabBarIOS") {
+			var tab = $('.' + index);
+			console.log("hey selecting tab here");
+			console.log("index of tab", index);
+			console.log($scope.activeHTMLEdit);
+			if ($scope.selectedTabItem) $scope.selectedTabItem.removeClass('tab-selected');
+			tab.addClass('tab-selected');
+			$scope.selectedTabItem = tab;
+			$scope.activeTabItem = $scope.activeHTMLEdit.props[0].TabBarIOSItems.filter(function(tabItem, i) {
+				return (index === i)
+			})[0]
+			console.log($scope.activeTabItem)
+		}
 
+
+		// 	}, 1)
+		//className in this context will be 
+		// $scope.currentlySelected.addClass('shadow')
+	}
 
 
 });

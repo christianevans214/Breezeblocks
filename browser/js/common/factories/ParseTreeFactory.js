@@ -101,6 +101,9 @@ app.factory('ParseTreeFactory', function($http) {
 				return (child.className[1] === className);
 			})[0];
 			// return activeElement;
+		},
+		addTabBarItemReference: function() {
+
 		}
 	}
 })

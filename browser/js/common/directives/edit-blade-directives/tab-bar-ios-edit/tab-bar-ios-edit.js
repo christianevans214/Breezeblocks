@@ -51,7 +51,13 @@ app.directive('tabBarIosEdit', function() {
 				}
 			}
 			scope.addTabItem = function(tabArray) {
-				if (scope.tabSelected) tabArray.push(scope.tabBarItems[scope.tabSelected]);
+				var toReturnObj = {
+					systemIcon: scope.tabBarItems[scope.tabSelected].systemIcon,
+					glyph: scope.tabBarItems[scope.tabSelected].glyph,
+					index: String(tabArray.length)
+				}
+				console.log(toReturnObj)
+				if (scope.tabSelected) tabArray.push(toReturnObj);
 			}
 
 		}
