@@ -13,68 +13,32 @@ var systemIconTypes = ['bookmarks', 'contacts', 'downloads', 'favorites', 'featu
 module.exports = React.createClass({
   getInitialState: function() {
     return {
-      selectedTab: 'redTab',
+      selectedTab: this.props.button
     };
-  },
-  _renderContent: function(pageText: string) {
-    return (
-      <View style={[styles.tabContent]}>
-        <Text style={styles.tabText}>{pageText}</Text>
-      </View>
-    );
   },
 
   render: function() {
-    
     return (
       <TabBarIOS
-        tintColor="white"
-        barTintColor="darkslateblue">
-        <TabBarIOS.Item
-          systemIcon={this.props.title}
-          selected={this.state.selectedTab === this.props.title}
-/*          onPress={() => {
-            this.setState({
-              selectedTab: {this.props.title},
-            });
-          }}*/>
-          {this._renderContent(this.props.title)}
-        </TabBarIOS.Item>
-        <TabBarIOS.Item
-          title="title"
-          selected={this.state.selectedTab === 'blueTab'}
-          onPress={() => {
-            this.setState({
-              selectedTab: 'blueTab',
-            });
-          }}>
-        	{this._renderContent('Blue Tab')}
-        </TabBarIOS.Item>
-        <TabBarIOS.Item
-          systemIcon="favorites"
-          selected={this.state.selectedTab === 'redTab'}
-          onPress={() => {
-            this.setState({
-              selectedTab: 'redTab',
-            });
-          }}>
-        	{this._renderContent('Red Tab')}
-        </TabBarIOS.Item>
-        <TabBarIOS.Item
-          systemIcon="more"
-          selected={this.state.selectedTab === 'greenTab'}
-          onPress={() => {
-            this.setState({
-              selectedTab: 'greenTab',
-            });
-          }}>
-          {this._renderContent('Green Tab')}
+        tintColor={this.props.tintColor}
+        barTintColor={this.props.barTintColor}>
+        <TabBarIOS.Item 
+        systemIcon={this.props.button}
+        selected={this.state.selectedTab === this.props.button}
+        onPress={() => {
+          this.setState({
+            selectedTab: this.props.button,
+          });
+        }}>
+        {this.props.view}
         </TabBarIOS.Item>
       </TabBarIOS>
     );
   },
 
 });
+
+    
 
 var styles = StyleSheet.create({
   tabContent: {
