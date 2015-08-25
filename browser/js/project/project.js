@@ -14,10 +14,9 @@ app.config(function($stateProvider) {
 
 
 app.controller("ProjectController", function(ProjectFactory, AuthService, $scope, $compile, UILibraryFactory, EmitterizerFactory, Interactory, StyleFactory, ParseTreeFactory, CssTreeFactory, $stateParams, project, user) {
-	//Get project here
-	//All factories will also take in only the project HTML or project CSS on THIS scope, to avoid the problem we're having with factory trees
 	$scope.convertObjToInlineStyle = CssTreeFactory.objToInlineStyle;
 	$scope.project = project;
+
 	$scope.user = user;
 	$scope.project["css"] = $scope.project.css || {};
 	$scope.cssTree = project.css;
@@ -25,15 +24,7 @@ app.controller("ProjectController", function(ProjectFactory, AuthService, $scope
 	//properties to edit styling:
 	$scope.activeCSSEdit = {};
 	//properties to edit HTML
-	$scope.activeHTMLEdit = {
-		props: [{
-			dataSource: [{
-				value: '1'
-			}, {
-				value: '2'
-			}]
-		}]
-	};
+	$scope.activeHTMLEdit = {};
 
 	//thsi will probably need to be edited later but yeah!
 	$scope.exportProject = function(project, user) {
@@ -94,8 +85,7 @@ app.controller("ProjectController", function(ProjectFactory, AuthService, $scope
 			console.log($lastSibling)
 			if ($lastSibling) {
 				$scope.changeSelected($lastSibling.className.split(' ')[1])
-			}
-			else {
+			} else {
 				//for use in DeleteElem function
 				console.log("else case")
 				$scope.deselect();
@@ -104,7 +94,7 @@ app.controller("ProjectController", function(ProjectFactory, AuthService, $scope
 		}
 	}
 
-	$scope.deselect = function(){
+	$scope.deselect = function() {
 		console.log("hello!")
 		$scope.currentlySelected = null;
 		$scope.activeCSSEdit = {};
@@ -150,7 +140,6 @@ app.controller("ProjectController", function(ProjectFactory, AuthService, $scope
 
 	//changes with check
 	$scope.showDropZones = true;
-
 
 
 

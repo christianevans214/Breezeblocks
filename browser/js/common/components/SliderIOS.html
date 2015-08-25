@@ -1,1 +1,7 @@
-<div class="rangeHolder"><input type="range"></input></div>
+<div class="rangeHolder">
+	<input type="range" 
+	 max="{{child.props[0].maximumValue}}"
+	 min = "{{child.props[0].minimumValue}}"
+	 ng-model="child.props[0].value"
+	 defaultValue = "{{child.props[0].value}}"></input>
+</div>

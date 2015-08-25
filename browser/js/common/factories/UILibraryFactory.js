@@ -29,17 +29,17 @@ app.factory("UILibraryFactory", function() {
 			}, {
 				component: "SliderIOS",
 				backgroundImage: '/images/slider.png'
-			},{
+			}, {
 				component: 'Text',
 				backgroundImage: '/images/text.png'
-			},{
+			}, {
 				component: 'ScrollView',
-				backgroundImage:'/images/ScrollView.png'
-			},{
+				backgroundImage: '/images/ScrollView.png'
+			}, {
 				component: 'ListView',
 				backgroundImage: '/images/ListView.png'
-			},{
-				component: 'TabBar',
+			}, {
+				component: "TabBarIOS",
 				backgroundImage: '/images/tabbar.png'
 			}
 			//
