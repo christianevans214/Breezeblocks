@@ -1,7 +1,7 @@
 <!-- <pre>{{project|json}}</pre> -->
+	<h3 id="Title" ng-bind="project.title"></h3>
 <div class="edit-container">
 <!-- <ui-navbar></ui-navbar> -->
-	<h3 id="Title" ng-bind="project.title"></h3>
 
 	<div id="elements" class="edit-blade col-md-2 col-sm-2">
 
@@ -26,8 +26,7 @@
 
 		<div id="bottomButtonContainer block">
 			<div class="bottomButton" ui-sref="userDash({id: user._id})"><span class="glyphicon glyphicon-th-list"></span> Project List</div>
-							<div class="bottomButtonContainer">
-
+			<div class="bottomButtonContainer">
 			<div class="bottomButton" ui-sref="home"><span class="glyphicon glyphicon-home"></span> Breezeblocks Home</div>
 			<div class="bottomButton" ui-sref="home" ng-click="logout()"><span class="glyphicon glyphicon-log-out"></span> Log Out</div>
 		</div>
@@ -47,7 +46,7 @@
 			></div>
 		</div>
 		<div class="footer">
-			<span class="glyphicon glyphicon-search pull-right"><input type="range" ng-model='scaleDegree' min="1" max="3">{{scaleDegree*100}}%</input>
+			<span class="glyphicon glyphicon-search pull-right"><input type="range" ng-model='scalePercent' ng-change="changeZoom(scalePercent)" min="1" max="300">{{scalePercent}}%</input>
 		</div>
 
 	</div>

@@ -13,7 +13,7 @@ app.config(function($stateProvider) {
 })
 
 
-app.controller("ProjectController", function(ProjectFactory, AuthService, $scope, $compile, UILibraryFactory, EmitterizerFactory, Interactory, StyleFactory, ParseTreeFactory, CssTreeFactory, $stateParams, project, user) {
+app.controller("ProjectController", function(ProjectFactory, AuthService, $scope, $compile, UILibraryFactory, EmitterizerFactory, Interactory, StyleFactory, ParseTreeFactory, CssTreeFactory, ZoomService, $stateParams, project, user) {
 	$scope.convertObjToInlineStyle = CssTreeFactory.objToInlineStyle;
 	$scope.project = project;
 
@@ -28,7 +28,7 @@ app.controller("ProjectController", function(ProjectFactory, AuthService, $scope
 	//properties to edit HTML
 	$scope.activeHTMLEdit = {};
 
-	//thsi will probably need to be edited later but yeah!
+	//this will probably need to be edited later but yeah!
 	$scope.exportProject = function(project, user) {
 		console.log("PROJECT FOR EXPORT", project);
 		console.log("USER FOR EXPORT", user);
@@ -166,8 +166,10 @@ app.controller("ProjectController", function(ProjectFactory, AuthService, $scope
 	});
 
 	//zoom level for app
-	$scope.scaleDegree = 1;
-	
+	$scope.scalePercent = ZoomService.scalePercent;
+
+	$scope.changeZoom = ZoomService.changeZoom;
+
 	$scope.selectTabItem = function(index) {
 		console.log("hey select tab function running here")
 		if ($scope.activeHTMLEdit && $scope.activeHTMLEdit.type === "TabBarIOS") {
