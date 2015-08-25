@@ -1,18 +1,28 @@
 .projectListItem{
 	display: inline-block;
+	box-sizing: border-box;
 	width: 250px;
 	color: black;
+	margin: 0px auto;
 	border: 1px solid #DDD;
 	padding: 10px;
 	background-color: white;
 	cursor: pointer;
+	&:hover{
+		background-color: #DDD;
+		border-color: #CCC;
+	}
 }
 
 .project-blade{
 	width: 80%;
-	margin: 0 auto;
+	margin:  auto;
 	button{
 		margin: 10px;
 		margin-left: 0px;
 	}
+}
+
+h1{
+	color: white;
 }
