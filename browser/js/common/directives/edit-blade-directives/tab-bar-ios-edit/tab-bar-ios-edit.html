@@ -1,5 +1,5 @@
 <div class='tab-bar-edit-container'>
-{{tabSelected}}
+{{activeTabItem}}
 	Background Color 
 	<input type="color" ng-model="activeHTMLEdit.props[0].barTintColor" />
 	</br>
@@ -9,4 +9,7 @@
 	Add Tab Item <select ng-model="tabSelected">
 	<option ng-repeat="tabitem in tabBarItems" value="{{tabitem.systemIcon}}">{{tabitem.systemIcon}}</option>
 </select><button class="btn btn-default" ng-click="addTabItem(activeHTMLEdit.props[0].TabBarIOSItems)">Add</button>
+	<select ng-model="activeTabItem.projectReference">
+		<option ng-repeat="project in user.projects" value="{{project.title}}">{{project.title}}</option>
+	</select>
 </div>
