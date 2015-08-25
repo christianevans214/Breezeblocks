@@ -42,6 +42,10 @@
 				ng-include='"js/common/directives/ui-components/ui-drop-area/ui-drop-area.html"'
 			></div>
 		</div>
+		<div class="footer">
+			<span class="glyphicon glyphicon-search pull-right"><input type="range" ng-model='scaleDegree' min="1" max="3">{{scaleDegree*100}}%</input>
+		</div>
+
 	</div>
 
 
@@ -50,8 +54,8 @@
 			Project Title  <input type="text" ng-model="project.title" placeholder = "Change Title of Project"></input>
 
 <div class="bottomButtonContainer">
-<div class="bottomButton" ng-click="deleteElem()"><span class="glyphicon glyphicon-remove-sign"></span> Delete Selected</div>
-<div class="bottomButton" ng-click="removeRow()"><span class="glyphicon glyphicon-trash"></span> Delete Container</div>
+<div class="bottomButton" ng-click="deleteElem()"><span class="glyphicon glyphicon-remove-sign" id="zoomin" ></span> Delete Selected</div>
+<div class="bottomButton" ng-click="removeRow()"><span class="glyphicon glyphicon-trash" id="zoomout"></span> Delete Container</div>
 </div>
 		<div id="controlsContainer" >
 			<div class="propsContainer">
