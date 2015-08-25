@@ -31,8 +31,8 @@ module.exports = function(userId, buildId, repo, projectName){
 	})
 	.then(function(erroredFiles){
 		var newKeys = Object.keys(erroredFiles);
-		return new Promise(function(resolve, reject){
-			if(newKeys.length > 0){
+		if(newKeys.length > 0){
+			return new Promise(function(resolve, reject){
 				var keyCount = 0;
 				var errorInterval = setInterval(function(){
 					repo.write('master', newKeys[keyCount], erroredFiles[newKeys[keyCount]], 'Exported Breezeblocks Project', function(err){
@@ -47,7 +47,7 @@ module.exports = function(userId, buildId, repo, projectName){
 						resolve(erroredFiles);
 					}
 				}, 1000);
-			}
-		})
+			})
+		}
 	})
 };
