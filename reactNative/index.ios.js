@@ -6,6 +6,7 @@ var BasicScrollView = require('./components/ScrollView');
 var BasicSlider = require('./components/SliderIOS');
 var BasicMapView = require('./components/MapView');
 var TabBar = require('./components/TabBarIOS');
+var BasicListView = require('./components/ListView');
 
 var {
   MapView,
