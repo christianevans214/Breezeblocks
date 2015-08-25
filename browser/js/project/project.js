@@ -14,8 +14,6 @@ app.config(function($stateProvider) {
 
 
 app.controller("ProjectController", function(ProjectFactory, AuthService, $scope, $compile, UILibraryFactory, EmitterizerFactory, Interactory, StyleFactory, ParseTreeFactory, CssTreeFactory, $stateParams, project, user) {
-	//Get project here
-	//All factories will also take in only the project HTML or project CSS on THIS scope, to avoid the problem we're having with factory trees
 	$scope.convertObjToInlineStyle = CssTreeFactory.objToInlineStyle;
 	$scope.project = project;
 	$scope.user = user;
@@ -25,15 +23,7 @@ app.controller("ProjectController", function(ProjectFactory, AuthService, $scope
 	//properties to edit styling:
 	$scope.activeCSSEdit = {};
 	//properties to edit HTML
-	$scope.activeHTMLEdit = {
-		props: [{
-			dataSource: [{
-				value: '1'
-			}, {
-				value: '2'
-			}]
-		}]
-	};
+	$scope.activeHTMLEdit = {};
 
 	//thsi will probably need to be edited later but yeah!
 	$scope.exportProject = function(project, user) {

@@ -38,20 +38,20 @@
 				ng-include='"js/common/directives/ui-components/ui-drop-area/ui-drop-area.html"'
 			></div>
 		</div>
-		<pre class = "col-md-6" spacing="default"> Css Tree {{cssTree | json}}</pre>
-		<pre class = "col-md-6" spacing="default"> THE WHOLE DAMN PROJECT {{project | json}}</pre>
 	</div>
 
 
 	<div id="style" class="edit-blade col-md-2 col-sm-2">
 		<!-- edit props: -->
-		<pre>activeCSSEdit {{activeCSSEdit | json}}</pre>
-		<pre>activeHTMLEdit {{activeHTMLEdit | json}}</pre>
+		<pre>activeHTMLEdit{{activeHTMLEdit | json}}</pre>
 		<div id="controlsContainer">
 			<css-style></css-style>
 			<image-edit ng-if="activeHTMLEdit.type === 'Image'"></image-edit>
 			<list-view-edit ng-if="activeHTMLEdit.type === 'ListView'"></list-view-edit>
 			<map-view-edit ng-if="activeHTMLEdit.type === 'MapView'"></map-view-edit>
+			<slider-ios-edit ng-if="activeHTMLEdit.type === 'SliderIOS'"></slider-ios-edit>
+			<switch-ios-edit ng-if="activeHTMLEdit.type" === 'SwitchIOS'></switch-ios-edit>
+			<tab-bar-ios-edit></tab-bar-ios-edit>
 		</div>
 
 		<div id="bottomButtonContainer">
@@ -61,5 +61,6 @@
 		<span ng-show="showConfirm"> Saving...</span>
 
 	</div>
-
+	<pre> {{cssTree | json }} </pre>
+	<pre class = "col-md-6"> {{project | json}} </pre>
 </div>

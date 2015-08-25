@@ -43,6 +43,14 @@ app.factory('ParseTreeFactory', function($http) {
 						region: {}
 					}]
 				})
+			} else if (type === "TabBarIOS") {
+				filteredViewElem.children.push({
+					type: type,
+					className: ['ui-' + type.toLowerCase(), classToReturn],
+					props: [{
+						TabBarIOSItems: []
+					}]
+				})
 			} else {
 
 				filteredViewElem.children.push({

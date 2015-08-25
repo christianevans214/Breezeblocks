@@ -1,0 +1,6 @@
+<div style="background-color: {{child.props[0].barTintColor}}; width: 100%; height: {{cssTree[View.className[1]].height}}"> 
+	<div style="display: inline-block" class="tab-item" ng-repeat="tabItem in child.props[0].TabBarIOSItems">
+		<span class = "glyphicon {{tabItem.glyph}}"></span>
+		<p>{{tabItem.title}}</p>
+	</div>
+</div>
