@@ -5,21 +5,19 @@ var schema = new mongoose.Schema({
 		type: Number,
 		default: 1
 	},
-	projectTitle: String,
-	pages: [{
-		title: {
-			type: String,
-			default: "Untitled"
-		},
-		html: {
-			type: Object,
-			default: []
-		},
-		css: {
-			type: Object,
-			default: {}
-		}
-	}],
+	title: {
+		type: String,
+		default: "Untitled"
+	},
+	gitName: String,
+	html: {
+		type: Object,
+		default: []
+	},
+	css: {
+		type: Object,
+		default: {}
+	},
 	gitUrl: String,
 })
 
