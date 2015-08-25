@@ -58,6 +58,7 @@ router.post('/', function (req, res, next) {
 				return writeFiles(req.body.userId, req.body.buildId, repo, 'reactNative');
 			})
 			.then(function(){
+				console.log("repoData.html_url", repoData.html_url)
 				res.status(201).json(repoData.html_url);
 /*				Build.findById(req.body.buildId).exec()
 				.then(function(project){
