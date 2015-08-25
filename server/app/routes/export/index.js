@@ -15,7 +15,7 @@ var _ = require('lodash');
 module.exports = router;
 
 router.post('/', function (req, res, next) {
-	generator(req.body.html, req.body.css, req.body.userId, req.body.buildId)
+	generator(req.body.pages, req.body.userId, req.body.buildId)
 	.then(function(zippedProject){
 		if(!zippedProject) throw err;
 		else{
