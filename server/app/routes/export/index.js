@@ -14,7 +14,7 @@ var fileContent = require('../../reactUtils/recursiveRead');
 module.exports = router;
 
 router.post('/', function (req, res, next) {
-	generator(req.body.html, req.body.css, req.body.userId, req.body.buildId)
+	generator(req.body.pages, req.body.userId, req.body.buildId)
 	.then(function(zippedProject){
 		//prompt user to download zipped project
 		res.status(201).sendFile(zippedProject, function(err){

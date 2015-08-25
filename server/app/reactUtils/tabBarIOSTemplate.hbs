@@ -1,0 +1,59 @@
+'use strict';
+
+var React = require('react-native');
+{{#each filesReq}}
+var {{@key}} = require('{{this}}');
+{{/each }}
+
+var {
+  StyleSheet,
+  TabBarIOS,
+  Text,
+  View,
+  ListView,
+} = React;
+
+var systemIconTypes = ['bookmarks', 'contacts', 'downloads', 'favorites', 'featured', 'history', 'more', 'most-recent', 'most-viewed', 'recents', 'search', 'top-rated'];
+
+module.exports = React.createClass({
+  getInitialState: function() {
+    return {
+      selectedTab: {{defaultButton}}
+    };
+  },
+
+  render: function() {
+    return (
+      <TabBarIOS
+        {{#each tabBarProps}}
+        {{@key}} = { {{this}} }
+        {{/each }}
+        style={[{{#each tabBarClasses}}'{{camelCase this}}'{{#unless @last}}, {{/unless }}{{/each }}]}
+        >
+        {{#each tabBarItems}}
+        <TabBarIOS.Item 
+        systemIcon='{{this.systemIcon}}'
+        selected={this.state.selectedTab === '{{this.systemIcon}}'}
+        onPress={() => {
+          this.setState({
+            selectedTab: '{{this.systemIcon}}',
+          });
+        }}>
+        <{{this.projectReference}} />
+        </TabBarIOS.Item>
+        {{/each }}
+      </TabBarIOS>
+    );
+  },
+
+});
+
+var styles = StyleSheet.create({
+  {{#each styles}}
+    {{camelCase @key}}:{
+      {{#each this}}
+        {{camelCase @key}}: {{{removePx this}}},
+      {{/each }}
+    }, 
+  {{/each }}
+});
