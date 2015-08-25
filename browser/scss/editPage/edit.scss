@@ -4,7 +4,9 @@
 // #tools{
 // 	border: 1px solid black;
 // }
-
+#app{
+	transform: scale(1)
+}
 .edit-container{
 	margin: 0 auto;
 	height: 100%;
@@ -60,7 +62,7 @@ input{
 	z-index: 0;
 	background-image: url('/images/grey_wash_wall.png');
 	box-shadow: inset 0 0 10px #000000;
-	height: 100%;
+	height: 80vh;
 }
 
 

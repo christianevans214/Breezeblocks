@@ -21,7 +21,8 @@ app.controller("ProjectController", function(ProjectFactory, AuthService, $scope
 	$scope.project["css"] = $scope.project.css || {};
 	$scope.cssTree = project.css;
 	$scope.thumbnails = UILibraryFactory.Thumbnails;
-
+	$scope.gitHubURL;
+	$scope.exporting;
 	$scope.activeTabItem = {};
 	//properties to edit styling:
 	$scope.activeCSSEdit = {};
@@ -30,8 +31,7 @@ app.controller("ProjectController", function(ProjectFactory, AuthService, $scope
 
 	//thsi will probably need to be edited later but yeah!
 	$scope.exportProject = function(project, user) {
-		console.log("PROJECT FOR EXPORT", project);
-		console.log("USER FOR EXPORT", user);
+		$scope.exporting = true;
 		var objToExport = {
 			html: project.html,
 			css: project.css,
@@ -40,8 +40,11 @@ app.controller("ProjectController", function(ProjectFactory, AuthService, $scope
 			title: project.title
 		}
 		ProjectFactory.exportProject(objToExport)
-			.then(function(file) {
-				console.log("THIS WORKED", file);
+			.then(function(ghURL) {
+				$scope.exporting = false;
+				console.log("THIS WORKED", ghURL);
+				$scope.gitHubURL = ghURL
+				$scope.$digest();
 			})
 	}
 
@@ -84,7 +87,6 @@ app.controller("ProjectController", function(ProjectFactory, AuthService, $scope
 	$scope.leftAlign = StyleFactory.leftAlign($scope);
 	$scope.rightAlign = StyleFactory.rightAlign($scope);
 	$scope.centerAlign = StyleFactory.centerAlign($scope);
-
 
 
 
