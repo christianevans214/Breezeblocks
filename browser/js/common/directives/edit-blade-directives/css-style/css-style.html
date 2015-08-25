@@ -1,22 +1,16 @@
-Project Title  <input type="text" ng-model="project.title" placeholder = "Change Title of Project"></input>
-</br>
-</br>
-<button class="btn btn-default" ng-click="removeRow()">Delete Parent Element</button>
-</br>
-</br>
-<button class="btn btn-default" ng-click="deleteElem()">Delete Selected Element!</button>
+
 <!-- <pre spacing="default">{{properties | json}}</pre> -->
 
 <form name="css-properties">
-<label>Background Color</label>
-<input type="color" ng-model='activeCSSEdit["background-color"]'>
-<label>Text Color</label>
-<input type="color" ng-model='activeCSSEdit["color"]'>
-<label>Padding</label>
-<input type="range" ng-model="activeCSSEdit['padding']">
-<label>Margin</label>
+<p>Background Color
+<input type="color" ng-model='activeCSSEdit["background-color"]'></p>
+<p>Text Color
+<input type="color" ng-model='activeCSSEdit["color"]'></p>
+<p>Padding
+<input type="range" ng-model="activeCSSEdit['padding']"></p>
+<p>Margin</p>
 <input type="range" ng-model="activeCSSEdit['margin']">
-<label>FlexGrowSize</label>
+<p>FlexGrowSize</p>
 <input type="button" value="-" ng-click="lessFlex()" ng-model= "activeCSSEdit['flex-grow']"></input>
 <input type="button" value="+" ng-click="moreFlex()"  ng-model= "activeCSSEdit['flex-grow']"></input>
 </form>

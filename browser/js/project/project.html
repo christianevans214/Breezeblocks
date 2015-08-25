@@ -48,20 +48,29 @@
 		<pre>activeHTMLEdit{{activeHTMLEdit | json}}</pre>
 <!-- 		<pre>activeCSSEdit {{activeCSSEdit | json}}</pre>
 		<pre>activeHTMLEdit {{activeHTMLEdit | json}}</pre> -->
+			Project Title  <input type="text" ng-model="project.title" placeholder = "Change Title of Project"></input>
+
+<div class="bottomButtonContainer">
+<button class="bottomButton" ng-click="deleteElem()">Delete Selected Element!</button>
+<button class="bottomButton" ng-click="removeRow()">Delete Parent Element</button>
+</div>
 		<div id="controlsContainer" >
-			<div id="propsContainer" ng-if='currentlySelected'>
-				<nav-or-text-edit ng-if="(activeHTMLEdit.type === 'Navbar')||(activeHTMLEdit.type === 'Text')"></nav-or-text-edit>
-				<image-edit ng-if="activeHTMLEdit.type === 'Image'"></image-edit>
-				<list-view-edit ng-if="(activeHTMLEdit.type === 'ListView')||(activeHTMLEdit.type === 'ScrollView')"></list-view-edit>
-				<map-view-edit ng-if="activeHTMLEdit.type === 'MapView'"></map-view-edit>
-				<slider-ios-edit ng-if="activeHTMLEdit.type === 'SliderIOS'"></slider-ios-edit>
-				<switch-ios-edit ng-if="activeHTMLEdit.type" === 'SwitchIOS'></switch-ios-edit>
-				<tab-bar-ios-edit></tab-bar-ios-edit>
-			</div>
+			<div class="propsContainer">
 			<css-style></css-style>
 		</div>
+		</br>
+			<div class="propsContainer" ng-if='currentlySelected'>
+			<nav-or-text-edit ng-if="(activeHTMLEdit.type === 'Navbar')||(activeHTMLEdit.type === 'Text')"></nav-or-text-edit>
+			<image-edit ng-if="activeHTMLEdit.type === 'Image'"></image-edit>
+			<list-view-edit ng-if="(activeHTMLEdit.type === 'ListView')||(activeHTMLEdit.type === 'ScrollView')"></list-view-edit>
+			<map-view-edit ng-if="activeHTMLEdit.type === 'MapView'"></map-view-edit>
+			<slider-ios-edit ng-if="activeHTMLEdit.type === 'SliderIOS'"></slider-ios-edit>
+			<switch-ios-edit ng-if="activeHTMLEdit.type" === 'SwitchIOS'></switch-ios-edit>
+			<tab-bar-ios-edit></tab-bar-ios-edit>
+			</div>
+		</div>
 
-		<div id="bottomButtonContainer">
+		<div class="bottomButtonContainer">
 			<div class="bottomButton left" ng-click = "saveProject(project)">Save Project</div>
 			<div class="bottomButton right" ng-click="exportProject(project, user)">Export Project</div>
 		</div>
