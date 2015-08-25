@@ -36,11 +36,12 @@ module.exports = function(userId, buildId, projectName){
 
 	var fileObject = {};
 	return Promise.each(promiseArr, function(fileContent){
-
+		return fileContent;
 	})
 	.then(function(fileContent){
 		for(var i = 0; i<fileContent.length; i++){
 			var virtualFilePath = projectName + filesToRead[i].slice(baseFilePath.length);
+			//var virtualFilePath = filesToRead[i].slice(baseFilePath.length);
 			fileObject[virtualFilePath] = fileContent[i];
 		}
 		return fileObject;
