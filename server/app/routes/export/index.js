@@ -58,14 +58,15 @@ router.post('/', function (req, res, next) {
 				return writeFiles(req.body.userId, req.body.buildId, repo, 'reactNative');
 			})
 			.then(function(){
-				Build.findById(req.body.buildId).exec()
+				res.status(201).json(repoData.html_url);
+/*				Build.findById(req.body.buildId).exec()
 				.then(function(project){
 					project.gitUrl = repoData.html_url;
 					project.save()
 					.then(function(updatedProject){
 						res.status(201).json(project);
 					})
-				})
+				})*/
 			})
 		})
 	})
