@@ -33,10 +33,32 @@
 		font-size: 17px;
 	}
 }
+
+.ui-listview{
+	display: flex;
+	flex-direction: column;
+	div{
+		color: black;
+		padding: 10px;
+		font-size: 17px;
+	}
+}
+
+.ui-scrollview{
+	overflow-y: hidden;
+	height: inherit;
+	white-space: nowrap;
+	-webkit-overflow-scrolling: touch;
+	img{
+		display: inline-block;
+		height: 100%;
+		padding: 5px;
+	}
+}
+
 .rangeHolder{
 	display: flex;
 	align-items: center;
-
 	padding: 10px;
 	flex-grow: 1;
 }

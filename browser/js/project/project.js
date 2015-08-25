@@ -73,7 +73,7 @@ app.controller("ProjectController", function(ProjectFactory, AuthService, $scope
 		if ($scope.currentlySelected) $scope.currentlySelected.removeClass('shadow')
 		$scope.activeCSSEdit = $scope.project.css[className];
 		$scope.currentlySelected = $('.' + className);
-		console.log($scope.currentlySelected.attr('component'));
+		// console.log($scope.currentlySelected.attr('component'));
 		var thisParent = $scope.currentlySelected.parent()[0]
 		$scope.currentlySelected.addClass('shadow')
 		$scope.activeHTMLEdit = ParseTreeFactory.findActiveElement($scope, className, thisParent);
@@ -91,13 +91,24 @@ app.controller("ProjectController", function(ProjectFactory, AuthService, $scope
 	$scope.selectLast = function() {
 		if ($scope.currentlySelected) {
 			var $lastSibling = $($scope.currentlySelected).prev()[0] || null;
+			console.log($lastSibling)
 			if ($lastSibling) {
 				$scope.changeSelected($lastSibling.className.split(' ')[1])
 			}
-		} else {
-			//for use in DeleteElem function
-			$scope.currentlySelected == null;
+			else {
+				//for use in DeleteElem function
+				console.log("else case")
+				$scope.deselect();
+				// console.log($scope.currentlySelected)
+			}
 		}
+	}
+
+	$scope.deselect = function(){
+		console.log("hello!")
+		$scope.currentlySelected = null;
+		$scope.activeCSSEdit = {};
+		$scope.activeHTMLEdit = {};
 	}
 
 	$scope.selectNext = function() {
@@ -114,8 +125,6 @@ app.controller("ProjectController", function(ProjectFactory, AuthService, $scope
 		console.log("COMMENCE DELETING", $scope.currentlySelected, thisParent)
 		var classNameToRemove = ParseTreeFactory.removeElement($scope, $scope.currentlySelected, thisParent);
 		CssTreeFactory.removeClass(classNameToRemove[1], $scope)
-		$scope.activeCSSEdit = {};
-		$scope.activeHTMLEdit = {};
 		$scope.selectLast();
 
 	}
@@ -138,6 +147,12 @@ app.controller("ProjectController", function(ProjectFactory, AuthService, $scope
 			$state.go('home');
 		});
 	};
+
+	//changes with check
+	$scope.showDropZones = true;
+
+
+
 
 	//listen for key presses
 	$(window).bind('keydown', function(e) {
