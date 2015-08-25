@@ -75,7 +75,7 @@
 
 		<div class="bottomButtonContainer">
 			<div class="bottomButton left" ng-click = "saveProject(project)"><span class="glyphicon glyphicon-floppy-disk"> </span> Save Project</div>
-			<div class="bottomButton right" ng-click="exportProject(project, user)"><span class="glyphicon glyphicon-cloud-upload"></span> Export Project</div>
+			<div class="bottomButton right" ng-click="exportProject(project, user, tabBar)"><span class="glyphicon glyphicon-cloud-upload"></span> Export Project</div>
 		</div>
 		<span ng-show="showConfirm"> Saving...</span>
 		<span ng-show="exporting">Exporting...</span>
@@ -83,4 +83,5 @@
 
 
 	</div>
+	<pre>{{tabBar | json}}</pre>
 </div>

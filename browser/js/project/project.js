@@ -23,6 +23,7 @@ app.controller("ProjectController", function(ProjectFactory, AuthService, $scope
 	$scope.thumbnails = UILibraryFactory.Thumbnails;
 	$scope.gitHubURL;
 	$scope.exporting;
+	$scope.tabBar = {};
 	$scope.activeTabItem = {};
 	//properties to edit styling:
 	$scope.activeCSSEdit = {};
@@ -30,11 +31,32 @@ app.controller("ProjectController", function(ProjectFactory, AuthService, $scope
 	$scope.activeHTMLEdit = {};
 
 	//thsi will probably need to be edited later but yeah!
-	$scope.exportProject = function(project, user) {
+	$scope.exportProject = function(project, user, tabBar) {
 		$scope.exporting = true;
-		var objToExport = {
+		var tabBarIOSItemsArr = tabBar.props[0].TabBarIOSItems;
+		var pagesArr = [{
 			html: project.html,
 			css: project.css,
+			title: project.title
+		}]
+
+		for (var i = 0; i < tabBarIOSItemsArr.length; i++) {
+			if (tabBarIOSItemsArr[i].projectReference) {
+
+				user.projects.forEach(function(userProject) {
+
+					if (userProject.title === tabBarIOSItemsArr[i].projectReference) {
+						pagesArr.push({
+							html: userProject.html,
+							css: userProject.css,
+							title: userProject.title
+						})
+					}
+				})
+			}
+		}
+		var objToExport = {
+			pages: pagesArr,
 			buildId: project._id,
 			userId: user._id,
 			title: project.title
@@ -75,6 +97,10 @@ app.controller("ProjectController", function(ProjectFactory, AuthService, $scope
 		var thisParent = $scope.currentlySelected.parent()[0]
 		$scope.currentlySelected.addClass('shadow')
 		$scope.activeHTMLEdit = ParseTreeFactory.findActiveElement($scope, className, thisParent);
+		if ($scope.activeHTMLEdit.type === "TabBarIOS") {
+			console.log("I'M A TAB BAR IOS")
+			$scope.tabBar = $scope.activeHTMLEdit;
+		}
 	}
 
 	$scope.activeDropzone = function(className) {
@@ -169,7 +195,7 @@ app.controller("ProjectController", function(ProjectFactory, AuthService, $scope
 
 	//zoom level for app
 	$scope.scaleDegree = 1;
-	
+
 	$scope.selectTabItem = function(index) {
 		console.log("hey select tab function running here")
 		if ($scope.activeHTMLEdit && $scope.activeHTMLEdit.type === "TabBarIOS") {
