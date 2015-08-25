@@ -74,13 +74,42 @@ input{
 
 
 .bottomButton{
-	border: 1px solid #222;
+	box-sizing: padding-box;
+	user-select: none;
+	border: 1px solid #232323;
 	flex-grow: 1;
+	color: #bbb;
+	font-size: 9pt;
 	cursor: pointer;
+
 	padding: 10px;
 	text-align: center;
+	margin: 1px;
+	background: linear-gradient(to bottom, #555 0%,#333 100%); /* W3C */
+	box-shadow: inset 0px 1px 0px #666;
+	span{
+		font-size:11pt;
+	}
+	&:hover{
+		background: linear-gradient(to bottom, #666 0%,#444 100%);
+		box-shadow: inset 0px 1px 0px #888;
+	}
+	&:active{
+		box-shadow: inset 0px 1px 0px #444;
+		background: linear-gradient(#333 0%,#353535 100%);
+	}
+}
+
+.littleButton{
+	flex-grow: 0;
+	font-size: 9pt;
+	width: 40px;
+	padding: 4px;
 	margin: 0px;
-	background-color: #333;
+	display: inline;
+	span{
+		font-size: 9pt;
+	}
 }
 
 .block{
@@ -93,7 +122,7 @@ input{
 
 .drop-area{
 	display: flex;
-	min-height: 20px;
+	height: 100px;
 	flex-direction: row;
 	box-sizing: border-box;
 	z-index: 1;
@@ -114,6 +143,11 @@ input{
 	font-size: 9pt;
 }
 
+input[type=color]{
+	-webkit-appearance: none;
+
+	width: 20px;
+}
 .thumbHolder{
 	box-sizing: border-box;
 	margin: 4px;
@@ -139,9 +173,17 @@ ui-thumbnail{
 	z-index: 50;
 }
 
+.x-button{
+	font-size: 20pt;
+	color: red;
+	cursor: pointer;
+	align-self: center;
+	margin: 0 auto;
+	}
+
 .propsContainer{
 	background: #555;
-	border: 1px solid grey;
+	border: 1px solid transparent;
 	border-radius: 5px;
 	padding: 5px;
 	margin-bottom: 0px;

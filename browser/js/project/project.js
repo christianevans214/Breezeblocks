@@ -77,6 +77,11 @@ app.controller("ProjectController", function(ProjectFactory, AuthService, $scope
 
 	$scope.lessFlex = StyleFactory.lessFlex($scope);
 	$scope.moreFlex = StyleFactory.moreFlex($scope);
+	$scope.leftAlign = StyleFactory.leftAlign($scope);
+	$scope.rightAlign = StyleFactory.rightAlign($scope);
+	$scope.centerAlign = StyleFactory.centerAlign($scope);
+
+
 
 
 	$scope.selectLast = function() {
