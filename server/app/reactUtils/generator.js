@@ -28,6 +28,10 @@ function removeFlexGrow(styleData){
 }
 
 module.exports = function(pages, userId, buildId) {
+		pages = pages.map(function(page){
+			page.title = ChangeCase.pascalCase(page.title);
+			return page;
+		});
 		var globalStyle;
 		var tabBarData;
 		var tabBarStyleData;
@@ -109,15 +113,17 @@ module.exports = function(pages, userId, buildId) {
 					if(pages.length > 1) title.push(page.title + ".js");
 					else title = ["index.ios.js"];
 
-					data = data.filter(function(htmlElement){
-						if(htmlElement.children[0].type === "TabBarIOS" && index === 0){
-							tabBarData = htmlElement;
-							tabBarStyleData = styleData;
-						}
-						return htmlElement.children[0].type !== "TabBarIOS"; 
-					});
-
 					styleData = removeFlexGrow(styleData);
+
+					data = data.filter(function(htmlElement){
+						if(htmlElement.children && htmlElement.children.length>0){						
+							if(htmlElement.children[0].type === "TabBarIOS" && index === 0){
+								tabBarData = htmlElement;
+								tabBarStyleData = styleData;
+							}
+							return htmlElement.children[0].type !== "TabBarIOS"; 
+						}else return false;
+					});
 
 					data.forEach(function(htmlElement){
 						var parent = htmlElement.className[1];

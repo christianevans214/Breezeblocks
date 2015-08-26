@@ -62,8 +62,8 @@ module.exports = function(data, styleData, titles, newProjectDir){
 				else return propValue;
 			});
 
-			Handlebars.registerHelper('camelCase', function(string) {
-				return ChangeCase.camelCase(string);
+			Handlebars.registerHelper('pascalCase', function(string) {
+				return ChangeCase.pascalCase(string);
 			});
 
 			Handlebars.registerHelper('removePx', function(string) {
