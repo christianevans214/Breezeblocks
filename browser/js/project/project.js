@@ -16,7 +16,7 @@ app.config(function($stateProvider) {
 })
 
 
-app.controller("ProjectController", function(ProjectFactory, $rootScope, AuthService, $scope, $compile, UILibraryFactory, EmitterizerFactory, Interactory, StyleFactory, ParseTreeFactory, CssTreeFactory, $stateParams, project, user) {
+app.controller("ProjectController", function(ProjectFactory, $rootScope, AuthService, $scope, $compile, UILibraryFactory, EmitterizerFactory, Interactory, StyleFactory, ParseTreeFactory, ZoomService, CssTreeFactory, $stateParams, project, user) {
 	$scope.convertObjToInlineStyle = CssTreeFactory.objToInlineStyle;
 	$scope.project = project;
 	$scope.user = user;
@@ -39,7 +39,8 @@ app.controller("ProjectController", function(ProjectFactory, $rootScope, AuthSer
 			html: project.html,
 			css: project.css,
 			title: project.title
-		}]
+		}];
+
 		if (tabBar) {
 			var tabBarIOSItemsArr = tabBar.props[0].TabBarIOSItems;
 			for (var i = 0; i < tabBarIOSItemsArr.length; i++) {
@@ -81,6 +82,7 @@ app.controller("ProjectController", function(ProjectFactory, $rootScope, AuthSer
 	$scope.showConfirm = false;
 
 	$scope.saveProject = function(updatedProject) {
+
 		$scope.showConfirm = true;
 		ProjectFactory.updateProject(updatedProject._id, updatedProject)
 			.then(function(returnedProject) {
@@ -90,9 +92,11 @@ app.controller("ProjectController", function(ProjectFactory, $rootScope, AuthSer
 			});
 	}
 
+
 	$scope.pathName = function(elemPath) {
-		return "js/common/components/" + elemPath + ".html"
-	}
+		return "js/common/components/" + elemPath + ".html";
+	};
+
 
 
 	$scope.changeSelected = function(className) {
@@ -200,7 +204,9 @@ app.controller("ProjectController", function(ProjectFactory, $rootScope, AuthSer
 	});
 
 	//zoom level for app
-	$scope.scaleDegree = 1;
+	$scope.scalePercent = ZoomService.scalePercent;
+
+	$scope.changeZoom = ZoomService.changeZoom;
 
 	$scope.selectTabItem = function(index) {
 		console.log("hey select tab function running here")
@@ -223,6 +229,45 @@ app.controller("ProjectController", function(ProjectFactory, $rootScope, AuthSer
 		//className in this context will be 
 		// $scope.currentlySelected.addClass('shadow')
 	}
-
-
 });
+
+
+
+//this doesn't really work all the time
+// $scope.logEvent = function (message, event) {
+// 	console.log(event, 'happened')
+// var theElem = event.target
+// var saveClass = event.target.className
+// var thisClass = event.target.className.split(" ")[1]
+
+// console.log('thisClass', thisClass)
+// var saveThisClass = thisClass
+// var parent;
+// setTimeout(function () {
+
+// 	//identify parent's number
+// 	parent = $('.' + thisClass).closest('.drop-area');
+// 	console.log(parent);
+// 	var parentClass = parent.attr('class').split(" ")[1]
+// 	var thisViewNum = thisClass.split(" ")[0].split("-")[1]
+// 	var parentViewNum = parentClass.split("-")[1]
+
+// 	//figure out what to change:
+// 	console.log(thisViewNum, "should be", parentViewNum)
+
+
+// 	//create new class string
+// 	var originalClassArr = thisClass.split("-");
+// 	originalClassArr[1] = parentViewNum
+// 	var newClass = originalClassArr.join("-");
+
+// 	//add the class back
+// 	$('.' + thisClass).removeClass(thisClass).addClass(newClass)
+// 	console.log('THE ELEM AFTER', $('.' + newClass))
+
+// 	//update css
+// 	var oldProps = $scope.cssTree[saveThisClass]
+// 	$scope.cssTree[newClass] = oldProps
+// 	delete $scope.cssTree[saveThisClass]
+
+// }, 500)

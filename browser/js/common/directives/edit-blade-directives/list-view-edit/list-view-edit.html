@@ -1,9 +1,9 @@
 <div class="data-source">
 	<ul class="list-view-contain">
-	<li style='list-decoration: none; display: block;' ng-repeat = "listItem in activeHTMLEdit.props[0].dataSource">
-		<input type = "text" ng-model="listItem.value"></input>
-		<!-- <button class="btn btn-danger" ng-click ="activeHTMLEdit.splice($index,1)">X</button> -->
-	</li>
+		<li style='list-decoration: none; display: block;' ng-repeat = "listItem in activeHTMLEdit.props[0].dataSource">
+			<input type = "text" ng-model="listItem.value"></input>
+			<!-- <button class="btn btn-danger" ng-click ="activeHTMLEdit.splice($index,1)">X</button> -->
+		</li>
 	</ul>
-	<button class="btn btn-default" ng-click= "addListItem(activeHTMLEdit.props[0].dataSource)">Add List Item!</button>
+	<div class="bottomButton littleButton" ng-click= "addListItem(activeHTMLEdit.props[0].dataSource)">Add List Item!</div>
 </div>
