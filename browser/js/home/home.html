@@ -1,4 +1,7 @@
-<script>var img = new Vivus('my-div-id', {type: 'async', duration: 50, file: '/images/logosvg.svg'});</script>
+<script>
+
+var img = new Vivus('logo', {type: 'async', duration: 50, file: '/images/logocrop.svg'});
+var img2 = new Vivus('headline', {type: 'async', duration: 100, file: '/images/type.svg'});</script>
 
 
 <section id="home">
@@ -7,7 +10,8 @@
     <div class="black">
 
       <div id="svgWrangler">
-        <div id="my-div-id"></div>
+        <div id="logo"></div>
+        <div id="headline"></div>
       </div>
       <!-- <span id="headline">B R E E Z E B L O C K S</span> -->
 <!--       <span id="under">Rapid Mobile Prototyping</span>
@@ -18,9 +22,8 @@
       <div class="homeButton" ng-if="user" ui-sref="userDash({id: user._id})">PROJECTS</div>
       <div class="homeButton" ng-if="!user" ui-sref="login">SIGN UP</div>
       <div class="homeButton" ng-if="user" ng-click="logout()">LOG OUT</div>
-
+      </div>
     </div>
-
   </div>
 
 <!--     <div id="homeHolder">
