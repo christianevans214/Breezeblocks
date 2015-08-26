@@ -51,5 +51,6 @@ var styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#eaeaea',
     borderRadius: 3,
+    flexDirection: 'row',
   },
 });

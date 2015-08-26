@@ -44,7 +44,6 @@ module.exports = function(data, styleData, titles, newProjectDir){
 			if(stylesNeeded.indexOf(key) !== -1) styles[key] = styleData[key];
 		}
 
-		console.log(data.props[0])
 		//-=-=-=-=-=-=-=-=-=-=-=-=-=-=end data cleanse-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 		return new Promise(function(resolve, reject) {
@@ -63,8 +62,8 @@ module.exports = function(data, styleData, titles, newProjectDir){
 				else return propValue;
 			});
 
-			Handlebars.registerHelper('camelCase', function(string) {
-				return ChangeCase.camelCase(string);
+			Handlebars.registerHelper('pascalCase', function(string) {
+				return ChangeCase.pascalCase(string);
 			});
 
 			Handlebars.registerHelper('removePx', function(string) {

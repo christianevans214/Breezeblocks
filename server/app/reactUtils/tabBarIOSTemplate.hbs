@@ -10,7 +10,6 @@ var {
   TabBarIOS,
   Text,
   View,
-  ListView,
 } = React;
 
 var systemIconTypes = ['bookmarks', 'contacts', 'downloads', 'favorites', 'featured', 'history', 'more', 'most-recent', 'most-viewed', 'recents', 'search', 'top-rated'];
@@ -28,7 +27,7 @@ module.exports = React.createClass({
         {{#each tabBarProps}}
         {{@key}} = { {{this}} }
         {{/each }}
-        style={[{{#each tabBarClasses}}'{{camelCase this}}'{{#unless @last}}, {{/unless }}{{/each }}]}
+        style={[{{#each tabBarClasses}}style.{{camelCase this}}{{#unless @last}}, {{/unless }}{{/each }}]}
         >
         {{#each tabBarItems}}
         <TabBarIOS.Item 
@@ -39,7 +38,7 @@ module.exports = React.createClass({
             selectedTab: '{{this.systemIcon}}',
           });
         }}>
-        {{#if this.projectReference}}<{{this.projectReference}} />{{/if}}
+        {{#if this.projectReference}}<{{pascalCase this.projectReference}} />{{/if}}
         </TabBarIOS.Item>
         {{/each }}
       </TabBarIOS>
