@@ -8,7 +8,6 @@ module.exports = function(data, styleData, titles, newProjectDir){
 	var templatePath = path.join(__dirname, 'tabBarIOSTemplate.hbs');
 
 	if(data){
-
 		//-=-=-=-=-=-=-=-=-=-=-=-=-=-=data cleanse-=-=-=-=-=-=-=-=-=-=-=-=-=-
 		data = data.children[0];
 		var tabBarClasses = data.className.slice(1);
@@ -44,6 +43,7 @@ module.exports = function(data, styleData, titles, newProjectDir){
 		for(var key in styleData){
 			if(stylesNeeded.indexOf(key) !== -1) styles[key] = styleData[key];
 		}
+
 		//-=-=-=-=-=-=-=-=-=-=-=-=-=-=end data cleanse-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 		return new Promise(function(resolve, reject) {

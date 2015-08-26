@@ -1,17 +1,17 @@
 'use strict';
 
 var React = require('react-native');
-var BasicSwitch = require('./components/SwitchIOS');
-var BasicScrollView = require('./components/ScrollView');
-var BasicSlider = require('./components/SliderIOS');
-var Navbar = require('./components/TabBarIOS');
+
+var ListView = require('./components/ListView');
+var MapView = require('./components/MapView');
+var ScrollView = require('./components/ScrollView');
+var SliderIOS = require('./components/SliderIOS');
+var StatusBar = require('./components/StatusBar');
+var SwitchIOS = require('./components/SwitchIOS');
+
 
 var {
-  TabBarIOS,
   Image,
-  SliderIOS,
-  ScrollView,
-  SwitchIOS,
   AppRegistry,
   StyleSheet,
   Text,
@@ -23,9 +23,9 @@ var reactNative = React.createClass({
         return (
           <View>
             {{#each tree}}
-            <View>
+            <View {{parentStyle this.className}}>
               {{#each this.children}}
-              <{{this.type}} {{#each this.props}}{{#each this}}{{@key}}={{{getProp @key this}}} {{/each }}{{/each }}style={[{{#each this.className}}{{#unless @first}}styles.{{camelCase this}}{{#unless @last}}, {{/unless }}{{/unless }}{{/each }}]}>
+              <{{this.type}} {{#each this.props}}{{#each this}}{{supplyProp @key}}{{{getProp @key this}}}{{/each }}{{/each }}style={[{{#each this.className}}{{#unless @first}}styles.{{camelCase this}}{{#unless @last}}, {{/unless }}{{/unless }}{{/each }}]}>{{valueHelper this}}
               </{{this.type}}>
               {{/each}}
             </View>
@@ -40,7 +40,7 @@ var styles = StyleSheet.create({
     {{#each styleTree}}
       {{camelCase @key}}:{
         {{#each this}}
-          {{camelCase @key}}: {{{removePx this}}},
+          {{camelCase @key}}: {{{removePx this @key}}},
         {{/each }}
       }, 
     {{/each }}
