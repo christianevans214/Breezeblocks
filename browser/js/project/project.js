@@ -23,7 +23,7 @@ app.controller("ProjectController", function (ProjectFactory, AuthService, $scop
 	$scope.thumbnails = UILibraryFactory.Thumbnails;
 	$scope.gitHubURL;
 	$scope.exporting;
-	$scope.tabBar = {};
+	$scope.tabBar;
 	$scope.activeTabItem = {};
 	//properties to edit styling:
 	$scope.activeCSSEdit = {};
