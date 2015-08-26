@@ -33,26 +33,27 @@ app.controller("ProjectController", function(ProjectFactory, AuthService, $scope
 	//thsi will probably need to be edited later but yeah!
 	$scope.exportProject = function(project, user, tabBar) {
 		$scope.exporting = true;
-		var tabBarIOSItemsArr = tabBar.props[0].TabBarIOSItems;
 		var pagesArr = [{
 			html: project.html,
 			css: project.css,
 			title: project.title
 		}]
+		if (tabBar) {
+			var tabBarIOSItemsArr = tabBar.props[0].TabBarIOSItems;
+			for (var i = 0; i < tabBarIOSItemsArr.length; i++) {
+				if (tabBarIOSItemsArr[i].projectReference) {
 
-		for (var i = 0; i < tabBarIOSItemsArr.length; i++) {
-			if (tabBarIOSItemsArr[i].projectReference) {
+					user.projects.forEach(function(userProject) {
 
-				user.projects.forEach(function(userProject) {
-
-					if (userProject.title === tabBarIOSItemsArr[i].projectReference && userProject.title !== project.title) {
-						pagesArr.push({
-							html: userProject.html,
-							css: userProject.css,
-							title: userProject.title
-						})
-					}
-				})
+						if (userProject.title === tabBarIOSItemsArr[i].projectReference && userProject.title !== project.title) {
+							pagesArr.push({
+								html: userProject.html,
+								css: userProject.css,
+								title: userProject.title
+							})
+						}
+					})
+				}
 			}
 		}
 		var objToExport = {
