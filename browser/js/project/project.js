@@ -7,23 +7,25 @@ app.config(function($stateProvider) {
 			resolve: {
 				project: function(ProjectFactory, $stateParams) {
 					return ProjectFactory.getProject($stateParams.projectId)
+				},
+				user: function(UserFactory, $stateParams) {
+					return UserFactory.getUser($stateParams.id);
 				}
 			}
 		});
 })
 
 
-app.controller("ProjectController", function(ProjectFactory, AuthService, $scope, $compile, UILibraryFactory, EmitterizerFactory, Interactory, StyleFactory, ParseTreeFactory, CssTreeFactory, $stateParams, project, user) {
+app.controller("ProjectController", function(ProjectFactory, $rootScope, AuthService, $scope, $compile, UILibraryFactory, EmitterizerFactory, Interactory, StyleFactory, ParseTreeFactory, CssTreeFactory, $stateParams, project, user) {
 	$scope.convertObjToInlineStyle = CssTreeFactory.objToInlineStyle;
 	$scope.project = project;
-
 	$scope.user = user;
 	$scope.project["css"] = $scope.project.css || {};
 	$scope.cssTree = project.css;
 	$scope.thumbnails = UILibraryFactory.Thumbnails;
 	$scope.gitHubURL;
 	$scope.exporting;
-	$scope.tabBar = {};
+	$scope.tabBar;
 	$scope.activeTabItem = {};
 	//properties to edit styling:
 	$scope.activeCSSEdit = {};
@@ -62,25 +64,29 @@ app.controller("ProjectController", function(ProjectFactory, AuthService, $scope
 			userId: user._id,
 			title: project.title
 		}
-		ProjectFactory.exportProject(objToExport)
-			.then(function(ghURL) {
-				$scope.exporting = false;
-				console.log("THIS WORKED", ghURL);
-				$scope.gitHubURL = ghURL
-				$scope.$digest();
-			})
+		console.log(objToExport)
+		$scope.exporting = false;
+		// ProjectFactory.exportProject(objToExport)
+		// 	.then(function(ghURL) {
+		// 		$scope.exporting = false;
+		// 		console.log("THIS WORKED", ghURL);
+		// 		$scope.gitHubURL = ghURL
+		// 		$scope.$digest();
+		// 	})
 	}
 
 	$scope.currentlySelected = null;
 	//selected Tab Item for connecting pages
 	$scope.selectedTabItem = null;
 	$scope.showConfirm = false;
+
 	$scope.saveProject = function(updatedProject) {
 		$scope.showConfirm = true;
 		ProjectFactory.updateProject(updatedProject._id, updatedProject)
 			.then(function(returnedProject) {
 				console.log("This worked");
 				$scope.showConfirm = false;
+				$rootScope.$broadcast("project updated", returnedProject)
 			});
 	}
 
@@ -94,7 +100,6 @@ app.controller("ProjectController", function(ProjectFactory, AuthService, $scope
 		if ($scope.currentlySelected) $scope.currentlySelected.removeClass('shadow')
 		$scope.activeCSSEdit = $scope.project.css[className];
 		$scope.currentlySelected = $('.' + className);
-		// console.log($scope.currentlySelected.attr('component'));
 		var thisParent = $scope.currentlySelected.parent()[0]
 		$scope.currentlySelected.addClass('shadow')
 		$scope.activeHTMLEdit = ParseTreeFactory.findActiveElement($scope, className, thisParent);
