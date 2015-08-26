@@ -62,7 +62,7 @@ app.controller("ProjectController", function(ProjectFactory, AuthService, $scope
 			userId: user._id,
 			title: project.title
 		};
-		console.log(objToExport);
+		console.log("object to export", objToExport);
 		ProjectFactory.exportProject(objToExport)
 			.then(function(ghURL) {
 				$scope.exporting = false;

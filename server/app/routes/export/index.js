@@ -19,6 +19,7 @@ var util = require('util');
 module.exports = router;
 
 router.post('/', function (req, res, next) {
+	console.log(req.body.pages)
 	generator(req.body.pages, req.body.userId, req.body.buildId)
 	.then(function(zippedProject){
 		if(!zippedProject) throw err;
