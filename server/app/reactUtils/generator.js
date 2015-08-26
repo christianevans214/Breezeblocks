@@ -10,7 +10,25 @@ var tabBarGenerator = require('./tabBarGenerator.js');
 var templatePath = path.join(__dirname, 'template.hbs');
 var reactNativePath = path.join(__dirname, '../../../reactNative');
 
+function removeFlexGrow(styleData){
+	var newStyleData = {};
+	for(var keys in styleData){
+		newStyleData[keys] = {};
+		for(var key in styleData[keys]){
+			if(key === "flex-grow"){
+				newStyleData[keys]['width'] = (styleData[keys][key] / 100) * 375;
+
+			}else{
+				newStyleData[keys][key] = styleData[keys][key];
+			}
+		}
+	}
+
+	return newStyleData;
+}
+
 module.exports = function(pages, userId, buildId) {
+		var globalStyle;
 		var tabBarData;
 		var tabBarStyleData;
 		var title = [];
@@ -38,9 +56,28 @@ module.exports = function(pages, userId, buildId) {
 			.then(function(templateFile) {
 				console.log("loading template");
 				Handlebars.registerHelper('getProp', function(propKey, propValue) {
-					if (propKey === "source") return "{{uri: '" + propValue + "'}}";
-					else if (propKey === "resizeMode") return "'" + propValue + "'";
-					else return propValue;
+					if(propKey !== "value"){					
+						if (propKey === "source") return "{{uri: '" + propValue + "'}} ";
+						else if (typeof propKey === "string") return "'" + propValue + "' ";
+						else return propValue + " ";
+					}else return;
+				});
+
+				Handlebars.registerHelper('parentStyle', function(className){
+					className = className.slice(1);
+					if(globalStyle[className]) return 'style={[styles.'+ ChangeCase.camelCase(className)+']}';
+					else return;
+				});
+
+				Handlebars.registerHelper('supplyProp', function(propKey){
+					if(propKey!== "value"){
+						return propKey + '=';
+					}else return;
+				});
+
+				Handlebars.registerHelper('valueHelper', function(child){
+					if(child.props[0] !== null && child.props[0].value) return child.props[0].value;
+					else return;
 				});
 
 				Handlebars.registerHelper('camelCase', function(string) {
@@ -80,6 +117,43 @@ module.exports = function(pages, userId, buildId) {
 						}
 						return htmlElement.children[0].type !== "TabBarIOS"; 
 					});
+
+					styleData = removeFlexGrow(styleData);
+
+					data.forEach(function(htmlElement){
+						var parent = htmlElement.className[1];
+						var parKeys = [];
+						var parentHeight = false;
+						if(htmlElement.children.length>1){
+							if(!styleData[parent]) styleData[parent] = {};
+							styleData[parent]['flexDirection'] = 'row';
+						}
+						if(styleData[parent]){
+							parKeys = Object.keys(styleData[parent]);
+							if(parKeys.indexOf('height') !== -1){
+								parentHeight = styleData[parent]['height'];
+								delete styleData[parent]['height'];
+							}
+						}
+						htmlElement.children.forEach(function(component){
+							if(parentHeight) styleData[component.className[1]]['height'] = parentHeight;
+							if(component.type === "Image"){
+								var compKeys = Object.keys(styleData[component.className[1]]);
+								if(compKeys.indexOf('width') === -1){
+									if(parKeys.indexOf('width') === -1) styleData[component.className[1]]['width'] = 375;
+									else styleData[component.className[1]]['width'] = styleData[parent].width;
+								}
+
+								if(compKeys.indexOf('height') === -1){
+									if(parKeys.indexOf('height') === -1) styleData[component.className[1]]['height'] = 200;
+									else styleData[component.className[1]]['height'] = styleData[parent].height;
+								}				
+							}
+						});
+					});
+
+					globalStyle = styleData;
+
 					templateArr.push(createTemplate({
 						tree: data,
 						styleTree: styleData
