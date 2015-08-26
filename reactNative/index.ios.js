@@ -1,12 +1,12 @@
 'use strict';
 
 var React = require('react-native');
-var BasicSwitch = require('./components/SwitchIOS');
-var BasicScrollView = require('./components/ScrollView');
-var BasicSlider = require('./components/SliderIOS');
-var BasicTabBar = require('./components/TabBarIOS');
-var BasicMapView = require('./components/MapView');
-var BasicListView = require('./components/ListView');
+var SwitchIOS = require('./components/SwitchIOS');
+var ScrollView = require('./components/ScrollView');
+var SliderIOS = require('./components/SliderIOS');
+var TabBarIOS = require('./components/TabBarIOS');
+var MapView = require('./components/MapView');
+var ListView = require('./components/ListView');
 
 var {
   Image,
@@ -20,25 +20,22 @@ var reactNative = React.createClass({
     render: function() {
         return (
           <View>
-            <View style={styles.view1}>
-              <BasicScrollView 
-                dataSource={["https://scontent-lga1-1.xx.fbcdn.net/hphotos-xap1/v/t1.0-9/1069194_2523046039889_1801474618_n.jpg?oh=e3a4cf4b3483c78a114e709cfdcac9cc&oe=567D3E03", "http://www.sellcell.com/blog/wp-content/uploads/2014/03/dog-apps.jpg", "http://www.oldyelladogranch.com/puppies.jpg", "http://vignette2.wikia.nocookie.net/austinally/images/1/19/Golden_retriever,_put_out_the_tongue,_bubbles_169414.jpg/revision/latest?cb=20131215154244"]}
-                style={[styles.view1Scrollview12]}
-                img={styles.view1ScrollImg12}
-                contentInset={{top: 0}}>
-              </BasicScrollView>
-            </View>
+            <ScrollView 
+              dataSource={["https://scontent-lga1-1.xx.fbcdn.net/hphotos-xap1/v/t1.0-9/1069194_2523046039889_1801474618_n.jpg?oh=e3a4cf4b3483c78a114e709cfdcac9cc&oe=567D3E03", "http://www.sellcell.com/blog/wp-content/uploads/2014/03/dog-apps.jpg", "http://www.oldyelladogranch.com/puppies.jpg", "http://vignette2.wikia.nocookie.net/austinally/images/1/19/Golden_retriever,_put_out_the_tongue,_bubbles_169414.jpg/revision/latest?cb=20131215154244"]}
+              style={[styles.view1Scrollview12]}
+              img={styles.view1ScrollImg12}
+              contentInset={{top: 50}}>
+            </ScrollView>
+
             <View>
-              <BasicMapView 
+              <MapView 
               latitude={40.7050758} 
               longitude={-74.0091604} 
               latitudeDelta={0.001} 
               longitudeDelta={0.001} 
               style={styles.map}/>
             </View>
-            <View style={styles.view16}>
-              <Text style={[styles.view13Navbar15]}>Scroll to see dogs pictures</Text>
-            </View>
+            <TabBarIOS />
           </View>
         );
     }
@@ -47,14 +44,14 @@ var reactNative = React.createClass({
 
 var styles = StyleSheet.create({
       view1:{
-          flex: 1,
+          //flex: 1,
       }, 
       view3:{
           height: 84.171875,
       }, 
       view1ScrollImg12:{
           flex: 1,
-          height: 295,
+          height: 200,
           width: 200,
       },  
       view13:{

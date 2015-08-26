@@ -66,7 +66,6 @@ module.exports = function(pages, userId, buildId) {
 				var createTemplate = Handlebars.compile(templateFile);
 
 				var templateArr = [];
-				
 				pages.forEach(function(page, index){					
 					var data = page.html;
 					var styleData = page.css;
