@@ -1,7 +1,7 @@
 <!-- <pre>{{project|json}}</pre> -->
+	<h3 id="Title" ng-bind="project.title"></h3>
 <div class="edit-container">
 <!-- <ui-navbar></ui-navbar> -->
-	<h3 id="Title" ng-bind="project.title"></h3>
 
 	<div id="elements" class="edit-blade col-md-2 col-sm-2">
 
@@ -26,8 +26,7 @@
 
 		<div id="bottomButtonContainer block">
 			<div class="bottomButton" ui-sref="userDash({id: user._id})"><span class="glyphicon glyphicon-th-list"></span> Project List</div>
-							<div class="bottomButtonContainer">
-
+			<div class="bottomButtonContainer">
 			<div class="bottomButton" ui-sref="home"><span class="glyphicon glyphicon-home"></span> Breezeblocks Home</div>
 			<div class="bottomButton" ui-sref="home" ng-click="logout()"><span class="glyphicon glyphicon-log-out"></span> Log Out</div>
 		</div>
@@ -43,7 +42,14 @@
 			></div>
 		</div>
 		<div class="footer">
-			<span class="glyphicon glyphicon-search pull-right"><input type="range" ng-model='scaleDegree' min="1" max="3">{{scaleDegree*100}}%</input>
+			<span ng-show="showConfirm"> Saving...</span>
+			<span ng-show="exporting">Exporting...</span>
+			<span ng-show="gitHubURL"><a href="{{gitHubURL}}">{{gitHubURL}}</a></span>
+			<div class="pull-right">
+			<span class="glyphicon glyphicon-search"></span>
+			<input type="range" ng-model='scalePercent' ng-change="changeZoom(scalePercent)" min="1" max="300"></input>
+			<span id="percentage">{{scalePercent}}%</span>
+		</div>
 		</div>
 
 	</div>
@@ -52,6 +58,7 @@
 	<div id="style" class="edit-blade col-md-2 col-sm-2">
 		<!-- edit props: -->
 			Project Title  <input type="text" ng-model="project.title" placeholder = "Change Title of Project"></input>
+		</br>
 
 <div class="bottomButtonContainer">
 <div class="bottomButton" ng-click="deleteElem()"><span class="glyphicon glyphicon-remove-sign" id="zoomin" ></span> Delete Selected</div>
@@ -65,7 +72,8 @@
 			<div class="propsContainer" ng-if='currentlySelected'>
 			<nav-or-text-edit ng-if="(activeHTMLEdit.type === 'Navbar')||(activeHTMLEdit.type === 'Text')"></nav-or-text-edit>
 			<image-edit ng-if="activeHTMLEdit.type === 'Image'"></image-edit>
-			<list-view-edit ng-if="(activeHTMLEdit.type === 'ListView')||(activeHTMLEdit.type === 'ScrollView')"></list-view-edit>
+			<list-view-edit ng-if="activeHTMLEdit.type === 'ListView'"></list-view-edit>
+			<scroll-view-edit ng-if="activeHTMLEdit.type === 'ScrollView'"></scroll-view-edit>
 			<map-view-edit ng-if="activeHTMLEdit.type === 'MapView'"></map-view-edit>
 			<slider-ios-edit ng-if="activeHTMLEdit.type === 'SliderIOS'"></slider-ios-edit>
 			<switch-ios-edit ng-if="activeHTMLEdit.type === 'SwitchIOS'"></switch-ios-edit>
@@ -77,11 +85,11 @@
 			<div class="bottomButton left" ng-click = "saveProject(project)"><span class="glyphicon glyphicon-floppy-disk"> </span> Save Project</div>
 			<div class="bottomButton right" ng-click="exportProject(project, user, tabBar)"><span class="glyphicon glyphicon-cloud-upload"></span> Export Project</div>
 		</div>
-		<span ng-show="showConfirm"> Saving...</span>
-		<span ng-show="exporting">Exporting...</span>
-		<span ng-show="gitHubURL"><a href="{{gitHubURL}}">{{gitHubURL}}</a></span>
+
+
+		
 
 
 	</div>
-	<pre>{{tabBar | json}}</pre>
+	<!-- <pre>{{tabBar | json}}</pre> -->
 </div>

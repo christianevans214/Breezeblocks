@@ -18,9 +18,9 @@
 
 
 .ui-switchios{
-	max-width: 60px;
 	justify-content: center;
 	display:flex;
+	flex-grow: 1;
 	align-items: center;
 	padding-top: 8px;
 }
@@ -69,6 +69,9 @@
 	align-items: center;
 	padding: 10px;
 	flex-grow: 1;
+	* {
+		-webkit-appearance: none
+	}
 }
 
 .ui-sliderios{
@@ -76,6 +79,7 @@
 	flex-grow: 1;
 	height: 100%;
 	align-self: center;
+	width: inherit;
 
 
 	input[type=range] {
@@ -98,6 +102,8 @@
 		  height: 4px;
 		  cursor: pointer;
 		  background: #aaa;
+		  flex-grow: 1;
+		  width: inherit;
 		  margin-top: -5px;
 		  border-radius: 10px;
 		  border: 0.2px solid #010101;

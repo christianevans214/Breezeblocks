@@ -1,13 +1,36 @@
+<script>var img = new Vivus('my-div-id', {type: 'async', duration: 50, file: '/images/logosvg.svg'});</script>
+
+
 <section id="home">
-    <!-- <fullstack-logo></fullstack-logo> -->
-    <div id="homeHolder">
+  <div class="bg">
+
+    <div class="black">
+
+      <div id="svgWrangler">
+        <div id="my-div-id"></div>
+      </div>
+      <!-- <span id="headline">B R E E Z E B L O C K S</span> -->
+<!--       <span id="under">Rapid Mobile Prototyping</span>
+ -->      
+
+      <div id="buttonHolder">
+        <div class="homeButton" ng-if="!user" ui-sref="login">LOG IN</div>
+      <div class="homeButton" ng-if="user" ui-sref="userDash({id: user._id})">PROJECTS</div>
+      <div class="homeButton" ng-if="!user" ui-sref="login">SIGN UP</div>
+      <div class="homeButton" ng-if="user" ng-click="logout()">LOG OUT</div>
+
+    </div>
+
+  </div>
+
+<!--     <div id="homeHolder">
 	    <div id="homeButtons">
 		    <div class="homeButton" ng-if="!user" ui-sref="login">LOG IN</div>
 		    <div class="homeButton" ng-if="user" ui-sref="userDash({id: user._id})">MY PROJECTS</div>
 	    	<img class="logo" src='/images/logo.png'></img>
 		    <div class="homeButton" ng-if="!user" ui-sref="login">SIGN UP</div>
 		    <div class="homeButton" ng-if="user" ng-click="logout()">LOG OUT</div>
-		</div>
-	</div>
+		  </div>
+	   </div> -->
     <!-- <rando-greeting></rando-greeting> -->
 </section>
