@@ -17,7 +17,7 @@ var systemIconTypes = ['bookmarks', 'contacts', 'downloads', 'favorites', 'featu
 module.exports = React.createClass({
   getInitialState: function() {
     return {
-      selectedTab: {{defaultButton}}
+      selectedTab: '{{defaultButton}}'
     };
   },
 
@@ -27,7 +27,7 @@ module.exports = React.createClass({
         {{#each tabBarProps}}
         {{@key}} = { {{this}} }
         {{/each }}
-        style={[{{#each tabBarClasses}}style.{{camelCase this}}{{#unless @last}}, {{/unless }}{{/each }}]}
+        style={[{{#each tabBarClasses}}styles.{{camelCase this}}{{#unless @last}}, {{/unless }}{{/each }}]}
         >
         {{#each tabBarItems}}
         <TabBarIOS.Item 
