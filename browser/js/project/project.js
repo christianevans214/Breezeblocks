@@ -45,7 +45,7 @@ app.controller("ProjectController", function(ProjectFactory, AuthService, $scope
 
 				user.projects.forEach(function(userProject) {
 
-					if (userProject.title === tabBarIOSItemsArr[i].projectReference) {
+					if (userProject.title === tabBarIOSItemsArr[i].projectReference && userProject.title !== project.title) {
 						pagesArr.push({
 							html: userProject.html,
 							css: userProject.css,
