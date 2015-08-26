@@ -224,44 +224,44 @@ app.controller("ProjectController", function (ProjectFactory, AuthService, $scop
 
 
 	//this doesn't really work all the time
-	$scope.logEvent = function (message, event) {
-		console.log(event, 'happened')
-			// var theElem = event.target
-			// var saveClass = event.target.className
-			// var thisClass = event.target.className.split(" ")[1]
+	// $scope.logEvent = function (message, event) {
+	// 	console.log(event, 'happened')
+	// var theElem = event.target
+	// var saveClass = event.target.className
+	// var thisClass = event.target.className.split(" ")[1]
 
-		// console.log('thisClass', thisClass)
-		// var saveThisClass = thisClass
-		// var parent;
-		// setTimeout(function () {
+	// console.log('thisClass', thisClass)
+	// var saveThisClass = thisClass
+	// var parent;
+	// setTimeout(function () {
 
-		// 	//identify parent's number
-		// 	parent = $('.' + thisClass).closest('.drop-area');
-		// 	console.log(parent);
-		// 	var parentClass = parent.attr('class').split(" ")[1]
-		// 	var thisViewNum = thisClass.split(" ")[0].split("-")[1]
-		// 	var parentViewNum = parentClass.split("-")[1]
+	// 	//identify parent's number
+	// 	parent = $('.' + thisClass).closest('.drop-area');
+	// 	console.log(parent);
+	// 	var parentClass = parent.attr('class').split(" ")[1]
+	// 	var thisViewNum = thisClass.split(" ")[0].split("-")[1]
+	// 	var parentViewNum = parentClass.split("-")[1]
 
-		// 	//figure out what to change:
-		// 	console.log(thisViewNum, "should be", parentViewNum)
+	// 	//figure out what to change:
+	// 	console.log(thisViewNum, "should be", parentViewNum)
 
 
-		// 	//create new class string
-		// 	var originalClassArr = thisClass.split("-");
-		// 	originalClassArr[1] = parentViewNum
-		// 	var newClass = originalClassArr.join("-");
+	// 	//create new class string
+	// 	var originalClassArr = thisClass.split("-");
+	// 	originalClassArr[1] = parentViewNum
+	// 	var newClass = originalClassArr.join("-");
 
-		// 	//add the class back
-		// 	$('.' + thisClass).removeClass(thisClass).addClass(newClass)
-		// 	console.log('THE ELEM AFTER', $('.' + newClass))
+	// 	//add the class back
+	// 	$('.' + thisClass).removeClass(thisClass).addClass(newClass)
+	// 	console.log('THE ELEM AFTER', $('.' + newClass))
 
-		// 	//update css
-		// 	var oldProps = $scope.cssTree[saveThisClass]
-		// 	$scope.cssTree[newClass] = oldProps
-		// 	delete $scope.cssTree[saveThisClass]
+	// 	//update css
+	// 	var oldProps = $scope.cssTree[saveThisClass]
+	// 	$scope.cssTree[newClass] = oldProps
+	// 	delete $scope.cssTree[saveThisClass]
 
-		// }, 500)
-	};
+	// }, 500)
+};
 
 
 
