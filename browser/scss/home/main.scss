@@ -1,5 +1,6 @@
-#home {
 
+   
+#home {
   fullstack-logo {
     padding-top: 30px;
     width: 150px;
@@ -13,29 +14,29 @@
   	width: 450px;
   	margin-left: -50px;
   }
-  #homeHolder{
-  	display: block;
-  	width: 630px;
-  	margin: 0 auto;
-  }
-  #homeButtons{
-  	display: inline-block;
-  	color: white;
-  	margin-left: -30px;
-  }
-  .homeButton{
-  	padding: 20px;
-  	font-size: 20px;
-  	border: 1px solid #DDD;
-  	border-radius: 5px;
-  	width: 200px;
-  	background: white;
-  	color: #444;
-  	margin-bottom: 20px;
-  	cursor: pointer;
-  	&:hover{
-  		background: #DDD;
-  	}
-  }
+  // #homeHolder{
+  // 	display: block;
+  // 	width: 630px;
+  // 	margin: 0 auto;
+  // }
+  // #homeButtons{
+  // 	display: inline-block;
+  // 	color: white;
+  // 	margin-left: -30px;
+  // }
+  // .homeButton{
+  // 	padding: 20px;
+  // 	font-size: 20px;
+  // 	border: 1px solid #DDD;
+  // 	border-radius: 5px;
+  // 	width: 200px;
+  // 	background: white;
+  // 	color: #444;
+  // 	margin-bottom: 20px;
+  // 	cursor: pointer;
+  // 	&:hover{
+  // 		background: #DDD;
+  // 	}
+  // }
 }
 

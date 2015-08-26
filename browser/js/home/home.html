@@ -1,10 +1,12 @@
 <section id="home">
     <!-- <fullstack-logo></fullstack-logo> -->
     <div id="homeHolder">
-	    <img src='/images/logo.png'></img>
 	    <div id="homeButtons">
-		    <div class="homeButton" ui-sref="about">ABOUT US</div>
-		    <div class="homeButton" ui-sref="login">LOG IN</div>
+		    <div class="homeButton" ng-if="!user" ui-sref="login">LOG IN</div>
+		    <div class="homeButton" ng-if="user" ui-sref="userDash({id: user._id})">MY PROJECTS</div>
+	    	<img class="logo" src='/images/logo.png'></img>
+		    <div class="homeButton" ng-if="!user" ui-sref="login">SIGN UP</div>
+		    <div class="homeButton" ng-if="user" ng-click="logout()">LOG OUT</div>
 		</div>
 	</div>
     <!-- <rando-greeting></rando-greeting> -->

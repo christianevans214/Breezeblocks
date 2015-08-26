@@ -40,7 +40,7 @@ var styles = StyleSheet.create({
     {{#each styleTree}}
       {{camelCase @key}}:{
         {{#each this}}
-          {{camelCase @key}}: {{{removePx this}}},
+          {{camelCase @key}}: {{{removePx this @key}}},
         {{/each }}
       }, 
     {{/each }}

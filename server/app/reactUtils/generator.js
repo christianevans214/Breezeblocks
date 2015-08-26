@@ -4,11 +4,17 @@ var path = require('path');
 var fs = require('fs-extra');
 var zip = new require('node-zip')();
 
+var tabBarGenerator = require('./tabBarGenerator.js');
+
 
 var templatePath = path.join(__dirname, 'template.hbs');
 var reactNativePath = path.join(__dirname, '../../../reactNative');
 
-module.exports = function(data, styleData, userId, buildId) {
+module.exports = function(pages, userId, buildId) {
+
+		var tabBarData;
+		var tabBarStyleData;
+		var title = [];
 
 		var newProjectDir = path.join(__dirname, 'UserBuilds', userId, buildId);
 		var newProjectZipDir = path.join(__dirname, 'UserBuilds', userId, buildId + 'ZIPPED');
@@ -31,6 +37,7 @@ module.exports = function(data, styleData, userId, buildId) {
 				});
 			})
 			.then(function(templateFile) {
+				console.log("loading template");
 				Handlebars.registerHelper('getProp', function(propKey, propValue) {
 					if (propKey === "source") return "{{uri: '" + propValue + "'}}";
 					else if (propKey === "resizeMode") return "'" + propValue + "'";
@@ -41,34 +48,67 @@ module.exports = function(data, styleData, userId, buildId) {
 					return ChangeCase.camelCase(string);
 				});
 
-				Handlebars.registerHelper('removePx', function(string) {
+				Handlebars.registerHelper('removePx', function(string, styleType) {
 					if(typeof string === "string"){	
 						string = string.replace(/px$/, "");
 						
-						if(string.match(/\D/) === null) string = Number(string);
+						if(string.match(/[^0-9]|^\./) === null) string = Number(string);
 						else string = "'" + string + "'";
 					}
 
+					if(styleType === "height" || styleType==="width"){
+						string = string * 1.25;
+						if(styleType === "height" && string>667) string = 667;
+						if(styleType === "width" && string>375) string = 375;
+					}
 					return string;
 				});
 
 				var createTemplate = Handlebars.compile(templateFile);
-				var renderedTemplate = createTemplate({
-					tree: data,
-					styleTree: styleData
-				});
-				return renderedTemplate;
-			})
-			.then(function(renderedTemplate) {
-				return new Promise(function(resolve, reject) {
-					fs.writeFile(newProjectDir + "/index.ios.js", renderedTemplate, function(err) {
-						if (err) reject(err);
-						else resolve(renderedTemplate);
+
+				var templateArr = [];
+				
+				pages.forEach(function(page, index){					
+					var data = page.html;
+					var styleData = page.css;
+					if(pages.length > 0) title.push(page.title + ".js");
+					else title = "index.ios.js";
+
+					data = data.filter(function(htmlElement){
+						if(htmlElement.children[0].type === "TabBarIOS" && index === 0){
+							tabBarData = htmlElement;
+							tabBarStyleData = styleData;
+						}
+						return htmlElement.children[0].type !== "TabBarIOS"; 
 					});
+					templateArr.push(createTemplate({
+						tree: data,
+						styleTree: styleData
+					}));
+
 				});
+
+				var promiseArr = [];
+
+				templateArr.forEach(function(template, index){
+					promiseArr.push(
+						new Promise(function(resolve, reject) {
+							fs.writeFile(newProjectDir +"/" + title[index], template, function(err) {
+								if (err) reject(err);
+								else resolve(template);
+							});
+						})
+					);
+				});
+
+				return Promise.all(promiseArr);
+
 			})
 			.then(function(finaltemp) {
 				console.log("file saved!");
+				return tabBarGenerator(tabBarData, tabBarStyleData, title, newProjectDir);
+			})
+			.then(function(tabBarFile){
 				return newProjectDir;
 			})
 			.then(function(newProjDir) {
@@ -88,131 +128,9 @@ module.exports = function(data, styleData, userId, buildId) {
 			});
 
 
+
 		// Handlebars.registerPartial('View', require('fs').readFileSync('./testPartial.hbs'));
 };
-	/*var data = [
-		{
-			className: ['drop-area','view-1'],
-			children: [
-				{type: 'Navbar',
-				 className: ['ui-navbar', 'view-1-navbar-1'],
-				 props: [
-				 	{ "name": "title", "value": "my cool app", type: "string" }
-				 ]
-				},
-				{type: 'Navbar',
-				 className: ['ui-navbar', 'view-1-navbar-2'],
-				 props: [
-				 	{ "name": "title", "value": "my okay app", type: "string" }
-				 ]
-				},
-				{type: 'Navbar',
-				 className: ['ui-navbar', 'view-1-navbar-3'],
-				 props: [
-				 	{ "name": "title", "value": "my bad app", type: "string" }
-				 ]
-				},
-				{type: 'Navbar',
-				 className: ['ui-navbar', 'view-1-navbar-3'],
-				 props: [
-				 	{ "name": "title", "value": "the title", type: "string" }
-				 ]
-				}
-
-			]
-		},
-		{
-			className: ['drop-area','view-2'],
-			children: [
-				{type: 'Image',
-				 className: ["ui-image",'view-2-image-1'],
-					 props: [
-				 	{ "name": "source", "value": "http://www.joomlaworks.net/images/demos/galleries/abstract/7.jpg", type: "string" }
-				 ]
-				},
-				{type: 'Image',
-				 className: ['ui-image', 'view-2-image-2'],
-				 props: [
-				 	{ "name": "source", "value": "https://imgs.xkcd.com/comics/perl_problems.png", type: "string" }
-				 ]	
-				}			 
-			]
-
-		}
-		/*var data = [
-			{
-				className: ['drop-area','view-1'],
-				children: [
-					{type: 'Navbar',
-					 className: ['ui-navbar', 'view-1-navbar-1'],
-					 props: [
-					 	{ "name": "title", "value": "my cool app", type: "string" }
-					 ]
-					},
-					{type: 'Navbar',
-					 className: ['ui-navbar', 'view-1-navbar-2'],
-					 props: [
-					 	{ "name": "title", "value": "my okay app", type: "string" }
-					 ]
-					},
-					{type: 'Navbar',
-					 className: ['ui-navbar', 'view-1-navbar-3'],
-					 props: [
-					 	{ "name": "title", "value": "my bad app", type: "string" }
-					 ]
-					},
-					{type: 'Navbar',
-					 className: ['ui-navbar', 'view-1-navbar-3'],
-					 props: [
-					 	{ "name": "title", "value": "the title", type: "string" }
-					 ]
-					}
-
-				]
-			},
-			{
-				className: ['drop-area','view-2'],
-				children: [
-					{type: 'Image',
-					 className: ["ui-image",'view-2-image-1'],
-						 props: [
-					 	{ "name": "source", "value": "http://www.joomlaworks.net/images/demos/galleries/abstract/7.jpg", type: "string" }
-					 ]
-					},
-					{type: 'Image',
-					 className: ['ui-image', 'view-2-image-2'],
-					 props: [
-					 	{ "name": "source", "value": "https://imgs.xkcd.com/comics/perl_problems.png", type: "string" }
-					 ]	
-					}			 
-				]
-
-			}
-		]
-
-		var styleData = {
-		    "view1": {
-		        "flex": '1',
-		        "justify-content": 'center',
-		        "align-items": 'center',
-		        "background-color": '#F5FCFF',
-		    },
-		    "img1": {
-		        "width": '200px',
-		        "height": '200px',
-		    },
-		    "view2": {
-		        "flex": '1',
-		        "justify-content": 'center',
-		        "align-items": 'center',
-		        "background-color": '#F5FCFF',
-		    },
-		    "img2": {
-		        "width": '200px',
-		        "height": '200px',
-		    }
-		};*/
-
 
 
 //recursive version
