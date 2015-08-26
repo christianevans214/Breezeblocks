@@ -228,18 +228,47 @@ ui-thumbnail{
 	margin: 0 auto;
 	}
 
+
 .propsContainer{
 	background: #555;
 	border: 1px solid transparent;
 	border-radius: 5px;
 	padding: 5px;
 	font-size: 9pt;
+
+	select{
+		color: #222;
+	}
 	margin-bottom: 0px;
 	input[type="number"]{
 		width: 30px;
 	}
 }
 
+.littleLabel{
+	padding: 2px;
+	margin: 2px;
+	text-shadow: 2px 2px 2px #444;
+}
+.SliderHolder{
+	hr{
+		margin: 0px;
+		padding: 0px;
+	}
+	p{
+		text-align: center;
+	}
+	display: inline;
+	span{
+		display: inline-block;
+		width: 56px;
+	}
+	input[type="range"]{
+		margin-left: 5px;
+		display: inline;
+		width: 70%;
+	}
+}
 .appear{
 	opacity: 1
 }
