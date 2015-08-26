@@ -4,14 +4,12 @@ var React = require('react-native');
 var BasicSwitch = require('./components/SwitchIOS');
 var BasicScrollView = require('./components/ScrollView');
 var BasicSlider = require('./components/SliderIOS');
-var Navbar = require('./components/TabBarIOS');
+var BasicTabBar = require('./components/TabBarIOS');
+var BasicMapView = require('./components/MapView');
+var BasicListView = require('./components/ListView');
 
 var {
-  TabBarIOS,
   Image,
-  SliderIOS,
-  ScrollView,
-  SwitchIOS,
   AppRegistry,
   StyleSheet,
   Text,
@@ -22,19 +20,24 @@ var reactNative = React.createClass({
     render: function() {
         return (
           <View>
-            <View>
-              <Image source={{uri: 'https://scontent-lga1-1.xx.fbcdn.net/hphotos-xfp1/v/t1.0-9/390469_103735846412710_468610899_n.jpg?oh=c08c11408e17d55d11c05431a3f9efdb&oe=5683D084'}} style={[styles.view1Image2]}>
-              </Image>
+            <View style={styles.view1}>
+              <BasicScrollView 
+                dataSource={["https://scontent-lga1-1.xx.fbcdn.net/hphotos-xap1/v/t1.0-9/1069194_2523046039889_1801474618_n.jpg?oh=e3a4cf4b3483c78a114e709cfdcac9cc&oe=567D3E03", "http://www.sellcell.com/blog/wp-content/uploads/2014/03/dog-apps.jpg", "http://www.oldyelladogranch.com/puppies.jpg", "http://vignette2.wikia.nocookie.net/austinally/images/1/19/Golden_retriever,_put_out_the_tongue,_bubbles_169414.jpg/revision/latest?cb=20131215154244"]}
+                style={[styles.view1Scrollview12]}
+                img={styles.view1ScrollImg12}
+                contentInset={{top: 0}}>
+              </BasicScrollView>
             </View>
             <View>
-              <TabBarIOS 
-              style={[styles.view3Tabbarios4]}> 
-              <TabBarIOS.Item
-                systemIcon="history"
-              >
-              <View></View>
-              </TabBarIOS.Item>
-              </TabBarIOS>
+              <BasicMapView 
+              latitude={40.7050758} 
+              longitude={-74.0091604} 
+              latitudeDelta={0.001} 
+              longitudeDelta={0.001} 
+              style={styles.map}/>
+            </View>
+            <View style={styles.view16}>
+              <Text style={[styles.view13Navbar15]}>Scroll to see dogs pictures</Text>
             </View>
           </View>
         );
@@ -44,20 +47,49 @@ var reactNative = React.createClass({
 
 var styles = StyleSheet.create({
       view1:{
-          height: 507.203125,
-      }, 
-      view1Image2:{
           flex: 1,
-          height: 507.203125,
-          width: 375
       }, 
       view3:{
           height: 84.171875,
       }, 
-      view3Tabbarios4:{
+      view1ScrollImg12:{
           flex: 1,
-          padding: 25,
+          height: 295,
+          width: 200,
+      },  
+      view13:{
+          flexDirection: 'row',
+          justifyContent: 'center',
+          alignItems: 'center'
       }, 
+      view13Switchios14:{
+          flex: 1,
+          marginLeft: 60,
+          alignItems: 'center',
+      }, 
+      view13Navbar15:{
+          height: 206.25,
+          flex: 1,
+          fontSize: 28,
+          paddingBottom: 92,
+          paddingTop: 65,
+          textAlign: 'center',
+          margin: 0,
+          color: '#887ef8',
+          backgroundColor: '#c5c7d8',
+      }, 
+      view16:{
+          height: 144,
+      }, 
+      view16Listview17:{
+          flex: 1,
+          fontSize: 17,
+          color: '#941751',
+          backgroundColor: '#73fcd6',
+      },
+      map: {
+        width: 375,
+      } 
 })
 
 AppRegistry.registerComponent('reactNative', () => reactNative);

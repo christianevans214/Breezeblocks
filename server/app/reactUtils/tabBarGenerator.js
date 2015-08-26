@@ -8,7 +8,6 @@ module.exports = function(data, styleData, titles, newProjectDir){
 	var templatePath = path.join(__dirname, 'tabBarIOSTemplate.hbs');
 
 	if(data){
-
 		//-=-=-=-=-=-=-=-=-=-=-=-=-=-=data cleanse-=-=-=-=-=-=-=-=-=-=-=-=-=-
 		data = data.children[0];
 		var tabBarClasses = data.className.slice(1);

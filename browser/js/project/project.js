@@ -13,7 +13,7 @@ app.config(function ($stateProvider) {
 })
 
 
-app.controller("ProjectController", function (ProjectFactory, AuthService, $scope, $compile, UILibraryFactory, EmitterizerFactory, Interactory, StyleFactory, ParseTreeFactory, CssTreeFactory, ZoomService, $stateParams, project, user) {
+app.controller("ProjectController", function (ProjectFactory, AuthService, $scope, $compile, UILibraryFactory, EmitterizerFactory, Interactory, StyleFactory, ParseTreeFactory, CssTreeFactory, $stateParams, project, user) {
 	$scope.convertObjToInlineStyle = CssTreeFactory.objToInlineStyle;
 	$scope.project = project;
 
@@ -23,7 +23,7 @@ app.controller("ProjectController", function (ProjectFactory, AuthService, $scop
 	$scope.thumbnails = UILibraryFactory.Thumbnails;
 	$scope.gitHubURL;
 	$scope.exporting;
-	$scope.tabBar = {};
+	$scope.tabBar;
 	$scope.activeTabItem = {};
 	//properties to edit styling:
 	$scope.activeCSSEdit = {};
@@ -33,44 +33,44 @@ app.controller("ProjectController", function (ProjectFactory, AuthService, $scop
 	//thsi will probably need to be edited later but yeah!
 	$scope.exportProject = function (project, user, tabBar) {
 		$scope.exporting = true;
-		var tabBarIOSItemsArr = tabBar.props[0].TabBarIOSItems;
 		var pagesArr = [{
 			html: project.html,
 			css: project.css,
 			title: project.title
-		}]
+		}];
+		if (tabBar) {
+			var tabBarIOSItemsArr = tabBar.props[0].TabBarIOSItems;
+			for (var i = 0; i < tabBarIOSItemsArr.length; i++) {
+				if (tabBarIOSItemsArr[i].projectReference) {
 
-		for (var i = 0; i < tabBarIOSItemsArr.length; i++) {
-			if (tabBarIOSItemsArr[i].projectReference) {
+					user.projects.forEach(function (userProject) {
 
-				user.projects.forEach(function (userProject) {
-
-					if (userProject.title === tabBarIOSItemsArr[i].projectReference) {
-						pagesArr.push({
-							html: userProject.html,
-							css: userProject.css,
-							title: userProject.title
-						})
-					}
-				})
+						if (userProject.title === tabBarIOSItemsArr[i].projectReference) {
+							pagesArr.push({
+								html: userProject.html,
+								css: userProject.css,
+								title: userProject.title
+							});
+						}
+					})
+				}
 			}
 		}
-		// ProjectFactory.convertFlexToWidthPercentage(pagesArr);
 		var objToExport = {
 			pages: pagesArr,
 			buildId: project._id,
 			userId: user._id,
 			title: project.title
-		}
+		};
 		console.log(objToExport);
-		// ProjectFactory.exportProject(objToExport)
-		// 	.then(function(ghURL) {
-		// 		$scope.exporting = false;
-		// 		console.log("THIS WORKED", ghURL);
-		// 		$scope.gitHubURL = ghURL
-		// 		$scope.$digest();
-		// 	})
-	}
+		ProjectFactory.exportProject(objToExport)
+			.then(function (ghURL) {
+				$scope.exporting = false;
+				console.log("THIS WORKED", ghURL);
+				$scope.gitHubURL = ghURL;
+				$scope.$digest();
+			});
+	};
 
 	$scope.currentlySelected = null;
 	//selected Tab Item for connecting pages
@@ -83,11 +83,11 @@ app.controller("ProjectController", function (ProjectFactory, AuthService, $scop
 				console.log("This worked");
 				$scope.showConfirm = false;
 			});
-	}
+	};
 
 	$scope.pathName = function (elemPath) {
-		return "js/common/components/" + elemPath + ".html"
-	}
+		return "js/common/components/" + elemPath + ".html";
+	};
 
 
 	$scope.changeSelected = function (className) {
@@ -196,9 +196,7 @@ app.controller("ProjectController", function (ProjectFactory, AuthService, $scop
 	});
 
 	//zoom level for app
-	$scope.scalePercent = ZoomService.scalePercent;
-
-	$scope.changeZoom = ZoomService.changeZoom;
+	$scope.scaleDegree = 1;
 
 	$scope.selectTabItem = function (index) {
 		console.log("hey select tab function running here")
@@ -261,7 +259,6 @@ app.controller("ProjectController", function (ProjectFactory, AuthService, $scop
 	// 	delete $scope.cssTree[saveThisClass]
 
 	// }, 500)
-};
 
 
 

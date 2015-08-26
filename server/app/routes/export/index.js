@@ -13,7 +13,7 @@ var fileContent = require('../../reactUtils/recursiveRead');
 var _ = require('lodash');
 
 //for deep inspection in console
-// var util = require('util');
+var util = require('util');
 // console.log(util.inspect(variable, false, null));
 
 module.exports = router;
