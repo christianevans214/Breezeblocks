@@ -18,11 +18,8 @@ module.exports = React.createClass({
   render() {
     return (
       <View>
-        <Text style={styles.text} >
-          {this.state.value}
-        </Text>
         <SliderIOS
-          style={styles.slider}
+          style={[this.props.style, styles.slider]}
           onValueChange={(value) => this.setState({value: value})} />
       </View>
     );
@@ -31,13 +28,6 @@ module.exports = React.createClass({
 
 var styles = StyleSheet.create({
   slider: {
-    height: 10,
-    margin: 10,
-  },
-  text: {
-    fontSize: 14,
-    textAlign: 'center',
-    fontWeight: '500',
     margin: 10,
   },
 });

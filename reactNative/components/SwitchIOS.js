@@ -19,7 +19,7 @@ module.exports = React.createClass({
       <View>
         <SwitchIOS
           onValueChange={(value) => this.setState({falseSwitchIsOn: value})}
-          style={{marginBottom: 10}}
+          style={this.props.style}
           value={this.state.falseSwitchIsOn} />
       </View>
     );

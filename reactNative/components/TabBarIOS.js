@@ -39,6 +39,7 @@ module.exports = React.createClass({
         </TabBarIOS.Item>
         <TabBarIOS.Item 
         systemIcon="favorites"
+        style={styles.tabText}
         selected={this.state.selectedTab === "favorites"}
         onPress={() => {
           this.setState({
