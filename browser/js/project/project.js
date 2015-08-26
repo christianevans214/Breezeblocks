@@ -23,7 +23,7 @@ app.controller("ProjectController", function(ProjectFactory, AuthService, $scope
 	$scope.thumbnails = UILibraryFactory.Thumbnails;
 	$scope.gitHubURL;
 	$scope.exporting;
-	$scope.tabBar;
+	$scope.tabBar = {};
 	$scope.activeTabItem = {};
 	//properties to edit styling:
 	$scope.activeCSSEdit = {};
@@ -33,6 +33,7 @@ app.controller("ProjectController", function(ProjectFactory, AuthService, $scope
 	//thsi will probably need to be edited later but yeah!
 	$scope.exportProject = function(project, user, tabBar) {
 		$scope.exporting = true;
+		var tabBarIOSItemsArr = tabBar.props[0].TabBarIOSItems;
 		var pagesArr = [{
 			html: project.html,
 			css: project.css,
@@ -52,7 +53,6 @@ app.controller("ProjectController", function(ProjectFactory, AuthService, $scope
 						})
 					}
 				})
-
 			}
 		}
 		var objToExport = {
@@ -60,16 +60,15 @@ app.controller("ProjectController", function(ProjectFactory, AuthService, $scope
 			buildId: project._id,
 			userId: user._id,
 			title: project.title
-		};
-		console.log("object to export", objToExport);
+		}
 		ProjectFactory.exportProject(objToExport)
 			.then(function(ghURL) {
 				$scope.exporting = false;
 				console.log("THIS WORKED", ghURL);
-				$scope.gitHubURL = ghURL;
+				$scope.gitHubURL = ghURL
 				$scope.$digest();
-			});
-	};
+			})
+	}
 
 	$scope.currentlySelected = null;
 	//selected Tab Item for connecting pages
@@ -82,11 +81,11 @@ app.controller("ProjectController", function(ProjectFactory, AuthService, $scope
 				console.log("This worked");
 				$scope.showConfirm = false;
 			});
-	};
+	}
 
 	$scope.pathName = function(elemPath) {
-		return "js/common/components/" + elemPath + ".html";
-	};
+		return "js/common/components/" + elemPath + ".html"
+	}
 
 
 	$scope.changeSelected = function(className) {
