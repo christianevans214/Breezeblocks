@@ -44,7 +44,6 @@ module.exports = function(data, styleData, titles, newProjectDir){
 			if(stylesNeeded.indexOf(key) !== -1) styles[key] = styleData[key];
 		}
 
-		console.log(data.props[0])
 		//-=-=-=-=-=-=-=-=-=-=-=-=-=-=end data cleanse-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 		return new Promise(function(resolve, reject) {
