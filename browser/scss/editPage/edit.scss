@@ -4,13 +4,20 @@
 // #tools{
 // 	border: 1px solid black;
 // }
-
+#app{
+	transform: scale(1)
+}
 .edit-container{
 	margin: 0 auto;
 	height: 100%;
 	background-color: #444;
 	border: 1px solid #222;
 }
+
+div[dnd-list]{
+	position: relative;
+}
+
 
 .edit-blade{
 	background-color: #444;
@@ -60,7 +67,7 @@ input{
 	z-index: 0;
 	background-image: url('/images/grey_wash_wall.png');
 	box-shadow: inset 0 0 10px #000000;
-	height: 100%;
+	height: calc(100vh - 47px);
 }
 
 
@@ -157,6 +164,22 @@ input[type=color]{
 	}
 }
 
+.dndDraggingSource{
+	display: none !important;
+	opacity: .5;
+}
+
+.dndDragging{
+	box-shadow: none;
+	border: none;
+}
+
+.dndPlaceholder{
+	display: flex;
+	flex-grow: 1;
+	border: 2px dotted lightgrey;
+}
+
 ui-thumbnail{
 	width: 50px;
 	height: 50px;
@@ -194,13 +217,33 @@ ui-thumbnail{
 }
 
 
-
 .delete-view{
 	position: absolute; 
 	z-index: 100; 
 	margin-left: -50px; 
 	border: none; 
-	opacity:0
+	opacity:0;
+}
+
+.footer{
+	display: inline-block;
+	position: absolute;
+	bottom: 0;
+	padding: 2px;
+	width: 100%;
+	background: #333;
+	font-size: 8pt;
+	border-top: 1px solid #222;
+	input{
+		display: inline;
+		width: 100px;
+		margin: 0px 10px;
+	}
+	.glyphicon{
+		font-size: 10pt;
+		padding: 3px;
+		margin-top: -3px;
+	}
 }
 
 .tab-selected {

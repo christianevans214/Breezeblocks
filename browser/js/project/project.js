@@ -21,7 +21,9 @@ app.controller("ProjectController", function(ProjectFactory, AuthService, $scope
 	$scope.project["css"] = $scope.project.css || {};
 	$scope.cssTree = project.css;
 	$scope.thumbnails = UILibraryFactory.Thumbnails;
-
+	$scope.gitHubURL;
+	$scope.exporting;
+	$scope.tabBar;
 	$scope.activeTabItem = {};
 	//properties to edit styling:
 	$scope.activeCSSEdit = {};
@@ -29,21 +31,46 @@ app.controller("ProjectController", function(ProjectFactory, AuthService, $scope
 	$scope.activeHTMLEdit = {};
 
 	//thsi will probably need to be edited later but yeah!
-	$scope.exportProject = function(project, user) {
-		console.log("PROJECT FOR EXPORT", project);
-		console.log("USER FOR EXPORT", user);
-		var objToExport = {
+	$scope.exportProject = function(project, user, tabBar) {
+		$scope.exporting = true;
+		var pagesArr = [{
 			html: project.html,
 			css: project.css,
+			title: project.title
+		}];
+		if (tabBar){
+			var tabBarIOSItemsArr = tabBar.props[0].TabBarIOSItems;
+			for (var i = 0; i < tabBarIOSItemsArr.length; i++) {
+				if (tabBarIOSItemsArr[i].projectReference) {
+
+					user.projects.forEach(function(userProject) {
+
+						if (userProject.title === tabBarIOSItemsArr[i].projectReference) {
+							pagesArr.push({
+								html: userProject.html,
+								css: userProject.css,
+								title: userProject.title
+							});
+						}
+					})
+				}
+			}
+		}
+		var objToExport = {
+			pages: pagesArr,
 			buildId: project._id,
 			userId: user._id,
 			title: project.title
-		}
+		};
+		console.log(objToExport);
 		ProjectFactory.exportProject(objToExport)
-			.then(function(file) {
-				console.log("THIS WORKED", file);
-			})
-	}
+			.then(function(ghURL) {
+				$scope.exporting = false;
+				console.log("THIS WORKED", ghURL);
+				$scope.gitHubURL = ghURL;
+				$scope.$digest();
+			});
+	};
 
 	$scope.currentlySelected = null;
 	//selected Tab Item for connecting pages
@@ -56,11 +83,11 @@ app.controller("ProjectController", function(ProjectFactory, AuthService, $scope
 				console.log("This worked");
 				$scope.showConfirm = false;
 			});
-	}
+	};
 
 	$scope.pathName = function(elemPath) {
-		return "js/common/components/" + elemPath + ".html"
-	}
+		return "js/common/components/" + elemPath + ".html";
+	};
 
 
 	$scope.changeSelected = function(className) {
@@ -72,6 +99,10 @@ app.controller("ProjectController", function(ProjectFactory, AuthService, $scope
 		var thisParent = $scope.currentlySelected.parent()[0]
 		$scope.currentlySelected.addClass('shadow')
 		$scope.activeHTMLEdit = ParseTreeFactory.findActiveElement($scope, className, thisParent);
+		if ($scope.activeHTMLEdit.type === "TabBarIOS") {
+			console.log("I'M A TAB BAR IOS")
+			$scope.tabBar = $scope.activeHTMLEdit;
+		}
 	}
 
 	$scope.activeDropzone = function(className) {
@@ -84,7 +115,6 @@ app.controller("ProjectController", function(ProjectFactory, AuthService, $scope
 	$scope.leftAlign = StyleFactory.leftAlign($scope);
 	$scope.rightAlign = StyleFactory.rightAlign($scope);
 	$scope.centerAlign = StyleFactory.centerAlign($scope);
-
 
 
 
@@ -164,6 +194,10 @@ app.controller("ProjectController", function(ProjectFactory, AuthService, $scope
 			$scope.selectNext()
 		}
 	});
+
+	//zoom level for app
+	$scope.scaleDegree = 1;
+
 	$scope.selectTabItem = function(index) {
 		console.log("hey select tab function running here")
 		if ($scope.activeHTMLEdit && $scope.activeHTMLEdit.type === "TabBarIOS") {
