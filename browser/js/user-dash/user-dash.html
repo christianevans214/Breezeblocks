@@ -2,14 +2,15 @@
 
 <ui-view>
 	<div class = "thin">
-	<h1>Your projects:</h1>
-		<div ng-repeat= "project in user.projects">
+	<h1>P R O J E C T S</h1>
+	<hr>
+		<div class="project-block" ng-repeat= "project in user.projects">
 			<div class="projectListItem" ui-sref='userDash.project({id: user._id, projectId: project._id})'>{{project.title}}</div>
 			<div class="delete-holder"><span class="glyphicon glyphicon-trash" ng-click="deleteProject(project._id)"></span></div>
 			</br>
 		</div>
 	</br>
 	
-	<button type="btn btn-signal" ng-click="createNewProject()">Create a New Project</button>
+	<button class="bottomButton project-button" ng-click="createNewProject()">Create a New Project</button>
 	</div>
 </ui-view>
