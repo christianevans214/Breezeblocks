@@ -2,30 +2,31 @@
 <!-- <pre spacing="default">{{properties | json}}</pre> -->
 
 <form name="css-properties">
+<div class="cssRow">
 <div class="bottomButton littleButton" ng-click="leftAlign()"><span class="glyphicon glyphicon-align-left"></span></div><!-- 
  --><div class="bottomButton littleButton" ng-click="centerAlign()"><span class="glyphicon glyphicon-align-center"></div><!-- 
- --><div class="bottomButton littleButton" ng-click="rightAlign()"><span class="glyphicon glyphicon-align-right"></div> <span class="glyphicon glyphicon-text-size"></span> 
+ --><div class="bottomButton littleButton" ng-click="rightAlign()"><span class="glyphicon glyphicon-align-right"></div> <span class="glyphicon glyphicon-text-size littleLabel"></span> 
 <input type="number" ng-model="activeCSSEdit['font-size']" value="Bob"></input>
-Text Color <input type="color" ng-model='activeCSSEdit["color"]'></p>
-<p>Background Color
+<span class="littleLabel">Text Color</span> <input type="color" ng-model='activeCSSEdit["color"]'></p>
+</div>
+<p><span class="littleLabel">Background Color</span>
 <input type="color" ng-model='activeCSSEdit["background-color"]'></p>
-
-
-
-
-
-
-<p>Padding-left:
-<input type="range" ng-model="activeCSSEdit['padding-left']"></p>
-<p>Padding-right:
-<input type="range" ng-model="activeCSSEdit['padding-right']"></p>
-<p>Padding-top:
-<input type="range" ng-model="activeCSSEdit['padding-top']"></p>
-<p>Padding-bottom:
-<input type="range" ng-model="activeCSSEdit['padding-bottom']"></p>
-<p>Margin</p>
-<input type="range" ng-model="activeCSSEdit['margin']">
-<p>FlexGrowSize</p>
-<input type="button" value="-" ng-click="lessFlex()" ng-model= "activeCSSEdit['flex-grow']"></input>
-<input type="button" value="+" ng-click="moreFlex()"  ng-model= "activeCSSEdit['flex-grow']"></input>
+<hr>
+<div class="SliderHolder">
+<p class="littleLabel">PADDING:</p>
+<span>TOP:</span><input type="range" ng-model="activeCSSEdit['padding-top']"></br>
+<span>LEFT:</span><input type="range" ng-model="activeCSSEdit['padding-left']"></br>
+<span>RIGHT:</span><input type="range" ng-model="activeCSSEdit['padding-right']"></br>
+<span>BOTTOM:</span><input type="range" ng-model="activeCSSEdit['padding-bottom']">
+</div>
+<hr>
+<div class="SliderHolder">
+<p class="littleLabel">MARGIN:</p>
+<span>TOP:</span><input type="range" ng-model="activeCSSEdit['margin-top']"></br>
+<span>LEFT:</span><input type="range" ng-model="activeCSSEdit['margin-left']"></br>
+<span>RIGHT:</span><input type="range" ng-model="activeCSSEdit['margin-right']"></br>
+<span>BOTTOM:</span><input type="range" ng-model="activeCSSEdit['margin-bottom']">
+</div>
+<hr>
+<span class="littleLabel">FlexGrowSize</span><div class="bottomButton littleButton" type="button" value="-" ng-click="lessFlex()" ng-model= "activeCSSEdit['flex-grow']"><span class="glyphicon glyphicon-minus"></div><div class="bottomButton littleButton" type="button" value="+" ng-click="moreFlex()"  ng-model= "activeCSSEdit['flex-grow']"><span class="glyphicon glyphicon-plus"></span></div>
 </form>

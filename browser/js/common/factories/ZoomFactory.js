@@ -5,7 +5,7 @@ app.service('ZoomService', function () {
 		self.scalePercent = scalePercent || 100;
 		console.log('from zoomservice', this.scalePercent)
 		var scaleRatio = this.scalePercent / 100;
-		$('#app').css('transform', 'scale(' + scaleRatio + ')')
+		$('#app').css('transform', 'scale(' + scaleRatio + ')');
 
 	};
 	this.getZoom = function () {
