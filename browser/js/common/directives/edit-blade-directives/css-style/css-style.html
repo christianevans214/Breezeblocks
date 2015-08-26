@@ -4,13 +4,13 @@
 <form name="css-properties">
 <div class="bottomButton littleButton" ng-click="leftAlign()"><span class="glyphicon glyphicon-align-left"></span></div><!-- 
  --><div class="bottomButton littleButton" ng-click="centerAlign()"><span class="glyphicon glyphicon-align-center"></div><!-- 
- --><div class="bottomButton littleButton" ng-click="rightAlign()"><span class="glyphicon glyphicon-align-right"></div>
+ --><div class="bottomButton littleButton" ng-click="rightAlign()"><span class="glyphicon glyphicon-align-right"></div> <span class="glyphicon glyphicon-text-size"></span> 
+<input type="number" ng-model="activeCSSEdit['font-size']" value="Bob"></input>
+Text Color <input type="color" ng-model='activeCSSEdit["color"]'></p>
 <p>Background Color
 <input type="color" ng-model='activeCSSEdit["background-color"]'></p>
-<p>Text Color
-<input type="color" ng-model='activeCSSEdit["color"]'></p>
-<span class="glyphicon glyphicon-text-size"></span>
-<input type="range" ng-model="activeCSSEdit['font-size']">
+
+
 
 
 

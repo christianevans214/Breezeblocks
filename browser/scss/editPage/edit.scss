@@ -12,6 +12,7 @@
 	height: 100%;
 	background-color: #444;
 	border: 1px solid #222;
+
 }
 
 div[dnd-list]{
@@ -81,6 +82,25 @@ input{
 	margin: 0px;
 }
 
+#imageSelect{
+	textarea{
+		color: #222;
+	}
+}
+
+.list-view-contain{
+	padding-left: 0px;
+	li{
+		input{
+		width: 100%;
+		}
+	}
+}
+
+.slider-ios-edit-box{
+	display: flex;
+	flex-direction: column;
+}
 
 .bottomButton{
 	box-sizing: padding-box;
@@ -211,7 +231,11 @@ ui-thumbnail{
 	border: 1px solid transparent;
 	border-radius: 5px;
 	padding: 5px;
+	font-size: 9pt;
 	margin-bottom: 0px;
+	input[type="number"]{
+		width: 30px;
+	}
 }
 
 .appear{
@@ -237,15 +261,32 @@ ui-thumbnail{
 	font-size: 8pt;
 	border-top: 1px solid #222;
 	input{
+		position: relative;
+		bottom: -1px;
 		display: inline;
 		width: 100px;
 		margin: 0px 10px;
+		font-size: inherit;
+
+	}
+	span{
+
+		padding-left: 4px;
 	}
 	.glyphicon{
 		font-size: 10pt;
 		padding: 3px;
 		margin-top: -3px;
 	}
+	#percentage{
+		width: 30px;
+		position: relative;
+		display: inline-block;
+		bottom: 2px;
+		right: 4px;
+	}
+
+
 }
 
 .tab-selected {

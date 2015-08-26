@@ -13,7 +13,7 @@ app.config(function ($stateProvider) {
 })
 
 
-app.controller("ProjectController", function (ProjectFactory, AuthService, $scope, $compile, UILibraryFactory, EmitterizerFactory, Interactory, StyleFactory, ParseTreeFactory, CssTreeFactory, $stateParams, project, user) {
+app.controller("ProjectController", function (ProjectFactory, AuthService, $scope, $compile, UILibraryFactory, EmitterizerFactory, Interactory, StyleFactory, ParseTreeFactory, ZoomService, CssTreeFactory, $stateParams, project, user) {
 	$scope.convertObjToInlineStyle = CssTreeFactory.objToInlineStyle;
 	$scope.project = project;
 
@@ -196,7 +196,9 @@ app.controller("ProjectController", function (ProjectFactory, AuthService, $scop
 	});
 
 	//zoom level for app
-	$scope.scaleDegree = 1;
+	$scope.scalePercent = ZoomService.scalePercent;
+
+	$scope.changeZoom = ZoomService.changeZoom;
 
 	$scope.selectTabItem = function (index) {
 		console.log("hey select tab function running here")
@@ -219,47 +221,45 @@ app.controller("ProjectController", function (ProjectFactory, AuthService, $scop
 		//className in this context will be 
 		// $scope.currentlySelected.addClass('shadow')
 	}
-
-
-	//this doesn't really work all the time
-	// $scope.logEvent = function (message, event) {
-	// 	console.log(event, 'happened')
-	// var theElem = event.target
-	// var saveClass = event.target.className
-	// var thisClass = event.target.className.split(" ")[1]
-
-	// console.log('thisClass', thisClass)
-	// var saveThisClass = thisClass
-	// var parent;
-	// setTimeout(function () {
-
-	// 	//identify parent's number
-	// 	parent = $('.' + thisClass).closest('.drop-area');
-	// 	console.log(parent);
-	// 	var parentClass = parent.attr('class').split(" ")[1]
-	// 	var thisViewNum = thisClass.split(" ")[0].split("-")[1]
-	// 	var parentViewNum = parentClass.split("-")[1]
-
-	// 	//figure out what to change:
-	// 	console.log(thisViewNum, "should be", parentViewNum)
-
-
-	// 	//create new class string
-	// 	var originalClassArr = thisClass.split("-");
-	// 	originalClassArr[1] = parentViewNum
-	// 	var newClass = originalClassArr.join("-");
-
-	// 	//add the class back
-	// 	$('.' + thisClass).removeClass(thisClass).addClass(newClass)
-	// 	console.log('THE ELEM AFTER', $('.' + newClass))
-
-	// 	//update css
-	// 	var oldProps = $scope.cssTree[saveThisClass]
-	// 	$scope.cssTree[newClass] = oldProps
-	// 	delete $scope.cssTree[saveThisClass]
-
-	// }, 500)
-
-
-
 });
+
+
+
+//this doesn't really work all the time
+// $scope.logEvent = function (message, event) {
+// 	console.log(event, 'happened')
+// var theElem = event.target
+// var saveClass = event.target.className
+// var thisClass = event.target.className.split(" ")[1]
+
+// console.log('thisClass', thisClass)
+// var saveThisClass = thisClass
+// var parent;
+// setTimeout(function () {
+
+// 	//identify parent's number
+// 	parent = $('.' + thisClass).closest('.drop-area');
+// 	console.log(parent);
+// 	var parentClass = parent.attr('class').split(" ")[1]
+// 	var thisViewNum = thisClass.split(" ")[0].split("-")[1]
+// 	var parentViewNum = parentClass.split("-")[1]
+
+// 	//figure out what to change:
+// 	console.log(thisViewNum, "should be", parentViewNum)
+
+
+// 	//create new class string
+// 	var originalClassArr = thisClass.split("-");
+// 	originalClassArr[1] = parentViewNum
+// 	var newClass = originalClassArr.join("-");
+
+// 	//add the class back
+// 	$('.' + thisClass).removeClass(thisClass).addClass(newClass)
+// 	console.log('THE ELEM AFTER', $('.' + newClass))
+
+// 	//update css
+// 	var oldProps = $scope.cssTree[saveThisClass]
+// 	$scope.cssTree[newClass] = oldProps
+// 	delete $scope.cssTree[saveThisClass]
+
+// }, 500)
