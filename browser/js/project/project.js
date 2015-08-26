@@ -67,13 +67,13 @@ app.controller("ProjectController", function(ProjectFactory, $rootScope, AuthSer
 		}
 		console.log(objToExport)
 		$scope.exporting = false;
-		// ProjectFactory.exportProject(objToExport)
-		// 	.then(function(ghURL) {
-		// 		$scope.exporting = false;
-		// 		console.log("THIS WORKED", ghURL);
-		// 		$scope.gitHubURL = ghURL
-		// 		$scope.$digest();
-		// 	})
+		ProjectFactory.exportProject(objToExport)
+			.then(function(ghURL) {
+				$scope.exporting = false;
+				console.log("THIS WORKED", ghURL);
+				$scope.gitHubURL = ghURL
+				$scope.$digest();
+			})
 	}
 
 	$scope.currentlySelected = null;
