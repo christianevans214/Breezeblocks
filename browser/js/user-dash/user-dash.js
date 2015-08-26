@@ -12,9 +12,21 @@ app.config(function($stateProvider) {
 		});
 });
 
-app.controller("UserDashController", function($scope, $state, UserFactory, ProjectFactory, user) {
+app.controller("UserDashController", function($scope, $state, UserFactory, ProjectFactory, user, $rootScope) {
 	$scope.user = user;
 	$scope.latestProject;
+	$scope.deleteProject = function(idToDelete) {
+		console.log(idToDelete);
+		ProjectFactory.deleteProject(idToDelete)
+			.then(function(data) {
+				return UserFactory.getUser(user._id)
+			})
+			.then(function(updatedUser) {
+				$scope.user = updatedUser;
+				user = updatedUser;
+				console.log("user after delete", user);
+			})
+	}
 	$scope.createNewProject = function() {
 		ProjectFactory.createProject()
 			.then(function(project) {
@@ -23,14 +35,25 @@ app.controller("UserDashController", function($scope, $state, UserFactory, Proje
 				user.projects.push(project._id)
 				return UserFactory.updateUser(user._id, user)
 			})
-			.then(function(returnedUser) {
-				console.log("this worked");
-				$scope.user = user = returnedUser;
+			.then(function(returnedUserId) {
+
+				$scope.user = returnedUserId
+				user = returnedUserId;
 				$state.go('userDash.project', ({
 					id: user._id,
 					projectId: $scope.latestProject
 				}))
 			})
 	}
-	console.log("USER", user);
+
+	$rootScope.$on("project updated", function(event, data) {
+		console.log("EVENT", event);
+		console.log("DATA", data);
+		UserFactory.getUser(user._id)
+			.then(function(user) {
+				$scope.user = user;
+
+
+			})
+	})
 })

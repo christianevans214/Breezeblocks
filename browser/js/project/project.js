@@ -7,16 +7,18 @@ app.config(function ($stateProvider) {
 			resolve: {
 				project: function (ProjectFactory, $stateParams) {
 					return ProjectFactory.getProject($stateParams.projectId)
+				},
+				user: function (UserFactory, $stateParams) {
+					return UserFactory.getUser($stateParams.id);
 				}
 			}
 		});
 })
 
 
-app.controller("ProjectController", function (ProjectFactory, AuthService, $scope, $compile, UILibraryFactory, EmitterizerFactory, Interactory, StyleFactory, ParseTreeFactory, ZoomService, CssTreeFactory, $stateParams, project, user) {
+app.controller("ProjectController", function (ProjectFactory, $rootScope, AuthService, $scope, $compile, UILibraryFactory, EmitterizerFactory, Interactory, StyleFactory, ParseTreeFactory, ZoomService, CssTreeFactory, $stateParams, project, user) {
 	$scope.convertObjToInlineStyle = CssTreeFactory.objToInlineStyle;
 	$scope.project = project;
-
 	$scope.user = user;
 	$scope.project["css"] = $scope.project.css || {};
 	$scope.cssTree = project.css;
@@ -63,6 +65,7 @@ app.controller("ProjectController", function (ProjectFactory, AuthService, $scop
 			userId: user._id,
 			title: project.title
 		}
+		console.log(objToExport)
 		ProjectFactory.exportProject(objToExport)
 			.then(function (ghURL) {
 				$scope.exporting = false;
@@ -76,12 +79,15 @@ app.controller("ProjectController", function (ProjectFactory, AuthService, $scop
 	//selected Tab Item for connecting pages
 	$scope.selectedTabItem = null;
 	$scope.showConfirm = false;
+
 	$scope.saveProject = function (updatedProject) {
+
 		$scope.showConfirm = true;
 		ProjectFactory.updateProject(updatedProject._id, updatedProject)
 			.then(function (returnedProject) {
 				console.log("This worked");
 				$scope.showConfirm = false;
+				$rootScope.$broadcast("project updated", returnedProject)
 			});
 	}
 
@@ -97,7 +103,6 @@ app.controller("ProjectController", function (ProjectFactory, AuthService, $scop
 		if ($scope.currentlySelected) $scope.currentlySelected.removeClass('shadow')
 		$scope.activeCSSEdit = $scope.project.css[className];
 		$scope.currentlySelected = $('.' + className);
-		// console.log($scope.currentlySelected.attr('component'));
 		var thisParent = $scope.currentlySelected.parent()[0]
 		$scope.currentlySelected.addClass('shadow')
 		$scope.activeHTMLEdit = ParseTreeFactory.findActiveElement($scope, className, thisParent);

@@ -14,6 +14,20 @@
 	}
 }
 
+.delete-holder{
+	color: white;
+	font-size: 16px;
+	display: inline-block;
+	padding-left: 6px;
+	cursor: pointer;
+	&:hover{
+		color: #0DD;
+		transition: .2s;
+		font-size: 18px;
+
+	}
+}
+
 .project-blade{
 	width: 80%;
 	margin:  auto;

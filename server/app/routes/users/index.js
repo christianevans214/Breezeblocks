@@ -45,7 +45,11 @@ router.put('/:id', function(req, res, next) {
 	_.extend(req.user, req.body);
 	req.user.save()
 		.then(function(user) {
-			res.json(user);
+			user.populate('projects', function(err) {
+					if (err) next(err)
+					res.send(user)
+				})
+				// res.json(user);
 		})
 		.then(null, next);
 });
