@@ -1,6 +1,4 @@
 
-
-
 // #tools{
 // 	border: 1px solid black;
 // }
@@ -47,6 +45,7 @@ div[dnd-list]{
 	padding: 10px;
 	color: #0dd;
 	margin: 0px;
+	margin-top: 0;
 }
 
 #app{
@@ -68,6 +67,7 @@ input{
 }
 
 #outer-canvas{
+	position: relative;
 	z-index: 0;
 	background-image: url('/images/grey_wash_wall.png');
 	box-shadow: inset 0 0 10px #000000;
@@ -283,11 +283,11 @@ ui-thumbnail{
 }
 
 .footer{
-	display: inline-block;
+	color: white;
 	position: absolute;
-	bottom: 0;
-	padding: 2px;
-	width: 100%;
+	left: 16.7%;
+	bottom: 0%;
+	width: 66.6%;
 	background: #333;
 	font-size: 8pt;
 	border-top: 1px solid #222;
@@ -301,11 +301,11 @@ ui-thumbnail{
 
 	}
 	span{
-
-		padding-left: 4px;
+		font-size: 14px;
+		margin-left:-7px;
 	}
 	.glyphicon{
-		font-size: 10pt;
+		font-size: 14px;
 		padding: 3px;
 		margin-top: -3px;
 	}
@@ -337,4 +337,11 @@ ui-thumbnail{
 .tab-p {
 	font-size: 8px; 
 	color: black;
+}
+
+#elements{
+	display: flex;
+	height: calc(100vh - 47px);
+	flex-direction: column;
+	justify-content: space-between;
 }
