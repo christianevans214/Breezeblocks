@@ -2,7 +2,6 @@
 	<h3 id="Title" ng-bind="project.title"></h3>
 <div class="edit-container">
 <!-- <ui-navbar></ui-navbar> -->
-
 	<div id="elements" class="edit-blade col-md-2 col-sm-2">
 
 		<div id="elementsContainer">
@@ -45,6 +44,8 @@
 	<div id="style" class="edit-blade col-md-2 col-sm-2">
 		<!-- edit props: -->
 		<div class="styling-panel">
+		<pre>{{activeCSSEdit}}</pre>
+		<pre> {{project.html | json}}</pre>
 			<span class="littleLabel">Project Title</span>  <input type="text" ng-model="project.title" placeholder = "Change Title of Project"></input>
 			</br>
 
