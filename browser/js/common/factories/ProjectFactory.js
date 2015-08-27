@@ -74,13 +74,42 @@ app.factory("ProjectFactory", function($http) {
 			})
 			return flexPage;
 		},
-		convertFlexToWidthPercentageHTML: function(pageArr) {
-			var cumulativeFlex = [];
+		convertFlexToWidthPercentageHTML: function(pageArr, $scope) {
+			var cumulative = [];
+
 			pageArr.forEach(function(page) {
 				// console.log(_.groupBy(page.html, 'className'));
-				cumulativeFlex.push(_.groupBy(page.html, 'className'));
-				_.groupBy(_.groupBy(page.html, "className"), 'children');
+				// cumulativeFlex.push(_.groupBy(page.html, 'className'));
+				var Views = _.groupBy(page.html, 'className');
+
+				for (var key in Views) {
+					var flexSum = 0;
+					Views[key] = Views[key][0].children.map(function(child) {
+
+						if (page.css[child.className[1]] && page.css[child.className[1]]['flex-grow']) {
+							flexSum += page.css[child.className[1]]['flex-grow'];
+							return child.className[1];
+						} else return Views[key];
+					})
+
+					Views[key] = {
+						childrenClasses: Views[key],
+						totalFlex: flexSum
+					}
+				}
+
+				cumulative.push(Views);
+				for (var view in Views) {
+					console.log(view);
+					Views[view].childrenClasses.forEach(function(childClass, index) {
+						console.log('childClass', childClass);
+						console.log('childClassCSS', page.css[childClass]);
+						if (page.css[childClass]['flex-grow']) page.css[childClass]['flex-grow-width'] = (page.css[childClass]['flex-grow'] / Views[view].totalFlex) * 100;
+					})
+				}
 			})
+			return pageArr;
+
 		}
 	}
 })

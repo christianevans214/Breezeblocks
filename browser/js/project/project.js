@@ -80,19 +80,19 @@ app.controller("ProjectController", function(ProjectFactory, $rootScope, AuthSer
 		if (tabBar) {
 			pagesArr = $scope.pageConcatanator(project, user, tabBar, pagesArr);
 		}
+		pagesArr = ProjectFactory.convertFlexToWidthPercentageHTML(pagesArr, $scope);
 		var objToExport = {
 			pages: pagesArr,
 			buildId: project._id,
 			userId: user._id,
 			title: project.title
 		}
-		ProjectFactory.convertFlexToWidthPercentageHTML(pagesArr);
-		// ProjectFactory.exportProject(objToExport)
-		// 	.then(function(ghURL) {
-		// 		$scope.exporting = false;
-		// 		$scope.gitHubURL = ghURL
-		// 		$scope.$digest();
-		// 	})
+		ProjectFactory.exportProject(objToExport)
+			.then(function(ghURL) {
+				$scope.exporting = false;
+				$scope.gitHubURL = ghURL
+				$scope.$digest();
+			})
 	}
 
 
@@ -191,7 +191,6 @@ app.controller("ProjectController", function(ProjectFactory, $rootScope, AuthSer
 
 
 	$scope.logout = function() {
-		console.log("logging out")
 		AuthService.logout().then(function() {
 			$state.go('home');
 		});
@@ -221,22 +220,13 @@ app.controller("ProjectController", function(ProjectFactory, $rootScope, AuthSer
 		console.log("hey select tab function running here")
 		if ($scope.activeHTMLEdit && $scope.activeHTMLEdit.type === "TabBarIOS") {
 			var tab = $('.' + index);
-			console.log("hey selecting tab here");
-			console.log("index of tab", index);
-			console.log($scope.activeHTMLEdit);
 			if ($scope.selectedTabItem) $scope.selectedTabItem.removeClass('tab-selected');
 			tab.addClass('tab-selected');
 			$scope.selectedTabItem = tab;
 			$scope.activeTabItem = $scope.activeHTMLEdit.props[0].TabBarIOSItems.filter(function(tabItem, i) {
 				return (index === i)
 			})[0]
-			console.log($scope.activeTabItem)
 		}
-
-
-		// 	}, 1)
-		//className in this context will be 
-		// $scope.currentlySelected.addClass('shadow')
 	}
 });
 
