@@ -9,8 +9,8 @@ var multipageGenerator = require('./multipageGenerator.js');
 Handlebars.registerPartial({
 	Image: fs.readFileSync(path.join(__dirname, '/partials/ImagePartial.hbs')).toString(),
 	Text: fs.readFileSync(path.join(__dirname, '/partials/TextPartial.hbs')).toString(),
-	MapView: fs.readFileSync(path.join(__dirname, '/partials/TextPartial.hbs')).toString(),
-	ScrollView: fs.readFileSync(path.join(__dirname, '/partials/ScrollViewPartial.hbs')).toString(),
+	MapView: fs.readFileSync(path.join(__dirname, '/partials/MapViewPartial.hbs')).toString(),
+	ScrollView: fs.readFileSync(path.join(__dirname, '/partials/ScrollViewPartial.hbs')).toString()
 	SwitchIOS: fs.readFileSync(path.join(__dirname, '/partials/SwitchPartial.hbs')).toString(),
 	SliderIOS: fs.readFileSync(path.join(__dirname, '/partials/SliderPartial.hbs')).toString(),
 });

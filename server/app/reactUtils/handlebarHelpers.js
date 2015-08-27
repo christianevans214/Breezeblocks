@@ -11,6 +11,11 @@ module.exports= function(){
 				else return propValue + " ";
 			}else return;
 		},
+		setMapCoords: function(propKey, propValue){
+		    if(propKey === 'region'){
+		        return 'latitude=' + '{' + propValue['latitude'] + '}' + ' longitude=' + '{' + propValue['longitude'] + '}' + ' latitudeDelta=' + '{' + propValue['latitudeDelta'] + '}' + ' longitudeDelta=' + '{' + propValue['longitudeDelta'] + '}';
+		    }else return ' ' + propKey + '={' + propValue + '}';
+		},
 		parentStyle: function(className, globalStyle){
 			className = className.slice(1);
 			if(globalStyle[className]) return 'style={[styles.'+ ChangeCase.camelCase(className)+']}';
@@ -58,10 +63,7 @@ module.exports= function(){
 		},
 		selectTypePartial: function (type) {
 			return type;
-		},
-/*		fixCoords: function(prop){
-			if(prop)
-		}*/
+		}
 
 	});
 
