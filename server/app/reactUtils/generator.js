@@ -14,6 +14,7 @@ Handlebars.registerPartial({
 	SwitchIOS: fs.readFileSync(path.join(__dirname, '/partials/SwitchPartial.hbs')).toString(),
 	SliderIOS: fs.readFileSync(path.join(__dirname, '/partials/SliderPartial.hbs')).toString(),
 	ListView: fs.readFileSync(path.join(__dirname, '/partials/ListViewPartial.hbs')).toString(),
+	Navbar: fs.readFileSync(path.join(__dirname, '/partials/NavbarPartial.hbs')).toString(),
 });
 
 
