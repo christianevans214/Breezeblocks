@@ -56,25 +56,24 @@ router.post('/', function (req, res, next) {
 			
 			var repoData;
 			//create new repo then write all files to new repo
-			res.sendStatus(200);
-// 			createNewRepo(currentUser, github, repoName)
-// 			.then(function(repoInfo){
-// 				repoData = repoInfo;
-// 				var repo = github.getRepo(repoInfo.owner.login, repoInfo.name);
-// 				return writeFiles(req.body.userId, req.body.buildId, repo, 'reactNative');
-// 			})
-// 			.then(function(){
-// 				console.log("repoData.html_url", repoData.html_url)
-// 				res.status(201).json(repoData.html_url);
-// /*				Build.findById(req.body.buildId).exec()
-// 				.then(function(project){
-// 					project.gitUrl = repoData.html_url;
-// 					project.save()
-// 					.then(function(updatedProject){
-// 						res.status(201).json(project);
-// 					})
-// 				})*/
-// 			})
+			createNewRepo(currentUser, github, repoName)
+			.then(function(repoInfo){
+				repoData = repoInfo;
+				var repo = github.getRepo(repoInfo.owner.login, repoInfo.name);
+				return writeFiles(req.body.userId, req.body.buildId, repo, 'reactNative');
+			})
+			.then(function(){
+				console.log("repoData.html_url", repoData.html_url)
+				res.status(201).json(repoData.html_url);
+/*				Build.findById(req.body.buildId).exec()
+				.then(function(project){
+					project.gitUrl = repoData.html_url;
+					project.save()
+					.then(function(updatedProject){
+						res.status(201).json(project);
+					})
+				})*/
+			})
 		})
 	})
 	.then(null, next);
