@@ -88,6 +88,22 @@ module.exports = function(pages, userId, buildId) {
 					return ChangeCase.camelCase(string);
 				});
 
+				Handlebars.registerHelper('appName', function(){
+					if(pages.length>1) return 'module.exports';
+					else return 'var reactNative';
+				});
+
+				Handlebars.registerHelper('multiPageCheck', function(){
+					if(pages.length === 1) return "AppRegistry.registerComponent('reactNative', () => reactNative);";
+					else return;
+				});
+
+				Handlebars.registerHelper('typeCheck', function(type){
+					if(type === "Navbar") return "Text";
+					else if(type === "Map") return "MapView";
+					else return type;
+				});
+
 				Handlebars.registerHelper('removePx', function(string, styleType) {
 					if(typeof string === "string"){	
 						string = string.replace(/px$/, "");
