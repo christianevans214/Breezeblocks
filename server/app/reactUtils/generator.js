@@ -9,7 +9,8 @@ Handlebars.registerPartial({
 	Image: fs.readFileSync(path.join(__dirname, '/partials/ImagePartial.hbs')).toString(),
 	Text: fs.readFileSync(path.join(__dirname, '/partials/TextPartial.hbs')).toString(),
 	MapView: fs.readFileSync(path.join(__dirname, '/partials/TextPartial.hbs')).toString(),
-	ScrollView: fs.readFileSync(path.join(__dirname, '/partials/ScrollViewPartial.hbs')).toString()
+	ScrollView: fs.readFileSync(path.join(__dirname, '/partials/ScrollViewPartial.hbs')).toString(),
+	SwitchIOS: fs.readFileSync(path.join(__dirname, '/partials/SwitchPartial.hbs')).toString(),
 });
 
 var tabBarGenerator = require('./tabBarGenerator.js');
