@@ -17,7 +17,7 @@ var {
   View,
 } = React;
 
-{{appName}} = React.createClass({
+{{appName pages}} = React.createClass({
     render: function() {
         return (
           <View>
@@ -25,7 +25,7 @@ var {
             <View {{parentStyle this.className @root.globalStyle}}>
                 {{#each this.children}}
                 {{> (selectTypePartial this.type) }}
-                
+
                 {{/each}}
             </View>
             {{/each }}
@@ -45,5 +45,5 @@ var styles = StyleSheet.create({
     {{/each }}
 })
 
-{{{multiPageCheck}}}
+{{{multiPageCheck pages}}}
 
