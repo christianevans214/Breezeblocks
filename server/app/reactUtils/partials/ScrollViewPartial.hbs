@@ -1,0 +1,4 @@
+<{{this.type}} 
+{{#each this.props}}dataSource={[{{#each this.dataSource}}'{{this.value}}'{{#unless @last}}, {{/unless}}{{/each}}]}{{/each }}
+style={[{{#each this.className}}{{#unless @first}}styles.{{camelCase this}}{{#unless @last}}, {{/unless }}{{/unless }}{{/each }}]}>
+</{{this.type}}>

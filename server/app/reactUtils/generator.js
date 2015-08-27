@@ -3,8 +3,19 @@ var ChangeCase = require('change-case');
 var path = require('path');
 var fs = require('fs-extra');
 var zip = new require('node-zip')();
+var handlebarHelpers = require('./handlebarHelpers')();
+var multipageGenerator = require('./multipageGenerator.js');
 
-var tabBarGenerator = require('./tabBarGenerator.js');
+Handlebars.registerPartial({
+	Image: fs.readFileSync(path.join(__dirname, '/partials/ImagePartial.hbs')).toString(),
+	Text: fs.readFileSync(path.join(__dirname, '/partials/TextPartial.hbs')).toString(),
+	MapView: fs.readFileSync(path.join(__dirname, '/partials/MapViewPartial.hbs')).toString(),
+	ScrollView: fs.readFileSync(path.join(__dirname, '/partials/ScrollViewPartial.hbs')).toString(),
+	SwitchIOS: fs.readFileSync(path.join(__dirname, '/partials/SwitchPartial.hbs')).toString(),
+	SliderIOS: fs.readFileSync(path.join(__dirname, '/partials/SliderPartial.hbs')).toString(),
+	ListView: fs.readFileSync(path.join(__dirname, '/partials/ListViewPartial.hbs')).toString(),
+	Navbar: fs.readFileSync(path.join(__dirname, '/partials/NavbarPartial.hbs')).toString(),
+});
 
 
 var templatePath = path.join(__dirname, 'template.hbs');
@@ -17,15 +28,14 @@ function removeFlexGrow(styleData){
 		for(var key in styleData[keys]){
 			if(key === "flex-grow"){
 				newStyleData[keys]['width'] = (styleData[keys][key] / 100) * 375;
-
 			}else{
 				newStyleData[keys][key] = styleData[keys][key];
 			}
 		}
 	}
-
 	return newStyleData;
 }
+
 
 module.exports = function(pages, userId, buildId) {
 		pages = pages.map(function(page){
@@ -59,67 +69,7 @@ module.exports = function(pages, userId, buildId) {
 			})
 			.then(function(templateFile) {
 				console.log("loading template");
-				Handlebars.registerHelper('getProp', function(propKey, propValue) {
-					if(propKey !== "value"){					
-						if (propKey === "source") return "{{uri: '" + propValue + "'}} ";
-						else if (typeof propKey === "string") return "'" + propValue + "' ";
-						else return propValue + " ";
-					}else return;
-				});
-
-				Handlebars.registerHelper('parentStyle', function(className){
-					className = className.slice(1);
-					if(globalStyle[className]) return 'style={[styles.'+ ChangeCase.camelCase(className)+']}';
-					else return;
-				});
-
-				Handlebars.registerHelper('supplyProp', function(propKey){
-					if(propKey!== "value"){
-						return propKey + '=';
-					}else return;
-				});
-
-				Handlebars.registerHelper('valueHelper', function(child){
-					if(child.props[0] !== null && child.props[0].value) return child.props[0].value;
-					else return;
-				});
-
-				Handlebars.registerHelper('camelCase', function(string) {
-					return ChangeCase.camelCase(string);
-				});
-
-				Handlebars.registerHelper('appName', function(){
-					if(pages.length>1) return 'module.exports';
-					else return 'var reactNative';
-				});
-
-				Handlebars.registerHelper('multiPageCheck', function(){
-					if(pages.length === 1) return "AppRegistry.registerComponent('reactNative', () => reactNative);";
-					else return;
-				});
-
-				Handlebars.registerHelper('typeCheck', function(type){
-					if(type === "Navbar") return "Text";
-					else if(type === "Map") return "MapView";
-					else return type;
-				});
-
-				Handlebars.registerHelper('removePx', function(string, styleType) {
-					if(typeof string === "string"){	
-						string = string.replace(/px$/, "");
-						
-						if(string.match(/[^0-9]|^\./) === null) string = Number(string);
-						else string = "'" + string + "'";
-					}
-
-					if(styleType === "height" || styleType==="width"){
-						string = string * 1.25;
-						if(styleType === "height" && string>667) string = 667;
-						if(styleType === "width" && string>375) string = 375;
-					}
-					return string;
-				});
-
+				
 				var createTemplate = Handlebars.compile(templateFile);
 
 				var templateArr = [];
@@ -177,9 +127,11 @@ module.exports = function(pages, userId, buildId) {
 
 					templateArr.push(createTemplate({
 						tree: data,
-						styleTree: styleData
+						styleTree: styleData,
+						pages: pages,
+						globalStyle: globalStyle
 					}));
-
+					
 				});
 
 				var promiseArr = [];
@@ -200,7 +152,7 @@ module.exports = function(pages, userId, buildId) {
 			})
 			.then(function(finaltemp) {
 				console.log("file saved!");
-				return tabBarGenerator(tabBarData, tabBarStyleData, title, newProjectDir);
+				return multipageGenerator(tabBarData, tabBarStyleData, title, newProjectDir);
 			})
 			.then(function(tabBarFile){
 				return newProjectDir;
@@ -221,9 +173,6 @@ module.exports = function(pages, userId, buildId) {
 				});
 			});
 
-
-
-		// Handlebars.registerPartial('View', require('fs').readFileSync('./testPartial.hbs'));
 };
 
 

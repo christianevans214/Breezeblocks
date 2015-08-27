@@ -3,6 +3,10 @@ var ChangeCase = require('change-case');
 var path = require('path');
 var fs = require('fs-extra');
 
+Handlebars.registerHelper('pascalCase', function(string) {
+	return ChangeCase.pascalCase(string);
+});
+
 module.exports = function(data, styleData, titles, newProjectDir){
 	var templatePath = path.join(__dirname, 'tabBarIOSTemplate.hbs');
 
@@ -57,27 +61,6 @@ module.exports = function(data, styleData, titles, newProjectDir){
 		})
 		.then(function(templateFile){
 
-			Handlebars.registerHelper('getProp', function(propKey, propValue) {
-				if (propKey === "source") return "{{uri: '" + propValue + "'}}";
-				else if (propKey === "resizeMode") return "'" + propValue + "'";
-				else return propValue;
-			});
-
-			Handlebars.registerHelper('pascalCase', function(string) {
-				return ChangeCase.pascalCase(string);
-			});
-
-			Handlebars.registerHelper('removePx', function(string) {
-				if(typeof string === "string"){	
-					string = string.replace(/px$/, "");
-					
-					if(string.match(/[^0-9]|\./) === null) string = Number(string);
-					else string = "'" + string + "'";
-				}
-
-				return string;
-			});
-
 			var createTemplate = Handlebars.compile(templateFile);
 
 			var tabBarTemplate = createTemplate({
@@ -99,7 +82,7 @@ module.exports = function(data, styleData, titles, newProjectDir){
 		})
 		.then(function(tabBarTemplate){
 			return new Promise(function(resolve, reject) {
-				fs.copy(__dirname+'/tabBarIndex.ios.js', newProjectDir+"/index.ios.js", function(err) {
+				fs.copy(__dirname+'/multipageIndex.ios.js', newProjectDir+"/index.ios.js", function(err) {
 					if (err) reject(err);
 					else resolve('index created');
 				});

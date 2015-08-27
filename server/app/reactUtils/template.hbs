@@ -17,16 +17,16 @@ var {
   View,
 } = React;
 
-{{appName}} = React.createClass({
+{{appName pages}} = React.createClass({
     render: function() {
         return (
           <View>
             {{#each tree}}
-            <View {{parentStyle this.className}}>
-              {{#each this.children}}
-              <{{typeCheck this.type}} {{#each this.props}}{{#each this}}{{supplyProp @key}}{{{getProp @key this}}}{{/each }}{{/each }}style={[{{#each this.className}}{{#unless @first}}styles.{{camelCase this}}{{#unless @last}}, {{/unless }}{{/unless }}{{/each }}]}>{{valueHelper this}}
-              </{{typeCheck this.type}}>
-              {{/each}}
+            <View {{parentStyle this.className @root.globalStyle}}>
+                {{#each this.children}}
+                {{> (selectTypePartial this.type) }}
+
+                {{/each}}
             </View>
             {{/each }}
           </View>
@@ -45,5 +45,5 @@ var styles = StyleSheet.create({
     {{/each }}
 })
 
-{{{multiPageCheck}}}
+{{{multiPageCheck pages}}}
 
