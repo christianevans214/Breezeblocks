@@ -22,11 +22,11 @@ var {
         return (
           <View>
             {{#each tree}}
-            <View {{parentStyle this.className}}>
+            <View {{parentStyle this.className @root.globalStyle}}>
                 {{#each this.children}}
                 {{> (selectTypePartial this.type) }}
-                {{/each}}
                 
+                {{/each}}
             </View>
             {{/each }}
           </View>
