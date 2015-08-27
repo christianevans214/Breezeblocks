@@ -17,15 +17,15 @@ var {
   View,
 } = React;
 
-var reactNative = React.createClass({
+{{appName}} = React.createClass({
     render: function() {
         return (
           <View>
             {{#each tree}}
             <View {{parentStyle this.className}}>
               {{#each this.children}}
-              <{{this.type}} {{#each this.props}}{{#each this}}{{supplyProp @key}}{{{getProp @key this}}}{{/each }}{{/each }}style={[{{#each this.className}}{{#unless @first}}styles.{{camelCase this}}{{#unless @last}}, {{/unless }}{{/unless }}{{/each }}]}>{{valueHelper this}}
-              </{{this.type}}>
+              <{{typeCheck this.type}} {{#each this.props}}{{#each this}}{{supplyProp @key}}{{{getProp @key this}}}{{/each }}{{/each }}style={[{{#each this.className}}{{#unless @first}}styles.{{camelCase this}}{{#unless @last}}, {{/unless }}{{/unless }}{{/each }}]}>{{valueHelper this}}
+              </{{typeCheck this.type}}>
               {{/each}}
             </View>
             {{/each }}
@@ -45,5 +45,5 @@ var styles = StyleSheet.create({
     {{/each }}
 })
 
-AppRegistry.registerComponent('reactNative', () => reactNative);
+{{{multiPageCheck}}}
 

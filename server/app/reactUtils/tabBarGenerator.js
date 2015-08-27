@@ -4,7 +4,6 @@ var path = require('path');
 var fs = require('fs-extra');
 
 module.exports = function(data, styleData, titles, newProjectDir){
-
 	var templatePath = path.join(__dirname, 'tabBarIOSTemplate.hbs');
 
 	if(data){
@@ -22,8 +21,10 @@ module.exports = function(data, styleData, titles, newProjectDir){
 		}, {});
 
 		var titleLinks = titles.reduce(function(previousValue, title){
-			var titleRemovedJS = title.replace(/\.js/, "");
-			previousValue[titleRemovedJS] = "./" + title;
+			if(title !== 'index.ios.js'){			
+				var titleRemovedJS = title.replace(/\.js/, "");
+				previousValue[titleRemovedJS] = "./" + title;
+			}
 			return previousValue;
 		}, {});
 
