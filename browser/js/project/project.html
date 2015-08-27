@@ -44,30 +44,31 @@
 
 	<div id="style" class="edit-blade col-md-2 col-sm-2">
 		<!-- edit props: -->
+		<div class="styling-panel">
 			<span class="littleLabel">Project Title</span>  <input type="text" ng-model="project.title" placeholder = "Change Title of Project"></input>
-		</br>
+			</br>
 
-		<div class="bottomButtonContainer">
-		<div class="bottomButton" ng-click="deleteElem()"><span class="glyphicon glyphicon-remove-sign" id="zoomin" ></span> Delete Selected</div>
-		<div class="bottomButton" ng-click="removeRow()"><span class="glyphicon glyphicon-trash" id="zoomout"></span> Delete Container</div>
-		</div>
-		<div id="controlsContainer" >
-			<div class="propsContainer">
-			<css-style></css-style>
-		</div>
-		</br>
-			<div class="propsContainer" ng-if='currentlySelected'>
-			<nav-or-text-edit ng-if="(activeHTMLEdit.type === 'Navbar')||(activeHTMLEdit.type === 'Text')"></nav-or-text-edit>
-			<image-edit ng-if="activeHTMLEdit.type === 'Image'"></image-edit>
-			<list-view-edit ng-if="activeHTMLEdit.type === 'ListView'"></list-view-edit>
-			<scroll-view-edit ng-if="activeHTMLEdit.type === 'ScrollView'"></scroll-view-edit>
-			<map-view-edit ng-if="activeHTMLEdit.type === 'MapView'"></map-view-edit>
-			<slider-ios-edit ng-if="activeHTMLEdit.type === 'SliderIOS'"></slider-ios-edit>
-			<switch-ios-edit ng-if="activeHTMLEdit.type === 'SwitchIOS'"></switch-ios-edit>
-			<tab-bar-ios-edit ng-if="activeHTMLEdit.type === 'TabBarIOS'"></tab-bar-ios-edit>
+			<div class="bottomButtonContainer">
+				<div class="bottomButton" ng-click="deleteElem()"><span class="glyphicon glyphicon-remove-sign" id="zoomin" ></span> Delete Selected</div>
+				<div class="bottomButton" ng-click="removeRow()"><span class="glyphicon glyphicon-trash" id="zoomout"></span> Delete Container</div>
+			</div>
+			<div id="controlsContainer" >
+				<div class="propsContainer">
+					<css-style></css-style>
+				</div>
+			</br>
+				<div class="propsContainer" ng-if='currentlySelected'>
+					<nav-or-text-edit ng-if="(activeHTMLEdit.type === 'Navbar')||(activeHTMLEdit.type === 'Text')"></nav-or-text-edit>
+					<image-edit ng-if="activeHTMLEdit.type === 'Image'"></image-edit>
+					<list-view-edit ng-if="activeHTMLEdit.type === 'ListView'"></list-view-edit>
+					<scroll-view-edit ng-if="activeHTMLEdit.type === 'ScrollView'"></scroll-view-edit>
+					<map-view-edit ng-if="activeHTMLEdit.type === 'MapView'"></map-view-edit>
+					<slider-ios-edit ng-if="activeHTMLEdit.type === 'SliderIOS'"></slider-ios-edit>
+					<switch-ios-edit ng-if="activeHTMLEdit.type === 'SwitchIOS'"></switch-ios-edit>
+					<tab-bar-ios-edit ng-if="activeHTMLEdit.type === 'TabBarIOS'"></tab-bar-ios-edit>
+				</div>
 			</div>
 		</div>
-
 		<div class="bottomButtonContainer">
 			<div class="bottomButton left" ng-click = "saveProject(project)"><span class="glyphicon glyphicon-floppy-disk"> </span> Save Project</div>
 			<div class="bottomButton right" ng-click="exportProject(project, user, tabBar)"><span class="glyphicon glyphicon-cloud-upload"></span> Export Project</div>
