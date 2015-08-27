@@ -24,7 +24,7 @@ app.factory("UILibraryFactory", function() {
 				component: "SwitchIOS",
 				backgroundImage: '/images/sliderbutton.png'
 			}, {
-				component: "Map",
+				component: "MapView",
 				backgroundImage: '/images/map.png'
 			}, {
 				component: "SliderIOS",
