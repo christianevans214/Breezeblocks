@@ -23,10 +23,10 @@ var {
           <View>
             {{#each tree}}
             <View {{parentStyle this.className}}>
-              {{#each this.children}}
-
-              {{> (selectTypePartial this.type) }}
-              {{/each}}
+                {{#each this.children}}
+                {{> (selectTypePartial this.type) }}
+                {{/each}}
+                
             </View>
             {{/each }}
           </View>

@@ -7,7 +7,8 @@ var handlebarHelpers = require('./handlebarHelpers')();
 
 Handlebars.registerPartial({
 	Image: fs.readFileSync(path.join(__dirname, '/partials/ImagePartial.hbs')).toString(),
-	Text: fs.readFileSync(path.join(__dirname, '/partials/TextPartial.hbs')).toString()
+	Text: fs.readFileSync(path.join(__dirname, '/partials/TextPartial.hbs')).toString(),
+	MapView: fs.readFileSync(path.join(__dirname, '/partials/TextPartial.hbs')).toString()
 });
 
 var tabBarGenerator = require('./tabBarGenerator.js');

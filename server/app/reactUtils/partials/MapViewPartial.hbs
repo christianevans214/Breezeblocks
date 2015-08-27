@@ -1,4 +1,4 @@
-<{{this.type}}
+<{{typeCheck this.type}} 
 	{{#each this.props}}{{#each this}}{{supplyProp @key}}{{{getProp @key this}}}{{/each }}{{/each }}
 	style={[{{#each this.className}}{{#unless @first}}styles.{{camelCase this}}{{#unless @last}}, {{/unless }}{{/unless }}{{/each }}]}>
-</{{this.type}}>
+</{{typeCheck this.type}}>

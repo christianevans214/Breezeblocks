@@ -58,7 +58,10 @@ module.exports= function(){
 		},
 		selectTypePartial: function (type) {
 			return type;
-		}
+		},
+/*		fixCoords: function(prop){
+			if(prop)
+		}*/
 
 	});
 
