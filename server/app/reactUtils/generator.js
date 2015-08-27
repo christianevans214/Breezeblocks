@@ -5,8 +5,10 @@ var fs = require('fs-extra');
 var zip = new require('node-zip')();
 var handlebarHelpers = require('./handlebarHelpers')();
 
-Handlebars.registerPartial('Image', fs.readFileSync(path.join(__dirname, 'Image.hbs')).toString());
-Handlebars.registerPartial('Text', fs.readFileSync(path.join(__dirname, 'Text.hbs')).toString());
+Handlebars.registerPartial('Image', fs.readFileSync(path.join(__dirname, '/partials/ImagePartial.hbs')).toString());
+Handlebars.registerPartial('Text', fs.readFileSync(path.join(__dirname, '/partials/TextPartial.hbs')).toString());
+Handlebars.registerPartial('ScrollView', fs.readFileSync(path.join(__dirname, '/partials/ScrollViewPartial.hbs')).toString());
+
 
 var tabBarGenerator = require('./tabBarGenerator.js');
 
@@ -27,7 +29,6 @@ function removeFlexGrow(styleData){
 			}
 		}
 	}
-
 	return newStyleData;
 }
 
