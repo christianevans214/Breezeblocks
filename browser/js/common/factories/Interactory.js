@@ -35,14 +35,14 @@ app.factory("Interactory", function($compile, ParseTreeFactory, CssTreeFactory, 
 				})
 				.on('resizemove', function(event) {
 					// console.log("scale percent",ZoomService.getZoom())
-					var scaleRatio = ZoomService.getZoom()/100;
+					var scaleRatio = ZoomService.getZoom() / 100;
 					var target = event.target,
 						x = (parseFloat(target.getAttribute('data-x')) || 0),
 						y = (parseFloat(target.getAttribute('data-y')) || 0);
 
 					// update the element's style
-					target.style.width = event.rect.width/scaleRatio + 'px';
-					target.style.height = event.rect.height/scaleRatio + 'px';
+					target.style.width = event.rect.width / scaleRatio + 'px';
+					target.style.height = event.rect.height / scaleRatio + 'px';
 					// if($(event.target).children) console.log("HEY HERE'S THE RESIZING INFO", $(event.target).children[0]);
 					// translate when resizing from top or left edges
 					x += event.deltaRect.left;
