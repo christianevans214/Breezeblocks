@@ -33,6 +33,7 @@
 	<div id="outer-canvas" class="edit-blade col-md-8 col-sm-8">
 			<!-- <ui-drop-area class="drop-area ng-class:'getClass()'"></ui-drop-area> -->
 		<div id="app">
+			<div id="statusbar"></div>
 			<div ng-repeat="View in project.html" dnd-list="View.children" hover-x class='{{View.className.join(" ")}}' ng-class="{dropBorder: showDropZones}"
 				style='{{convertObjToInlineStyle(View.className[1])}}'
 				ng-include='"js/common/directives/ui-components/ui-drop-area/ui-drop-area.html"'
