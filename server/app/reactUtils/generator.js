@@ -85,6 +85,14 @@ module.exports = function(pages, userId, buildId) {
 						if(htmlElement.children && htmlElement.children.length>0){						
 							if(htmlElement.children[0].type === "TabBarIOS" && index === 0){
 								tabBarData = htmlElement;
+								console.log('in tabbar stuff')
+								for(var key in styleData){
+									if(key.match(/tabbarios/)){
+										for(var childKey in styleData[key]){
+											if(childKey === "width") delete styleData[key][childKey];
+										}
+									}
+								}
 								tabBarStyleData = styleData;
 							}
 							return htmlElement.children[0].type !== "TabBarIOS"; 
@@ -152,6 +160,7 @@ module.exports = function(pages, userId, buildId) {
 			})
 			.then(function(finaltemp) {
 				console.log("file saved!");
+				console.log(tabBarStyleData)
 				return multipageGenerator(tabBarData, tabBarStyleData, title, newProjectDir);
 			})
 			.then(function(tabBarFile){
