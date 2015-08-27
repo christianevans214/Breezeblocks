@@ -1,4 +1,4 @@
 <{{typeCheck this.type}} 
 	style={[{{#each this.className}}{{#unless @first}}styles.{{camelCase this}}{{#unless @last}}, {{/unless }}{{/unless }}{{/each }}]}>
-	{{valueHelper this}}
+	{{{valueHelper this}}}
 </{{typeCheck this.type}}>
