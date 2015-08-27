@@ -345,3 +345,9 @@ ui-thumbnail{
 	flex-direction: column;
 	justify-content: space-between;
 }
+#style {
+	display: flex;
+	flex-direction: column;
+	height: calc(100vh - 47px);
+	justify-content: space-between;
+}
