@@ -42,7 +42,11 @@ h1{
 }
 
 .project-button{
+	box-shadow: inset 0px 1px 0px #444;
 	background: linear-gradient(to bottom, #888 0%, #444 100%);
+	&:hover{
+		box-shadow: inset 0px 1px 0px #999;
+	}
 }
 
 .project-block{
@@ -50,5 +54,5 @@ h1{
 }
 
 .projectListItem{
-	border-radius: 5%;
+	border-radius: 10px;
 }

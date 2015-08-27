@@ -8,6 +8,7 @@ app.directive("uiThumbnail", function($rootScope) {
 		templateUrl: 'js/common/directives/ui-components/ui-thumbnail/ui-thumbnail.html',
 		link: function(scope, elem, attr) {
 			var clone;
+			var spanClone;
 
 			elem.css('background-image', "url(" + scope.background + ")");
 			elem.addClass('thumb')
@@ -18,11 +19,15 @@ app.directive("uiThumbnail", function($rootScope) {
 					inertia: true,
 					// call this function on every dragmove event
 					onstart: function(event) {
-						console.log("clicked")
-						console.log(event.target)
-						var holder = $(event.target).parent()
-						clone = $(event.target).clone()
+						var $thumbnail = $(event.target);
+						var $span = $thumbnail.next();
+						var holder = $thumbnail.parent()
+
+						clone = $thumbnail.clone()
+						spanClone = $span.clone();
+						$span.remove();
 						clone.hide().appendTo(holder);
+						spanClone.appendTo(holder);
 					},
 					onmove: dragMoveListener,
 					// call this function on every dragend event
