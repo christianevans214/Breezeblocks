@@ -1,6 +1,6 @@
-
-
-
+// *{
+// 	border: 1px solid black;
+// }
 // #tools{
 // 	border: 1px solid black;
 // }
@@ -8,6 +8,37 @@
 	transform: scale(1)
 }
 
+
+accordion{
+	*{
+		font-size: 8pt;
+	}
+
+	.panel-body{
+		color: #555;
+	}
+
+	.SliderHolder{
+	hr{
+		margin: 0px;
+		padding: 0px;
+	}
+	p{
+		text-align: center;
+	}
+	display: inline;
+	span{
+		display: inline-block;
+		width: 50px;
+	}
+	input[type="range"]{
+		margin-left: 5px;
+		display: inline;
+		width: 70%;
+	}
+}
+
+}
 
 .edit-container{
 	margin: 0 auto;
@@ -47,6 +78,7 @@ div[dnd-list]{
 	padding: 10px;
 	color: #0dd;
 	margin: 0px;
+	margin-top: 0;
 }
 
 #app{
@@ -59,7 +91,7 @@ div[dnd-list]{
 	margin-top: 10vh;
 	background: white;
 	display: flex;
-	overflow: scroll;
+	overflow: auto;
 	color: black;
 }
 
@@ -68,6 +100,7 @@ input{
 }
 
 #outer-canvas{
+	position: relative;
 	z-index: 0;
 	background-image: url('/images/grey_wash_wall.png');
 	box-shadow: inset 0 0 10px #000000;
@@ -79,9 +112,9 @@ input{
 
 .bottomButtonContainer{
 	display: flex;
-	align-self: flex-end;
-	padding: 0px;
-	margin: 0px;
+	// align-self: flex-end;
+	margin-bottom: 2px;
+	// margin: 0px;
 }
 
 #imageSelect{
@@ -181,10 +214,36 @@ input[type=color]{
 }
 .thumbHolder{
 	box-sizing: border-box;
-	margin: 4px;
+	margin: 0px;
+	// margin: 0.2vh;
 	transition: .2s;
+	&:hover .description-text{
+		transition: .5s;
+		opacity: .6;
+	}
+	&:active .description-text{
+		opacity: .0;
+	}
 	&:hover{
 		margin-left: 15px;
+	}
+	ui-thumbnail{
+		display: inline-block;
+	}
+	.description-text{
+		z-index: 100;
+		font-size: 1.5vh;
+		position:absolute;
+		padding-top: 2.1vh;
+		display: inline-block;
+		padding-left: 20px;
+		letter-spacing: 3px;
+		color: white;
+		font-weight: 100;
+		opacity: 0;
+	}
+	.component-description-container{
+		display: inline-block;
 	}
 }
 
@@ -205,8 +264,8 @@ input[type=color]{
 }
 
 ui-thumbnail{
-	width: 50px;
-	height: 50px;
+	width: 6vh;
+	height: 6vh;
 	border: 2px solid #0dd;
 	border-radius: 4px;
 	position: relative;
@@ -226,7 +285,7 @@ ui-thumbnail{
 	cursor: pointer;
 	align-self: center;
 	margin: 0 auto;
-	}
+}
 
 
 .propsContainer{
@@ -283,11 +342,11 @@ ui-thumbnail{
 }
 
 .footer{
-	display: inline-block;
+	color: white;
 	position: absolute;
-	bottom: 0;
-	padding: 2px;
-	width: 100%;
+	left: 16.7%;
+	bottom: 0%;
+	width: 66.6%;
 	background: #333;
 	font-size: 14pt;
 	border-top: 1px solid #222;
@@ -301,11 +360,11 @@ ui-thumbnail{
 
 	}
 	span{
-
-		padding-left: 4px;
+		font-size: 14px;
+		margin-left:-7px;
 	}
 	.glyphicon{
-		font-size: 10pt;
+		font-size: 14px;
 		padding: 3px;
 		margin-top: -3px;
 	}
@@ -337,4 +396,17 @@ ui-thumbnail{
 .tab-p {
 	font-size: 8px; 
 	color: black;
+}
+
+#elements{
+	display: flex;
+	height: calc(100vh - 47px);
+	flex-direction: column;
+	justify-content: space-between;
+}
+#style {
+	display: flex;
+	flex-direction: column;
+	height: calc(100vh - 47px);
+	justify-content: space-between;
 }
