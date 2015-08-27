@@ -7,21 +7,19 @@
 
 		<div id="elementsContainer">
 			<div class="thumbHolder">
-			<ui-thumbnail background="'images/box.png'" component="DropArea" id="dropThumb"></ui-thumbnail>
+			<div class="inner-thumb">
+
+				<ui-thumbnail background="'images/box.png'" component="DropArea" id="dropThumb"></ui-thumbnail>
+				<span class="description-text">DROP BOX</span>
 			</div>
-			<!-- this should really be an ng-repeat! -->
-
-	<!-- 		<div class="thumbHolder">
-			<ui-thumbnail style= "height: 75px; width: 75px; display: block" component="uiLibrary.Navbar" id="elemThumb"></ui-thumbnail>
-			</div >
-
-			<div class="thumbHolder">
-			<ui-thumbnail style= "height: 75px; width: 75px; display: block; background-size: cover" component="uiLibrary.Image" id="elemThumb"></ui-thumbnail>
-			</div> -->
+			</div>
 			<div class = "thumbHolder" ng-repeat="thumbnail in thumbnails">
-			<ui-thumbnail background="thumbnail.backgroundImage" component="thumbnail.component" id="elemThumb"></ui-thumbnail>
+				<div class="inner-thumb">
+					<ui-thumbnail background="thumbnail.backgroundImage" component="thumbnail.component" id="elemThumb"></ui-thumbnail>
+					<span class="description-text">{{thumbnail.component | uppercase}}</span>
+				</div>
 			</div>
-				<div id="checkboxcontainer"><input type="checkbox" ng-model="showDropZones" checked="checked"></input>Show Drop Zones</div>
+			<div id="checkboxcontainer"><input type="checkbox" ng-model="showDropZones" checked="checked"></input>Show Drop Zones</div>
 		</div>
 
 		<div id="bottomButtonContainer block">

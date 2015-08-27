@@ -182,9 +182,27 @@ input[type=color]{
 .thumbHolder{
 	box-sizing: border-box;
 	margin: 4px;
+	padding: 6px 0;
 	transition: .2s;
+	&:hover .description-text{
+		transition: .5s;
+		opacity: .6;
+	}
 	&:hover{
 		margin-left: 15px;
+	}
+	ui-thumbnail{
+		display: inline-block;
+	}
+	.description-text{
+		position:absolute;
+		padding-top: 15px;
+		display: inline-block;
+		padding-left: 30px;
+		letter-spacing: 3px;
+		color: white;
+		font-weight: 100;
+		opacity: 0;
 	}
 }
 
