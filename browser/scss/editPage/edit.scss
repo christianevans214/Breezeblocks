@@ -7,6 +7,37 @@
 }
 
 
+accordion{
+	*{
+		font-size: 8pt;
+	}
+
+	.panel-body{
+		color: #555;
+	}
+
+	.SliderHolder{
+	hr{
+		margin: 0px;
+		padding: 0px;
+	}
+	p{
+		text-align: center;
+	}
+	display: inline;
+	span{
+		display: inline-block;
+		width: 50px;
+	}
+	input[type="range"]{
+		margin-left: 5px;
+		display: inline;
+		width: 70%;
+	}
+}
+
+}
+
 .edit-container{
 	margin: 0 auto;
 	height: 100%;
@@ -244,7 +275,7 @@ ui-thumbnail{
 	cursor: pointer;
 	align-self: center;
 	margin: 0 auto;
-	}
+}
 
 
 .propsContainer{

@@ -12,21 +12,27 @@
 <p><span class="littleLabel">Background Color</span>
 <input type="color" ng-model='activeCSSEdit["background-color"]'></p>
 <hr>
-<div class="SliderHolder">
-<p class="littleLabel">PADDING:</p>
-<span>TOP:</span><input type="range" ng-model="activeCSSEdit['padding-top']"></br>
-<span>LEFT:</span><input type="range" ng-model="activeCSSEdit['padding-left']"></br>
-<span>RIGHT:</span><input type="range" ng-model="activeCSSEdit['padding-right']"></br>
-<span>BOTTOM:</span><input type="range" ng-model="activeCSSEdit['padding-bottom']">
-</div>
-<hr>
-<div class="SliderHolder">
-<p class="littleLabel">MARGIN:</p>
-<span>TOP:</span><input type="range" ng-model="activeCSSEdit['margin-top']"></br>
-<span>LEFT:</span><input type="range" ng-model="activeCSSEdit['margin-left']"></br>
-<span>RIGHT:</span><input type="range" ng-model="activeCSSEdit['margin-right']"></br>
-<span>BOTTOM:</span><input type="range" ng-model="activeCSSEdit['margin-bottom']">
-</div>
+  <accordion close-others="true">
+  	   <accordion-group heading="PADDING">
+
+	<div class="SliderHolder">
+	<span>TOP:</span><input type="range" ng-model="activeCSSEdit['padding-top']"></br>
+	<span>LEFT:</span><input type="range" ng-model="activeCSSEdit['padding-left']"></br>
+	<span>RIGHT:</span><input type="range" ng-model="activeCSSEdit['padding-right']"></br>
+	<span>BOTTOM:</span><input type="range" ng-model="activeCSSEdit['padding-bottom']">
+	</div>
+		</accordion-group>
+		    <accordion-group heading="MARGIN">
+	<div class="SliderHolder">
+	<span>TOP:</span><input type="range" ng-model="activeCSSEdit['margin-top']"></br>
+	<span>LEFT:</span><input type="range" ng-model="activeCSSEdit['margin-left']"></br>
+	<span>RIGHT:</span><input type="range" ng-model="activeCSSEdit['margin-right']"></br>
+	<span>BOTTOM:</span><input type="range" ng-model="activeCSSEdit['margin-bottom']">
+	</div>
+		</accordion-group>
+
+  </accordion>
+
 <hr>
 <span class="littleLabel">FlexGrowSize</span><div class="bottomButton littleButton" type="button" value="-" ng-click="lessFlex()" ng-model= "activeCSSEdit['flex-grow']"><span class="glyphicon glyphicon-minus"></div><div class="bottomButton littleButton" type="button" value="+" ng-click="moreFlex()"  ng-model= "activeCSSEdit['flex-grow']"><span class="glyphicon glyphicon-plus"></span></div>
 </form>
