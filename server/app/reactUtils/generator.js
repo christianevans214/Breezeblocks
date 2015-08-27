@@ -4,6 +4,7 @@ var path = require('path');
 var fs = require('fs-extra');
 var zip = new require('node-zip')();
 var handlebarHelpers = require('./handlebarHelpers')();
+var multipageGenerator = require('./multipageGenerator.js');
 
 Handlebars.registerPartial({
 	Image: fs.readFileSync(path.join(__dirname, '/partials/ImagePartial.hbs')).toString(),
@@ -13,8 +14,6 @@ Handlebars.registerPartial({
 	SwitchIOS: fs.readFileSync(path.join(__dirname, '/partials/SwitchPartial.hbs')).toString(),
 	SliderIOS: fs.readFileSync(path.join(__dirname, '/partials/SliderPartial.hbs')).toString(),
 });
-
-var tabBarGenerator = require('./tabBarGenerator.js');
 
 
 var templatePath = path.join(__dirname, 'template.hbs');
@@ -27,7 +26,6 @@ function removeFlexGrow(styleData){
 		for(var key in styleData[keys]){
 			if(key === "flex-grow"){
 				newStyleData[keys]['width'] = (styleData[keys][key] / 100) * 375;
-
 			}else{
 				newStyleData[keys][key] = styleData[keys][key];
 			}
@@ -152,7 +150,7 @@ module.exports = function(pages, userId, buildId) {
 			})
 			.then(function(finaltemp) {
 				console.log("file saved!");
-				return tabBarGenerator(tabBarData, tabBarStyleData, title, newProjectDir);
+				return multipageGenerator(tabBarData, tabBarStyleData, title, newProjectDir);
 			})
 			.then(function(tabBarFile){
 				return newProjectDir;
