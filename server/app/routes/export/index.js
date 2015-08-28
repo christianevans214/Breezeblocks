@@ -10,7 +10,6 @@ var Github = require('github-api');
 var createNewRepo = require('../../reactUtils/githubCreator');
 var writeFiles = require('../../reactUtils/writeFiles');
 var fileContent = require('../../reactUtils/recursiveRead');
-var checkRepoName = require('../../reactUtils/repoNameChecker');
 var _ = require('lodash');
 
 //for deep inspection in console
