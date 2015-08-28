@@ -328,7 +328,7 @@ ui-thumbnail{
 	}
 	margin-bottom: 0px;
 	input[type="number"]{
-		width: 30px;
+		width: 35px;
 	}
 }
 
@@ -337,25 +337,7 @@ ui-thumbnail{
 	margin: 2px;
 	text-shadow: 2px 2px 2px #444;
 }
-.SliderHolder{
-	hr{
-		margin: 0px;
-		padding: 0px;
-	}
-	p{
-		text-align: center;
-	}
-	display: inline;
-	span{
-		display: inline-block;
-		width: 56px;
-	}
-	input[type="range"]{
-		margin-left: 5px;
-		display: inline;
-		width: 70%;
-	}
-}
+
 .appear{
 	opacity: 1
 }
