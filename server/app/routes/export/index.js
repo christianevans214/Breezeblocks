@@ -14,7 +14,7 @@ var _ = require('lodash');
 var chalk = require('chalk')
 
 //for deep inspection in console
-var util = require('util');
+// var util = require('util');
 // console.log(util.inspect(variable, false, null));
 
 module.exports = router;
@@ -23,9 +23,7 @@ router.post('/', function (req, res, next) {
 	generator(req.body.pages, req.body.userId, req.body.buildId)
 	.then(function(zippedProject){
 		if(!zippedProject) throw err;
-		else{
-			console.log('download complete');
-		}
+
 		return zippedProject;
 
 	})
@@ -43,7 +41,7 @@ router.post('/', function (req, res, next) {
 					else{
 						console.log('zipped file was sent');
 					}
-				})
+				});
 				return;
 			}
 
@@ -64,18 +62,17 @@ router.post('/', function (req, res, next) {
 				return writeFiles(req.body.userId, req.body.buildId, repo, 'reactNative');
 			})
 			.then(function(){
-				console.log(chalk.bgGreen("Files complete"));
+				console.log(chalk.black.bgGreen("Files complete"));
 				console.log(chalk.magenta("repoData.html_url"), chalk.blue.underline(repoData.html_url));
 				res.status(201).json(repoData.html_url);
 				var directoryPath = path.join(__dirname,'../../reactUtils/UserBuilds', req.body.userId);
 				
 				fs.remove(directoryPath, function(err){
 					if(err) console.error("error deleting", err);
-					else console.log('files were deleted');
 				});
-			})
-		})
+			});
+		});
 	})
 	.then(null, next);
-})
+});
 
