@@ -38,7 +38,7 @@ router.post('/', function (req, res, next) {
 			// user is not logged in with github
 			if(!currentUser.github.username){
 				console.log("No github account...");
-				res.status(201).sendFile(zippedProject, function(err){
+				res.status(201).download(zippedProject, function(err){
 					if(err) throw err;
 					else{
 						console.log('zipped file was sent');
@@ -66,6 +66,12 @@ router.post('/', function (req, res, next) {
 			.then(function(){
 				console.log("repoData.html_url", repoData.html_url)
 				res.status(201).json(repoData.html_url);
+				var directoryPath = path.join(__dirname,'../../reactUtils/UserBuilds', req.body.userId);
+				
+				fs.remove(directoryPath, function(err){
+					if(err) console.error("error deleting", err);
+					else console.log('files were deleted');
+				});
 			})
 		})
 	})

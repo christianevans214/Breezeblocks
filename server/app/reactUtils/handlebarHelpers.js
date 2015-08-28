@@ -33,8 +33,8 @@ module.exports= function(){
 		camelCase: function(string) {
 			return ChangeCase.camelCase(string);
 		},
-		appName: function(pages){
-			if(pages.length>1) return 'module.exports';
+		appName: function(pages, bool){
+			if(pages.length>1 || bool) return 'module.exports';
 			else return 'var reactNative';
 		},
 		multiPageCheck: function(pages){

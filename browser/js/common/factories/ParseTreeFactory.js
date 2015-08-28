@@ -51,6 +51,22 @@ app.factory('ParseTreeFactory', function($http) {
 						TabBarIOSItems: []
 					}]
 				})
+			} else if (type === "Text") {
+				filteredViewElem.children.push({
+					type: type,
+					className: ['ui-' + type.toLowerCase(), classToReturn],
+					props: [{
+						value: "Fingerstache veniam dreamcatcher organic authentic, tilde lumbersexual nesciunt farm-to-table mumblecore nostrud. Try-hard chillwave commodo dolor nihil, Thundercats irure 90's Helvetica esse four loko. Kale chips Godard fugiat tempor. Tattooed fugiat viral quinoa"
+					}]
+				})
+			} else if (type === "Navbar") {
+				filteredViewElem.children.push({
+					type: type,
+					className: ['ui-' + type.toLowerCase(), classToReturn],
+					props: [{
+						value: "My Cool App"
+					}]
+				})
 			} else {
 
 				filteredViewElem.children.push({

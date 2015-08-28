@@ -1,4 +1,6 @@
 <div>
 	Text:
-	<input ng-model="activeHTMLEdit.props[0].value"></input>
+	<input ng-if= "activeHTMLEdit.type !== 'Text'" ng-model="activeHTMLEdit.props[0].value"></input>
+	<br ng-if= "activeHTMLEdit.type !== 'Navbar'">
+	<textarea ng-if= "activeHTMLEdit.type !== 'Navbar'" ng-model="activeHTMLEdit.props[0].value"></textarea>
 </div>
