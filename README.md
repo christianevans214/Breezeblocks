@@ -1,7 +1,5 @@
-<img src="http://i.imgur.com/Mx6Glyv.png" title="BreezeBlocks" alt="BreezeBlocks">
-
 # Breeze-Blocks
-
+<img src="http://i.imgur.com/Mx6Glyv.png" title="BreezeBlocks" alt="BreezeBlocks">
 > A drag-and-drop graphical interface to create ReactNative mobile applications
 
 
