@@ -12,9 +12,9 @@ module.exports= function(){
 			}else return;
 		},
 		setMapCoords: function(propKey, propValue){
-		    if(propKey === 'region'){
-		        return 'latitude=' + '{' + propValue['latitude'] + '}' + ' longitude=' + '{' + propValue['longitude'] + '}' + ' latitudeDelta=' + '{' + propValue['latitudeDelta'] + '}' + ' longitudeDelta=' + '{' + propValue['longitudeDelta'] + '}';
-		    }else return ' ' + propKey + '={' + propValue + '}';
+		    if(propKey === 'region') return 'latitude=' + '{' + propValue['latitude'] + '}' + ' longitude=' + '{' + propValue['longitude'] + '}' + ' latitudeDelta=' + '{' + propValue['latitudeDelta'] + '}' + ' longitudeDelta=' + '{' + propValue['longitudeDelta'] + '}';
+		    else if(propKey === 'mapType') return ' ' + propKey + "={'" + propValue + "'}";
+		    else return ' ' + propKey + '={' + propValue + '}';
 		},
 		parentStyle: function(className, globalStyle){
 			className = className.slice(1);
