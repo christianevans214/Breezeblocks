@@ -9,13 +9,32 @@
 }
 
 #statusbar{
-	background-image: url('images/statusbar.png');
 	background-size: cover;
 	width: 100%;
 	height: 3.0%;
+	font-size: 70%;
+	padding: .4%;
+	padding-left: 1.7%;
 	position: absolute;
 	z-index: 10;
 	display: block;
+	#wificon{
+		height: 54%;
+		margin-left: 1.6%;
+		margin-bottom: .7%;
+	}
+	#battericon{
+		float: right;
+		height: 115%;
+		margin-top: -.2%;
+		margin-right: -.3%;
+	}
+	#time{
+		font-size: 95%;
+		display: inline-block;
+		margin: 0 auto;
+		margin-left: 28%;
+	}
 }
 
 accordion{

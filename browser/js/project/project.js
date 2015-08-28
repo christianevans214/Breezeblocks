@@ -1,14 +1,14 @@
-app.config(function($stateProvider) {
+app.config(function ($stateProvider) {
 	$stateProvider
 		.state("userDash.project", {
 			url: '/:projectId',
 			templateUrl: "js/project/project.html",
 			controller: "ProjectController",
 			resolve: {
-				project: function(ProjectFactory, $stateParams) {
+				project: function (ProjectFactory, $stateParams) {
 					return ProjectFactory.getProject($stateParams.projectId)
 				},
-				user: function(UserFactory, $stateParams) {
+				user: function (UserFactory, $stateParams) {
 					return UserFactory.getUser($stateParams.id);
 				}
 			}
@@ -16,7 +16,7 @@ app.config(function($stateProvider) {
 })
 
 
-app.controller("ProjectController", function(ProjectFactory, $rootScope, AuthService, $scope, $compile, UILibraryFactory, Interactory, StyleFactory, ParseTreeFactory, ZoomService, CssTreeFactory, $stateParams, project, user) {
+app.controller("ProjectController", function ($interval, ProjectFactory, $rootScope, AuthService, $scope, $compile, UILibraryFactory, Interactory, StyleFactory, ParseTreeFactory, ZoomService, CssTreeFactory, $stateParams, project, user) {
 	//Takes cssTree, and converts each array of styling into a string 
 	//compatible with inline-styling (injected with angular interpolation on project.html)
 	$scope.convertObjToInlineStyle = CssTreeFactory.objToInlineStyle;
@@ -51,11 +51,11 @@ app.controller("ProjectController", function(ProjectFactory, $rootScope, AuthSer
 	Interactory.Interact($scope);
 
 	//Function eneded to export the project for downloading and uploading to github
-	$scope.pageConcatanator = function(project, user, tabBar, pagesArr) {
+	$scope.pageConcatanator = function (project, user, tabBar, pagesArr) {
 		var tabBarIOSItemsArr = tabBar.props[0].TabBarIOSItems;
 		for (var i = 0; i < tabBarIOSItemsArr.length; i++) {
 			if (tabBarIOSItemsArr[i].projectReference) {
-				user.projects.forEach(function(userProject) {
+				user.projects.forEach(function (userProject) {
 					if (userProject.title === tabBarIOSItemsArr[i].projectReference && userProject.title !== project.title) {
 						pagesArr.push({
 							html: userProject.html,
@@ -69,7 +69,7 @@ app.controller("ProjectController", function(ProjectFactory, $rootScope, AuthSer
 		return pagesArr
 	}
 
-	$scope.exportProject = function(project, user, tabBar) {
+	$scope.exportProject = function (project, user, tabBar) {
 		$scope.exporting = true;
 		var pagesArr = [{
 			html: project.html,
@@ -88,7 +88,7 @@ app.controller("ProjectController", function(ProjectFactory, $rootScope, AuthSer
 			title: project.title
 		}
 		ProjectFactory.exportProject(objToExport)
-			.then(function(ghURL) {
+			.then(function (ghURL) {
 				$scope.exporting = false;
 				$scope.gitHubURL = ghURL
 				$scope.$digest();
@@ -96,10 +96,10 @@ app.controller("ProjectController", function(ProjectFactory, $rootScope, AuthSer
 	}
 
 
-	$scope.saveProject = function(updatedProject) {
+	$scope.saveProject = function (updatedProject) {
 		$scope.showConfirm = true;
 		ProjectFactory.updateProject(updatedProject._id, updatedProject)
-			.then(function(returnedProject) {
+			.then(function (returnedProject) {
 				console.log("This worked");
 				$scope.showConfirm = false;
 				$rootScope.$broadcast("project updated", returnedProject)
@@ -107,13 +107,13 @@ app.controller("ProjectController", function(ProjectFactory, $rootScope, AuthSer
 	}
 
 
-	$scope.pathName = function(elemPath) {
+	$scope.pathName = function (elemPath) {
 		return "js/common/components/" + elemPath + ".html";
 	};
 
 
 
-	$scope.changeSelected = function(className) {
+	$scope.changeSelected = function (className) {
 		console.log("CLASSNAME OF CURRENTLY SELECTED", className)
 		if ($scope.currentlySelected) $scope.currentlySelected.removeClass('shadow')
 		$scope.activeCSSEdit = $scope.project.css[className];
@@ -127,7 +127,7 @@ app.controller("ProjectController", function(ProjectFactory, $rootScope, AuthSer
 		}
 	}
 
-	$scope.activeDropzone = function(className) {
+	$scope.activeDropzone = function (className) {
 		console.log($('.' + className[1]).prev().addClass('appear'));
 
 	}
@@ -140,7 +140,7 @@ app.controller("ProjectController", function(ProjectFactory, $rootScope, AuthSer
 
 
 
-	$scope.selectLast = function() {
+	$scope.selectLast = function () {
 		if ($scope.currentlySelected) {
 			var $lastSibling = $($scope.currentlySelected).prev()[0] || null;
 			console.log($lastSibling)
@@ -155,14 +155,14 @@ app.controller("ProjectController", function(ProjectFactory, $rootScope, AuthSer
 		}
 	}
 
-	$scope.deselect = function() {
+	$scope.deselect = function () {
 		console.log("hello!")
 		$scope.currentlySelected = null;
 		$scope.activeCSSEdit = {};
 		$scope.activeHTMLEdit = {};
 	}
 
-	$scope.selectNext = function() {
+	$scope.selectNext = function () {
 		if ($scope.currentlySelected) {
 			var $nextSibling = $($scope.currentlySelected).next()[0] || null;
 			if ($nextSibling) {
@@ -171,7 +171,7 @@ app.controller("ProjectController", function(ProjectFactory, $rootScope, AuthSer
 		}
 	}
 
-	$scope.deleteElem = function() {
+	$scope.deleteElem = function () {
 		var thisParent = $scope.currentlySelected.parent()[0]
 		console.log("COMMENCE DELETING", $scope.currentlySelected, thisParent)
 		var classNameToRemove = ParseTreeFactory.removeElement($scope, $scope.currentlySelected, thisParent);
@@ -179,7 +179,7 @@ app.controller("ProjectController", function(ProjectFactory, $rootScope, AuthSer
 		$scope.selectLast();
 
 	}
-	$scope.removeRow = function() {
+	$scope.removeRow = function () {
 		var thisParent = $scope.currentlySelected.parent()[0]
 		var viewToRemove = thisParent.className.split(' ')[1]
 		$scope.project.html = ParseTreeFactory.removeRow($scope, viewToRemove, $scope.project.html);
@@ -190,8 +190,8 @@ app.controller("ProjectController", function(ProjectFactory, $rootScope, AuthSer
 
 
 
-	$scope.logout = function() {
-		AuthService.logout().then(function() {
+	$scope.logout = function () {
+		AuthService.logout().then(function () {
 			$state.go('home');
 		});
 	};
@@ -202,7 +202,7 @@ app.controller("ProjectController", function(ProjectFactory, $rootScope, AuthSer
 
 
 	//listen for key presses
-	$(window).bind('keydown', function(e) {
+	$(window).bind('keydown', function (e) {
 		var code = e.keyCode;
 		//left arrow
 		if (code === 37) {
@@ -216,18 +216,28 @@ app.controller("ProjectController", function(ProjectFactory, $rootScope, AuthSer
 
 
 
-	$scope.selectTabItem = function(index) {
+	$scope.selectTabItem = function (index) {
 		console.log("hey select tab function running here")
 		if ($scope.activeHTMLEdit && $scope.activeHTMLEdit.type === "TabBarIOS") {
 			var tab = $('.' + index);
 			if ($scope.selectedTabItem) $scope.selectedTabItem.removeClass('tab-selected');
 			tab.addClass('tab-selected');
 			$scope.selectedTabItem = tab;
-			$scope.activeTabItem = $scope.activeHTMLEdit.props[0].TabBarIOSItems.filter(function(tabItem, i) {
+			$scope.activeTabItem = $scope.activeHTMLEdit.props[0].TabBarIOSItems.filter(function (tabItem, i) {
 				return (index === i)
 			})[0]
 		}
 	}
+	$scope.time = new Date()
+
+	$scope.getTime = function () {
+		$interval(function () {
+			$scope.time = new Date()
+		}, 100)
+	}
+
+	$scope.getTime()
+
 });
 
 
