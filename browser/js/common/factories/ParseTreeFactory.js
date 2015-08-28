@@ -27,7 +27,7 @@ app.factory('ParseTreeFactory', function($http) {
 						"resizeMode": 'cover'
 					}]
 				})
-			} else if (type === "ListView" || type === "ScrollView") {
+			} else if (type === "ListView") {
 				filteredViewElem.children.push({
 					type: type,
 					className: ['ui-' + type.toLowerCase(), classToReturn],
@@ -41,6 +41,23 @@ app.factory('ParseTreeFactory', function($http) {
 						}, {
 							index: 2,
 							value: "Praesent in orci scelerisque"
+						}]
+					}]
+				})
+			} else if (type === "ScrollView") {
+				filteredViewElem.children.push({
+					type: type,
+					className: ['ui-' + type.toLowerCase(), classToReturn],
+					props: [{
+						dataSource: [{
+							index: 0,
+							value: "http://www.viralnovelty.net/wp-content/uploads/2014/07/121.jpg"
+						}, {
+							index: 1,
+							value: "http://imgscenter.com/images/2014/09/13/Beauty-of-nature-random-4884759-1280-800.jpg"
+						}, {
+							index: 2,
+							value: "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcShVpqAWrvxn8f2-XGo0ES0XP555GrVnU83y4v5kxBg8wOK9m1E"
 						}]
 					}]
 				})
