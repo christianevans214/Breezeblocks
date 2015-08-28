@@ -28,7 +28,7 @@ module.exports = function(userId, buildId, repo, projectName){
 					}
 				});
 			})(keys, fileObject, 0);
-		})
+		});
 	})
 	.then(function(erroredFiles){
 		var newKeys = Object.keys(erroredFiles);
@@ -36,10 +36,11 @@ module.exports = function(userId, buildId, repo, projectName){
 			return new Promise(function(resolve, reject){
 				var keyCount = 0;
 				var errorInterval = setInterval(function(){
+					console.log(chalk.yellow("rewriting errored file", newKeys[keyCount]));
 					repo.write('master', newKeys[keyCount], erroredFiles[newKeys[keyCount]], 'Exported Breezeblocks Project', function(err){
 						if(err) reject(err);
 						else {
-							console.log(chalk.yellow("Rewriting file ", newKeys[keyCount]))
+							if(newKeys[keyCount]) console.log(chalk.green("file written", newKeys[keyCount]));
 						}
 					});
 					keyCount++;
@@ -48,7 +49,7 @@ module.exports = function(userId, buildId, repo, projectName){
 						resolve(erroredFiles);
 					}
 				}, 1000);
-			})
+			});
 		}
-	})
+	});
 };

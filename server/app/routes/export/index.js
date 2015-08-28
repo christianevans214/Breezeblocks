@@ -23,9 +23,7 @@ router.post('/', function (req, res, next) {
 	generator(req.body.pages, req.body.userId, req.body.buildId)
 	.then(function(zippedProject){
 		if(!zippedProject) throw err;
-		else{
-			console.log('download complete');
-		}
+
 		return zippedProject;
 
 	})
