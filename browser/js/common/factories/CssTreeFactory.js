@@ -29,7 +29,12 @@ app.factory('CssTreeFactory', function ($http) {
 				console.log("hey", className)
 				console.log($scope.project.css[className])
 				$scope.project.css[className]['font-size'] = 17;
+				if (className.match(/(navbar)/)) {
+					console.log("hey this is navbar")
+					$scope.project.css[className]['text-align'] = 'center'
+				}
 			}
+
 		},
 		removeClass: function (className, $scope) {
 			console.log("className to delete", className);
