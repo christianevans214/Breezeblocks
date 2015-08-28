@@ -55,6 +55,7 @@ router.post('/', function (req, res, next) {
 			});
 			
 			var repoData;
+
 			//create new repo then write all files to new repo
 			createNewRepo(currentUser, github, repoName)
 			.then(function(repoInfo){
@@ -72,14 +73,6 @@ router.post('/', function (req, res, next) {
 					if(err) console.error("error deleting", err);
 					else console.log('files were deleted');
 				});
-/*				Build.findById(req.body.buildId).exec()
-				.then(function(project){
-					project.gitUrl = repoData.html_url;
-					project.save()
-					.then(function(updatedProject){
-						res.status(201).json(project);
-					})
-				})*/
 			})
 		})
 	})
