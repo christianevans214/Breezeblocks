@@ -20,6 +20,9 @@ var chalk = require('chalk')
 module.exports = router;
 
 router.post('/', function (req, res, next) {
+
+	var directoryPath = path.join(__dirname,'../../reactUtils/UserBuilds', req.body.userId);
+
 	generator(req.body.pages, req.body.userId, req.body.buildId)
 	.then(function(zippedProject){
 		if(!zippedProject) throw err;
@@ -55,7 +58,7 @@ router.post('/', function (req, res, next) {
 			var repoData;
 
 			//create new repo then write all files to new repo
-			createNewRepo(currentUser, github, repoName)
+			createNewRepo(currentUser, github, repoName, directoryPath)
 			.then(function(repoInfo){
 				repoData = repoInfo;
 				var repo = github.getRepo(repoInfo.owner.login, repoInfo.name);
@@ -65,7 +68,6 @@ router.post('/', function (req, res, next) {
 				console.log(chalk.black.bgGreen("Files complete"));
 				console.log(chalk.magenta("repoData.html_url"), chalk.blue.underline(repoData.html_url));
 				res.status(201).json(repoData.html_url);
-				var directoryPath = path.join(__dirname,'../../reactUtils/UserBuilds', req.body.userId);
 				
 				fs.remove(directoryPath, function(err){
 					if(err) console.error("error deleting", err);
