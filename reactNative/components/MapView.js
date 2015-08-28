@@ -9,31 +9,6 @@ var {
   View,
 } = React;
 
-var region = {
-  latitude: 40.7050758, 
-  longitude: -74.0091604, 
-  latitudeDelta: 0.001,
-  longitudeDelta: 0.001,
-}
-
-var generateRandomPins = function(region, count) {
-  var count = count || 5,
-      arr = [],
-      pin;
-
-  for (var i = count - 1; i >= 0; i--) {
-    pin = {
-      title: 'Pin number ' + i,
-      subtitle: 'My cool subtitle',
-      latitude: region.latitude + (region.latitudeDelta * Math.random() * 2 - region.latitudeDelta),
-      longitude: region.longitude + (region.longitudeDelta * Math.random() * 2 - region.longitudeDelta)
-    };
-
-    arr.push(pin);
-  };
-  return arr;
-};
-
 module.exports = React.createClass({
   getInitialState() {
     return {
@@ -45,8 +20,7 @@ module.exports = React.createClass({
       },
       annotations: null,
       isFirstLoad: true,
-      mapRegionInput: null,
-      pins: generateRandomPins(region),
+      mapRegionInput: null
     };
   },
 
@@ -61,8 +35,8 @@ module.exports = React.createClass({
           annotations={this.state.annotations || undefined}
           showUserLocation={true}
           scrollEnabled={true}
-          pitchEnabled={true}
-          pins={this.state.pins}
+          pitchEnabled={this.props.pitchEnabled || true}
+          mapType={this.props.mapType || 'standard'}
         />
       </View>
     );
