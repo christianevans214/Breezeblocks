@@ -14,7 +14,6 @@ module.exports = function(currentUser, github, repoName, directoryPath){
 	return new Promise(function(resolve, reject){
 		user.createRepo(repoObj, function(err, res) {
 			if(err) {
-				console.log("Erroring!", directoryPath)
 				fs.remove(directoryPath, function(err){
 					if(err) console.error("error deleting", err);
 				});
