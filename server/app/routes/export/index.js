@@ -64,14 +64,13 @@ router.post('/', function (req, res, next) {
 				return writeFiles(req.body.userId, req.body.buildId, repo, 'reactNative');
 			})
 			.then(function(){
-				console.log(chalk.bgGreen("Files complete"));
+				console.log(chalk.black.bgGreen("Files complete"));
 				console.log(chalk.magenta("repoData.html_url"), chalk.blue.underline(repoData.html_url));
 				res.status(201).json(repoData.html_url);
 				var directoryPath = path.join(__dirname,'../../reactUtils/UserBuilds', req.body.userId);
 				
 				fs.remove(directoryPath, function(err){
 					if(err) console.error("error deleting", err);
-					else console.log('files were deleted');
 				});
 			})
 		})

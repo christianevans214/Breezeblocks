@@ -10,12 +10,13 @@ module.exports = function(userId, buildId, repo, projectName){
 		console.log(keys.length);
 		return new Promise(function(resolve, reject){		
 			(function repoWrite(fileNames, fileObject, index){
-				console.log(chalk.yellow("fileNames", index, fileNames[index]));
+				console.log(chalk.yellow("writing file number", index, fileNames[index]));
 				repo.write('master', fileNames[index], fileObject[fileNames[index]], 'Exported BreezeBlocks Project', function(err) {
-					console.log(chalk.green("writing to file", index));
 					if(err){
 						erroredFiles[fileNames[index]] = fileObject[fileNames[index]];
-						console.error(chalk.red("File error, will rewrite", fileObject[fileNames[index]]));
+						console.log(chalk.red("File error, will rewrite", fileObject[fileNames[index]]));
+					}else{
+						console.log(chalk.green("file written, files left:", fileNames.length-index));
 					}
 
 					index++;
