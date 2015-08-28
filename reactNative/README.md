@@ -13,7 +13,7 @@
 **Sorry friends not using a Mac, these instructions require Xcode**
 - Make sure npm is installed on your machine, if not head on over to <a href="https://nodejs.org/download/">nodejs.org</a> and take care of that
 - Clone `git clone http://github/YOURREPOINFO` the repository or copy it on to your machine
-- Change the current directory in the commandline to reactNative `cd reactNative`
+- Once in the project directory, change the current directory in the commandline to your reactNative `cd reactNative`
 - Once inside the reactNative directory, install the required node modules by typing `npm install`
 
 - Make sure you have Xcode installed, if not you can do this at the App store
