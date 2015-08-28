@@ -119,7 +119,7 @@ div[dnd-list]{
 	margin: 0px auto;
 	left: 50%;
 	margin-left: -150px;
-	margin-top: 15vh;
+	margin-top: 12vh;
 	// margin-top: 6vh;
 	background: white;
 	display: flex;
@@ -138,6 +138,9 @@ input{
 	box-shadow: inset 0 0 10px #000000;
 	height: calc(100vh - 47px);
 	overflow: scroll;
+	display: flex;
+	flex-direction: column;
+	// justify-content: center;
 }
 
 

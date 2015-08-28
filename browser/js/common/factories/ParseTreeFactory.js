@@ -32,7 +32,16 @@ app.factory('ParseTreeFactory', function($http) {
 					type: type,
 					className: ['ui-' + type.toLowerCase(), classToReturn],
 					props: [{
-						dataSource: []
+						dataSource: [{
+							index: 0,
+							value: "Lorem ipsum dolor sit amet"
+						}, {
+							index: 1,
+							value: "Proin tempus volutpat lectus"
+						}, {
+							index: 2,
+							value: "Praesent in orci scelerisque"
+						}]
 					}]
 				})
 			} else if (type === "MapView") {
@@ -56,7 +65,7 @@ app.factory('ParseTreeFactory', function($http) {
 					type: type,
 					className: ['ui-' + type.toLowerCase(), classToReturn],
 					props: [{
-						value: "Fingerstache veniam dreamcatcher organic authentic, tilde lumbersexual nesciunt farm-to-table mumblecore nostrud. Try-hard chillwave commodo dolor nihil, Thundercats irure 90's Helvetica esse four loko. Kale chips Godard fugiat tempor. Tattooed fugiat viral quinoa"
+						value: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ut neque eget sem egestas varius."
 					}]
 				})
 			} else if (type === "Navbar") {
