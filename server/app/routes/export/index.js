@@ -38,7 +38,7 @@ router.post('/', function (req, res, next) {
 			// user is not logged in with github
 			if(!currentUser.github.username){
 				console.log("No github account...");
-				res.status(201).sendFile(zippedProject, function(err){
+				res.status(201).download(zippedProject, function(err){
 					if(err) throw err;
 					else{
 						console.log('zipped file was sent');

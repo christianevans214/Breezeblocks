@@ -16,6 +16,10 @@ module.exports = function(data, styleData, titles, newProjectDir){
 		var tabBarClasses = data.className.slice(1);
 		var tabBarItems = data.props[0].TabBarIOSItems;
 
+		tabBarItems.forEach(function(item, index){
+			if(!item.projectReference) tabBarItems[index].projectReference = titles[0].replace('.js', "");
+		});
+
 		var tabBarProps = Object.keys(data.props[0]).filter(function(key){
 			return key !== "TabBarIOSItems";
 		});

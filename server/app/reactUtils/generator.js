@@ -26,7 +26,10 @@ function removeFlexGrow(styleData){
 	for(var keys in styleData){
 		newStyleData[keys] = {};
 		for(var key in styleData[keys]){
-			if(key === "flex-grow"){
+			if(key === 'flex-grow'){
+				delete styleData[keys][key];
+			}
+			else if(key === "flex-grow-width"){
 				newStyleData[keys]['width'] = (styleData[keys][key] / 100) * 375;
 			}else{
 				newStyleData[keys][key] = styleData[keys][key];
@@ -73,6 +76,7 @@ module.exports = function(pages, userId, buildId) {
 				var createTemplate = Handlebars.compile(templateFile);
 
 				var templateArr = [];
+				var bool = false;
 				pages.forEach(function(page, index){					
 					var data = page.html;
 					var styleData = page.css;
@@ -85,7 +89,10 @@ module.exports = function(pages, userId, buildId) {
 						if(htmlElement.children && htmlElement.children.length>0){						
 							if(htmlElement.children[0].type === "TabBarIOS" && index === 0){
 								tabBarData = htmlElement;
-								console.log('in tabbar stuff')
+								if(pages.length === 1){
+									title = [ChangeCase.pascalCase(page.title) + ".js"];
+									bool = true;
+								}
 								for(var key in styleData){
 									if(key.match(/tabbarios/)){
 										for(var childKey in styleData[key]){
@@ -137,6 +144,7 @@ module.exports = function(pages, userId, buildId) {
 						tree: data,
 						styleTree: styleData,
 						pages: pages,
+						bool: bool,
 						globalStyle: globalStyle
 					}));
 					
@@ -160,7 +168,6 @@ module.exports = function(pages, userId, buildId) {
 			})
 			.then(function(finaltemp) {
 				console.log("file saved!");
-				console.log(tabBarStyleData)
 				return multipageGenerator(tabBarData, tabBarStyleData, title, newProjectDir);
 			})
 			.then(function(tabBarFile){
