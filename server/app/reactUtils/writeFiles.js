@@ -1,5 +1,6 @@
 var fileContent = require('./recursiveRead');
 var path = require('path');
+var chalk = require('chalk');
 
 module.exports = function(userId, buildId, repo, projectName){
 	var erroredFiles = {};
@@ -9,12 +10,12 @@ module.exports = function(userId, buildId, repo, projectName){
 		console.log(keys.length);
 		return new Promise(function(resolve, reject){		
 			(function repoWrite(fileNames, fileObject, index){
-				console.log("fileNames", index, fileNames[index]);
+				console.log(chalk.yellow("fileNames", index, fileNames[index]));
 				repo.write('master', fileNames[index], fileObject[fileNames[index]], 'Exported BreezeBlocks Project', function(err) {
-					console.log("writing to file", index);
+					console.log(chalk.green("writing to file", index));
 					if(err){
 						erroredFiles[fileNames[index]] = fileObject[fileNames[index]];
-						console.error(err);
+						console.error(chalk.red("File error, will rewrite", fileObject[fileNames[index]]));
 					}
 
 					index++;
@@ -38,7 +39,7 @@ module.exports = function(userId, buildId, repo, projectName){
 					repo.write('master', newKeys[keyCount], erroredFiles[newKeys[keyCount]], 'Exported Breezeblocks Project', function(err){
 						if(err) reject(err);
 						else {
-							console.log("Rewriting file ", newKeys[keyCount])
+							console.log(chalk.yellow("Rewriting file ", newKeys[keyCount]))
 						}
 					});
 					keyCount++;

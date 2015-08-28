@@ -11,6 +11,7 @@ var createNewRepo = require('../../reactUtils/githubCreator');
 var writeFiles = require('../../reactUtils/writeFiles');
 var fileContent = require('../../reactUtils/recursiveRead');
 var _ = require('lodash');
+var chalk = require('chalk')
 
 //for deep inspection in console
 var util = require('util');
@@ -19,7 +20,6 @@ var util = require('util');
 module.exports = router;
 
 router.post('/', function (req, res, next) {
-	console.log(util.inspect(req.body.pages, false, null));
 	generator(req.body.pages, req.body.userId, req.body.buildId)
 	.then(function(zippedProject){
 		if(!zippedProject) throw err;
@@ -63,7 +63,8 @@ router.post('/', function (req, res, next) {
 				return writeFiles(req.body.userId, req.body.buildId, repo, 'reactNative');
 			})
 			.then(function(){
-				console.log("repoData.html_url", repoData.html_url)
+				console.log(chalk.bgGreen("Files complete"));
+				console.log(chalk.magenta("repoData.html_url"), chalk.blue.underline(repoData.html_url));
 				res.status(201).json(repoData.html_url);
 				var directoryPath = path.join(__dirname,'../../reactUtils/UserBuilds', req.body.userId);
 				
