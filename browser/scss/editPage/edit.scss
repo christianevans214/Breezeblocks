@@ -82,13 +82,17 @@ div[dnd-list]{
 }
 
 #app{
+	position: absolute;
 	flex-direction: column;
 	box-shadow: 0 0 10px #000000;
 	z-index: 0;
 	width: 300px;
 	height: 533px;
 	margin: 0px auto;
-	margin-top: 10vh;
+	left: 50%;
+	margin-left: -150px;
+	margin-top: 15vh;
+	// margin-top: 6vh;
 	background: white;
 	display: flex;
 	overflow: auto;
