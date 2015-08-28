@@ -7,7 +7,6 @@ module.exports = function(userId, buildId, repo, projectName){
 	return fileContent(userId, buildId, projectName)
 	.then(function(fileObject){
 		var keys = Object.keys(fileObject);
-		console.log(keys.length);
 		return new Promise(function(resolve, reject){		
 			(function repoWrite(fileNames, fileObject, index){
 				console.log(chalk.yellow("writing file number", index, fileNames[index]));

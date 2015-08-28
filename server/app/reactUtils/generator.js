@@ -70,9 +70,7 @@ module.exports = function(pages, userId, buildId) {
 					});
 				});
 			})
-			.then(function(templateFile) {
-				console.log("loading template");
-				
+			.then(function(templateFile) {				
 				var createTemplate = Handlebars.compile(templateFile);
 
 				var templateArr = [];
@@ -167,7 +165,6 @@ module.exports = function(pages, userId, buildId) {
 
 			})
 			.then(function(finaltemp) {
-				console.log("file saved!");
 				return multipageGenerator(tabBarData, tabBarStyleData, title, newProjectDir);
 			})
 			.then(function(tabBarFile){
@@ -181,7 +178,6 @@ module.exports = function(pages, userId, buildId) {
 					compression: 'DEFLATE'
 				});
 				return new Promise(function(resolve, reject) {
-					console.log("FILE ZIPPED");
 					fs.writeFile(newProjectZipDir, zippedFile, 'binary', function(err) {
 						if (err) reject(err);
 						else resolve(newProjectZipDir);

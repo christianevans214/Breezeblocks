@@ -14,7 +14,7 @@ var _ = require('lodash');
 var chalk = require('chalk')
 
 //for deep inspection in console
-var util = require('util');
+// var util = require('util');
 // console.log(util.inspect(variable, false, null));
 
 module.exports = router;
@@ -43,7 +43,7 @@ router.post('/', function (req, res, next) {
 					else{
 						console.log('zipped file was sent');
 					}
-				})
+				});
 				return;
 			}
 
@@ -72,9 +72,9 @@ router.post('/', function (req, res, next) {
 				fs.remove(directoryPath, function(err){
 					if(err) console.error("error deleting", err);
 				});
-			})
-		})
+			});
+		});
 	})
 	.then(null, next);
-})
+});
 
