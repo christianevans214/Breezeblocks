@@ -19,7 +19,7 @@ module.exports = React.createClass({
   },
 
   render: function() {
-    imageStyle = this.props.img;
+    imageStyle = this.props.style;
     return (
       <ScrollView
         horizontal={true}
