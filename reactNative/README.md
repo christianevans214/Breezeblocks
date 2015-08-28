@@ -1,4 +1,4 @@
-#This application was created using Breeze-Blocks
+#This application was created using BreezeBlocks
 <img src="http://i.imgur.com/Mx6Glyv.png" title="BreezeBlocks" alt="BreezeBlocks">
 
 ##Create your own at our website:
