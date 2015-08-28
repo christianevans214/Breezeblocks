@@ -1,11 +1,7 @@
 # Breezeblocks
-<img src="http://i.imgur.com/Mx6Glyv.png" title="BreezeBlocks" alt="BreezeBlocks">
+<center><img src="http://i.imgur.com/Mx6Glyv.png" title="BreezeBlocks" alt="BreezeBlocks"></center>
 > A drag-and-drop graphical interface to create ReactNative mobile applications
 
-
-***INSERT ANOTHER GRAPHIC HERE***
-
-[![INSERT YOUR GRAPHIC HERE](http://i.imgur.com/dt8AUb6.png)]()
 
 > GIF Tools
 
@@ -14,7 +10,7 @@
 
 **Recordit**
 
-![Recordit GIF](http://g.recordit.co/iLN6A0vSD8.gif)
+![Recordit GIF](http://g.recordit.co/pNcQcOFgVR.gif)
 
 **ttystudio**
 
@@ -33,7 +29,10 @@
 
 ## FAQ
 
-- **How do I do *specifically* so and so?**
-    - No problem! Just do this.
-
+- **Can I make an *Android App* with Breezeblocks?**
+    - Currently Android is not supported by ReactNative and thus is not supported by Breezeblocks
+- **So after I make my app with Breezeblocks, how do I get it on my phone?**
+    - Great question!  Once your application is downloaded to your Github, you will find a list of instructions for deploying your app in the README.
+- **If I don't have a Github account, can I still use Breezeblocks?**
+    - Sure can.  If you don't login to Breezeblocks with your Github account, upon exporting you will be prompted to download a zipped file of your ReactNative directory.  Once you unzip the ReactNative directory, you will find a README file for installation instructions.
 ---
