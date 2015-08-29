@@ -90,11 +90,9 @@ app.controller("ProjectController", function ($interval, ProjectFactory, $rootSc
 		ProjectFactory.exportProject(objToExport)
 			.then(function (ghURL) {
 				$scope.exporting = false;
-				if(ghURL === 'name already exists on this account'){
-					$scope.errorMessage = "Project name already exists on this Github account, revise project title.";
-				}else{
-					$scope.gitHubURL = ghURL;
-				}
+				if(!$scope.user.github) $scope.downloadFile = '/api/export/' + $scope.user._id + '/' + $scope.project._id;
+				else if(ghURL === 'name already exists on this account') $scope.errorMessage = "Project name already exists on this Github account, revise project title.";
+				else $scope.gitHubURL = ghURL;
 				$scope.$digest();
 			});
 	}
@@ -160,7 +158,7 @@ app.controller("ProjectController", function ($interval, ProjectFactory, $rootSc
 	}
 
 	$scope.deselect = function () {
-		console.log("hello!")
+		//console.log("hello!")
 		$scope.currentlySelected = null;
 		$scope.activeCSSEdit = {};
 		$scope.activeHTMLEdit = {};
