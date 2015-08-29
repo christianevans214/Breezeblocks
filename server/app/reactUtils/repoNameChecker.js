@@ -1,4 +1,4 @@
-var shortid = require('shortid');
+/*var shortid = require('shortid');
 module.exports = function(currentUser, github, repoName){
 	var user = github.getUser();
 	//if user already has github repo with repo name, change repo name
@@ -11,4 +11,4 @@ module.exports = function(currentUser, github, repoName){
 			resolve(repoName);
 		}
 	})
-}
+}*/

@@ -20,7 +20,7 @@ var img2 = new Vivus('headline', {type: 'async', duration: 100, file: '/images/t
       <div id="buttonHolder">
         <div class="homeButton" ng-if="!user" ui-sref="login">LOG IN</div>
       <div class="homeButton" ng-if="user" ui-sref="userDash({id: user._id})">PROJECTS</div>
-      <div class="homeButton" ng-if="!user" ui-sref="login">SIGN UP</div>
+      <div class="homeButton" ng-if="!user" ui-sref="signup">SIGN UP</div>
       <div class="homeButton" ng-if="user" ng-click="logout()">LOG OUT</div>
       </div>
     </div>

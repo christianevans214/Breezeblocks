@@ -92,7 +92,7 @@ app.controller("ProjectController", function ($interval, ProjectFactory, $rootSc
 				$scope.exporting = false;
 				$scope.gitHubURL = ghURL
 				$scope.$digest();
-			})
+			});
 	}
 
 

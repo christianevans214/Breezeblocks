@@ -31,8 +31,8 @@ app.factory("ProjectFactory", function($http) {
 				})
 		},
 		exportProject: function(projectObj) {
-			console.log("EXPORTPROJECT PROJECT OBJ", projectObj)
-				//projectObj needs to be {html, css, userId, buildId}
+			//console.log("EXPORTPROJECT PROJECT OBJ", projectObj)
+			//projectObj needs to be {html, css, userId, buildId}
 			return $http.post(`api/export`, projectObj)
 				.then(function(res) {
 					return res.data;
@@ -40,7 +40,7 @@ app.factory("ProjectFactory", function($http) {
 		},
 		convertFlexToWidthPercentage: function(pageArr) {
 			var flexArr = this.returnHashedFlexTable(pageArr);
-			console.log(flexArr);
+			//console.log(flexArr);
 			//generate percentages
 			var percentageObj = {};
 			pageArr.forEach(function(page, i) {
