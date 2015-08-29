@@ -50,6 +50,8 @@ app.controller("ProjectController", function ($interval, ProjectFactory, $rootSc
 	//All drag and drop features contained here
 	Interactory.Interact($scope);
 
+	console.log("this is the user!!", $scope.user)
+
 	//Function eneded to export the project for downloading and uploading to github
 	$scope.pageConcatanator = function (project, user, tabBar, pagesArr) {
 		var tabBarIOSItemsArr = tabBar.props[0].TabBarIOSItems;
@@ -90,9 +92,11 @@ app.controller("ProjectController", function ($interval, ProjectFactory, $rootSc
 		ProjectFactory.exportProject(objToExport)
 			.then(function (ghURL) {
 				$scope.exporting = false;
-				$scope.gitHubURL = ghURL
+				if(!$scope.user.github) $scope.downloadFile = '/api/export/' + $scope.user._id + '/' + $scope.project._id;
+				else if(ghURL === 'name already exists on this account') $scope.errorMessage = "Project name already exists on this Github account, revise project title.";
+				else $scope.gitHubURL = ghURL;
 				$scope.$digest();
-			})
+			});
 	}
 
 
@@ -156,7 +160,7 @@ app.controller("ProjectController", function ($interval, ProjectFactory, $rootSc
 	}
 
 	$scope.deselect = function () {
-		console.log("hello!")
+		//console.log("hello!")
 		$scope.currentlySelected = null;
 		$scope.activeCSSEdit = {};
 		$scope.activeHTMLEdit = {};

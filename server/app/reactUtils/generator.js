@@ -2,7 +2,7 @@ var Handlebars = require('handlebars');
 var ChangeCase = require('change-case');
 var path = require('path');
 var fs = require('fs-extra');
-var zip = new require('node-zip')();
+var archiver = require('archiver');
 var handlebarHelpers = require('./handlebarHelpers')();
 var multipageGenerator = require('./multipageGenerator.js');
 
@@ -51,7 +51,7 @@ module.exports = function(pages, userId, buildId) {
 		var title = [];
 
 		var newProjectDir = path.join(__dirname, 'UserBuilds', userId, buildId);
-		var newProjectZipDir = path.join(__dirname, 'UserBuilds', userId, buildId + 'ZIPPED');
+		var userZipDirectory = path.join(__dirname, 'UserBuilds', userId, 'target.zip');
 
 
 		return new Promise(function(resolve, reject) {
@@ -171,18 +171,25 @@ module.exports = function(pages, userId, buildId) {
 				return newProjectDir;
 			})
 			.then(function(newProjDir) {
-				//zip the created project
-				zip.file(newProjDir);
-				var zippedFile = zip.generate({
-					base64: false,
-					compression: 'DEFLATE'
+
+				var output = fs.createWriteStream(userZipDirectory);
+				var archive = archiver('zip');
+
+				output.on('close', function () {
+				    console.log(archive.pointer() + ' total bytes');
+				    console.log('archiver has been finalized and the output file descriptor has closed.');
 				});
-				return new Promise(function(resolve, reject) {
-					fs.writeFile(newProjectZipDir, zippedFile, 'binary', function(err) {
-						if (err) reject(err);
-						else resolve(newProjectZipDir);
-					});
+
+				archive.on('error', function(err){
+				    throw err;
 				});
+
+				archive.pipe(output);
+				archive.bulk([
+				    { expand: true, cwd: newProjDir, src: ['**'], dest: 'source'}
+				]);
+				return archive.finalize();
+
 			});
 
 };

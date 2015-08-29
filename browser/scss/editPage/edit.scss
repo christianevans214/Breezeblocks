@@ -379,6 +379,13 @@ ui-thumbnail{
 	span{
 		font-size: 14px;
 		margin-left:-7px;
+		&.error-message {
+			text-transform: uppercase;
+			letter-spacing: 2px;
+			font-size: 16px;
+			font-weight: bold;
+			color: red;
+		}
 	}
 	.glyphicon{
 		font-size: 14px;

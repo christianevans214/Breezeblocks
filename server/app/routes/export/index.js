@@ -19,6 +19,18 @@ var chalk = require('chalk')
 
 module.exports = router;
 
+router.get('/:user/:build', function(req, res, next){
+	var filePath = path.join(__dirname, '../../reactUtils/UserBuilds', req.params.user, 'target.zip');
+	var directoryPath = path.join(__dirname, '../../reactUtils/UserBuilds', req.params.user);
+	res.download(filePath, "reactNativeZipped.zip", function(err){
+		if(err) console.log("There was an error downloading zipped file", err)
+			fs.remove(directoryPath, function(err){
+				if(err) console.error("error deleting", err);
+			});
+	});
+
+});
+
 router.post('/', function (req, res, next) {
 
 	var directoryPath = path.join(__dirname,'../../reactUtils/UserBuilds', req.body.userId);
@@ -30,7 +42,7 @@ router.post('/', function (req, res, next) {
 		return zippedProject;
 
 	})
-	.then(function(zippedProjectPath){
+	.then(function(){
 		//Change project title to be acceptable syntax for Github repo name
 		var repoName = req.body.title.replace(/\s/ig,'_').replace(/\W/ig,'');
 		
@@ -38,13 +50,13 @@ router.post('/', function (req, res, next) {
 		.then(function(currentUser){
 			// user is not logged in with github
 			if(!currentUser.github.username){
-				console.log("No github account...");
-				res.status(201).download(zippedProject, function(err){
-					if(err) throw err;
-					else{
-						console.log('zipped file was sent');
-					}
-				});
+				res.sendStatus(201);
+				//give user 5 minutes to download file before deleting
+				setTimeout(function(){
+					fs.remove(directoryPath, function(err){
+						if(err) console.error("error deleting", err);
+					});
+				}, 60000*5);
 				return;
 			}
 
@@ -72,7 +84,18 @@ router.post('/', function (req, res, next) {
 				fs.remove(directoryPath, function(err){
 					if(err) console.error("error deleting", err);
 				});
-			});
+			})
+			.then(null, function(err){
+				var response = JSON.parse(err.request.responseText).errors;
+
+				var errorMessage = response.filter(function(error){
+					return error.message === "name already exists on this account";
+				})
+				if(errorMessage && errorMessage.length > 0){
+					//send message to front end, to inform user to rename app.
+					res.send(errorMessage[0].message);
+				}
+			})
 		});
 	})
 	.then(null, next);
