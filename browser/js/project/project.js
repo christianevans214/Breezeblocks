@@ -90,7 +90,11 @@ app.controller("ProjectController", function ($interval, ProjectFactory, $rootSc
 		ProjectFactory.exportProject(objToExport)
 			.then(function (ghURL) {
 				$scope.exporting = false;
-				$scope.gitHubURL = ghURL
+				if(ghURL === 'name already exists on this account'){
+					$scope.errorMessage = "Project name already exists on this Github account, revise project title.";
+				}else{
+					$scope.gitHubURL = ghURL;
+				}
 				$scope.$digest();
 			});
 	}
