@@ -86,7 +86,18 @@ router.post('/', function (req, res, next) {
 				fs.remove(directoryPath, function(err){
 					if(err) console.error("error deleting", err);
 				});
-			});
+			})
+			.then(null, function(err){
+				var response = JSON.parse(err.request.responseText).errors;
+
+				var errorMessage = response.filter(function(error){
+					return error.message === "name already exists on this account";
+				})
+				if(errorMessage && errorMessage.length > 0){
+					//send message to front end, to inform user to rename app.
+					res.send(errorMessage[0].message);
+				}
+			})
 		});
 	})
 	.then(null, next);

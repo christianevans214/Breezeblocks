@@ -84,6 +84,8 @@
 	<span ng-show="showConfirm"> Saving...</span>
 	<span ng-show="exporting">Exporting...</span>
 	<span ng-show="gitHubURL"><a href="{{gitHubURL}}">{{gitHubURL}}</a></span>
+	<span class="error-message" ng-show="errorMessage">{{errorMessage}}</span>
+	<span ng-show="downloadFile"><a ng-href={{downloadFile}} target="_self"> Download File</a></span>
 	<div class="pull-right">
 		<span class="glyphicon glyphicon-search"></span>
 		<input type="range" ng-model='scalePercent' ng-change="changeZoom(scalePercent)" min="1" max="300"></input>
