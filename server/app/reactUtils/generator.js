@@ -178,7 +178,6 @@ module.exports = function(pages, userId, buildId) {
 				output.on('close', function () {
 				    console.log(archive.pointer() + ' total bytes');
 				    console.log('archiver has been finalized and the output file descriptor has closed.');
-				    return userZipDirectory;
 				});
 
 				archive.on('error', function(err){
@@ -189,7 +188,7 @@ module.exports = function(pages, userId, buildId) {
 				archive.bulk([
 				    { expand: true, cwd: newProjDir, src: ['**'], dest: 'source'}
 				]);
-				archive.finalize();
+				return archive.finalize();
 
 			});
 
