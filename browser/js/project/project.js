@@ -50,6 +50,8 @@ app.controller("ProjectController", function ($interval, ProjectFactory, $rootSc
 	//All drag and drop features contained here
 	Interactory.Interact($scope);
 
+	console.log("this is the user!!", $scope.user)
+
 	//Function eneded to export the project for downloading and uploading to github
 	$scope.pageConcatanator = function (project, user, tabBar, pagesArr) {
 		var tabBarIOSItemsArr = tabBar.props[0].TabBarIOSItems;
