@@ -12,10 +12,6 @@
 
 ![Recordit GIF](http://g.recordit.co/pNcQcOFgVR.gif)
 
-**ttystudio**
-
-![ttystudio GIF](https://raw.githubusercontent.com/chjj/ttystudio/master/img/example.gif)
-
 ---
 
 ## Team
@@ -29,10 +25,10 @@
 
 ## FAQ
 
-- **Can I make an *Android App* with Breezeblocks?**
-    - Currently Android is not supported by ReactNative and thus is not supported by Breezeblocks
+
 - **So after I make my app with Breezeblocks, how do I get it on my phone?**
     - Great question!  Once your application is downloaded to your Github, you will find a list of instructions for deploying your app in the README.
 - **If I don't have a Github account, can I still use Breezeblocks?**
     - Sure can.  If you don't login to Breezeblocks with your Github account, upon exporting you will be prompted to download a zipped file of your ReactNative directory.  Once you unzip the ReactNative directory, you will find a README file for installation instructions.
+
 ---
