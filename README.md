@@ -1,6 +1,6 @@
 # Breezeblocks
+######*A drag-and-drop graphical interface to create ReactNative mobile applications*
 <center><img src="http://i.imgur.com/Mx6Glyv.png" title="BreezeBlocks" alt="BreezeBlocks"></center>
-> A drag-and-drop graphical interface to create ReactNative mobile applications
 
 Check out this GIF on Breezeblocks in action:
 
