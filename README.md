@@ -1,11 +1,11 @@
 # Breezeblocks
 ######*A drag-and-drop graphical interface to create ReactNative mobile applications* 
-Visit [Breezeblocks.io](http://www.breezeblocks.io) to make your own native mobile application :dog:
+Visit [Breezeblocks.io](http://www.breezeblocks.io) to make your own native mobile application :dog:.  Want to help make Breezeblocks even better?  Great news, you can!  Skip on down to the [team](#Team) section and contact any member for details.
 
 ![BreezeBlocks](http://i.imgur.com/Mx6Glyv.png)
 
 ## Summary
-Breezeblocks provides a drag-and-drop graphical user interface allowing users to easily create native mobile applications.  Moreover, Breezeblocks believes in giving the user as much control over their app as they want.  This is why upon project completion the user has the option to either directly export the ReactNative code using XCode or take their code and continue to edit it manually.  
+Breezeblocks provides a drag-and-drop graphical user interface allowing users to easily create native mobile applications.  Moreover, Breezeblocks believes in giving the user as much control over their app as they want.  This is why upon project completion the user has the option to either directly export the ReactNative code to XCode or take their code and continue to edit it manually.  
 
 Currently Breezeblocks supports the following mobile application components:
 * Navbar
@@ -32,7 +32,7 @@ Finally, Breezeblocks supports page navigation through the tabbar component.  On
 
 ---
 
-## Team
+## <a name="Team">Team</a>
 
 | <a href="https://github.com/christianevans214" target="_blank">**Christian**</a> | <a href="https://github.com/nickells" target="_blank">**Nick**</a> | <a href="https://github.com/cez213" target="_blank">**Carolyn**</a> | <a href="https://github.com/pat310" target="_blank">**Patrick**</a> |
 |:---:|:---:|:---:|:---:|
