@@ -1,8 +1,8 @@
-#This application was created using Breezeblocks
+#This application was created using [Breezeblocks](http://www.breezeblocks.io)
 ######*Want to help make Breezeblocks even better?  Great news, you can!  Visit us at our [Github page](https://github.com/christianevans214/DrandAndDrop) to learn more.*
 <img src="http://i.imgur.com/Mx6Glyv.png" title="BreezeBlocks" alt="Breezeblocks">
 
-###Create your own native mobile application for FREE using our [website](http://breezeblocks.io)
+###Create your own native mobile application for FREE using our [website](http://www.breezeblocks.io)
 
 ###Or learn more at our [Github page](https://github.com/christianevans214/DrandAndDrop)
 
