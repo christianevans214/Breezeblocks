@@ -1,11 +1,10 @@
 #This application was created using Breezeblocks
+######*Want to help make Breezeblocks even better?  Great news, you can!  Visit us at our [Github page](https://github.com/christianevans214/DrandAndDrop) to learn more.*
 <img src="http://i.imgur.com/Mx6Glyv.png" title="BreezeBlocks" alt="Breezeblocks">
 
-##Create your own at our website:
-<a href="http://breezeblocks.io">Breezeblocks.io</a>
+###Create your own native mobile application for FREE using our [website](http://breezeblocks.io)
 
-##Or learn more at our github:
-<a href="https://github.com/christianevans214/DrandAndDrop">Breezeblocks Github</a>
+###Or learn more at our [Github page](https://github.com/christianevans214/DrandAndDrop)
 
 ---
 
@@ -19,4 +18,5 @@
 - Make sure you have Xcode installed, if not you can do this at the App store
 - Open Xcode and then open the project by selecting "Open another project..." (specifically, you will need to have Xcode open your `reactNative.xcodeproj` file in your reactNative directory)
 - Once Xcode opens and indexes the files, press cmd-R or the run button to have Xcode build your app
-- 
+
+
