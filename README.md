@@ -2,13 +2,7 @@
 <center><img src="http://i.imgur.com/Mx6Glyv.png" title="BreezeBlocks" alt="BreezeBlocks"></center>
 > A drag-and-drop graphical interface to create ReactNative mobile applications
 
-
-> GIF Tools
-
-- Use <a href="http://recordit.co/" target="_blank">**Recordit**</a> to create quicks screencasts of your desktop and export them as `GIF`s.
-- For terminal sessions, there's <a href="https://github.com/chjj/ttystudio" target="_blank">**ttystudio**</a> which also supports exporting `GIF`s.
-
-**Recordit**
+Check out this GIF on Breezeblocks in action:
 
 ![Recordit GIF](http://g.recordit.co/pNcQcOFgVR.gif)
 
