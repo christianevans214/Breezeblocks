@@ -20,6 +20,7 @@ Currently Breezeblocks supports the following mobile application components:
 
 In addition to the listed components, Breezeblocks allows the user to fine-tune:
 * Text alignment
+* Font size
 * Text color
 * Background color
 * Padding
