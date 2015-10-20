@@ -1,13 +1,34 @@
 # Breezeblocks
-######*A drag-and-drop graphical interface to create ReactNative mobile applications*
+######*A drag-and-drop graphical interface to create ReactNative mobile applications* 
+Visit [Breezeblocks.io](http://www.breezeblocks.io) to make your own native mobile application :dog:
 
 ![BreezeBlocks](http://i.imgur.com/Mx6Glyv.png)
 
-Visit [Breezeblocks.io](http://www.breezeblocks.io) to make your own native mobile application.
+## Summary
+Breezeblocks provides a drag-and-drop graphical user interface allowing users to easily create native mobile applications.  Moreover, Breezeblocks believes in giving the user as much control over their app as they want.  This is why upon project completion the user has the option to either directly export the ReactNative code using XCode or take their code and continue to edit it manually.  
 
-Check out this GIF of Breezeblocks in action:
+Currently Breezeblocks supports the following mobile application components:
+* Navbar
+* Single images
+* Switches
+* Map views
+* Sliders
+* Text boxes
+* Scrolling images
+* Listviews
+* Tabbars
 
-![Recordit GIF](http://g.recordit.co/pNcQcOFgVR.gif)
+In addition to the listed components, Breezeblocks allows the user to fine-tune:
+* Text alignment
+* Text color
+* Background color
+* Padding
+* Margin
+* Component position
+
+Finally, Breezeblocks supports page navigation through the tabbar component.  Once a tabbar is created, each tabbar item included can be linked to a different project.  Check out this GIF of Breezeblocks in action:
+
+![Breezeblocks GIF](http://g.recordit.co/pNcQcOFgVR.gif)
 
 ---
 
@@ -27,5 +48,7 @@ Check out this GIF of Breezeblocks in action:
     - Great question!  Once your application is downloaded to your Github, you will find a list of instructions for deploying your app in the README.
 - **If I don't have a Github account, can I still use Breezeblocks?**
     - Sure can.  If you don't login to Breezeblocks with your Github account, upon exporting you will be prompted to download a zipped file of your ReactNative directory.  Once you unzip the ReactNative directory, you will find a README file for installation instructions.
+- **is the Breezeblocks code open source?**
+    - If it wasn't, this repo would be private!  Please post any suggestions/code reviews/pull requests to help make Breezeblocks even better.
 
 ---
