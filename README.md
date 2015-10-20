@@ -48,7 +48,7 @@ Finally, Breezeblocks supports page navigation through the tabbar component.  On
     - Great question!  Once your application is downloaded to your Github, you will find a list of instructions for deploying your app in the README.
 - **If I don't have a Github account, can I still use Breezeblocks?**
     - Sure can.  If you don't login to Breezeblocks with your Github account, upon exporting you will be prompted to download a zipped file of your ReactNative directory.  Once you unzip the ReactNative directory, you will find a README file for installation instructions.
-- **is the Breezeblocks code open source?**
+- **Is the Breezeblocks code open source?**
     - If it wasn't, this repo would be private!  Please post any suggestions/code reviews/pull requests to help make Breezeblocks even better.
 
 ---
