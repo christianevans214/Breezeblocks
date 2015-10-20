@@ -1,7 +1,7 @@
 # Breezeblocks
 ######*A drag-and-drop graphical interface to create ReactNative mobile applications*
 
-<center><img src="http://i.imgur.com/Mx6Glyv.png" title="BreezeBlocks" alt="BreezeBlocks" style="width:50%;height:50%"></center>
+<center><img src="http://i.imgur.com/Mx6Glyv.png" title="BreezeBlocks" alt="BreezeBlocks" style="max-width:30%;"></center>
 
 Visit [Breezeblocks.io](http://www.breezeblocks.io) to make your own native mobile application.
 
